@@ -8,10 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Compras extends Model
 {
     static $rules = [
-		'Producto' => 'required',
-		'Precio' => 'required',
 		'Cantidad' => 'required',
-        'Foto' => 'required',
     ];
 
     protected $perPage = 20;
@@ -23,7 +20,4 @@ class Compras extends Model
      * @var array
      */
     protected $fillable = [];
-
-
-
 }

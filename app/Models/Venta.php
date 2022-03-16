@@ -7,5 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Venta extends Model
 {
-    use HasFactory;
+    static $rules = [
+		'Precio' => 'required',
+		'Cantidad' => 'required',
+    ];
+
+    protected $perPage = 20;
+
+
+    /**
+     * Attributes that should be mass-assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [];
 }

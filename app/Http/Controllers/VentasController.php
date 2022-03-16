@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Venta;
+
 
 class VentasController extends Controller
 {
@@ -12,9 +14,9 @@ class VentasController extends Controller
     }
 
 
-    public function Agregar_venta()
+    public function Agregar_producto_venta()
     {
 
-        return view('ventas.Agregar_venta');
+        return view('ventas.index');
     }
 }
