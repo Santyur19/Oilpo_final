@@ -1,0 +1,62 @@
+﻿@model InvoiceOne.Core.Entity.CustomerModel
+@{
+    ViewData["Title"] = "Edit Customer";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <!-- Start Page Content -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-title">
+                        <h4>Edit Customer</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="basic-elements">
+                            <form asp-controller="Admin" asp-action="EditCustomer" method="post">
+                                <input asp-for="Id" type="hidden" />
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <div class="form-group">
+                                            <label asp-for="Name"></label>
+                                            <input type="text" asp-for="Name" class="form-control" placeholder="Ingresar Nombre">
+                                            <span asp-validation-for="Name" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="Email"></label>
+                                            <input asp-for="Email" class="form-control" type="email" placeholder="Ingresar Email">
+                                            <span asp-validation-for="Email" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="Phone"></label>
+                                            <input asp-for="Phone" class="form-control" type="text" placeholder="Ingresar Telefono Celular">
+                                            <span asp-validation-for="Phone" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="Adrress"></label>
+                                            <textarea class="form-control" asp-for="Adrress" rows="4" placeholder="Ingresar Direcciónt"></textarea>
+                                            <span asp-validation-for="Adrress" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="Notes"></label>
+                                            <input asp-for="Notes" class="form-control" type="tel" placeholder="Ingresar algunas referencia o notas">
+                                            <span asp-validation-for="Notes" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-success"> Actualizar Cambios </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End PAge Content -->
+    </div>
+</div>

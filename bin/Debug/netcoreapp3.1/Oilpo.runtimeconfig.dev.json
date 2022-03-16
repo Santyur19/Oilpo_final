@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\santy\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\santy\\.nuget\\packages"
+    ]
+  }
+}
