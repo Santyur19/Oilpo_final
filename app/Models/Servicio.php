@@ -18,9 +18,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Servicio extends Model
 {
-    
+
     static $rules = [
-		'nombre' => 'required',
+		'Nombre_servicio' => 'required',
 		'valor' => 'required',
     ];
 
@@ -31,7 +31,7 @@ class Servicio extends Model
      *
      * @var array
      */
-    protected $fillable = ['nombre','valor'];
+    protected $fillable = ['Nombre_servicio','valor'];
 
 
 

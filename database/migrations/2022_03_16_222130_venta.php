@@ -15,12 +15,11 @@ class Venta extends Migration
     {
         Schema::create('ventas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('Cliente')->nullable();
-            $table->date('Fecha_compra');
-            $table->string('Documento');
-            $table->string('Producto');
+            $table->unsignedBigInteger('Nombre');
+            $table->unsignedBigInteger('Nombre_Producto');
+            $table->unsignedBigInteger('Nombre_servicio');
+            $table->date('Fecha_venta');
             $table->integer('Cantidad');
-            $table->integer('Precio');
             $table->integer('Iva');
             $table->integer('Total');
             $table->timestamps();
@@ -32,7 +31,7 @@ class Venta extends Migration
      *
      * @return void
      */
-    
+
     public function down()
     {
         Schema::dropIfExists('ventas');

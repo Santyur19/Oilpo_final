@@ -103,7 +103,9 @@ Route::post('/', [App\Http\Controllers\ComprasController::class, 'exportar_excel
 //RUTAS VENTAS
 
 Route::resource('/ventas', App\Http\Controllers\VentasController::class);
-Route::post('/ventas/Agregar_ventas', [App\Http\Controllers\VentasController::class, 'Agregar_producto'])->name('Agregar_producto');
+Route::post('/ventas/Agregar_ventas', [App\Http\Controllers\VentasController::class, 'Agregar_venta'])->name('Agregar_venta');
+Route::post('/ventas', [App\Http\Controllers\VentasController::class, 'Agregar_venta'])->name('Guardar_Venta');
+Route::post('ventas.Agregar_ventas', [App\Http\Controllers\VentasController::class, 'Buscar_cliente'])->name('Buscar_clientes');
 
 
 
@@ -111,5 +113,6 @@ Route::post('/ventas/Agregar_ventas', [App\Http\Controllers\VentasController::cl
 
 Route::resource('/informes', App\Http\Controllers\InformeController::class);
 Route::get('/informes/informe_ventas', [App\Http\Controllers\InformeController::class, 'informe_ventas'])->name('Informe_ventas');
+
 
 

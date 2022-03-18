@@ -17,15 +17,15 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     {{--ICONO  --}}
-    <link rel="icon" href="vendor/adminlte/dist/img/Moto.png">
+    <link rel="icon" href="vendor\adminlte\dist\img\Moto.png">
     <style>
         body{
             background-image: url('vendor/adminlte/dist/img/Fondo.jpg');
             background-repeat: repeat;
             background-size: 110%;
         }
-    </style>        
-        
+    </style>
+
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

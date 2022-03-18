@@ -26,7 +26,7 @@
                             <span id="card_title">
                                 <h3>Gestion Ventas</h3>
                             </span>
-                            <form action="{{ route('Agregar_producto_venta') }}" method="GET">
+                            <form action="{{ route('Agregar_venta') }}" method="post">
                             @csrf
                                 <button class="btn btn-success" type="submit">Agregar
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-circle-dotted" viewBox="0 0 16 16">
@@ -52,20 +52,24 @@
                                 </thead>
                                 <tbody>
 
-
+                                <?php foreach ($ventas as $venta){ ?>
                                         <tr>
-											<td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-											<td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td>{{ $venta->id }}</td>
+                                            <td>{{ $venta->Cliente }}</td>
+                                            <td>{{ $venta->Fecha_compra }}</td>
+                                            <td>{{ $venta->Producto }}</td>
+                                            <td>{{ $venta->Cantidad }}</td>
+                                            <td>{{ $venta->Precio }}</td>
+                                            <td>{{ $venta->Iva }}</td>
+                                            <td>{{ $venta->Total }}</td>
                                             <td>
                                             </td>
                                         </tr>
 
+                                <?php } ?>
+
                                 </tbody>
+
                                 @yield('js')
 
                                     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -82,6 +86,9 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 @endsection
+
+
+
 
 
 
