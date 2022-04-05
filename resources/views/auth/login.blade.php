@@ -30,9 +30,9 @@
                 }
 
                 body{
-                    background-image: url('https://s1.1zoom.me/big0/622/356341-admin.jpg');
+                    background-image: url('vendor/adminlte/dist/img/Fondo.jpg');
                     background-repeat: no-repeat;
-                    background-size: 100%;
+                    background-size: 110%;
                 }
 
             </style>

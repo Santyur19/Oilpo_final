@@ -38,7 +38,6 @@ class ComprasController extends Controller
     public function show()
 
     {
-
         $proveedores = Proveedore::all();
         $compra = Compras::paginate();
         $productos = Producto::all();
@@ -180,5 +179,12 @@ class ComprasController extends Controller
         }
     }
 
+        $tabla .="
+                </tbody>
+            </thead>
+        </table>
+        ";
 
+        echo $tabla;
+    }
 }

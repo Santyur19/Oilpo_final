@@ -49,8 +49,8 @@
                             @csrf
                                 <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Nombre:</label>
-                                    <input type="text" name="nombre" class="form-control" id="recipient-name" value="{{old('nombre')}}">
-                                    <small class="text-danger">{{$errors->first('nombre')}}</small>
+                                    <input type="text" name="Nombre_servicio" class="form-control" id="recipient-name" value="{{old('Nombre_servicio')}}">
+                                    <small class="text-danger">{{$errors->first('Nombre_servicio')}}</small>
                                 </div>
                                 <div class="mb-3">
                                     <label for="message-text" class="col-form-label">Valor:</label>
@@ -97,7 +97,7 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
 
-											<td>{{ $servicio->nombre }}</td>
+											<td>{{ $servicio->Nombre_servicio }}</td>
 											<td>$ {{ $servicio->valor }}</td>
                                             <td>
                                                <?php if($servicio->estado=="Activo"){ ?>
@@ -150,8 +150,8 @@
                             @csrf
                                 <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Nombre:</label>
-                                    <input type="text" name="nombre" class="form-control" id="recipient-name" value="{{old('nombre', $servicio->nombre)}}">
-                                    <small class="text-danger">{{$errors->first('nombre')}}</small>
+                                    <input type="text" name="Nombre_servicio" class="form-control" id="recipient-name" value="{{old('Nombre_servicio', $servicio->Nombre_servicio)}}">
+                                    <small class="text-danger">{{$errors->first('Nombre_servicio')}}</small>
                                 </div>
                                 <div class="mb-3">
                                     <label for="message-text" class="col-form-label">Valor:</label>

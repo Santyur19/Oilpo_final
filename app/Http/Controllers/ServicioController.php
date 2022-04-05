@@ -64,7 +64,7 @@ class ServicioController extends Controller
 
     public function servicio_guardar(){
         $campos = request()->validate([
-            'nombre' =>'required|unique:servicios,nombre',
+            'Nombre_servicio' =>'required|unique:servicios,Nombre_servicio',
             'valor'=> 'required',
         ]);
         Servicio::create($campos);
@@ -115,7 +115,7 @@ class ServicioController extends Controller
     // }
     public function editar_servicio(Servicio  $servicio){
         $campos = request()->validate([
-            'nombre' =>'required',
+            'Nombre_servicio' =>'required',
             'valor'=> 'required',
         ]);
         $servicio->update($campos);
