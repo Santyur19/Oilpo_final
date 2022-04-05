@@ -80,7 +80,7 @@
                                         <select class="form-select" name="Nombre_producto" id="producto">
                                             <option selected >Seleccione</option>
                                                 <?php  foreach($productos as  $producto){ ?>
-                                            <option selected value="<?php echo $producto->Nombre_producto ?>"><?php echo $producto->Nombre_Producto ?></option>
+                                            <option id="d"  value="<?php $producto->Nombre_producto ?>"><?php echo $producto->Nombre_Producto ?></option>
                                             <?php } ?>
                                         </select>
 
@@ -116,14 +116,13 @@
                                             <th>Cantidad</th>
                                             <th>Precio</th>
                                             <th>Iva</th>
-                                            <th>Total</th>
+                                            <th>Subtotal</th>
                                         </tr>
 
                                         </thead>
 
 
                                         <tbody>
-
 
                                         </tbody>
 
@@ -152,6 +151,10 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     
     <script>
+        $("#producto").change(function(){
+                alert($('select[id=d]').val());
+                $('#producto').val($(this).val());
+        });
         $(document).ready(function(){
             $('#agregar').click(function(){
                 agregar();
@@ -164,28 +167,31 @@
         var iva =0;
         var ivat=0;
         subtotal=[];
+        totalt=[];
         $('#guardar').hide();
         function agregar(){
-            var producto = $('#producto').val();
+            // var producto = $('#producto').val();
             var cantidad = $('#cantidad').val();
             var iva = $('#iva').val();
             var precio = $('#precio').val();
 
-            var producto = $("#prodcuto option:selected").val();
+            var producto = $('#producto').val($("#producto option:selected").text());
 
 
             producto= $(this).children("option:selected").val();
 
             if(producto !="" && cantidad >0 && iva>0){
                 subtotal[cont]=(cantidad*precio);
-                ivat=ivat+(subtotal*(iva/100));
-                total = (subtotal+ivat);
+                ivat=ivat+(subtotal[cont]*(iva/100));
+                total = total + (subtotal[cont]+ivat);
+                totalt[cont]=(subtotal[cont]+ivat);
+                
+                ivat=0;
 
-
-                var fila = '<tr id="fila'+cont+'"><td><input readnoly type="text" name="producto[]" value="'+producto+'"></td><td><input readnoly type="number" name="Cantidad[]" value="'+cantidad+'"></td><td><input readnoly type="number" name="precio[]" value="'+precio+'"></td><td><input readnoly type="number" name="iva[]" value="'+iva+'"></td><td>'+total+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
+                var fila = '<tr id="fila'+cont+'"><td><input readnoly type="text" name="producto" value="'+producto+'"></td><td><input readnoly type="number" name="Cantidad[]" value="'+cantidad+'"></td><td><input readnoly type="number" name="precio[]" value="'+precio+'"></td><td><input readnoly type="number" name="iva[]" value="'+iva+'"></td><td>'+subtotal[cont]+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
                 cont++;
                 limpiar();
-                $('#total').html('<h1 class="btn btn-info">Total: $'+total+'<input type="number" name="Total" value="'+total+'"  ></h1>');
+                $('#total').html('<h1 class="btn btn-info">Total: $'+total+'<input type="number" hidden name="Total" value="'+total+'"  ></h1>');
                 evaluar();
                 $('#tabla').append(fila);
             }
@@ -215,7 +221,7 @@
 
         }
         function eliminar(index){
-            total=total-subtotal[index];
+            total=total-totalt[index];
             $('#total').html('<h1 class="btn btn-info">Total: $'+total+'</h1>');
             $('#fila'+index).remove();
             guardar();
