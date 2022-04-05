@@ -78,7 +78,7 @@
                                     <div class="card-body">
                                         <label for="">Producto</label>
                                         <select class="form-select" name="Nombre_producto" id="producto">
-                                            <option>Seleccione</option>
+                                            <option selected >Seleccione</option>
                                                 <?php  foreach($productos as  $producto){ ?>
                                             <option selected value="<?php echo $producto->Nombre_producto ?>"><?php echo $producto->Nombre_Producto ?></option>
                                             <?php } ?>
@@ -160,11 +160,13 @@
 
         });
         var cont = 0;
-        total = 0;
+        var total = 0;
+        var iva =0;
+        var ivat=0;
         subtotal=[];
         $('#guardar').hide();
         function agregar(){
-            producto = $('#productos').val();
+            var producto = $('#producto').val();
             var cantidad = $('#cantidad').val();
             var iva = $('#iva').val();
             var precio = $('#precio').val();
@@ -176,9 +178,8 @@
 
             if(producto !="" && cantidad >0 && iva>0){
                 subtotal[cont]=(cantidad*precio);
-                ivat=0
                 ivat=ivat+(subtotal*(iva/100));
-                total = subtotal+ivat);
+                total = (subtotal+ivat);
 
 
                 var fila = '<tr id="fila'+cont+'"><td><input readnoly type="text" name="producto[]" value="'+producto+'"></td><td><input readnoly type="number" name="Cantidad[]" value="'+cantidad+'"></td><td><input readnoly type="number" name="precio[]" value="'+precio+'"></td><td><input readnoly type="number" name="iva[]" value="'+iva+'"></td><td>'+total+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
