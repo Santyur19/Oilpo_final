@@ -176,8 +176,8 @@ class ComprasController extends Controller
             return view('compras.index', compact('compra', 'nombre'))
             ->with('i', (request()->input('page', 1) - 1) * $compra->perPage());
 
+        
         }
-    }
 
         $tabla .="
                 </tbody>
