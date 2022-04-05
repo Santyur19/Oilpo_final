@@ -114,43 +114,70 @@ class ComprasController extends Controller
 
     public function exportar_excel()
     {
-        header("Content-Type: application/xls");
-        header("Content-Disposition: attachment; filename=compras_". date('Y:m:d:m:s') .".xls");
-        header("Pragma: no-cache");
-        header("Expires: 0");
-        $tabla = "";
+        $filtro = $_POST["Filtrar"];
 
-        $tabla .="
-        <table>
-            <thead>
-                <tbody>
-                    <tr>
-                        <th>Numero_factura</th>
-                        <th>Fecha_compra</th>
-                        <th>Nombre_proveedor</th>
-                        <th>Producto</th>
-                        <th>Precio_compra</th>
-                        <th>Precio_venta</th>
-                        <th>Cantidad</th>
-                        <th>Total</th>
-                    </tr>
-        ";
-        $compra = DB:: select("SELECT Numero_factura, Cantidad, Precio_compra, Precio_venta, Total, Producto,  p.Nombre_proveedor, Fecha_compra, Total FROM compras  as c JOIN proveedores as p  WHERE c.Nombre_proveedor=p.id");
+        if($filtro =="Export"){
 
-        foreach ($compra as $compras) {
+            header("Content-Type: application/xls");
+            header("Content-Disposition: attachment; filename=compras_". date('Y:m:d:m:s') .".xls");
+            header("Pragma: no-cache");
+            header("Expires: 0");
+            $tabla = "";
+
             $tabla .="
-                    <tr>
-                        <td>".$compras->Numero_factura."</td>
-                        <td>".$compras->Fecha_compra."</td>
-                        <td>".$compras->Nombre_proveedor."</td>
-                        <td>".$compras->Producto."</td>
-                        <td>".$compras->Precio_compra."</td>
-                        <td>".$compras->Precio_venta."</td>
-                        <td>".$compras->Cantidad."</td>
-                        <td>".$compras->Total."</td>
-                    </tr>
+            <table>
+                <thead>
+                    <tbody>
+                        <tr>
+                            <th>Numero_factura</th>
+                            <th>Fecha_compra</th>
+                            <th>Nombre_proveedor</th>
+                            <th>Producto</th>
+                            <th>Precio_compra</th>
+                            <th>Precio_venta</th>
+                            <th>Cantidad</th>
+                            <th>Total</th>
+                        </tr>
             ";
+            $compra = DB:: select("SELECT Numero_factura, Cantidad, Precio_compra, Precio_venta, Total, Producto,  p.Nombre_proveedor, Fecha_compra, Total FROM compras  as c JOIN proveedores as p  WHERE c.Nombre_proveedor=p.id");
+
+            foreach ($compra as $compras) {
+                $tabla .="
+                        <tr>
+                            <td>".$compras->Numero_factura."</td>
+                            <td>".$compras->Fecha_compra."</td>
+                            <td>".$compras->Nombre_proveedor."</td>
+                            <td>".$compras->Producto."</td>
+                            <td>".$compras->Precio_compra."</td>
+                            <td>".$compras->Precio_venta."</td>
+                            <td>".$compras->Cantidad."</td>
+                            <td>".$compras->Total."</td>
+                        </tr>
+                ";
+            }
+
+            $tabla .="
+                    </tbody>
+                </thead>
+            </table>
+            ";
+
+            echo $tabla;
+
+        }else{
+
+            $fecha_filtro = $_POST["fecha_filtro"];
+
+            $nombre = DB:: select("SELECT DISTINCT Numero_factura, p.Nombre_proveedor, Fecha_compra, Total FROM compras  as c JOIN proveedores as p  WHERE c.Nombre_proveedor=p.id AND Fecha_compra ='".$fecha_filtro."' ");
+
+            $compra = Compras::paginate();
+
+
+            return view('compras.index', compact('compra', 'nombre'))
+            ->with('i', (request()->input('page', 1) - 1) * $compra->perPage());
+
         }
+    }
 
         $tabla .="
                 </tbody>
