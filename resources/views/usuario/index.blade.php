@@ -112,11 +112,8 @@
                                     <tr>
                                         <th>No</th>
 
-										<th>Documento</th>
-										<th>Nombres</th>
-										<th>Apellidos</th>
+										<th>Usuario</th>
 										<th>Correo</th>
-                                        <th>Usuario</th>
                                         <th></th>
                                         <th></th>
 
@@ -128,11 +125,8 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
 
-											<td>{{ $usuario->Documento }}</td>
-											<td>{{ $usuario->Nombres }}</td>
-											<td>{{ $usuario->Apellidos }}</td>
-											<td>{{ $usuario->Correo }}</td>
-											<td>{{ $usuario->Usuario }}</td>
+											<td>{{ $usuario->name }}</td>
+											<td>{{ $usuario->email }}</td>
                                             <td>
                                                 <?php if($usuario->estado =="Activo"){ ?>
                                                     <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editar_usuario{{$usuario->id}}" data-bs-whatever="@mdo">Editar
