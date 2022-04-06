@@ -188,7 +188,7 @@
                 
                 ivat=0;
 
-                var fila = '<tr id="fila'+cont+'"><td><input readnoly type="text" name="producto" value="'+producto+'"></td><td><input readnoly type="number" name="Cantidad[]" value="'+cantidad+'"></td><td><input readnoly type="number" name="precio[]" value="'+precio+'"></td><td><input readnoly type="number" name="iva[]" value="'+iva+'"></td><td>'+subtotal[cont]+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
+                var fila = '<tr id="fila'+cont+'"><td><input readnoly type="text" name="producto[]" value="'+producto+'"></td><td><input readnoly type="number" name="Cantidad[]" value="'+cantidad+'"></td><td><input readnoly type="number" name="precio[]" value="'+precio+'"></td><td><input readnoly type="number" name="iva[]" value="'+iva+'"></td><td>'+subtotal[cont]+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
                 cont++;
                 limpiar();
                 $('#total').html('<h1 class="btn btn-info">Total: $'+total+'<input type="number" hidden name="Total" value="'+total+'"  ></h1>');

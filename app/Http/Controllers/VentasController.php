@@ -44,7 +44,6 @@ class VentasController extends Controller
         if(!empty($Nombre)){
             $documento= DB:: select("SELECT Documento from clientes where Nombre=$Nombre");
         }
-        $documento="Malparido laravel";
 
         date_default_timezone_set("America/Bogota");
         $fecha_actual = date("d-m-Y H:i");
@@ -69,6 +68,28 @@ class VentasController extends Controller
 
         return redirect('ventas/Agregar_ventas')
             ->with('borrado', 'Venta deleted successfully');
+    }
+
+    public function Guardar_venta(){
+
+        $Cliente=$_POST['Nombre'];
+        $Fecha="Hola";
+        $total = $_POST['Total'];
+        $Producto = $_POST['producto'];
+        $Precio = $_POST['precio'];
+        $Iva = $_POST['iva'];
+        $Cantidad = $_POST['Cantidad'];
+
+        $cadena= "INSERT INTO ventas (Nombre, Nombre_servicio, Fecha_venta, Total, Nombre_Producto, Cantidad, Iva) VALUES ";
+        for ($i = 0; $i <count($Producto); $i++){
+            $cadena.="('".$Cliente."',  '".$total."',  '".$Cliente."', '".$Fecha."',  '".$Producto[$i]."' , '".$Cantidad[$i]."', '".$Iva[$i]."'),";
+        }
+        $cadena_final = substr($cadena, 0, -1);
+        $cadena_final.=";";
+        DB::insert($cadena_final);
+
+        return redirect('compras/')
+            ->with('success', ' ');
     }
 
 }

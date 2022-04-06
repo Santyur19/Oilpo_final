@@ -19,9 +19,9 @@ class Venta extends Migration
             $table->unsignedBigInteger('Nombre_Producto');
             $table->unsignedBigInteger('Nombre_servicio');
             $table->date('Fecha_venta');
-            $table->integer('Cantidad');
-            $table->integer('Iva');
-            $table->integer('Total');
+            $table->String('Cantidad');
+            $table->String('Iva');
+            $table->String('Total');
             $table->timestamps();
         });
     }
