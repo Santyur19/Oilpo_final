@@ -106,6 +106,7 @@ Route::resource('/ventas', App\Http\Controllers\VentasController::class);
 Route::post('/ventas/Agregar_ventas', [App\Http\Controllers\VentasController::class, 'Agregar_venta'])->name('Agregar_venta');
 Route::post('/ventas', [App\Http\Controllers\VentasController::class, 'Guardar_venta'])->name('Guardar_Venta');
 Route::post('ventas.Agregar_ventas', [App\Http\Controllers\VentasController::class, 'Buscar_cliente'])->name('Buscar_clientes');
+Route::post('/ventas/Detalles_ventas', [App\Http\Controllers\VentasController::class, 'Detalles'])->name('Detalles_ventas');
 
 
 

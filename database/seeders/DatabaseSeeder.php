@@ -5,6 +5,7 @@ use App\Models\ciudades;
 use App\Models\Proveedore;
 use App\Models\permiso;
 use App\Models\User;
+use App\Models\Venta;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,6 +17,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
+
+    //SEEDERS FACTURA VENTA
+    
+    $factura = new Venta();
+    $factura->Factura = 0;
+    $factura->Nombre = "";
+    $factura->Nombre_Producto = "";
+    $factura->Nombre_servicio = "";
+    $factura->Fecha_venta = "";
+    $factura->Cantidad = 0;
+    $factura->Iva = 0;
+    $factura->Total = 0;
+    $factura ->save();
+
+    
+    
 
     //SEEDERS PERMISOS
 

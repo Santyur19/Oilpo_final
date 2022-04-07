@@ -15,10 +15,11 @@ class Venta extends Migration
     {
         Schema::create('ventas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('Nombre');
-            $table->unsignedBigInteger('Nombre_Producto');
-            $table->unsignedBigInteger('Nombre_servicio');
-            $table->date('Fecha_venta');
+            $table->integer('Factura');
+            $table->String('Nombre');
+            $table->String('Nombre_Producto');
+            $table->String('Nombre_servicio');
+            $table->String('Fecha_venta');
             $table->String('Cantidad');
             $table->String('Iva');
             $table->String('Total');

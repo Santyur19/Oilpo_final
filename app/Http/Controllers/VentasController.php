@@ -16,9 +16,11 @@ class VentasController extends Controller
 
     {
         $ventas = Venta::paginate();
+        $venta = DB:: select("SELECT DISTINCT Factura, Nombre, Fecha_venta, Total FROM ventas ");
 
 
-        return view('ventas.index', compact('ventas'))
+
+        return view('ventas.index', compact('ventas', 'venta'))
             ->with('i', (request()->input('page', 1) - 1) * $ventas->perPage());
 
     }
@@ -29,11 +31,12 @@ class VentasController extends Controller
         date_default_timezone_set("America/Bogota");
         $fecha_actual = date("d-m-Y H:i");
 
+        $Facturas=DB:: select("SELECT Factura FROM ventas ORDER by ID DESC LIMIT 1");
         $ventas = Venta::all();
         $clientes = Cliente::all();
         $productos=Producto::all();
 
-        return view('ventas.Agregar_venta', compact('ventas', 'clientes', 'fecha_actual', 'productos'))
+        return view('ventas.Agregar_venta', compact('ventas', 'clientes', 'fecha_actual', 'productos', 'Facturas'))
             ->with('success', ' ');
 
     }
@@ -46,7 +49,7 @@ class VentasController extends Controller
         }
 
         date_default_timezone_set("America/Bogota");
-        $fecha_actual = date("d-m-Y H:i");
+        $fecha_actual = date("Y-m-d");
 
         $ventas = Venta::all();
         $clientes = Cliente::all();
@@ -73,24 +76,36 @@ class VentasController extends Controller
     public function Guardar_venta(){
 
         $Cliente=$_POST['Nombre'];
-        $Fecha="Hola";
+        $Fecha=$_POST['Fecha_compra'];
         $total = $_POST['Total'];
         $Producto = $_POST['producto'];
         $Precio = $_POST['precio'];
         $Iva = $_POST['iva'];
         $Cantidad = $_POST['Cantidad'];
+        $factura = $_POST['factura'];
 
-        $cadena= "INSERT INTO ventas (Nombre, Nombre_servicio, Fecha_venta, Total, Nombre_Producto, Cantidad, Iva) VALUES ";
+        $cadena= "INSERT INTO ventas (Nombre, Nombre_servicio, Fecha_venta, Total, Nombre_Producto, Cantidad, Iva, factura) VALUES ";
         for ($i = 0; $i <count($Producto); $i++){
-            $cadena.="('".$Cliente."',  '".$total."',  '".$Cliente."', '".$Fecha."',  '".$Producto[$i]."' , '".$Cantidad[$i]."', '".$Iva[$i]."'),";
+            $cadena.="('".$Cliente."',  '".$Cliente."', '".$Fecha."',  '".$total."',  '".$Producto[$i]."' , '".$Cantidad[$i]."', '".$Iva[$i]."', '".$factura."'),";
         }
         $cadena_final = substr($cadena, 0, -1);
         $cadena_final.=";";
         DB::insert($cadena_final);
 
-        return redirect('compras/')
+        return redirect('ventas/')
             ->with('success', ' ');
     }
 
+    public function Detalles(){
+
+
+        $Factura = $_POST['Factura'];
+
+        $ventas = DB:: select("SELECT *  FROM ventas WHERE Factura ='".$Factura."'");
+
+        return view('ventas.Detalles_ventas', compact('ventas'));
+
+
+    }
 }
 
