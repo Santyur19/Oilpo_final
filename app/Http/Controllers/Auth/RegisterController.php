@@ -65,9 +65,21 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
+
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    public function usuario_guardar(){
+        $campos = request()->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => Hash::make($data['password']),
+        ]);
+
+        User::create($campos);
+        return redirect()->route('usuarios.index') ->with('success', 'El producto se ha guardado.');
     }
 }

@@ -13,7 +13,7 @@
             background: -webkit-linear-gradient(to right, #eaeaea56, #dbdbdb86, #f2f2f25d, #ada99660);  /* Chrome 10-25, Safari 5.1-6 */
             background: linear-gradient(to right, #eaeaea5d, #dbdbdb5b, #f2f2f260, #ada99650); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
-            /* background-image: url("https://cdn.discordapp.com/attachments/881318396128526336/951287080686854184/d260bf929d013a8c8c478a54df4ca8d1.jpg"); */
+            background-image: url("https://e00-expansion.uecdn.es/assets/multimedia/imagenes/2020/05/12/15892926549229.jpg");
             background-size: 100%;
             background-position: 0px -47px;
             background-repeat: no-repeat;
@@ -21,7 +21,7 @@
 
         }
         #card{
-            border-radius: 34px;
+            border-radius: 10px;
             border: 7px;
             border-bottom: black;
             background: #ADA996;  /* fallback for old browsers */
@@ -33,24 +33,19 @@
         }
         #texto{
             text-shadow: -1px -1px 1px #aaa,0px 4px 1px rgba(0,0,0,0.5),4px 4px 5px rgba(0,0,0,0.7),0px 0px 7px rgba(0,0,0,0.4);
-            letter-spacing: 2px;
-            word-spacing: 4px;
+            letter-spacing: 1px;
+            word-spacing: 2px;
             font-family: fantasy;
-            font-size: 70px;
+            font-size: 30px;
         }
     </style>
     <br>
-    </br>
-    <br>
-    </br>
-    <br>
-    </br>
-    <br>
+
     <div class="card" id="card">
         <div class="card-body" >
                 <div class="row mb-3">
 
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <h1 id="texto" class="text-center" >Bienvenido {{ Auth::user()->name }}</h1>
                     </div>
                 </div>
