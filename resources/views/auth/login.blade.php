@@ -8,36 +8,24 @@
             <style>
                 #card{
                     text-align: center;
-                    background-repeat: no-repeat;
-	                background-size: 250px;
-                    background-color: rgba(78, 77, 77, 0.397);
-                    -webkit-box-shadow: -22px 28px 20px 16px rgba(0,0,0,0.75);
-                    -moz-box-shadow: -22px 28px 20px 16px rgba(0,0,0,0.75);
-                    box-shadow: -22px 28px 20px 16px rgba(0,0,0,0.75);
+                   
                     background-position: 490px 20px;
-                    border-block-color: blue;
 
 
                 }
                 #olvido{
-                    text-decoration: underline;
-                    animation: mymove 5s infinite;
+                    text-decoration:none;
+
                 }
-                @keyframes mymove {
-                50% {
-                    text-decoration-color: rgb(17, 0, 255);
-                }
-                }
+               
 
                 body{
-                    background-image: url('vendor/adminlte/dist/img/Fondo.jpg');
-                    background-repeat: no-repeat;
-                    background-size: 110%;
+                    
                 }
 
             </style>
-            <div class="card" id="card">
-                <div class="card-header" style="font-family:cursive ;-webkit-text-stroke: 1px black;"><h3 style="color: rgb(255, 255, 255);">{{ __('Inicio de sesión') }}</h3></div>
+            <div class="card" id="card" >
+                <div class="card-header"><h3 style="color: black);">{{ __('Inicio de sesión') }}</h3></div>
                 <br>
                 </br>
                 <div class="card-body" >
@@ -45,7 +33,7 @@
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-center"><h4 style="color: rgb(255, 255, 255);">{{ __('E-Mail') }}</h4></label>
+                            <label for="email" class="col-md-4 col-form-label text-md-center"><h4 style="color: black;">{{ __('E-Mail') }}</h4></label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -59,7 +47,7 @@
                         </div>
                         </br>
                         <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-right"><h4 style="color: rgb(255, 255, 255);">{{ __('Contraseña') }}</h4></label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right"><h4 style="color:black;">{{ __('Contraseña') }}</h4></label>
                             <div id="password" class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
@@ -74,7 +62,7 @@
                             <div class="col-md-11 ">
                                 <input style="font-size: 25px;" class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                                 <label class="form-check-label" for="remember">
-                                    <h4 style="color: white;">{{ __('Recuérdame') }}</h4>
+                                    <h4 style="color: black;">{{ __('Recuérdame') }}</h4>
                                 </label>
                             </div>
                         </div>
@@ -88,11 +76,11 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                    @if (Route::has('password.request'))
-                                    &nbsp;&nbsp;&nbsp;<a class="btn btn-link" href="{{ route('password.request') }}">
-                                            <h5 id="olvido" style="color:antiquewhite;">{{ __('¿Has olvidado tu contraseña?') }}</h5>
-                                        </a>
-                                    @endif
+                                @if (Route::has('password.request'))
+                                &nbsp;&nbsp;&nbsp;<a class="btn btn-link" id="olvido" href="{{ route('password.request') }}">
+                                        <h5 id="olvido">{{ __('¿Has olvidado tu contraseña?') }}</h5>
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     </form>

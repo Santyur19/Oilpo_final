@@ -13,7 +13,6 @@
             background: -webkit-linear-gradient(to right, #eaeaea56, #dbdbdb86, #f2f2f25d, #ada99660);  /* Chrome 10-25, Safari 5.1-6 */
             background: linear-gradient(to right, #eaeaea5d, #dbdbdb5b, #f2f2f260, #ada99650); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
-            /* background-image: url("https://cdn.discordapp.com/attachments/881318396128526336/951287080686854184/d260bf929d013a8c8c478a54df4ca8d1.jpg"); */
             background-size: 100%;
             background-position: 0px -47px;
             background-repeat: no-repeat;

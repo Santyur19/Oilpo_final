@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('content')+
+@section('content')
 <style>
     body{
         background-image: url('vendor/adminlte/dist/img/Fondo.jpg');
