@@ -24,6 +24,13 @@
                         <form action="{{ route('Informe_ventas') }}" method="POST">
                             @csrf
                             <button type="submit">Informes Ventas</button>
+                            
+
+                        </form>
+                        <form action="{{ route('Informe_compras') }}" method="POST">
+                            @csrf
+                            <button type="submit">Informes Compras</button>
+                            
 
                         </form>
                     </div>

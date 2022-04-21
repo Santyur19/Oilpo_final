@@ -16,7 +16,7 @@ class VentasController extends Controller
 
     {
         $ventas = Venta::paginate();
-        $venta = DB:: select("SELECT DISTINCT Factura, Nombre, Fecha_venta, Total FROM ventas ");
+        $venta = DB:: select("SELECT DISTINCT Factura, Nombre, Fecha_venta, Total FROM ventas where Factura > 0 ");
 
 
 
@@ -84,13 +84,22 @@ class VentasController extends Controller
         $Cantidad = $_POST['Cantidad'];
         $factura = $_POST['factura'];
 
+        $cadena_u="";
         $cadena= "INSERT INTO ventas (Nombre, Nombre_servicio, Fecha_venta, Total, Nombre_Producto, Cantidad, Iva, factura) VALUES ";
         for ($i = 0; $i <count($Producto); $i++){
             $cadena.="('".$Cliente."',  '".$Cliente."', '".$Fecha."',  '".$total."',  '".$Producto[$i]."' , '".$Cantidad[$i]."', '".$Iva[$i]."', '".$factura."'),";
+            $cadena_u.= "UPDATE productos SET Cantidad_Producto = ( SELECT Cantidad_Producto + $Cantidad[$i]) WHERE Nombre_Producto = '$Producto[$i]';";
+
         }
         $cadena_final = substr($cadena, 0, -1);
         $cadena_final.=";";
+
+        $cadena_update = substr($cadena_u, 0, -1);
+        $cadena_update.=";";
+
         DB::insert($cadena_final);
+        DB::update($cadena_update);
+
 
         return redirect('ventas/')
             ->with('success', ' ');

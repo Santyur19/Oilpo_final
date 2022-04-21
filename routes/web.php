@@ -117,7 +117,9 @@ Route::post('/ventas/Detalles_ventas', [App\Http\Controllers\VentasController::c
 //RUTAS INFORMES
 
 Route::resource('/informes', App\Http\Controllers\InformeController::class);
-Route::get('/informes/informe_ventas', [App\Http\Controllers\InformeController::class, 'informe_ventas'])->name('Informe_ventas');
+Route::post('/informes/informe_ventas', [App\Http\Controllers\InformeController::class, 'informe_ventas'])->name('Informe_ventas');
+Route::post('/informes/informe_compras', [App\Http\Controllers\InformeController::class, 'informe_compras'])->name('Informe_compras');
+
 
 //USER
 Route::post('/usuarios', [App\Http\Controllers\Auth\RegisterController::class, 'usuario_guardar'] )->name('guardar_usuario');

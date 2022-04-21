@@ -28,24 +28,29 @@
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
     <script>
-    const ctx = document.getElementById('myChart').getContext('2d');
+        $(document).ready(function(){
+            var cData = JSON.parse(`<?php echo $data;  ?>`)
+            const ctx = document.getElementById('myChart').getContext('2d');
     const myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio','Julio','Agosto', 'Septiembre', 'Octubre', 'Noviembre','Diciembre'],
+            //labels:cData.label,
+            labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+
             datasets: [{
-                label: '# de ventas',
-                data: [12, 19, 3, 5, 2, 3, 5, 6, 8, 9, 1, 3, 5],
+                label: 'Ventas',
+                data:cData.data,
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
                 ],
                 borderColor: [
                     'rgba(255, 99, 132, 1)',
@@ -56,7 +61,11 @@
                     'rgba(255, 159, 64, 1)'
                 ],
                 borderWidth: 1
+
+
+
             }]
+
         },
         options: {
             scales: {
@@ -66,5 +75,7 @@
             }
         }
     });
+
+        });
     </script>
 @endsection
