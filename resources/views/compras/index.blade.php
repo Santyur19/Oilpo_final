@@ -100,17 +100,17 @@
                         <br>
                         <label>Filtrar por fecha</label>
                         <br>
-                        <form action="{{ route("Exportar_Excel") }}" method="POST">
+                        <form action="{{ route('Exportar_Excel') }}" method="POST">
                             @csrf
                             <input type="date" name="fecha_filtro" id="">
-                            <input value="Filtrar" name="Filtrar">
+                            <input hidden value="Filtrar" name="Filtrar">
                             <button type="submit">Filtrar</button>
                         </form>
                         <br>
                         <div class="text-center">
                             <form action="{{ route('Exportar_Excel') }}" method="POST">
                                 @csrf
-                                <input value="Export" name="Filtrar">
+                                <input hidden value="Export" name="Filtrar">
                                 <button type="submit" class="btn btn-primary">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
                                         <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
