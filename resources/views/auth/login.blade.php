@@ -6,8 +6,6 @@
     <div class="row justify-content-center" id="borde">
         <div class="col-md-8">
 
-            <div class="card" id="card">
-                <div class="card-header"><h3>{{ __('Inicio de sesión') }}</h3></div>
                 <br>
                 </br>
                 <div class="card-body" >
@@ -15,7 +13,7 @@
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-center"><h4>{{ __('E-Mail') }}</h4></label>
+
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -29,7 +27,7 @@
                         </div>
                         </br>
                         <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-right"><h4>{{ __('Contraseña') }}</h4></label>
+
                             <div id="password" class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
@@ -44,7 +42,7 @@
                             <div class="col-md-11 ">
                                 <input style="font-size: 25px;" class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                                 <label class="form-check-label" for="remember">
-                                    <h4>{{ __('Recuérdame') }}</h4>
+
                                 </label>
                             </div>
                         </div>
@@ -58,11 +56,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                    @if (Route::has('password.request'))
-                                    &nbsp;&nbsp;&nbsp;<a class="btn btn-link" href="{{ route('password.request') }}">
-                                            <h5>{{ __('¿Has olvidado tu contraseña?') }}</h5>
-                                        </a>
-                                    @endif
+
                             </div>
                         </div>
                     </form>

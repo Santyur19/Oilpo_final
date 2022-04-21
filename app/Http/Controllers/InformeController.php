@@ -13,4 +13,9 @@ class InformeController extends Controller
     public function informe_ventas(){
         return view('informes.informe_ventas');
     }
+
+    public function informe_compras(){
+        return view('informes.informe_compras');
+    }
+
 }
