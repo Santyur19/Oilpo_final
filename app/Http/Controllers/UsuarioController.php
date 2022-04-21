@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Usuario;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -19,7 +20,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $usuarios = Usuario::paginate();
+        $usuarios = User::paginate();
 
         return view('usuario.index', compact('usuarios'))
             ->with('i', (request()->input('page', 1) - 1) * $usuarios->perPage());
@@ -52,19 +53,7 @@ class UsuarioController extends Controller
     //         ->with('success', 'Usuario created successfully.');
     // }
 
-    public function usuario_guardar(){
-        $campos = request()->validate([
-            'Documento' =>'required|unique:usuarios,Documento',
-            'Nombres'=> 'required',
-            'Apellidos' => 'required' ,
-            'Correo'=> 'required|unique:usuarios,Correo',
-            'Usuario' => 'required|unique:usuarios,Usuario',
-            'Password'=> 'required|min:8'
-        ]);
 
-        Usuario::create($campos);
-        return redirect()->route('usuarios.index') ->with('success', 'El producto se ha guardado.');
-    }
 
     /**
      * Display the specified resource.

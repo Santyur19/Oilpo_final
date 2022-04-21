@@ -179,6 +179,7 @@ class ComprasController extends Controller
         
         }
 
+
         $tabla .="
                 </tbody>
             </thead>

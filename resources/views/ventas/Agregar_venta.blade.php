@@ -70,6 +70,9 @@
                                         <input type="datetime" class="form-control" name="Fecha_compra" id="" aria-describedby="helpId" readonly value="<?php echo $fecha_actual?>">
                                         <small id="helpId" class="form-text text-muted"></small>
 
+                                        <label for="">Factura</label>
+                                        <input type="text" class="form-control" name="factura" id="" aria-describedby="helpId" readonly value="<?php foreach($Facturas as  $Factura) {echo $Factura->Factura+1;} ?>">
+                                        <small id="helpId" class="form-text text-muted"></small>
                                     </div>
                                 </div>
                             </div>
@@ -78,9 +81,9 @@
                                     <div class="card-body">
                                         <label for="">Producto</label>
                                         <select class="form-select" name="Nombre_producto" id="producto">
-                                            <option selected >Seleccione</option>
+                                            <option>Seleccione</option>
                                                 <?php  foreach($productos as  $producto){ ?>
-                                            <option selected value="<?php echo $producto->Nombre_producto ?>"><?php echo $producto->Nombre_Producto ?></option>
+                                            <option  value="<?php echo $producto->Nombre_Producto ?>"><?php echo $producto->Nombre_Producto ?></option>
                                             <?php } ?>
                                         </select>
 
@@ -93,7 +96,7 @@
                                         <small id="helpId" class="form-text text-muted"></small> 
 
                                         <label for="">Iva</label>
-                                        <input type="number" class="form-control" name="iva" id="iva" aria-describedby="helpId" placeholder="">
+                                        <input type="number" class="form-control" name="ivas" id="iva" aria-describedby="helpId" placeholder="">
                                         <small id="helpId" class="form-text text-muted"></small> 
                                         <div class="text-center" >
                                         <button  id="agregar" type="button" class="btn btn-primary">Agregar producto</button>
@@ -116,14 +119,13 @@
                                             <th>Cantidad</th>
                                             <th>Precio</th>
                                             <th>Iva</th>
-                                            <th>Total</th>
+                                            <th>Subtotal</th>
                                         </tr>
 
                                         </thead>
 
 
                                         <tbody>
-
 
                                         </tbody>
 
@@ -152,6 +154,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     
     <script>
+      
         $(document).ready(function(){
             $('#agregar').click(function(){
                 agregar();
@@ -164,28 +167,31 @@
         var iva =0;
         var ivat=0;
         subtotal=[];
+        totalt=[];
         $('#guardar').hide();
         function agregar(){
-            var producto = $('#producto').val();
+            // var producto = $('#producto').val();
             var cantidad = $('#cantidad').val();
             var iva = $('#iva').val();
             var precio = $('#precio').val();
 
-            var producto = $("#prodcuto option:selected").val();
+         
+            //var producto = $("#producto option:selected").val();
+            var producto = $("#producto option:selected").text();
 
-
-            producto= $(this).children("option:selected").val();
 
             if(producto !="" && cantidad >0 && iva>0){
                 subtotal[cont]=(cantidad*precio);
-                ivat=ivat+(subtotal*(iva/100));
-                total = (subtotal+ivat);
+                ivat=ivat+(subtotal[cont]*(iva/100));
+                total = total + (subtotal[cont]+ivat);
+                totalt[cont]=(subtotal[cont]+ivat);
+                
+                ivat=0;
 
-
-                var fila = '<tr id="fila'+cont+'"><td><input readnoly type="text" name="producto[]" value="'+producto+'"></td><td><input readnoly type="number" name="Cantidad[]" value="'+cantidad+'"></td><td><input readnoly type="number" name="precio[]" value="'+precio+'"></td><td><input readnoly type="number" name="iva[]" value="'+iva+'"></td><td>'+total+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
+                var fila = '<tr id="fila'+cont+'"><td><input readnoly type="text" name="producto[]" value="'+producto+'"></td><td><input readnoly type="number" name="Cantidad[]" value="'+cantidad+'"></td><td><input readnoly type="number" name="precio[]" value="'+precio+'"></td><td><input readnoly type="number" name="iva[]" value="'+iva+'"></td><td>'+subtotal[cont]+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
                 cont++;
                 limpiar();
-                $('#total').html('<h1 class="btn btn-info">Total: $'+total+'<input type="number" name="Total" value="'+total+'"  ></h1>');
+                $('#total').html('<h1 class="btn btn-info">Total: $'+total+'<input type="number" hidden name="Total" value="'+total+'"  ></h1>');
                 evaluar();
                 $('#tabla').append(fila);
             }
@@ -200,10 +206,10 @@
             // }
         }
         function limpiar(){
-            $('#Productos').val('');
-            $('#Precios_compra').val('');
-            $('#Precios_venta').val('');
-            $('#Cantidades').val('');
+            $('#producto').val('');
+            $('#cantidad').val('');
+            $('#precio').val('');
+            $('#iva').val('');
         }
         function evaluar(){
             if (total>0){
@@ -215,44 +221,13 @@
 
         }
         function eliminar(index){
-            total=total-subtotal[index];
+            total=total-totalt[index];
             $('#total').html('<h1 class="btn btn-info">Total: $'+total+'</h1>');
             $('#fila'+index).remove();
             guardar();
         }
 
     </script>
-
-    <!-- <script>
-    jQuery(document).on('submit', '#form_insert', function(event){
-        event.preventDefault();
-        jQuery.ajax({
-            url:'{{ url("") }}',
-            type: 'POST',
-            dataType: 'json',
-            data: $(this).serialize(),
-
-        })
-        .done(function(repuesta){
-            console.log(repuesta);
-            if(!respuesta.error){
-                alert('Los datos se ingresaron');
-
-            }else{
-                alert('No se puede ingresar los datos');
-
-
-            }
-        })
-        .fail(function(resp){
-            console.log(resp.responseText);
-        })
-        .always(function(){
-            console.log('TODO CORRECTO');
-        })
-
-    });
-</script> -->
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
