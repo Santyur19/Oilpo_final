@@ -18,15 +18,6 @@
 
     {{--ICONO  --}}
     <link rel="icon" href="vendor\adminlte\dist\img\Moto.png">
-    <style>
-        body{
-            background-image: url('vendor/adminlte/dist/img/Fondo.jpg');
-            background-repeat: repeat;
-            background-size: 110%;
-        }
-    </style>
-
-
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -94,33 +85,6 @@
         </main>
     </div>
 </body>
-<style>
-    #oilpo{
-        -webkit-box-shadow: -23px 22px 39px 19px rgba(0,0,0,0.42);
-        -moz-box-shadow: -23px 22px 39px 19px rgba(0,0,0,0.42);
-        box-shadow: -23px 22px 39px 19px rgba(0,0,0,0.42);
-    }
-    #Iniciar_sesion{
-        -webkit-box-shadow: -23px 22px 39px 19px rgba(0,0,0,0.42);
-        -moz-box-shadow: -23px 22px 39px 19px rgba(0,0,0,0.42);
-        box-shadow: -23px 22px 39px 19px rgba(0,0,0,0.42);
-    }
-    #Registrarse{
-        -webkit-box-shadow: -23px 22px 39px 19px rgba(0,0,0,0.42);
-        -moz-box-shadow: -23px 22px 39px 19px rgba(0,0,0,0.42);
-        box-shadow: -23px 22px 39px 19px rgba(0,0,0,0.42);
-
-    }
-    #PO{
-        border: 1px solid rgba(0, 0, 0, 0);
-        width: 400px;
-        height: 100px;
-        animation: mymove1 5s infinite;
-    }
-    @keyframes mymove1 {
-        50% {font-weight: bold;}
-    }
-
-</style>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </html>
 

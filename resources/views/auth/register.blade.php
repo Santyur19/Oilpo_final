@@ -1,26 +1,7 @@
 @extends('layouts.app')
 
-@section('content')+
-<style>
-    body{
-        background-image: url('vendor/adminlte/dist/img/Fondo.jpg');
-        background-repeat: repeat;
-        background-size: 110%;
-    }
-    #card{
-        text-align: center;
-        color:white;
-        background-repeat: no-repeat;
-        background-size: 250px;
-        background-color: rgba(78, 77, 77, 0.397);
-        -webkit-box-shadow: -22px 28px 20px 16px rgba(0,0,0,0.75);
-        -moz-box-shadow: -22px 28px 20px 16px rgba(0,0,0,0.75);
-        box-shadow: -22px 28px 20px 16px rgba(0,0,0,0.75);
-        background-position: 490px 20px;
-        border-block-color: blue;
-    }
+@section('content')
 
-</style>
 <div class="container" >
     <div class="row justify-content-center">
         <div class="col-md-8" >

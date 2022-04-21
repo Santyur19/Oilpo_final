@@ -6,12 +6,20 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Restablecer contraseña') }}</div>
-
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
+                    @if ($message = Session::get('status'))
+                        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                        <script>
+                            Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Hemos enviado por correo electrónico el enlace para restablecer la contraseña.',
+                            showConfirmButton: false,
+                            timer: 4500
+                            })
+
+
+                        </script>
                     @endif
 
                     <form method="POST" action="{{ route('password.email') }}">
