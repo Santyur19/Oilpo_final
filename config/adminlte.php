@@ -263,6 +263,14 @@ return [
             'label_color' => 'success',
         ],
 
+        
+        [
+            'text'        => 'Permisos',
+            'url'         => 'permisos',
+            'icon'        => 'fas fa-unlock-alt',
+            'label_color' => 'success',
+        ],
+
 
 
 

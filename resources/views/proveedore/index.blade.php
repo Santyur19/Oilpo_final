@@ -54,7 +54,7 @@
 
                                 <div class="mb-3">
                                     <label for="message-text" class="col-form-label">Tipo Documento:</label>
-                                    <select require class="form-select"  id="js-example-disabled-results"name="Tipo_Doc_proveedor" >
+                                    <select require class="form-select"  id="" name="Tipo_Doc_proveedor" >
                                         <option class="form-control" id="recipient-name" value="" >Seleccione tipo documento...</option>
                                         <option class="form-control" id="recipient-name" value="Cédula de ciudadania">Cédula de ciudadania</option>
                                         <option class="form-control" id="recipient-name" value="Cédula Extranjeria">Cédula Extranjeria</option>

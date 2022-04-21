@@ -20,7 +20,7 @@
 
         }
         #card{
-            border-radius: 34px;
+            border-radius: 10px;
             border: 7px;
             border-bottom: black;
             background: #ADA996;  /* fallback for old browsers */
@@ -32,24 +32,19 @@
         }
         #texto{
             text-shadow: -1px -1px 1px #aaa,0px 4px 1px rgba(0,0,0,0.5),4px 4px 5px rgba(0,0,0,0.7),0px 0px 7px rgba(0,0,0,0.4);
-            letter-spacing: 2px;
-            word-spacing: 4px;
+            letter-spacing: 1px;
+            word-spacing: 2px;
             font-family: fantasy;
-            font-size: 70px;
+            font-size: 30px;
         }
     </style>
     <br>
-    </br>
-    <br>
-    </br>
-    <br>
-    </br>
-    <br>
+
     <div class="card" id="card">
         <div class="card-body" >
                 <div class="row mb-3">
 
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <h1 id="texto" class="text-center" >Bienvenido {{ Auth::user()->name }}</h1>
                     </div>
                 </div>

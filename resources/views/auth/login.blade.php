@@ -5,27 +5,7 @@
 
     <div class="row justify-content-center" id="borde">
         <div class="col-md-8">
-            <style>
-                #card{
-                    text-align: center;
-                   
-                    background-position: 490px 20px;
 
-
-                }
-                #olvido{
-                    text-decoration:none;
-
-                }
-               
-
-                body{
-                    
-                }
-
-            </style>
-            <div class="card" id="card" >
-                <div class="card-header"><h3 style="color: black);">{{ __('Inicio de sesión') }}</h3></div>
                 <br>
                 </br>
                 <div class="card-body" >
@@ -33,7 +13,7 @@
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-center"><h4 style="color: black;">{{ __('E-Mail') }}</h4></label>
+
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -47,7 +27,7 @@
                         </div>
                         </br>
                         <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-right"><h4 style="color:black;">{{ __('Contraseña') }}</h4></label>
+
                             <div id="password" class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
@@ -62,7 +42,7 @@
                             <div class="col-md-11 ">
                                 <input style="font-size: 25px;" class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                                 <label class="form-check-label" for="remember">
-                                    <h4 style="color: black;">{{ __('Recuérdame') }}</h4>
+
                                 </label>
                             </div>
                         </div>
@@ -71,16 +51,12 @@
                             <div class="col-md-6 ">
                                 <div class="col-md-6 offset-md-8">
                                     <button type="submit" class="btn btn-primary">
-                                        <h5 style="color: rgb(255, 255, 255);">{{ __('Iniciar sesión') }}</h5>
+                                        <h5>{{ __('Iniciar sesión') }}</h5>
                                     </button>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                @if (Route::has('password.request'))
-                                &nbsp;&nbsp;&nbsp;<a class="btn btn-link" id="olvido" href="{{ route('password.request') }}">
-                                        <h5 id="olvido">{{ __('¿Has olvidado tu contraseña?') }}</h5>
-                                    </a>
-                                @endif
+
                             </div>
                         </div>
                     </form>

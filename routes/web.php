@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\Auth\RegisterController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -72,7 +74,6 @@ Route::put('/proveedores', [App\Http\Controllers\ProveedoreController::class, 'u
 
 Route::put('/usuarios{usuario}', [App\Http\Controllers\UsuarioController::class , 'editar_usuario'])->name('Editar_usuario');
 Route::resource('/usuarios', App\Http\Controllers\UsuarioController::class);
-Route::post('/usuarios', [App\Http\Controllers\UsuarioController::class, 'usuario_guardar'] )->name('guardar_usuario');
 Route::put('/usuarios', [App\Http\Controllers\UsuarioController::class, 'update_status'] )->name('Editar_estado_usuario');
 
 
@@ -115,6 +116,10 @@ Route::post('/ventas/Detalles_ventas', [App\Http\Controllers\VentasController::c
 Route::resource('/informes', App\Http\Controllers\InformeController::class);
 Route::post('/informes/informe_ventas', [App\Http\Controllers\InformeController::class, 'informe_ventas'])->name('Informe_ventas');
 Route::post('/informes/informe_compras', [App\Http\Controllers\InformeController::class, 'informe_compras'])->name('Informe_compras');
+
+
+//USER
+Route::post('/usuarios', [App\Http\Controllers\Auth\RegisterController::class, 'usuario_guardar'] )->name('guardar_usuario');
 
 
 

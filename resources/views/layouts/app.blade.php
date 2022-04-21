@@ -18,13 +18,6 @@
 
     {{--ICONO  --}}
     <link rel="icon" href="vendor\adminlte\dist\img\Moto.png">
-    <style>
-        body{
-            background-repeat: repeat;
-            background-size: 110%;
-        }
-    </style>
-
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -93,27 +86,6 @@
         </main>
     </div>
 </body>
-<style>
-    #oilpo{
-    
-    }
-    #Iniciar_sesion{
-       
-    }
-    #Registrarse{
-       
 
-    }
-    #PO{
-        border: 1px solid rgba(0, 0, 0, 0);
-        width: 400px;
-        height: 100px;
-      
-    }
-    @keyframes mymove1 {
-        50% {font-weight: bold;}
-    }
-
-</style>
 </html>
 
