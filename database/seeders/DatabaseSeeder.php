@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 use App\Models\ciudades;
 use App\Models\Proveedore;
-use App\Models\permiso;
 use App\Models\User;
 use App\Models\Venta;
 use Illuminate\Database\Seeder;
@@ -18,6 +17,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
+        $this->call(RoleSeeder::class);
+        $this->call(UserSeeder::class);
 
     //SEEDERS FACTURA VENTA
     
@@ -33,33 +34,6 @@ class DatabaseSeeder extends Seeder
     $factura ->save();
 
     
-    
-
-    //SEEDERS PERMISOS
-
-    $permiso = new permiso();
-    $permiso->Nombre = "Usuarios";
-    $permiso->save();
-
-    $permiso = new permiso();
-    $permiso->Nombre = "Roles";
-    $permiso->save();
-
-    $permiso = new permiso();
-    $permiso->Nombre = "Compras";
-    $permiso->save();
-
-    $permiso = new permiso();
-    $permiso->Nombre = "Ventas";
-    $permiso->save();
-
-    $permiso = new permiso();
-    $permiso->Nombre = "Informes";
-    $permiso->save();
-
-
-
-
 
     //SEEDERS DEL PROVEEDOR
 
