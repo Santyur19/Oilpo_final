@@ -58,14 +58,14 @@
                             <div class="col-md-6">
                                 <div class="card">
                                     <div class="card-body">
+                                        <label for="">Cliente</label>
                                     <select class="form-select" name="Nombre">
                                         <option value=" ">Seleccione</option>
                                         <?php foreach($clientes as  $cliente){ ?>
                                         <option value="<?php echo $cliente->Nombre ?>"><?php echo $cliente->Nombre ?></option>
                                         <?php } ?>
-                                    </select>  
+                                    </select> </p>
 
-                                        <br>
                                         <label for="">Fecha de compra</label>
                                         <input type="datetime" class="form-control" name="Fecha_compra" id="" aria-describedby="helpId" readonly value="<?php echo $fecha_actual?>">
                                         <small id="helpId" class="form-text text-muted"></small>
