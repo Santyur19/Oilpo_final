@@ -28,3 +28,5 @@ class InformeController extends Controller
         return view('informes.informe_ventas', $data);
     }
 }
+
+// select COUNT(DISTINCT(Factura)) from ventas WHERE Fecha_venta LIKE "%-05-%"
