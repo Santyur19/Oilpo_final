@@ -88,7 +88,7 @@ class VentasController extends Controller
         $cadena= "INSERT INTO ventas (Nombre, Nombre_servicio, Fecha_venta, Total, Nombre_Producto, Cantidad, Iva, factura) VALUES ";
         for ($i = 0; $i <count($Producto); $i++){
             $cadena.="('".$Cliente."',  '".$Cliente."', '".$Fecha."',  '".$total."',  '".$Producto[$i]."' , '".$Cantidad[$i]."', '".$Iva[$i]."', '".$factura."'),";
-            $cadena_u.= "UPDATE productos SET Cantidad_Producto = ( SELECT Cantidad_Producto + $Cantidad[$i]) WHERE Nombre_Producto = '$Producto[$i]';";
+            $cadena_u.= "UPDATE productos SET Cantidad_Producto = ( SELECT Cantidad_Producto - $Cantidad[$i]) WHERE Nombre_Producto = '$Producto[$i]';";
 
         }
         $cadena_final = substr($cadena, 0, -1);
