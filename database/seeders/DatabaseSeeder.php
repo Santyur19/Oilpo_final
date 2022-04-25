@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
 
     //SEEDERS FACTURA VENTA
-    
+
     $factura = new Venta();
     $factura->Factura = 0;
     $factura->Nombre = "";
@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
     $factura->Total = 0;
     $factura ->save();
 
-    
+
 
     //SEEDERS DEL PROVEEDOR
 

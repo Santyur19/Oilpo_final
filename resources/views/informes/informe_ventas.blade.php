@@ -35,6 +35,8 @@
         $(document).ready(function(){
             var cData = JSON.parse(`<?php echo $data;  ?>`)
             const ctx = document.getElementById('myChart').getContext('2d');
+            console.log(cData)
+
     const myChart = new Chart(ctx, {
         type: 'bar',
         data: {
