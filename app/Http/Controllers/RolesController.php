@@ -1,18 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Role;
-use App\Models\permiso;
+use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 
 class RolesController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -24,10 +23,9 @@ class RolesController extends Controller
     public function index()
     {
         //$roles = Role::paginate();
-        $permiso = permiso::paginate();
-        $roles = DB::select("SELECT id, rol, id_user, permisos FROM roles");
+        // $roles = DB::select("SELECT id, rol, id_user, permisos FROM roles");
 
-        return view('role.index', compact('roles', 'permiso'))->with('i');
+         return view('role.index');
     }
 
 

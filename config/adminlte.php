@@ -266,7 +266,7 @@ return [
         
         [
             'text'        => 'Permisos',
-            'url'         => 'permisos',
+            'url'         => 'permissions',
             'icon'        => 'fas fa-unlock-alt',
             'label_color' => 'success',
         ],

@@ -21,12 +21,11 @@ class InformeController extends Controller
         $data = [];
 
         foreach ($ventas as $venta) {
-            $data['label'][] = $venta->Nombre;
-            $data['data'][] = $venta->id;
+            $data['label'][] = $venta->created_at;
+            $data['data'][] = $venta->Factura;
         }
         $data['data'] = json_encode($data);
         return view('informes.informe_ventas', $data);
     }
 }
 
-// select COUNT(DISTINCT(Factura)) from ventas WHERE Fecha_venta LIKE "%-05-%"
