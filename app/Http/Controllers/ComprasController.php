@@ -64,6 +64,8 @@ class ComprasController extends Controller
 
     public function Agregar_compra(Request  $request){
 
+        $productos = Producto::all();
+
         $proveedor = $_POST['Nombre_proveedor'];
         $numero_factura = $_POST['Numero_factura'];
         $foto=(isset($_FILES['Foto']['name']))?$_FILES['Foto']['name']:"";
@@ -108,7 +110,7 @@ class ComprasController extends Controller
         DB::insert($cadena_final);
 
         return redirect('compras/')
-            ->with('success', ' ');
+            ->with('success', ' ', $productos);
 
 
     }
