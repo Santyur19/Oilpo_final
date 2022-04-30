@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 @endsection
 @section('template_title')
 
@@ -59,13 +61,12 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <label for="">Cliente</label>
-                                    <select class="form-select" name="Nombre">
+                                    <select class="form-select" name="Nombre" id="Nombre_cliente" required>
                                         <option value=" ">Seleccione</option>
                                         <?php foreach($clientes as  $cliente){ ?>
                                         <option value="<?php echo $cliente->Nombre ?>"><?php echo $cliente->Nombre ?></option>
                                         <?php } ?>
                                     </select> </p>
-
                                         <label for="">Fecha de compra</label>
                                         <input type="datetime" class="form-control" name="Fecha_compra" id="" aria-describedby="helpId" readonly value="<?php echo $fecha_actual?>">
                                         <small id="helpId" class="form-text text-muted"></small>
@@ -96,7 +97,7 @@
                                         <small id="helpId" class="form-text text-muted"></small> 
 
                                         <label for="">Iva</label>
-                                        <input type="number" class="form-control" name="ivas" id="iva" aria-describedby="helpId" placeholder="">
+                                        <input type="number" class="form-control" name="ivas" id="iva" aria-describedby="helpId" placeholder="" >
                                         <small id="helpId" class="form-text text-muted"></small> 
                                         <div class="text-center" >
                                         <button  id="agregar" type="button" class="btn btn-primary">Agregar producto</button>
@@ -145,6 +146,7 @@
         </div>
     </div>
     @yield('js')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
@@ -152,9 +154,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
     
     <script>
-      
+        $(document).ready(function() {
+            $('#Nombre_cliente').select2();
+        });
+    </script>
+    <script>
         $(document).ready(function(){
             $('#agregar').click(function(){
                 agregar();
@@ -170,7 +177,6 @@
         totalt=[];
         $('#guardar').hide();
         function agregar(){
-            // var producto = $('#producto').val();
             var cantidad = $('#cantidad').val();
             var iva = $('#iva').val();
             var precio = $('#precio').val();
@@ -178,9 +184,10 @@
          
             //var producto = $("#producto option:selected").val();
             var producto = $("#producto option:selected").text();
+            var Cliente = $("#Nombre_cliente option:selected").text();
 
 
-            if(producto !="" && cantidad >0 && iva>0){
+            if(producto !="" && cantidad > 0 && iva > 0 && precio > 0 && Cliente !=""){
                 subtotal[cont]=(cantidad*precio);
                 ivat=ivat+(subtotal[cont]*(iva/100));
                 total = total + (subtotal[cont]+ivat);
@@ -191,19 +198,17 @@
                 var fila = '<tr id="fila'+cont+'"><td><input readnoly type="text" name="producto[]" value="'+producto+'"></td><td><input readnoly type="number" name="Cantidad[]" value="'+cantidad+'"></td><td><input readnoly type="number" name="precio[]" value="'+precio+'"></td><td><input readnoly type="number" name="iva[]" value="'+iva+'"></td><td>'+subtotal[cont]+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
                 cont++;
                 limpiar();
-                $('#total').html('<h1 class="btn btn-info">Total: $'+total+'<input type="number" hidden name="Total" value="'+total+'"  ></h1>');
+                $('#total').html('<h1 class="btn btn-info">Total: $'+total.toFixed(0)+'<input type="number" hidden name="Total" value="'+total.toFixed(0)+'"  ></h1>');
                 evaluar();
                 $('#tabla').append(fila);
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'No se han llenado todos campos!',
+                    
+                })
             }
-
-            // }else{
-            //     Swal.fire({
-            //         icon: 'error',
-            //         title: 'Oops...',
-            //         text: 'Something went wrong!',
-            //         footer: '<a href="">Why do I have this issue?</a>'
-            //     })
-            // }
         }
         function limpiar(){
             $('#producto').val('');
@@ -226,7 +231,6 @@
             $('#fila'+index).remove();
             guardar();
         }
-
     </script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
