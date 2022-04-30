@@ -74,7 +74,24 @@
                                     <label for="message-text" class="col-form-label">Contraseña <small style="color:red;">*</small></label>
                                     <input type="password" name="Password" class="form-control" id="recipient-name" value="{{old('Password')}}">
                                     <small class="text-danger">{{$errors->first('Password')}}</small>
+
                                 </div>
+
+                                <div class="mb-3">
+                                    <label for="message-text" class="col-form-label">Rol:</label>
+                                    <select  class="form-select" id="recipient-name" name="Rol_usuario" >
+                                        <option class="form-select" id="recipient-name" value="">Seleccione</option>
+                                    <?php foreach($ciudad as $ciudades){ ?>
+                                        <option  class="form-select" id="recipient-name" value="<?php echo $ciudades->Nombre ?>"><?php echo $ciudades->Nombre ?></option>
+
+
+                                    <?php } ?>
+                                    </select>
+                                    <small class="text-danger">{{$errors->first('Ciudad_proveedor')}}</small>
+
+
+                                </div>
+
                                <!--  <div class="mb-3">
                                     <label for="message-text" class="col-form-label">Estado:</label>
                                     <select require class="form-control" id="recipient-name">

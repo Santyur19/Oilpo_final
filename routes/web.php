@@ -27,12 +27,15 @@ Route::get('/', function () {
 
 
 
+
+
+
+Route::group(['middleware' => 'auth'], function () {
+
 //RUTAS ADMIN O PRINCIPALES
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
 
 //RUTAS ROLES
 
@@ -120,6 +123,12 @@ Route::post('/informes/informe_compras', [App\Http\Controllers\InformeController
 
 //USER
 Route::post('/usuarios', [App\Http\Controllers\Auth\RegisterController::class, 'usuario_guardar'] )->name('guardar_usuario');
+
+Route::resource('/permissions', controller: App\Http\Controllers\PermissionController::class);
+
+
+
+});
 
 
 

@@ -1,7 +1,7 @@
 
 @extends('adminlte::page')
 
-@section('title', '| Roles')
+@section('title', '| Permisos')
 
 @section('css')
     <link rel="icon" href="https://cdn.discordapp.com/attachments/881318396128526336/921091428321488946/unknown.png">

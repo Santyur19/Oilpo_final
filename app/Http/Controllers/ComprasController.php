@@ -14,11 +14,12 @@ class ComprasController extends Controller
     public function index()
 
     {
+        $fecha_filtro ="";
         $compra = Compras::paginate();
         $nombre = DB:: select("SELECT DISTINCT Numero_factura, p.Nombre_proveedor, Fecha_compra, Total FROM compras  as c JOIN proveedores as p  WHERE c.Nombre_proveedor=p.id");
 
 
-        return view('compras.index', compact('compra', 'nombre'))
+        return view('compras.index', compact('compra', 'nombre', 'fecha_filtro' ))
             ->with('i', (request()->input('page', 1) - 1) * $compra->perPage());
 
     }
@@ -62,6 +63,8 @@ class ComprasController extends Controller
     }
 
     public function Agregar_compra(Request  $request){
+
+        $productos = Producto::all();
 
         $proveedor = $_POST['Nombre_proveedor'];
         $numero_factura = $_POST['Numero_factura'];
@@ -107,7 +110,7 @@ class ComprasController extends Controller
         DB::insert($cadena_final);
 
         return redirect('compras/')
-            ->with('success', ' ');
+            ->with('success', ' ', $productos);
 
 
     }
@@ -139,7 +142,9 @@ class ComprasController extends Controller
                             <th>Total</th>
                         </tr>
             ";
-            $compra = DB:: select("SELECT Numero_factura, Cantidad, Precio_compra, Precio_venta, Total, Producto,  p.Nombre_proveedor, Fecha_compra, Total FROM compras  as c JOIN proveedores as p  WHERE c.Nombre_proveedor=p.id");
+            $fecha_filtro = $_POST["fecha_filtro"];
+
+            $compra = DB:: select("SELECT DISTINCT Numero_factura, Cantidad, Precio_compra, Precio_venta, Total, Producto,  p.Nombre_proveedor, Fecha_compra, Total FROM compras  as c JOIN proveedores as p  WHERE c.Nombre_proveedor=p.id AND Fecha_compra ='".$fecha_filtro."'");
 
             foreach ($compra as $compras) {
                 $tabla .="
@@ -173,10 +178,10 @@ class ComprasController extends Controller
             $compra = Compras::paginate();
 
 
-            return view('compras.index', compact('compra', 'nombre'))
+            return view('compras.index', compact('compra', 'nombre', 'fecha_filtro'))
             ->with('i', (request()->input('page', 1) - 1) * $compra->perPage());
 
-        
+
         }
 
 
