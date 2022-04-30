@@ -73,36 +73,46 @@ class VentasController extends Controller
             ->with('borrado', 'Venta deleted successfully');
     }
 
+
     public function Guardar_venta(){
 
         $Cliente=$_POST['Nombre'];
-        $Fecha=$_POST['Fecha_compra'];
-        $total = $_POST['Total'];
-        $Producto = $_POST['producto'];
-        $Precio = $_POST['precio'];
-        $Iva = $_POST['iva'];
-        $Cantidad = $_POST['Cantidad'];
-        $factura = $_POST['factura'];
+        if ($Cliente != " "){
+            $Fecha=$_POST['Fecha_compra'];
+            $total = $_POST['Total'];
+            $Producto = $_POST['producto'];
+            $Precio = $_POST['precio'];
+            $Iva = $_POST['iva'];
+            $Cantidad = $_POST['Cantidad'];
+            $factura = $_POST['factura'];
 
-        $cadena_u="";
-        $cadena= "INSERT INTO ventas (Nombre, Nombre_servicio, Fecha_venta, Total, Nombre_Producto, Cantidad, Iva, factura) VALUES ";
-        for ($i = 0; $i <count($Producto); $i++){
-            $cadena.="('".$Cliente."',  '".$Cliente."', '".$Fecha."',  '".$total."',  '".$Producto[$i]."' , '".$Cantidad[$i]."', '".$Iva[$i]."', '".$factura."'),";
-            $cadena_u.= "UPDATE productos SET Cantidad_Producto = ( SELECT Cantidad_Producto + $Cantidad[$i]) WHERE Nombre_Producto = '$Producto[$i]';";
+            $cadena_u="";
+            $cadena= "INSERT INTO ventas (Nombre, Nombre_servicio, Fecha_venta, Total, Nombre_Producto, Cantidad, Iva, factura) VALUES ";
+            for ($i = 0; $i <count($Producto); $i++){
+                $cadena.="('".$Cliente."',  '".$Cliente."', '".$Fecha."',  '".$total."',  '".$Producto[$i]."' , '".$Cantidad[$i]."', '".$Iva[$i]."', '".$factura."'),";
+                $cadena_update= "UPDATE productos SET Cantidad_Producto = ( SELECT Cantidad_Producto - $Cantidad[$i]) WHERE Nombre_Producto = '$Producto[$i]';";
 
+            }
+            $cadena_final = substr($cadena, 0, -1);
+            $cadena_final.=";";
+
+            // $cadena_update = substr($cadena_u, 0, -1);
+
+            DB::insert($cadena_final);
+            DB::update($cadena_update);
+
+
+            return redirect('ventas/')
+                ->with('success', ' ');
         }
-        $cadena_final = substr($cadena, 0, -1);
-        $cadena_final.=";";
+        else{
 
-        $cadena_update = substr($cadena_u, 0, -1);
-        $cadena_update.=";";
+        $ventas = Venta::paginate();
+        $venta = DB:: select("SELECT DISTINCT Factura, Nombre, Fecha_venta, Total FROM ventas where Factura > 0 ");
 
-        DB::insert($cadena_final);
-        DB::update($cadena_update);
-
-
-        return redirect('ventas/')
-            ->with('success', ' ');
+        return redirect('ventas')
+            ->with('Error', ' ');
+        }
     }
 
     public function Detalles(){
