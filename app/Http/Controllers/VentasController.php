@@ -120,9 +120,10 @@ class VentasController extends Controller
 
         $Factura = $_POST['Factura'];
 
+        $totales = DB:: select("SELECT DISTINCT(Total), Factura FROM ventas WHERE Factura = '".$Factura."'");
         $ventas = DB:: select("SELECT *  FROM ventas WHERE Factura ='".$Factura."'");
 
-        return view('ventas.Detalles_ventas', compact('ventas'));
+        return view('ventas.Detalles_ventas', compact('ventas', 'totales'));
 
 
     }

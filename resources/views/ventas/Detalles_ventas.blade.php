@@ -22,8 +22,10 @@
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <h5>Numero factura  <?php  ?></h5>
-                            <br>
+                            <?php foreach ($totales as $total){ ?>   
+                                <h5>Numero factura  <?php echo $total-> Factura ?></h5>
+                            <?php } ?>
+                                <br>
                             <span id="card_title">
                                 <h3>Detalles ventas</h3>
                             </span>
@@ -41,7 +43,6 @@
                                         <th>Fecha Venta</th>
                                         <th>cantidad</th>
                                         <th>Iva</th>
-                                        <th>Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -55,13 +56,14 @@
                                         <td>{{ $venta->Fecha_venta }}</td>                                        
                                         <td>{{ $venta->Cantidad }}</td>
                                         <td>{{ $venta->Iva }}</td>
-                                        <td>{{ $venta->Total}}</td>
                                     </tr>
                                 <?php }?>
 
                             </table>
-                            <h5>Total Venta $<?php  ?></h5>
+                            <?php foreach ($totales as $total){ ?>
 
+                            <h5>Total Venta $<?php echo $total->Total ?></h5>
+                            <?php }?>
                         </div>
                     </div>
                 </div>
