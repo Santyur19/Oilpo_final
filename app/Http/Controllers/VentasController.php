@@ -29,7 +29,7 @@ class VentasController extends Controller
     public function Agregar_venta(){
 
         date_default_timezone_set("America/Bogota");
-        $fecha_actual = date("d-m-Y H:i");
+        $fecha_actual = date("Y-m-d");
 
         $Facturas=DB:: select("SELECT Factura FROM ventas ORDER by ID DESC LIMIT 1");
         $ventas = Venta::all();
