@@ -22,10 +22,11 @@ class InformeController extends Controller
 
         foreach ($ventas as $venta) {
             $data['label'][] = $venta->MONTH;
+
             $data['data'][] = $venta->numRecords;
         }
         $data['data'] = json_encode($data);
-        return view('informes.informe_ventas', $data);
+        return view('informes.informe_ventas ', $data);
     }
 }
 
