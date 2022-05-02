@@ -40,8 +40,8 @@
     const myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            //labels:cData.label,
-            labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            labels:cData.label,
+            //labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
 
             datasets: [{
                 label: 'Ventas',

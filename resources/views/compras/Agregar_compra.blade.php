@@ -115,9 +115,12 @@
         </div>
         <div class="text-center">
             <button id="guardar" type="submit" class="btn btn-primary">Agregar</button>
+            <button id="cancelar" type="button" onclick="cancelar()" class="btn btn-danger">Cancelar</button>
         </div>
 
     </form>
+
+
     </div>
 </div>
 @yield('js')
@@ -145,12 +148,18 @@
                 agregar();
 
             });
+            $('#cancelar').click(function(){
+                cancelar();
+
+            });
+
 
         });
         var cont = 0;
         total = 0;
         subtotal=[];
         $('#guardar').hide();
+        $('#cancelar').hide();
         function agregar(){
             // producto = $('#Productos').val();
             var producto = $("#Productos option:selected").text();
@@ -187,8 +196,10 @@
         function evaluar(){
             if (total>0){
                 $('#guardar').show();
+                $('#cancelar').show();
             }else{
                 $('#guardar').hide();
+                $('#cancelar').hide();
 
             }
 
@@ -199,6 +210,12 @@
             $('#fila'+index).remove();
             guardar();
         }
+
+        function cancelar(){
+            location.reload();
+        }
+
+
 
 </script>
 
