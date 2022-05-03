@@ -6,6 +6,7 @@ use App\Models\Producto;
 use Illuminate\Http\Request;
 use App\Models\Venta;
 use App\Models\Cliente;
+use App\Models\Servicio;
 use Illuminate\Support\Facades\DB;
 use function Psy\bin;
 
@@ -35,8 +36,10 @@ class VentasController extends Controller
         $ventas = Venta::all();
         $clientes = Cliente::all();
         $productos=Producto::all();
+        $servicios=Servicio::all();
 
-        return view('ventas.Agregar_venta', compact('ventas', 'clientes', 'fecha_actual', 'productos', 'Facturas'))
+
+        return view('ventas.Agregar_venta', compact('ventas', 'clientes', 'fecha_actual', 'productos', 'Facturas', 'servicios'))
             ->with('success', ' ');
 
     }
@@ -78,9 +81,11 @@ class VentasController extends Controller
 
         $Cliente=$_POST['Nombre'];
         if ($Cliente != " "){
+
             $Fecha=$_POST['Fecha_compra'];
             $total = $_POST['Total'];
             $Producto = $_POST['producto'];
+            $Servicio = $_POST['servicio'];
             $Precio = $_POST['precio'];
             $Iva = $_POST['iva'];
             $Cantidad = $_POST['Cantidad'];
@@ -89,17 +94,17 @@ class VentasController extends Controller
             $cadena_u="";
             $cadena= "INSERT INTO ventas (Nombre, Nombre_servicio, Fecha_venta, Total, Nombre_Producto, Cantidad, Iva, factura) VALUES ";
             for ($i = 0; $i <count($Producto); $i++){
-                $cadena.="('".$Cliente."',  '".$Cliente."', '".$Fecha."',  '".$total."',  '".$Producto[$i]."' , '".$Cantidad[$i]."', '".$Iva[$i]."', '".$factura."'),";
+                $cadena.="('".$Cliente."',  '".$Servicio[$i]."', '".$Fecha."',  '".$total."',  '".$Producto[$i]."' , '".$Cantidad[$i]."', '".$Iva[$i]."', '".$factura."'),";
+                
                 $cadena_update= "UPDATE productos SET Cantidad_Producto = ( SELECT Cantidad_Producto - $Cantidad[$i]) WHERE Nombre_Producto = '$Producto[$i]';";
-
+                DB::update($cadena_update);
+            
             }
             $cadena_final = substr($cadena, 0, -1);
             $cadena_final.=";";
 
-            // $cadena_update = substr($cadena_u, 0, -1);
 
             DB::insert($cadena_final);
-            DB::update($cadena_update);
 
 
             return redirect('ventas/')
