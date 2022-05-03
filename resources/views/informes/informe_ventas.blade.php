@@ -14,11 +14,10 @@
 @endsection
 
 @section('content')
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-            <br>
+                <br>
                 <div class="card">
                     <div class="card-header">
                         <h1 class="text-center">Informes Ventas</h1>
@@ -40,8 +39,8 @@
     const myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            //labels:cData.label,
-            labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            labels:cData.label,
+            //labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
 
             datasets: [{
                 label: 'Ventas',

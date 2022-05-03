@@ -41,8 +41,9 @@ class ComprasController extends Controller
     {
         $proveedores = Proveedore::all();
         $compra = Compras::paginate();
+        $numero_facturas = DB:: select("SELECT Numero_compras FROM Compras ORDER by ID DESC LIMIT 1");
         $productos = Producto::all();
-        return view('compras.Agregar_compra', compact('compra', 'proveedores', 'productos'))
+        return view('compras.Agregar_compra', compact('compra', 'proveedores', 'productos', 'numero_facturas'))
             ->with('i', (request()->input('page', 1) - 1) * $compra->perPage());
     }
 
@@ -65,7 +66,7 @@ class ComprasController extends Controller
     public function Agregar_compra(Request  $request){
 
         $productos = Producto::all();
-
+        $Numero_compra = $_POST['Numero_compras'];
         $proveedor = $_POST['Nombre_proveedor'];
         $numero_factura = $_POST['Numero_factura'];
         $foto=(isset($_FILES['Foto']['name']))?$_FILES['Foto']['name']:"";
@@ -100,9 +101,9 @@ class ComprasController extends Controller
         $Precio_venta = $_POST['Precio_venta'];
         $Cantidad = $_POST['Cantidad'];
 
-        $cadena= "INSERT INTO compras (Nombre_proveedor, Numero_factura, Fecha_compra, Foto, Total,  Producto, Precio_compra, Precio_venta, Cantidad) VALUES ";
+        $cadena= "INSERT INTO compras (Numero_compras, Nombre_proveedor, Numero_factura, Fecha_compra, Foto, Total,  Producto, Precio_compra, Precio_venta, Cantidad) VALUES ";
         for ($i = 0; $i <count($Producto); $i++){
-            $cadena.="('".$proveedor."',  '".$numero_factura."',  '".$fecha_compra."', '".$foto."',  '".$total."' , '".$Producto[$i]."', '".$Precio_compra[$i]."', '".$Precio_venta[$i]."', '".$Cantidad[$i]."'),";
+            $cadena.="('".$Numero_compra."', '".$proveedor."',  '".$numero_factura."',  '".$fecha_compra."', '".$foto."',  '".$total."' , '".$Producto[$i]."', '".$Precio_compra[$i]."', '".$Precio_venta[$i]."', '".$Cantidad[$i]."'),";
 
         }
         $cadena_final = substr($cadena, 0, -1);

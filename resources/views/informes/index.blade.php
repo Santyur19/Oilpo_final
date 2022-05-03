@@ -14,30 +14,151 @@
 @endsection
 
 @section('content')
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
             <br>
                 <div class="card">
                     <div class="card-header">
-                        <form action="{{ route('Informe_ventas') }}" method="POST">
-                            @csrf
-                            <button type="submit">Informes Ventas</button>
-                            
-
-                        </form>
-                        <form action="{{ route('Informe_compras') }}" method="POST">
-                            @csrf
-                            <button type="submit">Informes Compras</button>
-                            
-
-                        </form>
+                        <h2 class="text-center">Informes
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
+                                <path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"/>
+                            </svg>
+                        </h2>
+                    </div>
+                    <br>
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-sm-6">
+                              <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title">Informes ventas</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="myChart" width="400" height="190"></canvas>
+                                    <br>
+                                    <form action="{{ route('Informe_ventas') }}" method="POST">
+                                        @csrf
+                                        <button class="btn btn-primary" type="submit">Informes Ventas</button>
+                                    </form>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-sm-6">
+                              <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title">Informes compras</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="line_chart" width="400" height="190"></canvas>
+                                    <br>
+                                    <form action="{{ route('Informe_compras') }}" method="POST">
+                                        @csrf
+                                        <button class="btn btn-primary" type="submit">Informes Compras</button>
+                                    </form>
+                                </div>
+                            </div>
+                          </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+
+{{-- INFORMES VENTAS --}}
+    <script>
+        $(document).ready(function(){
+            var cData = JSON.parse(`<?php echo $data;  ?>`)
+            const ctx = document.getElementById('myChart').getContext('2d');
+            console.log(cData)
+
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels:cData.label,
+            //labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+
+            datasets: [{
+                label: 'Ventas',
+                data:cData.data,
+                backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+
+
+
+            }]
+
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+        });
+    </script>
+
+{{-- INFORMES COMPRAS --}}
+<script>
+     var cData = JSON.parse(`<?php echo $data_compras;  ?>`)
+        var div_line_chart = document.getElementById("line_chart");
+        var myLineChart = new Chart(div_line_chart, {
+            type: 'line',
+            data: {
+                labels:cData.label_compras,
+                //labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul"],
+                datasets: [
+                    {
+                        label: "Ingreso",
+                        fill: false,
+                        lineTension: 0.1,
+                        backgroundColor: "#428bca",
+                        borderColor: "#357ebd",
+                        borderCapStyle: 'butt',
+                        borderDash: [],
+                        borderDashOffset: 0.0,
+                        borderJoinStyle: 'miter',
+                        pointBorderColor: "#3276B1",
+                        pointBackgroundColor: "#3276B1",
+                        pointBorderWidth: 1,
+                        pointHoverRadius: 5,
+                        pointHoverBackgroundColor: "#3276B1",
+                        pointHoverBorderColor: "#3276B1",
+                        pointHoverBorderWidth: 2,
+                        pointRadius: 1,
+                        pointHitRadius: 10,
+                        data:cData.data_compras,
+                        //data: [65, 59, 80, 81, 56, 55, 40],
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+            }
+        });
+    </script>
 
 @endsection

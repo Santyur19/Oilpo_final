@@ -68,7 +68,7 @@
                                         <?php } ?>
                                     </select> </p>
                                         <label for="">Fecha de compra</label>
-                                        <input type="datetime" class="form-control" name="Fecha_compra" id="" aria-describedby="helpId" readonly value="<?php echo $fecha_actual?>">
+                                        <input type="date" class="form-control" name="Fecha_compra" id="" aria-describedby="helpId">
                                         <small id="helpId" class="form-text text-muted"></small>
 
                                         <label for="">Factura</label>
