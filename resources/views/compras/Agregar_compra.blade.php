@@ -26,6 +26,9 @@
                     <div class="card">
                         <div class="card-body">
                         <div class="form-group">
+                        <label for="">Numero de compras</label>
+                        <input type="number" name="Numero_compras" id="">
+                        <br>
                         <label for="">Proveedor</label>
                         <select style="width: 100%" class="js-example-theme-single" name="Nombre_proveedor" id="">
                             <option>Seleccione</option>

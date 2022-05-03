@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+use App\Models\Compras;
 use App\Models\ciudades;
 use App\Models\Proveedore;
 use App\Models\User;
@@ -32,6 +33,22 @@ class DatabaseSeeder extends Seeder
     $factura->Iva = 0;
     $factura->Total = 0;
     $factura ->save();
+
+
+    //SEEDERS DE NUMERO DE COMPRAS
+    // $numero_copmra = new Compras();
+    // $numero_copmra->Nombre_proveedor = "";
+    // $numero_copmra->Numero_factura = 0;
+    // //$numero_copmra->Fecha_compra = "";
+    // $numero_copmra->Foto = "";
+    // $numero_copmra->Producto = "";
+    // $numero_copmra->Precio_Compra = 0;
+    // $numero_copmra->Total = 0;
+    // $numero_copmra->Precio_venta = 0;
+    // $numero_copmra->Cantidad = 0;
+    // $numero_copmra->Numero_compras = 0;
+    // $numero_copmra->save();
+
 
 
 

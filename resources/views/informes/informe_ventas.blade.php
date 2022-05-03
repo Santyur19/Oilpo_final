@@ -14,11 +14,10 @@
 @endsection
 
 @section('content')
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-            <br>
+                <br>
                 <div class="card">
                     <div class="card-header">
                         <h1 class="text-center">Informes Ventas</h1>
