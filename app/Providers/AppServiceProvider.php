@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Providers;
-
+//use App\Providers\Carbon;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Configuración para fechas en español
+        // Carbon::setUTF8(true);
+        // Carbon::setLocale(config('app.locale'));
+        // setlocale(LC_ALL, 'es_MX', 'es', 'ES', 'es_MX.utf8');
     }
 }
