@@ -76,6 +76,7 @@
                                         <small id="helpId" class="form-text text-muted"></small>
                                     </div>
                                 </div>
+
                             </div>
                             <div class="col-md-6">
                                 <div class="card">
@@ -85,6 +86,14 @@
                                             <option>Seleccione</option>
                                                 <?php  foreach($productos as  $producto){ ?>
                                             <option  value="<?php echo $producto->Nombre_Producto ?>"><?php echo $producto->Nombre_Producto ?></option>
+                                            <?php } ?>
+                                        </select>
+
+                                        <label for="">Servicio</label>
+                                        <select class="form-select" name="Nombre_servicio" id="servicio">
+                                            <option>Seleccione</option>
+                                                <?php  foreach($servicios as $servicio){ ?>
+                                            <option  value="<?php echo $servicio->Nombre_servicio ?>"><?php echo $servicio->Nombre_servicio ?></option>>
                                             <?php } ?>
                                         </select>
 
@@ -101,6 +110,7 @@
                                         <small id="helpId" class="form-text text-muted"></small> 
                                         <div class="text-center" >
                                         <button  id="agregar" type="button" class="btn btn-primary">Agregar producto</button>
+
                                         </div>
                                     </div>
                                 </div>
@@ -155,7 +165,6 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
-    
     <script>
         $(document).ready(function() {
             $('#Nombre_cliente').select2();
@@ -180,10 +189,11 @@
             var cantidad = $('#cantidad').val();
             var iva = $('#iva').val();
             var precio = $('#precio').val();
-
+// Nombre_servicio
          
             //var producto = $("#producto option:selected").val();
             var producto = $("#producto option:selected").text();
+            var servicio = $("#servicio option:selected").text();
             var Cliente = $("#Nombre_cliente option:selected").text();
 
 
@@ -195,7 +205,7 @@
                 
                 ivat=0;
 
-                var fila = '<tr id="fila'+cont+'"><td><input readnoly type="text" name="producto[]" value="'+producto+'"></td><td><input readnoly type="number" name="Cantidad[]" value="'+cantidad+'"></td><td><input readnoly type="number" name="precio[]" value="'+precio+'"></td><td><input readnoly type="number" name="iva[]" value="'+iva+'"></td><td>'+subtotal[cont]+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
+                var fila = '<tr id="fila'+cont+'"><td><input readnoly type="text" name="producto[]" value="'+producto+'"><td><input readnoly type="text" name="servicio[]" value="'+servicio+'"></td></td><td><input readnoly type="number" name="Cantidad[]" value="'+cantidad+'"></td><td><input readnoly type="number" name="precio[]" value="'+precio+'"></td><td><input readnoly type="number" name="iva[]" value="'+iva+'"></td><td>'+subtotal[cont]+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
                 cont++;
                 limpiar();
                 $('#total').html('<h1 class="btn btn-info">Total: $'+total.toFixed(0)+'<input type="number" hidden name="Total" value="'+total.toFixed(0)+'"  ></h1>');
