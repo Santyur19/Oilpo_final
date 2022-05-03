@@ -36,18 +36,18 @@ class DatabaseSeeder extends Seeder
 
 
     //SEEDERS DE NUMERO DE COMPRAS
-    // $numero_copmra = new Compras();
-    // $numero_copmra->Nombre_proveedor = "";
-    // $numero_copmra->Numero_factura = 0;
-    // //$numero_copmra->Fecha_compra = "";
-    // $numero_copmra->Foto = "";
-    // $numero_copmra->Producto = "";
-    // $numero_copmra->Precio_Compra = 0;
-    // $numero_copmra->Total = 0;
-    // $numero_copmra->Precio_venta = 0;
-    // $numero_copmra->Cantidad = 0;
-    // $numero_copmra->Numero_compras = 0;
-    // $numero_copmra->save();
+    $numero_compra = new Compras();
+    //$numero_compra->Nombre_proveedor = 0;
+    $numero_compra->Numero_factura = 0;
+    $numero_compra->Fecha_compra = "";
+    $numero_compra->Foto = "";
+    $numero_compra->Producto = "";
+    $numero_compra->Precio_Compra = 0;
+    $numero_compra->Total = 0;
+    $numero_compra->Precio_venta = 0;
+    $numero_compra->Cantidad = 0;
+    $numero_compra->Numero_compras = 0;
+    $numero_compra->save();
 
 
 

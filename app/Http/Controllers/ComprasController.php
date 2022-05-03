@@ -41,8 +41,9 @@ class ComprasController extends Controller
     {
         $proveedores = Proveedore::all();
         $compra = Compras::paginate();
+        $numero_facturas = DB:: select("SELECT Numero_compras FROM Compras ORDER by ID DESC LIMIT 1");
         $productos = Producto::all();
-        return view('compras.Agregar_compra', compact('compra', 'proveedores', 'productos'))
+        return view('compras.Agregar_compra', compact('compra', 'proveedores', 'productos', 'numero_facturas'))
             ->with('i', (request()->input('page', 1) - 1) * $compra->perPage());
     }
 

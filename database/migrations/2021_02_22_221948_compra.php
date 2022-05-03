@@ -17,7 +17,7 @@ class Compra extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('Nombre_proveedor')->nullable();
             $table->integer('Numero_factura');
-            $table->date('Fecha_compra')->nullable();
+            $table->string('Fecha_compra')->nullable();
             $table->string('Foto')->nullable();
             $table->string('Producto');
             $table->integer('Precio_compra');
