@@ -41,7 +41,7 @@
                 //labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul"],
                 datasets: [
                     {
-                        label: "Ingreso",
+                        label: "Compras",
                         fill: false,
                         lineTension: 0.1,
                         backgroundColor: "#428bca",

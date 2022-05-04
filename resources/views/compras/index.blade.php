@@ -104,13 +104,17 @@
                             @csrf
                             <input type="date" name="fecha_filtro" id="fecha">
                             <input hidden value="Filtrar" name="Filtrar">
-                            <button type="submit">Filtrar</button>
+                            <button class="btn btn-success" type="submit">Filtrar
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
+                                    <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+                                  </svg>
+                            </button>
                         </form>
                         <br>
                         <div class="text-center">
                             <form action="{{ route('Exportar_Excel') }}" method="POST">
-                                <input hidden value="Export" name="Filtrar">
-                                <input type="text" value="<?php echo $fecha_filtro ?>" name="fecha_filtro" id="fecha">
+                                <input hidden value="Export"  name="Filtrar">
+                                <input hidden type="text" value="<?php echo $fecha_filtro ?>" name="fecha_filtro" id="fecha">
                                 @csrf
                                 <button type="submit" class="btn btn-primary">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">

@@ -12,17 +12,19 @@ class InformeController extends Controller
     public function index(){
 
         //INFORME DE VENTAS
-        $ventas = DB::select("SELECT DISTINCT MonthName(Fecha_venta) AS MONTH, COUNT(*) AS numRecords FROM ventas WHERE MonthName(Fecha_venta) IS NOT NULL GROUP BY MonthName(Fecha_venta) ASC");
+        DB::statement("SET lc_time_names = 'es_MX'");
+        $ventas = DB::select("SELECT DISTINCT MonthName(Fecha_venta) AS Mes, MONTH(Fecha_venta) AS MONTH, COUNT(*) AS Numero_ventas FROM ventas WHERE MonthName(Fecha_venta) IS NOT NULL GROUP BY MONTH, MES DESC");
         $data = [];
 
         foreach ($ventas as $venta) {
-            $data['label'][] = $venta->MONTH;
+            $data['label'][] = $venta->Mes;
 
-            $data['data'][] = $venta->numRecords;
+            $data['data'][] = $venta->Numero_ventas;
         }
         $data['data'] = json_encode($data);
 
         //INFORME DE COMPRAS
+        DB::statement("SET lc_time_names = 'es_MX'");
         $compras = DB::select("SELECT DISTINCT Fecha_compra, MonthName(Fecha_compra) AS MONTH, COUNT(*) AS Numero_compras FROM compras WHERE MonthName(Fecha_compra) IS NOT NULL GROUP BY Fecha_compra");
 
 
@@ -35,26 +37,29 @@ class InformeController extends Controller
         }
         $data_compras['data_compras'] = json_encode($data_compras);
 
-        return view('informes.index', $data_compras, $data);
+        return view('informes.index', $data, $data_compras);
     }
 
     public function informe_ventas(){
         // $ventas = DB::select("SELECT COUNT(id) AS NumberOfProducts FROM ventas;");
-        $ventas = DB::select("SELECT DISTINCT MonthName(Fecha_venta) AS MONTH, COUNT(*) AS numRecords FROM ventas WHERE MonthName(Fecha_venta) IS NOT NULL GROUP BY MonthName(Fecha_venta) ASC");
+        DB::statement("SET lc_time_names = 'es_MX'");
+        $Año = DB::select("SELECT DISTINCT YEAR(Fecha_venta) AS Año FROM ventas");
+        $ventas = DB::select("SELECT DISTINCT MonthName(Fecha_venta) AS Mes, MONTH(Fecha_venta) AS MONTH, COUNT(*) AS Numero_ventas FROM ventas WHERE MonthName(Fecha_venta) IS NOT NULL GROUP BY MONTH, MES DESC");
         $data = [];
 
         foreach ($ventas as $venta) {
-            $data['label'][] = $venta->MONTH;
+            $data['label'][] = $venta->Mes;
 
-            $data['data'][] = $venta->numRecords;
+            $data['data'][] = $venta->Numero_ventas;
         }
         $data['data'] = json_encode($data);
-        return view('informes.informe_ventas ', $data);
+        return view('informes.informe_ventas ', compact('Año'), $data);
     }
 
     public function informe_compras(){
         //$compras = Compras::all();
-        $compras = DB::select("SELECT DISTINCT Fecha_compra, MonthName(Fecha_compra) AS MONTH, COUNT(*) AS Numero_compras FROM compras WHERE MonthName(Fecha_compra) IS NOT NULL GROUP BY Fecha_compra");
+        DB::statement("SET lc_time_names = 'es_MX'");
+        $compras = DB::select("SELECT DISTINCT MonthName(Fecha_compra) AS MONTH, COUNT(*) AS Numero_compras FROM compras WHERE MonthName(Fecha_compra) IS NOT NULL GROUP BY Fecha_compra");
 
 
         $data = [];

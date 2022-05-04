@@ -140,14 +140,12 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-
 										<th>Tipo Documento</th>
 										<th>Documento </th>
 										<th>Nombre </th>
 										<th>Telefono </th>
 										<th>Ciudad </th>
 										<th>Direccion</th>
-
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -206,7 +204,7 @@
                                                 </form>
                                             </td>
                                         </tr>
-                    <!--Modal editar-->
+                                    <!--Modal editar-->
 
                                     <div class="modal fade" id="editar{{$proveedore->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
                                         <div class="modal-dialog" style="background-color:white;">
@@ -304,23 +302,18 @@
                                                 reponsive:true
 
                                             });
-
-
                                         });
-
                                     </script>
                                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
+                                </div>
+                            </table>
                         </div>
-                         </table>
                     </div>
                 </div>
                 {!! $proveedores->links() !!}
             </div>
         </div>
     </div>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <!-- Mensaje guardado -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <?php if($message = Session::get('success')){ ?>

@@ -30,6 +30,8 @@ Route::get('/', function () {
 
 
 
+
+
 Route::group(['middleware' => 'auth'], function () {
 
 //RUTAS ADMIN O PRINCIPALES
