@@ -125,7 +125,22 @@
         Swal.fire({
             position: 'top-center',
             icon: 'error',
-            title: 'Ha faltado algo!',
+            title: 'Ha faltado ingresar el cliente',
+            showConfirmButton: false,
+            timer: 1500
+        })
+
+        </script>
+    <?php } ?>
+
+    <?php if($message = Session::get('stock')){ ?>
+        <p>{{$message}}</p>
+        <script>
+
+        Swal.fire({
+            position: 'top-center',
+            icon: 'error',
+            title: 'No hay suficiente stock!',
             showConfirmButton: false,
             timer: 1500
         })
