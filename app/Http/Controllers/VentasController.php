@@ -79,6 +79,7 @@ class VentasController extends Controller
 
     public function Guardar_venta(){
 
+
         $Cliente=$_POST['Nombre'];
         if ($Cliente != " "){
 
@@ -94,12 +95,41 @@ class VentasController extends Controller
             $cadena_u="";
             $cadena= "INSERT INTO ventas (Nombre, Nombre_servicio, Fecha_venta, Total, Nombre_Producto, Cantidad, Iva, factura) VALUES ";
             for ($i = 0; $i <count($Producto); $i++){
-                $cadena.="('".$Cliente."',  '".$Servicio[$i]."', '".$Fecha."',  '".$total."',  '".$Producto[$i]."' , '".$Cantidad[$i]."', '".$Iva[$i]."', '".$factura."'),";
                 
-                $cadena_update= "UPDATE productos SET Cantidad_Producto = ( SELECT Cantidad_Producto - $Cantidad[$i]) WHERE Nombre_Producto = '$Producto[$i]';";
-                DB::update($cadena_update);
+                $minimos = DB::SELECT("SELECT Cantidad_Producto,CASE WHEN Cantidad_Producto - $Cantidad[$i] < 0 THEN 0 ELSE 1 END AS MINIMO FROM productos WHERE Nombre_Producto = '$Producto[$i]' ;");
+
+                foreach ($minimos as $minimo) {
+                    if ($minimo->MINIMO == 1){
+                        $cadena_update= "UPDATE productos SET Cantidad_Producto = ( SELECT Cantidad_Producto - $Cantidad[$i]) WHERE Nombre_Producto = '$Producto[$i]';";
+                        DB::update($cadena_update);
+
+                        $cadena.="('".$Cliente."',  '".$Servicio[$i]."', '".$Fecha."',  '".$total."',  '".$Producto[$i]."' , '".$Cantidad[$i]."', '".$Iva[$i]."', '".$factura."'),";
+                    }else{
+                        $Producto_error= $Producto[$i];
+                        
+                        return redirect('ventas')
+                        ->with('stock', ' ');
+                    }
+                }
             
             }
+
+            // <?php echo $Producto_error
+
+
+
+            // SELECT Cantidad_Producto,
+            // CASE
+	        //     WHEN Cantidad_Producto - 50 < 0 THEN 0
+            //     ELSE 1
+            // END AS "Pepe"
+            // FROM productos;
+
+
+
+
+
+
             $cadena_final = substr($cadena, 0, -1);
             $cadena_final.=";";
 

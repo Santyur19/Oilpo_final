@@ -134,7 +134,6 @@
                                             <th>Iva</th>
                                             <th>Subtotal</th>
                                         </tr>
-
                                         </thead>
 
 
