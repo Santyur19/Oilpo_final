@@ -283,7 +283,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- End modal editar -->
+                                    <!-- Fin modal editar -->
 
                                     @endforeach
 
