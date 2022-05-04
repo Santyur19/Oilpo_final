@@ -16,6 +16,7 @@
 
 @section('content')
 
+
     <div class="row">
         <div class="col-md-12">
         <!-- <form action="{{ route('Buscar_clientes') }}" method="POST">
@@ -83,17 +84,17 @@
                                     <div class="card-body">
                                         <label for="">Producto</label>
                                         <select class="form-select" name="Nombre_producto" id="producto">
-                                            <option>Seleccione</option>
+                                            <option value="">Seleccione</option>
                                                 <?php  foreach($productos as  $producto){ ?>
-                                            <option  value="<?php echo $producto->Nombre_Producto ?>"><?php echo $producto->Nombre_Producto ?></option>
+                                            <option value="<?php echo $producto->Nombre_Producto ?>"><?php echo $producto->Nombre_Producto ?></option>
                                             <?php } ?>
                                         </select>
 
                                         <label for="">Servicio</label>
                                         <select class="form-select" name="Nombre_servicio" id="servicio">
-                                            <option>Seleccione</option>
+                                            <option value="">Seleccione</option>
                                                 <?php  foreach($servicios as $servicio){ ?>
-                                            <option  value="<?php echo $servicio->Nombre_servicio ?>"><?php echo $servicio->Nombre_servicio ?></option>>
+                                            <option value="<?php echo $servicio->Nombre_servicio ?>"><?php echo $servicio->Nombre_servicio ?></option>>
                                             <?php } ?>
                                         </select>
 
@@ -127,6 +128,7 @@
 
                                         <tr>
                                             <th>Producto</th>
+                                            <th>Servicio</th>
                                             <th>Cantidad</th>
                                             <th>Precio</th>
                                             <th>Iva</th>
@@ -150,6 +152,12 @@
                 </div>
                 <div class="text-center">
                     <button id="guardar" type="submit" class="btn btn-primary">Agregar</button>
+                    <button id="cancelar" type="button" onclick="cancelar()" class="btn btn-danger">Cancelar</button>
+
+            </form>
+            <form action="{{ route('volver') }}" method="get">
+            @csrf
+                <button id="volver" type="submit" name="volver" value="volver" class="btn btn-success">Volver</button>
                 </div>
 
             </form>
@@ -169,11 +177,20 @@
         $(document).ready(function() {
             $('#Nombre_cliente').select2();
         });
+
     </script>
     <script>
         $(document).ready(function(){
             $('#agregar').click(function(){
                 agregar();
+
+            });
+            $('#cancelar').click(function(){
+                cancelar();
+
+            });
+            $('#volver').click(function(){
+                volver();
 
             });
 
@@ -185,6 +202,7 @@
         subtotal=[];
         totalt=[];
         $('#guardar').hide();
+        $('#cancelar').hide();
         function agregar(){
             var cantidad = $('#cantidad').val();
             var iva = $('#iva').val();
@@ -194,10 +212,10 @@
             //var producto = $("#producto option:selected").val();
             var producto = $("#producto option:selected").text();
             var servicio = $("#servicio option:selected").text();
-            var Cliente = $("#Nombre_cliente option:selected").text();
+            // var Cliente = $("#Nombre_cliente option:selected").text();
 
 
-            if(producto !="" && cantidad > 0 && iva > 0 && precio > 0 && Cliente !=""){
+            if(producto !="Seleccione" && cantidad > 0 && iva > 0 && precio > 0 && servicio != "Seleccione"){
                 subtotal[cont]=(cantidad*precio);
                 ivat=ivat+(subtotal[cont]*(iva/100));
                 total = total + (subtotal[cont]+ivat);
@@ -225,22 +243,41 @@
             $('#cantidad').val('');
             $('#precio').val('');
             $('#iva').val('');
+            $('#servicio').val('');
         }
         function evaluar(){
             if (total>0){
                 $('#guardar').show();
+                $('#cancelar').show();
+                $('#volver').hide();
             }else{
                 $('#guardar').hide();
+                $('#cancelar').hide();
+                $('#volver').show();
+
 
             }
 
         }
         function eliminar(index){
             total=total-totalt[index];
+            if (total <= 0){
+                $('#guardar').hide();
+                $('#cancelar').hide();
+                $('#volver').show();
+            }
             $('#total').html('<h1 class="btn btn-info">Total: $'+total+'</h1>');
             $('#fila'+index).remove();
+            
             guardar();
         }
+        function cancelar(){
+            location.reload();
+        }
+        // function volver(){
+        //     history.back();
+        // }
+
     </script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
