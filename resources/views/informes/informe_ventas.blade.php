@@ -21,6 +21,9 @@
                 <div class="card">
                     <div class="card-header">
                         <h1 class="text-center">Informes Ventas</h1>
+                        <?php foreach ($Año as $Años){ ?>
+                            <h2 class="text-center">{{ $Años->Año }}</h2>
+                        <?php } ?>
                         <canvas id="myChart" width="400" height="190"></canvas>
                     </div>
                 </div>
