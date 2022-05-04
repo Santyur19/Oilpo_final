@@ -81,11 +81,6 @@
                                     <label for="message-text" class="col-form-label">Rol:</label>
                                     <select  class="form-select" id="recipient-name" name="Rol_usuario" >
                                         <option class="form-select" id="recipient-name" value="">Seleccione</option>
-                                    <?php foreach($ciudad as $ciudades){ ?>
-                                        <option  class="form-select" id="recipient-name" value="<?php echo $ciudades->Nombre ?>"><?php echo $ciudades->Nombre ?></option>
-
-
-                                    <?php } ?>
                                     </select>
                                     <small class="text-danger">{{$errors->first('Ciudad_proveedor')}}</small>
 
