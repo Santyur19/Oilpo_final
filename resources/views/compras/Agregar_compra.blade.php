@@ -26,7 +26,7 @@
                     <div class="card">
                         <div class="card-body">
                         <div class="form-group">
-                        <input type="number" name="Numero_compras" id="" value="<?php foreach($numero_facturas as $numero_factura){ echo $numero_factura->Numero_compras+1; } ?>">
+                        <input type="number" hidden name="Numero_compras" id="" value="<?php foreach($numero_facturas as $numero_factura){ echo $numero_factura->Numero_compras+1; } ?>">
                         <label for="">Proveedor</label>
                         <select style="width: 100%" class="js-example-theme-single" name="Nombre_proveedor" id="">
                             <option>Seleccione</option>
@@ -147,12 +147,12 @@
         $(document).ready(function(){
             $('#agregar').click(function(){
                 agregar();
+                
+        });
+        $('#cancelar').click(function(){
+            cancelar();
 
-            });
-            $('#cancelar').click(function(){
-                cancelar();
-
-            });
+        });
 
 
         });

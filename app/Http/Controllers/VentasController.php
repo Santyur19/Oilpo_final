@@ -132,5 +132,8 @@ class VentasController extends Controller
 
 
     }
+    public function volver(){
+        return redirect ('ventas');
+    }
 }
 
