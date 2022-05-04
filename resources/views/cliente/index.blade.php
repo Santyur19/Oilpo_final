@@ -47,16 +47,16 @@
 
                             <form action="{{ route('ClienteGuardar') }}" method="POST" >
                             @csrf
-<!--
-                            <select name="select">
-                                <option disabled="disabled">Seleccione...</option>
-                                <option value="Identidad">Tarjeta de identidad</option>
-                                <option value="Cedula">Cedula</option>
-                            </select> -->
-                                <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label">Tipo Documento <small style="color:red;">*</small> </label>
-                                    <input type="text" name="Tipo_documento" class="form-control" id="recipient-name" value="{{old('Tipo_documento')}}">
+                            <div class="mb-3">
+                                    <label for="message-text" class="col-form-label">Tipo Documento:</label>
+                                    <select require class="form-select"  id="" name="Tipo_documento" >
+                                        <option class="form-control" id="recipient-name" value="" >Seleccione tipo documento...</option>
+                                        <option class="form-control" id="recipient-name" value="Cédula de ciudadania">Cédula de ciudadania</option>
+                                        <option class="form-control" id="recipient-name" value="Cédula Extranjeria">Cédula Extranjeria</option>
+                                        <option class="form-control" id="recipient-name" value="NIT">NIT</option>
+                                    </select>
                                     <small class="text-danger">{{$errors->first('Tipo_documento')}}</small>
+
                                 </div>
                                 <div class="mb-3">
                                     <label for="message-text" class="col-form-label">Documento <small style="color:red;">*</small></label>
