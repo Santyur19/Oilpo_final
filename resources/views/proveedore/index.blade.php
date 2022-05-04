@@ -95,8 +95,6 @@
                                         <option class="form-select" id="recipient-name" value="">Seleccione</option>
                                     <?php foreach($ciudad as $ciudades){ ?>
                                         <option  class="form-select" id="recipient-name" value="<?php echo $ciudades->Nombre ?>"><?php echo $ciudades->Nombre ?></option>
-
-
                                     <?php } ?>
                                     </select>
                                     <small class="text-danger">{{$errors->first('Ciudad_proveedor')}}</small>
@@ -124,7 +122,6 @@
                                     </button>
                                 </div>
                             </form>
-
                         </div>
 
 
@@ -218,9 +215,9 @@
                                                 <form action="{{ route('editar', $proveedore) }}" method="POST" >
                                                     @csrf @method('PUT')
                                                     <div class="mb-3">
-                                                        <label for="message-text" class="col-form-label">Tipo Documento:</label>
+                                                        <label for="message-text" class="col-form-label" >Tipo Documento:</label>
                                                         <select require class="form-select" id="recipient-name" name="Tipo_Doc_proveedor" >
-                                                            <option class="form-select" id="recipient-name" value="" disable>Seleccione</option>
+                                                            <option class="form-select" id="recipient-name" value="" disable>Seleccione </option>
                                                             <option class="form-select" id="recipient-name" value="Cédula de ciudadania">Cédula de ciudadania</option>
                                                             <option class="form-select" id="recipient-name" value="Cédula Extranjeria">Cédula Extranjeria</option>
                                                             <option class="form-select" id="recipient-name" value="NIT">NIT</option>
@@ -286,7 +283,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- End modal editar -->
+                                    <!-- Fin modal editar -->
 
                                     @endforeach
 
