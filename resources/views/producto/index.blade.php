@@ -57,8 +57,8 @@
 
                                 </div>
                                 <div class="mb-3">
-                                    <label for="message-text" class="col-form-label">Cantidad <small style="color:red;">*</small></label>
-                                    <input type="number" name="Cantidad_Producto" class="form-control" id="recipient-name" value="{{old('Cantidad_Producto')}}">
+                                    {{-- <label for="message-text" class="col-form-label">Cantidad <small style="color:red;">*</small></label> --}}
+                                    <input hidden type="number" name="Cantidad_Producto" class="form-control" id="recipient-name" value=0 readonly>
                                     <small class="text-danger">{{$errors->first('Cantidad_Producto')}}</small>
                                 </div>
                                <!--  <div class="mb-3">

@@ -8,7 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Compras extends Model
 {
     static $rules = [
-		'Cantidad' => 'required',
+        'Nombre_proveedor' => 'required',
+		'Numero_factura' => 'required',
+        'Fecha_compra' => 'required',
+        'Foto' => 'required',
+
+
     ];
 
     protected $perPage = 20;

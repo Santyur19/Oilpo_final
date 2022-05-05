@@ -15,7 +15,7 @@ class ComprasController extends Controller
 
     {
         $fecha_filtro ="";
-        $compra = Compras::paginate();
+        $compra = Compras::paginate(5);
         $nombre = DB:: select("SELECT DISTINCT Numero_factura, p.Nombre_proveedor, Fecha_compra, Total FROM compras  as c JOIN proveedores as p  WHERE c.Nombre_proveedor=p.id");
 
 
@@ -65,6 +65,7 @@ class ComprasController extends Controller
 
     public function Agregar_compra(Request  $request){
 
+        request()->validate(Compras::$rules);
         $productos = Producto::all();
         $Numero_compra = $_POST['Numero_compras'];
         $proveedor = $_POST['Nombre_proveedor'];
@@ -103,7 +104,11 @@ class ComprasController extends Controller
 
         $cadena= "INSERT INTO compras (Numero_compras, Nombre_proveedor, Numero_factura, Fecha_compra, Foto, Total,  Producto, Precio_compra, Precio_venta, Cantidad) VALUES ";
         for ($i = 0; $i <count($Producto); $i++){
+
+            $cadena_update= "UPDATE productos SET Cantidad_Producto = ( SELECT Cantidad_Producto + $Cantidad[$i]) WHERE Nombre_Producto = '$Producto[$i]';";
+            DB::update($cadena_update);
             $cadena.="('".$Numero_compra."', '".$proveedor."',  '".$numero_factura."',  '".$fecha_compra."', '".$foto."',  '".$total."' , '".$Producto[$i]."', '".$Precio_compra[$i]."', '".$Precio_venta[$i]."', '".$Cantidad[$i]."'),";
+
 
         }
         $cadena_final = substr($cadena, 0, -1);
