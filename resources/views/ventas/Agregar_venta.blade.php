@@ -69,7 +69,7 @@
                                         <?php } ?>
                                     </select> </p>
                                         <label for="">Fecha de compra</label>
-                                        <input type="date" class="form-control" name="Fecha_compra" id="" aria-describedby="helpId">
+                                        <input type="date" class="form-control" name="Fecha_venta" id="" aria-describedby="helpId">
                                         <small id="helpId" class="form-text text-muted"></small>
 
                                         <label for="">Factura</label>

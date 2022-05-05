@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Producto;
-use Illuminate\Http\Request;
+
+use function Psy\bin;
 use App\Models\Venta;
 use App\Models\Cliente;
 use App\Models\Servicio;
+use App\Models\Producto;
+use App\Exports\ventas;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use function Psy\bin;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class VentasController extends Controller
@@ -17,11 +20,13 @@ class VentasController extends Controller
 
     {
         $ventas = Venta::paginate();
+        $minimos=DB::Select("SELECT min(Fecha_venta) AS Fecha_venta FROM ventas where Factura > 0");
         $venta = DB:: select("SELECT DISTINCT Factura, Nombre, Fecha_venta, Total FROM ventas where Factura > 0 ");
 
+        foreach ($minimos as $minimo)
+        $Fecha_minima=$minimo->Fecha_venta;
 
-
-        return view('ventas.index', compact('ventas', 'venta'))
+        return view('ventas.index', compact('ventas', 'venta', 'Fecha_minima'))
             ->with('i', (request()->input('page', 1) - 1) * $ventas->perPage());
 
     }
@@ -83,7 +88,7 @@ class VentasController extends Controller
         $Cliente=$_POST['Nombre'];
         if ($Cliente != " "){
 
-            $Fecha=$_POST['Fecha_compra'];
+            $Fecha=$_POST['Fecha_venta'];
             $total = $_POST['Total'];
             $Producto = $_POST['producto'];
             $Servicio = $_POST['servicio'];
@@ -164,6 +169,105 @@ class VentasController extends Controller
     }
     public function volver(){
         return redirect ('ventas');
+    }
+
+    public function Exportar(){
+        date_default_timezone_set("America/Bogota");
+        $fecha_actual = date("Y-m-d H:i");
+
+
+        $Desicion=$_POST['Desicion'];
+
+        $Valores = DB:: select("SELECT if( COUNT(DISTINCT(Factura))>1,1,0) as CONTADOR FROM ventas");
+
+        header("Content-Type: application/xls");
+        header("Content-Disposition: attachment; filename=Ventas ". $fecha_actual .".xls");
+        header("Pragma: no-cache");
+        header("Expires: 0");
+
+        $tabla = "";
+
+        $tabla .="
+        <table>
+            <thead>
+                <tbody>
+                    <tr>
+                        <th>Factura</th>
+                        <th>Cliente</th>
+                        <th>Producto</th>
+                        <th>Servicio</th>
+                        <th>Fecha de venta</th>
+                        <th>Cantidad</th>
+                        <th>Iva</th>
+                        <th>Total</th>
+                    </tr>
+        ";
+
+        foreach ($Valores as $valores)
+
+        if ($valores->CONTADOR==1){
+
+            if ($Desicion=="Todo"){
+
+
+                $Ventas = DB:: select("SELECT DISTINCT Factura, Nombre, Nombre_Producto, Nombre_servicio, Fecha_venta, Cantidad, Iva,  Total FROM Ventas WHERE Factura > 0");
+                // $Ventas = DB:: select("SELECT DISTINCT Factura, Nombre, Nombre_Producto, Nombre_servicio, Fecha_venta, Cantidad, Iva,  Total FROM Ventas  BETWEEN $Fecha_minima and $Fecha_maxima");
+
+                foreach ($Ventas as $ventas) {
+                    $tabla .="
+                            <tr>
+                                <td>".$ventas->Factura."</td>
+                                <td>".$ventas->Nombre."</td>
+                                <td>".$ventas->Nombre_Producto."</td>
+                                <td>".$ventas->Nombre_servicio."</td>
+                                <td>".$ventas->Fecha_venta."</td>
+                                <td>".$ventas->Cantidad."</td>
+                                <td>".$ventas->Iva."</td>
+                                <td>".$ventas->Total."</td>
+                            </tr>
+                    ";
+                }
+
+                $tabla .="
+                        </tbody>
+                    </thead>
+                </table>
+                ";
+                echo $tabla;
+            }
+            else{
+                $Fecha_maxima=$_POST['Fecha_maxima'];
+                $Fecha_minima=$_POST['Fecha_minima'];
+                $Ventas = DB:: select("SELECT DISTINCT Factura, Nombre, Nombre_Producto, Nombre_servicio, Fecha_venta, Cantidad, Iva,  Total FROM Ventas WHERE Fecha_venta BETWEEN '$Fecha_minima' AND '$Fecha_maxima' AND Factura > 0");
+
+                foreach ($Ventas as $ventas) {
+                    $tabla .="
+                            <tr>
+                                <td>".$ventas->Factura."</td>
+                                <td>".$ventas->Nombre."</td>
+                                <td>".$ventas->Nombre_Producto."</td>
+                                <td>".$ventas->Nombre_servicio."</td>
+                                <td>".$ventas->Fecha_venta."</td>
+                                <td>".$ventas->Cantidad."</td>
+                                <td>".$ventas->Iva."</td>
+                                <td>".$ventas->Total."</td>                                
+                            </tr>
+                    ";
+                }
+
+                $tabla .="
+                        </tbody>
+                    </thead>
+                </table>
+                ";
+                echo $tabla;
+            }
+        }
+        else {
+            return redirect('ventas')
+                ->with('Vacio', ' ');
+        }
+        // return Excel::download(new ventas, 'Ventas '.$fecha_actual.'.csv');
     }
 }
 
