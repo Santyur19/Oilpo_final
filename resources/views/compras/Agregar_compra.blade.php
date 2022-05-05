@@ -25,29 +25,34 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body">
-                        <div class="form-group">
-                        <input type="number" hidden name="Numero_compras" id="" value="<?php foreach($numero_facturas as $numero_factura){ echo $numero_factura->Numero_compras+1; } ?>">
-
-                        <label for="">Proveedor</label>
-                        <select style="width: 100%" class="js-example-theme-single" name="Nombre_proveedor" id="">
-                            <option>Seleccione</option>
-                            <?php foreach($proveedores as  $proveedor){ ?>
-                            <option value="<?php echo $proveedor->id ?>"><?php echo $proveedor->Nombre_proveedor ?></option>
-                            <?php } ?>
-                        </select>
-                        </div>
-
-                        <label for="">Numero de factura</label>
-                        <input type="number" class="form-control" name="Numero_factura" id="" aria-describedby="helpId" placeholder="">
-                        <small id="helpId" class="form-text text-muted"></small>
-
-                        <label for="">Fecha de compra</label>
-                        <input type="date" class="form-control" name="Fecha_compra" id="" aria-describedby="helpId" placeholder="">
-                        <small id="helpId" class="form-text text-muted"></small>
-
-                        <label for="">Foto</label>
-                            <input type="file" class="form-control" name="Foto" id="Foto" aria-describedby="helpId" placeholder="">
-                            <small id="helpId" class="form-text text-muted"></small>
+                            <div class="form-group">
+                                <div class="mb-3">
+                                    <input type="number" hidden name="Numero_compras" id="" value="<?php foreach($numero_facturas as $numero_factura){ echo $numero_factura->Numero_compras+1; } ?>">
+                                    <label for="">Proveedor</label>
+                                    <select  style="width: 100%" class="js-example-theme-single" name="Nombre_proveedor" id="">
+                                        <option value="">Seleccione</option>
+                                        <?php foreach($proveedores as  $proveedor){ ?>
+                                        <option value="<?php echo $proveedor->id ?>"><?php echo $proveedor->Nombre_proveedor ?></option>
+                                        <?php } ?>
+                                    </select>
+                                    <small class="text-danger">{{$errors->first('Nombre_proveedor')}}</small>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="">Numero de factura</label>
+                                <input type="number" class="form-control" name="Numero_factura" id="" aria-describedby="helpId" placeholder="" value="{{ old('Numero_factura') }}">
+                                <small class="text-danger">{{$errors->first('Numero_factura')}}</small>
+                            </div>
+                            <div class="mb-3">
+                                <label for="">Fecha de compra</label>
+                                <input type="date" class="form-control" name="Fecha_compra" id="" aria-describedby="helpId" placeholder="" value="{{ old('Fecha_compra') }}">
+                                <small class="text-danger">{{$errors->first('Fecha_compra')}}</small>
+                            </div>
+                            <div class="mb-3">
+                                <label for="">Foto</label>
+                                <input type="file" class="form-control" name="Foto" id="Foto" aria-describedby="helpId" placeholder="">
+                                <small class="text-danger">{{$errors->first('Foto')}}</small>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -56,7 +61,7 @@
                         <div class="card-body">
                             <label for="">Nombre Producto</label>
                             <select style="width: 100%" class="js-example-theme-single" name="Productos" id="Productos">
-                                <option>Seleccione</option>
+                                <option value="">Seleccione</option>
                                 <?php foreach($productos as  $producto){ ?>
                                 <option value="<?php echo $producto->Nombre_Producto ?>"><?php echo $producto->Nombre_Producto ?></option>
                                 <?php } ?>
@@ -64,7 +69,7 @@
                             <br></br>
                             <label for="">Precio compra</label>
                             <input type="number" class="form-control" name="Precios_compra" id="Precios_compra" aria-describedby="helpId" placeholder="">
-                            <small id="helpId" class="form-text text-muted"></small>
+                            <small style="color:red;"><p id="Precio_error"> </p></small>
 
                             <label for="">Precio venta</label>
                             <input type="number" class="form-control" name="Precios_venta" id="Precios_venta" aria-describedby="helpId" placeholder="">
@@ -149,7 +154,7 @@
         $(document).ready(function(){
             $('#agregar').click(function(){
                 agregar();
-                
+
         });
         $('#cancelar').click(function(){
             cancelar();
@@ -170,7 +175,7 @@
             precio_venta = $('#Precios_venta').val();
             cantidad = $('#Cantidades').val();
 
-            if(producto !="" && cantidad >0 && precio_compra>0){
+            if(producto !="" && cantidad > 0 && precio_compra > 0){
                 subtotal[cont]=(cantidad*precio_compra);
                 total = total+subtotal[cont];
 
@@ -182,12 +187,14 @@
                 $('#tabla').append(fila);
 
             }else{
+
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Something went wrong!',
-                    footer: '<a href="">Why do I have this issue?</a>'
+                    text: 'Por favor llene todos los campos',
                 })
+
+
             }
         }
         function limpiar(){
