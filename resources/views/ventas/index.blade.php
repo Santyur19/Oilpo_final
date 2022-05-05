@@ -138,6 +138,7 @@
                         <button type="submit" class="btn btn-secondary" >Descargar todo</button>
                     </div>
                 </form>
+                
                 <form action="{{ route('Exportar')}}" method="post">
                     @csrf
                     <label for="">Fecha minima</label>
