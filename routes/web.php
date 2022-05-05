@@ -114,6 +114,7 @@ Route::post('/ventas', [App\Http\Controllers\VentasController::class, 'Guardar_v
 Route::post('ventas.Agregar_ventas', [App\Http\Controllers\VentasController::class, 'Buscar_cliente'])->name('Buscar_clientes');
 Route::post('/ventas/Detalles_ventas', [App\Http\Controllers\VentasController::class, 'Detalles'])->name('Detalles_ventas');
 Route::get('/ventas.index', [App\Http\Controllers\VentasController::class, 'volver'])->name('volver');
+Route::post('/Exportar', [App\Http\Controllers\VentasController::class, 'Exportar'])->name('Exportar');
 
 
 //RUTAS INFORMES
