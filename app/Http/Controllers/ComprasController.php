@@ -116,82 +116,95 @@ class ComprasController extends Controller
 
     }
 
+    public function volver(){
+        return redirect ('compras');
+    }
+
     public function exportar_excel()
     {
-        $filtro = $_POST["Filtrar"];
-
-        if($filtro =="Export"){
-
-            header("Content-Type: application/xls");
-            header("Content-Disposition: attachment; filename=compras_". date('Y:m:d:m:s') .".xls");
-            header("Pragma: no-cache");
-            header("Expires: 0");
-            $tabla = "";
-
-            $tabla .="
-            <table>
-                <thead>
-                    <tbody>
-                        <tr>
-                            <th>Numero_factura</th>
-                            <th>Fecha_compra</th>
-                            <th>Nombre_proveedor</th>
-                            <th>Producto</th>
-                            <th>Precio_compra</th>
-                            <th>Precio_venta</th>
-                            <th>Cantidad</th>
-                            <th>Total</th>
-                        </tr>
-            ";
-            $fecha_filtro = $_POST["fecha_filtro"];
-
-            $compra = DB:: select("SELECT DISTINCT Numero_factura, Cantidad, Precio_compra, Precio_venta, Total, Producto,  p.Nombre_proveedor, Fecha_compra, Total FROM compras  as c JOIN proveedores as p  WHERE c.Nombre_proveedor=p.id AND Fecha_compra ='".$fecha_filtro."'");
-
-            foreach ($compra as $compras) {
-                $tabla .="
-                        <tr>
-                            <td>".$compras->Numero_factura."</td>
-                            <td>".$compras->Fecha_compra."</td>
-                            <td>".$compras->Nombre_proveedor."</td>
-                            <td>".$compras->Producto."</td>
-                            <td>".$compras->Precio_compra."</td>
-                            <td>".$compras->Precio_venta."</td>
-                            <td>".$compras->Cantidad."</td>
-                            <td>".$compras->Total."</td>
-                        </tr>
-                ";
-            }
-
-            $tabla .="
-                    </tbody>
-                </thead>
-            </table>
-            ";
-
-            echo $tabla;
-
-        }else{
-
-            $fecha_filtro = $_POST["fecha_filtro"];
-
-            $nombre = DB:: select("SELECT DISTINCT Numero_factura, p.Nombre_proveedor, Fecha_compra, Total FROM compras  as c JOIN proveedores as p  WHERE c.Nombre_proveedor=p.id AND Fecha_compra ='".$fecha_filtro."' ");
-
-            $compra = Compras::paginate();
+        date_default_timezone_set("America/Bogota");
+        $fecha_actual = date("Y-m-d H:i");
 
 
-            return view('compras.index', compact('compra', 'nombre', 'fecha_filtro'))
-            ->with('i', (request()->input('page', 1) - 1) * $compra->perPage());
+        $Desicion=$_POST['Desicion'];
 
+        $Valores = DB:: select("SELECT if( COUNT(DISTINCT(Numero_factura))>1,1,0) as CONTADOR FROM compras");
 
-        }
+        header("Content-Type: application/xls");
+        header("Content-Disposition: attachment; filename=Compras ". $fecha_actual .".xls");
+        header("Pragma: no-cache");
+        header("Expires: 0");
 
+        $tabla = "";
 
         $tabla .="
-                </tbody>
-            </thead>
-        </table>
+        <table>
+            <thead>
+                <tbody>
+                    <tr>
+                        <th>Factura</th>
+                        <th>proveedor</th>
+                        <th>Fecha de compra</th>
+                        <th>Total</th>
+                    </tr>
         ";
 
-        echo $tabla;
+        foreach ($Valores as $valores)
+
+        if ($valores->CONTADOR==1){
+
+            if ($Desicion=="Todo"){
+
+
+                $compras = DB:: select("SELECT DISTINCT Numero_factura, p.Nombre_proveedor, Fecha_compra, Total FROM compras  as c JOIN proveedores as p  WHERE c.Nombre_proveedor=p.id ");
+                // $Ventas = DB:: select("SELECT DISTINCT Factura, Nombre, Nombre_Producto, Nombre_servicio, Fecha_venta, Cantidad, Iva,  Total FROM Ventas  BETWEEN $Fecha_minima and $Fecha_maxima");
+
+                foreach ($compras as $compra) {
+                    $tabla .="
+                            <tr>
+                                <td>".$compra->Numero_factura."</td>
+                                <td>".$compra->Nombre_proveedor."</td>
+                                <td>".$compra->Fecha_compra."</td>
+                                <td>".$compra->Total."</td>
+                            </tr>
+                    ";
+                }
+
+                $tabla .="
+                        </tbody>
+                    </thead>
+                </table>
+                ";
+                echo $tabla;
+            }
+            else{
+                $Fecha_maxima=$_POST['Fecha_maxima'];
+                $Fecha_minima=$_POST['Fecha_minima'];
+                $compras = DB:: select("SELECT DISTINCT Numero_factura, p.Nombre_proveedor, Fecha_compra, Total FROM compras  as c JOIN proveedores as p  WHERE Fecha_compra BETWEEN '$Fecha_minima' AND '$Fecha_maxima' AND c.Nombre_proveedor=p.id ");
+
+                foreach ($compras as $compra) {
+                    $tabla .="
+                    <td>".$compra->Numero_factura."</td>
+                    <td>".$compra->Nombre_proveedor."</td>
+                    <td>".$compra->Fecha_compra."</td>
+                    <td>".$compra->Total."</td>
+                            </tr>
+                    ";
+                }
+
+                $tabla .="
+                        </tbody>
+                    </thead>
+                </table>
+                ";
+                echo $tabla;
+            }
+        }
+        else {
+            return redirect('compras/')
+                ->with('Vacio', ' ');
+        }
+        // return Excel::download(new ventas, 'Ventas '.$fecha_actual.'.csv');
     }
 }
+

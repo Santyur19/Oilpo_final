@@ -238,7 +238,7 @@ class VentasController extends Controller
             else{
                 $Fecha_maxima=$_POST['Fecha_maxima'];
                 $Fecha_minima=$_POST['Fecha_minima'];
-                $Ventas = DB:: select("SELECT DISTINCT Factura, Nombre, Nombre_Producto, Nombre_servicio, Fecha_venta, Cantidad, Iva,  Total FROM Ventas WHERE Fecha_venta BETWEEN '$Fecha_minima' AND '$Fecha_maxima' AND Factura > 0");
+                $Ventas = DB:: select("SELECT DISTINCT Factura, Nombre, Nombre_Producto, Nombre_servicio, Fecha_venta, Cantidad, Iva,  Total FROM Ventas WHERE Fecha_venta < AND Factura > 0");
 
                 foreach ($Ventas as $ventas) {
                     $tabla .="
