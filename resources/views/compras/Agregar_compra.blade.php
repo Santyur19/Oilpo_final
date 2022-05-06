@@ -126,6 +126,13 @@
         </div>
 
     </form>
+    <form action="{{ route('volver_compra') }}" method="get">
+        @csrf
+            <div class="text-center" >
+            <button id="volver" type="submit" name="volver" value="volver" class="btn btn-success">Volver</button>
+            </div>
+
+    </form>
 
 
     </div>
@@ -148,6 +155,7 @@
             theme: "classic"
         });
     });
+    
 </script>
 
 <script>
@@ -160,7 +168,10 @@
             cancelar();
 
         });
+        $('#volver').click(function(){
+                volver();
 
+        });
 
         });
         var cont = 0;
@@ -207,15 +218,22 @@
             if (total>0){
                 $('#guardar').show();
                 $('#cancelar').show();
+                $('#volver').hide();
             }else{
                 $('#guardar').hide();
                 $('#cancelar').hide();
+                $('#volver').show();
 
             }
 
         }
         function eliminar(index){
             total=total-subtotal[index];
+            if (total <= 0){
+                $('#guardar').hide();
+                $('#cancelar').hide();
+                $('#volver').show();
+            }
             $('#total').html('<h1 class="btn btn-info">Total: $'+total+'</h1>');
             $('#fila'+index).remove();
             guardar();

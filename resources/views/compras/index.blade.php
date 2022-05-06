@@ -97,43 +97,81 @@
                                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
                             </table>
                         </div>
-                        <br>
-                        <label>Filtrar por fecha</label>
-                        <br>
-                        <form action="{{ route('Exportar_Excel') }}" method="POST">
-                            @csrf
-                            <input type="date" name="fecha_filtro" id="fecha">
-                            <input hidden value="Filtrar" name="Filtrar">
-                            <button class="btn btn-success" type="submit">Filtrar
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
-                                    <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
-                                  </svg>
-                            </button>
-                        </form>
-                        <br>
-                        <div class="text-center">
-                            <form action="{{ route('Exportar_Excel') }}" method="POST">
-                                <input hidden value="Export"  name="Filtrar">
-                                <input hidden type="text" value="<?php echo $fecha_filtro ?>" name="fecha_filtro" id="fecha">
-                                @csrf
-                                <button type="submit" class="btn btn-primary">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-                                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-file-earmark-spreadsheet" viewBox="0 0 16 16">
-                                        <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z"/>
-                                    </svg>
+                        <div class="text-center" >
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Fecha">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-file-earmark-spreadsheet" viewBox="0 0 16 16">
+                        <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z"/>
+                    </svg>                </button>
+                <!-- <a class="btn btn-danger" onclick="Fecha()" href="{{ route('Exportar')}}">Exportar</a> -->
+            </div>
+        </div>
+    </div>
+<!------------------------------------------------------------------------------------------------------------------------------------------------  -->
 
-                                </button>
-                            </form>
+    <div class="modal fade" id="Fecha" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Filtrado de descarga</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
 
-                        </div>
+                @csrf
+                <div class="modal-body">
+                <div class="Text-center">
+                <form action="{{ route('Exportar_excel')}}" method="post">
+                    @csrf
+                    <div class="text-center" >
+                        <input type="text" hidden name="Desicion" value="Todo">
+                        <button type="submit" class="btn btn-secondary" >Descargar todo</button>
+                    </div>
+                </form>
+                
+                <form action="{{ route('Exportar_excel')}}" method="post">
+                    @csrf
+                    <label for="">Fecha minima</label>
+                    <br>
+                    <input type="date" class="form-control" required name="Fecha_minima" id="Fecha_minima" min="">
+                    </br>
+                    <label for="">Fecha Maxima</label>
+                    <br>
+                    <input type="date" class="form-control" required name="Fecha_maxima" id="Fecha_maxima" >
+
+                    <input type="text" hidden name="Desicion" value="Filtrar">
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Aceptar</button>
+                </div>
+                </div>
+            </form>
+        </div>
+    </div>
+<!------------------------------------------------------------------------------------------------------------------------------------------------  -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <?php if($message = Session::get('Vacio')){ ?>
+        <p>{{$message}}</p>
+        <script>
 
+        Swal.fire({
+            position: 'top-center',
+            icon: 'warning',
+            title: 'No hay datos para descargar!',
+            showConfirmButton: false,
+            timer: 1500
+        })
+
+        </script>
+    <?php } ?>
 @endsection

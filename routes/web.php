@@ -100,7 +100,8 @@ Route::put('/compras/Agregar_compra', [App\Http\Controllers\ComprasController::c
 Route::post('/compras/Agregar_compra', [App\Http\Controllers\ComprasController::class, 'Agregar_producto_compra'])->name('Agregar_producto_compra');
 Route::post('/compras', [App\Http\Controllers\ComprasController::class, 'Agregar_compra'])->name('Guardar_compra');
 Route::post('/compras/detalles', [App\Http\Controllers\ComprasController::class, 'detalle'])->name('Detalles');
-Route::post('/', [App\Http\Controllers\ComprasController::class, 'exportar_excel'])->name('Exportar_Excel');
+Route::get('/compras.index', [App\Http\Controllers\ComprasController::class, 'volver_compra'])->name('volver_compra');
+Route::post('/', [App\Http\Controllers\ComprasController::class, 'exportar_Excel'])->name('Exportar_excel');
 
 
 
