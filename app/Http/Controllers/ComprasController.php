@@ -116,7 +116,7 @@ class ComprasController extends Controller
 
     }
 
-    public function volver(){
+    public function volver_compra(){
         return redirect ('compras');
     }
 
