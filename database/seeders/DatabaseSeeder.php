@@ -6,7 +6,9 @@ use App\Models\ciudades;
 use App\Models\Proveedore;
 use App\Models\User;
 use App\Models\Venta;
+use App\Models\Tipo_documento;
 use Illuminate\Database\Seeder;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,51 +23,66 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
 
-    //SEEDERS FACTURA VENTA
+        //SEDERS TIPO DOCUMENTO
 
-    $factura = new Venta();
-    $factura->Factura = 0;
-    $factura->Nombre = "";
-    $factura->Nombre_Producto = "";
-    $factura->Nombre_servicio = "";
-    $factura->Fecha_venta = "";
-    $factura->Cantidad = 0;
-    $factura->Iva = 0;
-    $factura->Total = 0;
-    $factura ->save();
+        $Tipo_documento = new Tipo_documento();
+        $Tipo_documento->Tipo_documento = "Cédula de ciudadania";
+        $Tipo_documento->save();
 
+        $Tipo_documento = new Tipo_documento();
+        $Tipo_documento->Tipo_documento = "Cédula Extranjeria";
+        $Tipo_documento->save();
 
-    //SEEDERS DE NUMERO DE COMPRAS
-    $numero_compra = new Compras();
-    //$numero_compra->Nombre_proveedor = 0;
-    $numero_compra->Numero_factura = 0;
-    $numero_compra->Fecha_compra = "";
-    $numero_compra->Foto = "";
-    $numero_compra->Producto = "";
-    $numero_compra->Precio_Compra = 0;
-    $numero_compra->Total = 0;
-    $numero_compra->Precio_venta = 0;
-    $numero_compra->Cantidad = 0;
-    $numero_compra->Numero_compras = 0;
-    $numero_compra->save();
+        $Tipo_documento = new Tipo_documento();
+        $Tipo_documento->Tipo_documento = "NIT";
+        $Tipo_documento->save();
 
+        //SEEDERS FACTURA VENTA
+
+        $factura = new Venta();
+        $factura->Factura = 0;
+        $factura->Nombre = "";
+        $factura->Nombre_Producto = "";
+        $factura->Nombre_servicio = "";
+        $factura->Fecha_venta = "";
+        $factura->Cantidad = 0;
+        $factura->Iva = 0;
+        $factura->Total = 0;
+        $factura ->save();
 
 
+        //SEEDERS DE NUMERO DE COMPRAS
+        $numero_compra = new Compras();
+        //$numero_compra->Nombre_proveedor = 0;
+        $numero_compra->Numero_factura = 0;
+        $numero_compra->Fecha_compra = "";
+        $numero_compra->Foto = "";
+        $numero_compra->Producto = "";
+        $numero_compra->Precio_Compra = 0;
+        $numero_compra->Total = 0;
+        $numero_compra->Precio_venta = 0;
+        $numero_compra->Cantidad = 0;
+        $numero_compra->Numero_compras = 0;
+        $numero_compra->save();
 
-    //SEEDERS DEL PROVEEDOR
 
-    $proveedor = new Proveedore();
-    $proveedor->Tipo_Doc_proveedor = "NIT";
-    $proveedor->Documento_proveedor = "10023747499";
-    $proveedor->Nombre_proveedor = "YAMAHA";
-    $proveedor->Telefono_proveedor = "3136784903";
-    $proveedor->Ciudad_proveedor = "Springfield";
-    $proveedor->Direccion_proveedor = "avenida siempre viva 742";
-    $proveedor->save();
 
-    //SEEDERS CIUDADES
 
-	$ciudad = new ciudades();
+        //SEEDERS DEL PROVEEDOR
+
+        $proveedor = new Proveedore();
+        $proveedor->Tipo_Doc_proveedor = "NIT";
+        $proveedor->Documento_proveedor = "10023747499";
+        $proveedor->Nombre_proveedor = "YAMAHA";
+        $proveedor->Telefono_proveedor = "3136784903";
+        $proveedor->Ciudad_proveedor = "Springfield";
+        $proveedor->Direccion_proveedor = "avenida siempre viva 742";
+        $proveedor->save();
+
+
+        //SEEDERS CIUDADES
+
+        $ciudad = new ciudades();
         $ciudad->Nombre = 'Armenia';
         $ciudad->save();
 
@@ -251,6 +268,8 @@ class DatabaseSeeder extends Seeder
         $ciudad = new ciudades();
         $ciudad->Nombre = 'Zipaquirá';
         $ciudad->save();
+
+
 
     }
 }
