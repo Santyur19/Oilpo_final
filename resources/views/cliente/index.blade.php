@@ -51,9 +51,9 @@
                                     <label for="message-text" class="col-form-label">Tipo Documento:</label>
                                     <select require class="form-select"  id="" name="Tipo_documento" >
                                         <option class="form-control" id="recipient-name" value="" >Seleccione tipo documento...</option>
-                                        <option class="form-control" id="recipient-name" value="Cédula de ciudadania">Cédula de ciudadania</option>
-                                        <option class="form-control" id="recipient-name" value="Cédula Extranjeria">Cédula Extranjeria</option>
-                                        <option class="form-control" id="recipient-name" value="NIT">NIT</option>
+                                        <?php foreach ($Tipo_documento as $Tipo_documentos){ ?>
+                                        <option value="{{ $Tipo_documentos->Tipo_documento }}">{{ $Tipo_documentos->Tipo_documento }}</option>
+                                        <?php } ?>
                                     </select>
                                     <small class="text-danger">{{$errors->first('Tipo_documento')}}</small>
 
@@ -185,11 +185,15 @@
 
                                                 <form action="{{ route('editar_cliente', $cliente) }}" method="POST" >
                                                     @csrf @method('PUT')
-                                                    <div class="mb-3">
-                                                        <label for="recipient-name" class="col-form-label">Tipo Documento</label>
-                                                        <input type="text" name="Tipo_documento" class="form-control" id="recipient-name" value="{{old('Tipo_documento', $cliente->Tipo_documento)}}">
-                                                        <small class="text-danger">{{$errors->first('Tipo_documento')}}</small>
-                                                    </div>
+
+                                                    <label for="message-text" class="col-form-label">Tipo Documento:</label>
+                                                    <select require class="form-select"  id="" name="Tipo_documento" >
+                                                        <option class="form-control" id="recipient-name" value="{{old('Tipo_documento', $cliente->Tipo_documento)}}">{{old('Tipo_documento', $cliente->Tipo_documento)}}</option>
+                                                            <option class="form-control" hidden id="recipient-name" value="{{old('Tipo_documento', $cliente->Tipo_documento)}}">{{old('Tipo_documento', $cliente->Tipo_documento)}}</option>
+                                                            <?php foreach ($Tipo_documento as $Tipo_documentos){ ?>
+                                                                <option class="form-control" id="recipient-name" value="{{ $Tipo_documentos->Tipo_documento }}">{{ $Tipo_documentos->Tipo_documento }}</option>
+                                                            <?php } ?>
+                                                    </select>
                                                     <div class="mb-3">
                                                         <label for="message-text" class="col-form-label">Documento</label>
                                                         <input type="number" name="Documento" class="form-control" id="recipient-name" value="{{old('Documento', $cliente->Documento)}}">

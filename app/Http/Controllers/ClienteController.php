@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Models\Tipo_documento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,8 +21,11 @@ class ClienteController extends Controller
     public function index()
     {
         $clientes = Cliente::paginate();
+        //$Tipo_documento = DB::select("SELECT DISTINCT Tipo_documento FROM clientes WHERE Tipo_documento != id");
 
-        return view('cliente.index', compact('clientes'))->with('i', (request()->input('page', 1) - 1) * $clientes->perPage());
+        $Tipo_documento = Tipo_documento::all();
+
+        return view('cliente.index', compact('clientes', 'Tipo_documento'))->with('i', (request()->input('page', 1) - 1) * $clientes->perPage());
     }
 
     public function cliente_guardar(){
