@@ -11,7 +11,6 @@ class Compras extends Model
         'Nombre_proveedor' => 'required',
 		'Numero_factura' => 'required',
         'Fecha_compra' => 'required',
-        'Foto' => 'required',
 
 
     ];

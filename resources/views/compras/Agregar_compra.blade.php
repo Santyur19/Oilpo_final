@@ -60,7 +60,7 @@
                     <div class="card">
                         <div class="card-body">
                             <label for="">Nombre Producto</label>
-                            <select style="width: 100%" class="js-example-theme-single" name="Productos" id="Productos">
+                            <select style="width: 100%" class="js-example-theme-single" name="Producto" id="Producto">
                                 <option value="">Seleccione</option>
                                 <?php foreach($productos as  $producto){ ?>
                                 <option value="<?php echo $producto->Nombre_Producto ?>"><?php echo $producto->Nombre_Producto ?></option>
@@ -68,15 +68,15 @@
                             </select>
                             <br></br>
                             <label for="">Precio compra</label>
-                            <input type="number" class="form-control" name="Precios_compra" id="Precios_compra" aria-describedby="helpId" placeholder="">
+                            <input type="number" class="form-control" id="Precio_compra" aria-describedby="helpId" placeholder="">
                             <small style="color:red;"><p id="Precio_error"> </p></small>
 
                             <label for="">Precio venta</label>
-                            <input type="number" class="form-control" name="Precios_venta" id="Precios_venta" aria-describedby="helpId" placeholder="">
+                            <input type="number" class="form-control" id="Precio_venta" aria-describedby="helpId" placeholder="">
                             <small id="helpId" class="form-text text-muted"></small>
 
                             <label for="">Cantidad</label>
-                            <input type="number" class="form-control" name="Cantidades" id="Cantidades" aria-describedby="helpId" placeholder="">
+                            <input type="number" class="form-control" id="Cantidad" aria-describedby="helpId" placeholder="">
                             <small id="helpId" class="form-text text-muted"></small>
                             <br>
                             <div class="text-center" >
@@ -155,7 +155,7 @@
             theme: "classic"
         });
     });
-    
+
 </script>
 
 <script>
@@ -181,16 +181,16 @@
         $('#cancelar').hide();
         function agregar(){
             // producto = $('#Productos').val();
-            var producto = $("#Productos option:selected").text();
-            precio_compra = $('#Precios_compra').val();
-            precio_venta = $('#Precios_venta').val();
-            cantidad = $('#Cantidades').val();
+            var producto = $("#Producto option:selected").text();
+            precio_compra = $('#Precio_compra').val();
+            precio_venta = $('#Precio_venta').val();
+            cantidad = $('#Cantidad').val();
 
             if(producto !="" && cantidad > 0 && precio_compra > 0){
                 subtotal[cont]=(cantidad*precio_compra);
                 total = total+subtotal[cont];
 
-                var fila = '<tr id="fila'+cont+'"><td><input type="text" name="Producto[]" value="'+producto+'"></td><td><input type="number" name="Cantidad[]" value="'+cantidad+'"></td><td><input type="number" name="Precio_compra[]" value="'+precio_compra+'"></td><td><input type="number" name="Precio_venta[]" value="'+precio_venta+'"></td><td>'+subtotal[cont]+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
+                var fila = '<tr id="fila'+cont+'"><td><input type="text" name="Productos[]" value="'+producto+'"></td><td><input type="number" name="Cantidades[]" value="'+cantidad+'"></td><td><input type="number" name="Precios_compra[]" value="'+precio_compra+'"></td><td><input type="number" name="Precios_venta[]" value="'+precio_venta+'"></td><td>'+subtotal[cont]+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
                 cont++;
                 limpiar();
                 $('#total').html('<h1 class="btn btn-info">Total: $'+total+'<input type="number" hidden name="Total" value="'+total+'"  ></h1>');
@@ -209,10 +209,10 @@
             }
         }
         function limpiar(){
-            $('#Productos').val('');
-            $('#Precios_compra').val('');
-            $('#Precios_venta').val('');
-            $('#Cantidades').val('');
+            $('#Producto').val('');
+            $('#Precio_compra').val('');
+            $('#Precio_venta').val('');
+            $('#Cantidad').val('');
         }
         function evaluar(){
             if (total>0){

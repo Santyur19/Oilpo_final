@@ -16,7 +16,8 @@ class Productos extends Migration
         Schema::create('productos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table ->string('Nombre_Producto');
-            $table ->float('Valor_Producto');
+            $table ->float('Valor_venta');
+            $table ->float('Valor_compra');
             $table ->integer('Cantidad_Producto');
             $table ->enum('estado', ['Activo', 'Inactivo']);
             $table->timestamps();
