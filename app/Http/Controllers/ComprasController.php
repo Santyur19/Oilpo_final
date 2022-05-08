@@ -39,10 +39,10 @@ class ComprasController extends Controller
     public function show()
 
     {
-        $proveedores = Proveedore::all();
+        $proveedores = DB::select("SELECT Nombre_proveedor, id FROM proveedores WHERE estado = 'Activo' ");
         $compra = Compras::paginate();
         $numero_facturas = DB:: select("SELECT Numero_compras FROM Compras ORDER by ID DESC LIMIT 1");
-        $productos = Producto::all();
+        $productos = DB::select("SELECT Nombre_Producto FROM productos WHERE estado ='Activo'");
         return view('compras.Agregar_compra', compact('compra', 'proveedores', 'productos', 'numero_facturas'))
             ->with('i', (request()->input('page', 1) - 1) * $compra->perPage());
     }
@@ -97,16 +97,29 @@ class ComprasController extends Controller
 
           // //END IMAGEN
         $total = $_POST['Total'];
-        $Producto = $_POST['Producto'];
-        $Precio_compra = $_POST['Precio_compra'];
-        $Precio_venta = $_POST['Precio_venta'];
-        $Cantidad = $_POST['Cantidad'];
+        $Producto = $_POST['Productos'];
+        $Precio_venta = $_POST['Precios_venta'];
+        $Precio_compra = $_POST['Precios_compra'];
+        $Cantidad = $_POST['Cantidades'];
 
         $cadena= "INSERT INTO compras (Numero_compras, Nombre_proveedor, Numero_factura, Fecha_compra, Foto, Total,  Producto, Precio_compra, Precio_venta, Cantidad) VALUES ";
         for ($i = 0; $i <count($Producto); $i++){
 
+            //UPDATE CANTIDAD PRODUCTOS
+
             $cadena_update= "UPDATE productos SET Cantidad_Producto = ( SELECT Cantidad_Producto + $Cantidad[$i]) WHERE Nombre_Producto = '$Producto[$i]';";
             DB::update($cadena_update);
+
+            //UPDATE PRECIO DE VENTA PRODUCTOS
+
+            $cadena_update= "UPDATE productos SET Valor_venta =  $Precio_venta[$i] WHERE Nombre_Producto = '$Producto[$i]';";
+            DB::update($cadena_update);
+
+            //UPDATE PRECIO DE COMPRA PRODUCTOS
+
+            $cadena_update= "UPDATE productos SET Valor_compra =  $Precio_compra[$i]  WHERE Nombre_Producto = '$Producto[$i]';";
+            DB::update($cadena_update);
+
             $cadena.="('".$Numero_compra."', '".$proveedor."',  '".$numero_factura."',  '".$fecha_compra."', '".$foto."',  '".$total."' , '".$Producto[$i]."', '".$Precio_compra[$i]."', '".$Precio_venta[$i]."', '".$Cantidad[$i]."'),";
 
 

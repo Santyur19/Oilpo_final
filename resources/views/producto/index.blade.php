@@ -51,8 +51,14 @@
                                     <small class="text-danger">{{$errors->first('Nombre_Producto')}}</small>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="message-text" class="col-form-label">Valor <small style="color:red;">*</small></label>
-                                    <input type="number" name="Valor_Producto" class="form-control" id="recipient-name" value="{{old('Valor_Producto')}}">
+                                    {{-- <label for="message-text" class="col-form-label">Valor <small style="color:red;">*</small></label> --}}
+                                    <input  hidden type="number" name="Valor_venta" class="form-control" id="recipient-name" value=0>
+                                    <small class="text-danger">{{$errors->first('Valor_Producto')}}</small>
+
+                                </div>
+                                <div class="mb-3">
+                                    {{-- <label for="message-text" class="col-form-label">Valor <small style="color:red;">*</small></label> --}}
+                                    <input  hidden type="number" name="Valor_compra" class="form-control" id="recipient-name" value=0>
                                     <small class="text-danger">{{$errors->first('Valor_Producto')}}</small>
 
                                 </div>
@@ -61,6 +67,7 @@
                                     <input hidden type="number" name="Cantidad_Producto" class="form-control" id="recipient-name" value=0 readonly>
                                     <small class="text-danger">{{$errors->first('Cantidad_Producto')}}</small>
                                 </div>
+
                                <!--  <div class="mb-3">
                                     <label for="message-text" class="col-form-label">Estado:</label>
                                     <select require class="form-control" id="recipient-name">
@@ -97,9 +104,9 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Nombre Producto</th>
-										<th>Valor Producto</th>
+										<th>Valor venta</th>
+                                        <th>Valor compra</th>
 										<th>Cantidad Producto</th>
-
                                         <th></th>
                                         <th>Estado</th>
 
@@ -110,7 +117,8 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
 											<td>{{ $producto->Nombre_Producto }}</td>
-											<td>$ {{ $producto->Valor_Producto }}</td>
+											<td>$ {{ $producto->Valor_venta }}</td>
+                                            <td>$ {{ $producto->Valor_compra }}</td>
 											<td>{{ $producto->Cantidad_Producto }}</td>
 
                                             <td>
@@ -173,7 +181,7 @@
                                                         <input type="text" name="Nombre_Producto" class="form-control" id="recipient-name" value="{{old('Nombre_Producto', $producto->Nombre_Producto)}}">
                                                         <small class="text-danger">{{$errors->first('Nombre_Producto')}}</small>
                                                     </div>
-                                                    <div class="mb-3">
+                                                    {{-- <div class="mb-3">
                                                         <label for="message-text" class="col-form-label">Valor:</label>
                                                         <input type="number" name="Valor_Producto" class="form-control" id="recipient-name" value="{{old('Valor_Producto', $producto->Valor_Producto)}}">
                                                         <small>{{$errors->first('Valor_Producto')}}</small>
@@ -183,7 +191,7 @@
                                                         <label for="message-text" class="col-form-label">Cantidad:</label>
                                                         <input type="number" name="Cantidad_Producto" class="form-control" id="recipient-name" value="{{old('Cantidad_Producto', $producto->Cantidad_Producto)}}">
                                                         <small>{{$errors->first('Cantidad_Producto')}}</small>
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="modal-footer">
 
 

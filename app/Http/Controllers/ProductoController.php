@@ -57,7 +57,8 @@ class ProductoController extends Controller
     public function guardar(){
         $campos = request()->validate([
             'Nombre_Producto' =>'required|unique:productos,Nombre_Producto|min:3',
-            'Valor_Producto'=> 'required',
+            'Valor_venta'=> 'required',
+            'Valor_compra'=> 'required',
             'Cantidad_Producto' => 'required'
         ]);
         Producto::create($campos);
@@ -109,8 +110,7 @@ class ProductoController extends Controller
     public function editar(Producto  $producto){
         $campos = request()->validate([
             'Nombre_Producto' =>'required|min:3',
-            'Valor_Producto'=> 'required',
-            'Cantidad_Producto' => 'required'
+            
         ]);
         $producto->update($campos);
         return redirect()->route('productos.index') ->with('success', ' ');
