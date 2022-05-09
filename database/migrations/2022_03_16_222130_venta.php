@@ -17,8 +17,8 @@ class Venta extends Migration
             $table->bigIncrements('id');
             $table->integer('Factura');
             $table->String('Nombre');
-            $table->String('Nombre_Producto');
-            $table->String('Nombre_servicio');
+            $table->String('Nombre_Producto')->nullable();
+            $table->String('Nombre_servicio')->nullable();
             $table->String('Fecha_venta');
             $table->String('Cantidad');
             $table->String('Iva');

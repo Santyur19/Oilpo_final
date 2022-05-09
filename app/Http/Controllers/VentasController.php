@@ -37,11 +37,11 @@ class VentasController extends Controller
         date_default_timezone_set("America/Bogota");
         $fecha_actual = date("Y-m-d");
 
-        $Facturas=DB:: select("SELECT Factura FROM ventas ORDER by ID DESC LIMIT 1");
+        $Facturas=DB:: select("SELECT Factura FROM ventas ORDER by ID DESC LIMIT 1 ");
         $ventas = Venta::all();
         $clientes = Cliente::all();
-        $productos=Producto::all();
-        $servicios=Servicio::all();
+        $productos=DB::Select("SELECT * FROM productos WHERE estado ='Activo' ");
+        $servicios=DB::Select("SELECT * FROM servicios WHERE estado ='Activo' ");
 
 
         return view('ventas.Agregar_venta', compact('ventas', 'clientes', 'fecha_actual', 'productos', 'Facturas', 'servicios'))
@@ -100,23 +100,27 @@ class VentasController extends Controller
             $cadena_u="";
             $cadena= "INSERT INTO ventas (Nombre, Nombre_servicio, Fecha_venta, Total, Nombre_Producto, Cantidad, Iva, factura) VALUES ";
             for ($i = 0; $i <count($Producto); $i++){
-                
-                $minimos = DB::SELECT("SELECT Cantidad_Producto,CASE WHEN Cantidad_Producto - $Cantidad[$i] < 0 THEN 0 ELSE 1 END AS MINIMO FROM productos WHERE Nombre_Producto = '$Producto[$i]' ;");
+                if ($Producto[$i] != "Nada"){
+                    $minimos = DB::SELECT("SELECT Cantidad_Producto,CASE WHEN Cantidad_Producto - $Cantidad[$i] < 0 THEN 0 ELSE 1 END AS MINIMO FROM productos WHERE Nombre_Producto = '$Producto[$i]' ;");
 
-                foreach ($minimos as $minimo) {
-                    if ($minimo->MINIMO == 1){
-                        $cadena_update= "UPDATE productos SET Cantidad_Producto = ( SELECT Cantidad_Producto - $Cantidad[$i]) WHERE Nombre_Producto = '$Producto[$i]';";
-                        DB::update($cadena_update);
+                    foreach ($minimos as $minimo) {
+                        if ($minimo->MINIMO == 1){
+                            $cadena_update= "UPDATE productos SET Cantidad_Producto = ( SELECT Cantidad_Producto - $Cantidad[$i]) WHERE Nombre_Producto = '$Producto[$i]';";
+                            DB::update($cadena_update);
 
-                        $cadena.="('".$Cliente."',  '".$Servicio[$i]."', '".$Fecha."',  '".$total."',  '".$Producto[$i]."' , '".$Cantidad[$i]."', '".$Iva[$i]."', '".$factura."'),";
-                    }else{
-                        $Producto_error= $Producto[$i];
-                        
-                        return redirect('ventas')
-                        ->with('stock', ' ');
+                            $cadena.="('".$Cliente."',  '".$Servicio[$i]."', '".$Fecha."',  '".$total."',  '".$Producto[$i]."' , '".$Cantidad[$i]."', '".$Iva[$i]."', '".$factura."'),";
+                        }else{
+                            $Producto_error= $Producto[$i];
+                            $venta = DB:: select("SELECT DISTINCT Factura, Nombre, Fecha_venta, Total FROM ventas where Factura > 0 ");
+
+                            return redirect('/ventas')
+                            ->with('stock', '');
+                        }
                     }
                 }
-            
+                else{
+                    $cadena.="('".$Cliente."',  '".$Servicio[$i]."', '".$Fecha."',  '".$total."',  '".$Producto[$i]."' , '".$Cantidad[$i]."', '".$Iva[$i]."', '".$factura."'),";
+                }
             }
 
             // <?php echo $Producto_error
@@ -238,7 +242,7 @@ class VentasController extends Controller
             else{
                 $Fecha_maxima=$_POST['Fecha_maxima'];
                 $Fecha_minima=$_POST['Fecha_minima'];
-                $Ventas = DB:: select("SELECT DISTINCT Factura, Nombre, Nombre_Producto, Nombre_servicio, Fecha_venta, Cantidad, Iva,  Total FROM Ventas WHERE Fecha_venta < AND Factura > 0");
+                $Ventas = DB:: select("SELECT DISTINCT Factura, Nombre, Nombre_Producto, Nombre_servicio, Fecha_venta, Cantidad, Iva,  Total FROM Ventas WHERE Fecha_venta BETWEEN '$Fecha_minima' AND '$Fecha_maxima' AND Factura > 0");
 
                 foreach ($Ventas as $ventas) {
                     $tabla .="
