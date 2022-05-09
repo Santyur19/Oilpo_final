@@ -190,7 +190,7 @@
                 subtotal[cont]=(cantidad*precio_compra);
                 total = total+subtotal[cont];
 
-                var fila = '<tr id="fila'+cont+'"><td><input type="text" name="Productos[]" value="'+producto+'"></td><td><input type="number" name="Cantidades[]" value="'+cantidad+'"></td><td><input type="number" name="Precios_compra[]" value="'+precio_compra+'"></td><td><input type="number" name="Precios_venta[]" value="'+precio_venta+'"></td><td>'+subtotal[cont]+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
+                var fila = '<tr id="fila'+cont+'"><td><input  type="text" name="Productos[]" value="'+producto+'"></td><td><input type="number" name="Cantidades[]" value="'+cantidad+'"></td><td><input type="number" name="Precios_compra[]" value="'+precio_compra+'"></td><td><input type="number" name="Precios_venta[]" value="'+precio_venta+'"></td><td>'+subtotal[cont]+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
                 cont++;
                 limpiar();
                 $('#total').html('<h1 class="btn btn-info">Total: $'+total+'<input type="number" hidden name="Total" value="'+total+'"  ></h1>');

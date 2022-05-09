@@ -34,8 +34,8 @@
                                         <option value="<?php echo $cliente->Nombre ?>"><?php echo $cliente->Nombre ?></option>
                                         <?php } ?>
                                     </select> </p>
-                                        <label for="">Fecha de compra</label>
-                                        <input type="date" class="form-control" name="Fecha_venta" id="" aria-describedby="helpId">
+                                        <label for="">Fecha de Venta</label>
+                                        <input type="date" class="form-control" name="Fecha_venta" id="" aria-describedby="helpId" readonly value="<?php echo $fecha_actual; ?>">
                                         <small id="helpId" class="form-text text-muted"></small>
 
                                         <label for="">Factura</label>
@@ -50,7 +50,7 @@
                                     <div class="card-body">
                                         <label for="">Producto</label>
                                         <select class="form-select" name="Nombre_producto" id="producto">
-                                            <option value="">Seleccione</option>
+                                            <option value="Nada">Seleccione</option>
                                                 <?php  foreach($productos as  $producto){ ?>
                                             <option value="<?php echo $producto->Nombre_Producto ?>"><?php echo $producto->Nombre_Producto ?></option>
                                             <?php } ?>
@@ -58,7 +58,7 @@
 
                                         <label for="">Servicio</label>
                                         <select class="form-select" name="Nombre_servicio" id="servicio">
-                                            <option value="">Seleccione</option>
+                                            <option value="Nada">Seleccione</option>
                                                 <?php  foreach($servicios as $servicio){ ?>
                                             <option value="<?php echo $servicio->Nombre_servicio ?>"><?php echo $servicio->Nombre_servicio ?></option>>
                                             <?php } ?>
@@ -175,12 +175,12 @@
 // Nombre_servicio
          
             //var producto = $("#producto option:selected").val();
-            var producto = $("#producto option:selected").text();
-            var servicio = $("#servicio option:selected").text();
+            var producto = $("#producto option:selected").val();
+            var servicio = $("#servicio option:selected").val();
             // var Cliente = $("#Nombre_cliente option:selected").text();
 
 
-            if(producto !="Seleccione" && cantidad > 0 && iva > 0 && precio > 0 && servicio != "Seleccione"){
+            if(cantidad > 0 && iva > 0 && precio > 0 && servicio != " " || producto !=" "){
                 subtotal[cont]=(cantidad*precio);
                 ivat=ivat+(subtotal[cont]*(iva/100));
                 total = total + (subtotal[cont]+ivat);
