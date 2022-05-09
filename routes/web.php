@@ -42,8 +42,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //RUTAS ROLES
 
 Route::resource('/roles', App\Http\Controllers\RolesController::class);
+Route::post('/roles/create', [App\Http\Controllers\RolesController::class, 'create' ])->name('Roles_crear');
 Route::post('/roles', [App\Http\Controllers\RolesController::class, 'guardar' ])->name('Roles_guardar');
-Route::put('/roles{role}', [App\Http\Controllers\RolesController::class, 'editar' ])->name('Roles_editar');
+
+Route::put('/roles/edit', [App\Http\Controllers\RolesController::class, 'editar' ])->name('Roles_editar');
+Route::put('/roles', [App\Http\Controllers\RolesController::class, 'update_status'] )->name('Editar_estado_rol');
 
 
 
@@ -128,7 +131,10 @@ Route::post('/informes/informe_compras', [App\Http\Controllers\InformeController
 //USER
 Route::post('/usuarios', [App\Http\Controllers\Auth\RegisterController::class, 'usuario_guardar'] )->name('guardar_usuario');
 
+
+//PERMISOS
 Route::resource('/permissions', controller: App\Http\Controllers\PermissionController::class);
+Route::put('/permissions', [App\Http\Controllers\PermissionController::class, 'update_status'] )->name('Editar_estado_permiso');
 
 
 
