@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 
 
 class RolesController extends Controller
@@ -22,31 +24,28 @@ class RolesController extends Controller
 
     public function index()
     {
-        //$roles = Role::paginate();
-        // $roles = DB::select("SELECT id, rol, id_user, permisos FROM roles");
+        $rol = Role::all();
+        
 
-         return view('role.index');
+        // $roles = DB::select("SELECT id, rol, id_user, permisos FROM roles");
+        //return view(view:'role.index', data: compact(var_name:'rol'));
+        return view(view:'role.index', data: compact(var_name:'rol'));
+
     }
+
+    public function create()
+    {
+        $permissions = Permission::all()->pluck(value:'name', key:'id');  
+
+        return view(view:'role.create', data: compact(var_name:'permissions'));
+    }
+    
 
 
     public function guardar(){
-        // $campos = request()->validate([
-        //     'rol' =>'required',
-        //     'permisos[]'=> 'required',
-        // ]);
-        //Role::create($campos);
-        $id_user = $_POST['id_user'];
-        $permisos = $_POST['permisos'];
-        $rol = $_POST['rol'];
-        $cadena= "INSERT INTO roles (rol, id_user, permisos) VALUES ";
-        for ($i = 0; $i <count($permisos); $i++){
-            $cadena.="('".$rol."', '".$id_user."', '".$permisos[$i]."'),";
 
-        }
-        $cadena_final = substr($cadena, 0, -1);
-        $cadena_final.=";";
-        DB::insert($cadena_final);
-        return redirect()->route('roles.index') ->with('success', 'El rol se ha guardado.');
+        return view('role.index');
+       
     }
 
     // public function show($id)
@@ -73,4 +72,24 @@ class RolesController extends Controller
         return redirect()->route('roles.index')
             ->with('borrado', 'Rol deleted successfully');
     }
+
+    public function update_status(){
+        $id = $_POST['id'];
+        $activo = isset($_POST['Activo']);
+        $campos = request()->validate([
+            'estado' =>' '
+        ]);
+        if($activo=="Activo"){
+            DB::update("UPDATE roles SET estado ='Inactivo' WHERE id='".$id."'");
+            return redirect()->route('roles.index');
+
+
+
+        }else{
+            DB::update("UPDATE roles SET estado ='Activo' WHERE id ='".$id."'");
+            return redirect()->route('roles.index');
+
+        }
+    }
+
 }

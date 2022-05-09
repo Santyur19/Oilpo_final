@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\DB;
 
 class PermissionController extends Controller
 {
@@ -68,10 +69,26 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    
+    public function update_status(){
+        $id = $_POST['id'];
+        $activo = isset($_POST['Activo']);
+        $campos = request()->validate([
+            'estado' =>' '
+        ]);
+        if($activo=="Activo"){
+            DB::update("UPDATE permissions SET estado ='Inactivo' WHERE id='".$id."'");
+            return redirect()->route('permissions.index');
+
+
+
+        }else{
+            DB::update("UPDATE permissions SET estado ='Activo' WHERE id ='".$id."'");
+            return redirect()->route('permissions.index');
+
+        }
     }
+    
 
     /**
      * Remove the specified resource from storage.
