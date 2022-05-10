@@ -38,11 +38,12 @@
                     @endif
                 </div>
             </form>
-        </div>
-
             <button id="sesion" type="submit" class="btn btn-primary">
                 Iniciar sesión
             </button>
+        </div>
+
+           
 
       </div>
 </div>

@@ -28,9 +28,9 @@
     <div>
         <nav id="nav" class="navbar navbar-expand-md navbar-dark">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <h1 style="color: rgb(0, 0, 0); font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">OILPO</h1>
-                </a>
+                
+                    <img id="img" src="vendor\adminlte\dist\img\Moto.png" alt=""><h3 id="oilpo">ILPO</h3>
+              
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -47,14 +47,14 @@
                         @guest
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="btn btn-outline-primary" id="Iniciar_sesion" href="{{ route('login') }}">{{ __('Iniciar sesión') }}</a>
+                                    <a style="color:black;" class="btn btn-outline-primary" id="Iniciar_sesion" href="{{ route('login') }}">{{ __('Iniciar sesión') }}</a>
                                 </li>
 
                             @endif
 
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    &nbsp;&nbsp;&nbsp;<a class="btn btn-outline-primary" id="Registrarse" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
+                                    &nbsp;&nbsp;&nbsp;<a style="color:black;" class="btn btn-outline-primary" id="Registrarse" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
                                 </li>
                             @endif
                         @else
@@ -86,9 +86,18 @@
         </main>
     </div>
     <style>
-        #nav{
-            background-color: #0000cdcb;
+        #img{
+            width:9% ;
         }
+        #oilpo{
+            position: absolute; top: 65px; left: 410px ;width: 103px; height: 61px;
+            color:#675d65;
+            font-family:Fantasy;
+            font-size:39px;
+            -webkit-text-stroke: 2px black;
+             
+        }
+        
 
     </style>
 </body>
