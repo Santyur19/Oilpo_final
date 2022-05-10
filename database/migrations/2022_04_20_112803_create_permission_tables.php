@@ -43,7 +43,7 @@ class CreatePermissionTables extends Migration
             }
             $table->string('name');       // For MySQL 8.0 use string('name', 125);
             $table->string('guard_name'); // For MySQL 8.0 use string('guard_name', 125);
-            $table->String('Permiso_rol');
+            $table->String('Permiso_rol')->nullable();
             $table ->enum('estado', ['Activo', 'Inactivo']);
             $table->timestamps();
             if ($teams || config('permission.testing')) {

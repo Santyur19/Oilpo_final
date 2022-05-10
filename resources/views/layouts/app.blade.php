@@ -13,8 +13,9 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <link  >
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Koulen&family=Oleo+Script+Swash+Caps:wght@700&family=Tapestry&display=swap" rel="stylesheet">
 
     {{--ICONO  --}}
     <link rel="icon" href="vendor\adminlte\dist\img\Moto.png">
@@ -23,14 +24,17 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
+    {{-- Iconos inputs --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 <body >
     <div>
         <nav id="nav" class="navbar navbar-expand-md navbar-dark">
             <div class="container">
-                
-                    <img id="img" src="vendor\adminlte\dist\img\Moto.png" alt=""><h3 id="oilpo">ILPO</h3>
-              
+                <a href="#" style="text-decoration: none;">
+                    <img id="img" src="vendor\adminlte\dist\img\Moto_oilpo.png" alt="moto.png"><span id="oilpo">ILPO</span>
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -47,14 +51,13 @@
                         @guest
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a style="color:black;" class="btn btn-outline-primary" id="Iniciar_sesion" href="{{ route('login') }}">{{ __('Iniciar sesión') }}</a>
+                                    <a style="color:black;" class="btn btn-primary" id="Iniciar_sesion" href="{{ route('login') }}"><h5 style="font-family: Comic Sans MS; ">{{ __('Iniciar sesión') }}</h5></a>
                                 </li>
-
                             @endif
 
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    &nbsp;&nbsp;&nbsp;<a style="color:black;" class="btn btn-outline-primary" id="Registrarse" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
+                                    &nbsp;&nbsp;&nbsp;<a style="color:black;" class="btn btn-primary" id="Registrarse" href="{{ route('register') }}" ><h5 style="font-family: Comic Sans MS; ">{{ __('Registrarse') }}</h5></a>
                                 </li>
                             @endif
                         @else
@@ -87,20 +90,31 @@
     </div>
     <style>
         #img{
-            width:9% ;
+            width:25% ;
+
+
+
+
         }
         #oilpo{
-            position: absolute; top: 65px; left: 410px ;width: 103px; height: 61px;
+            position: absolute; top: 37px;
+            /* position: relative; */
             color:#675d65;
             font-family:Fantasy;
-            font-size:39px;
-            -webkit-text-stroke: 2px black;
-             
+            font-size:50px;
+            -webkit-text-stroke: 3px black;
+
         }
-        
+
+
+
 
     </style>
+    &nbsp; &nbsp; &nbsp;<h6>OILMOTORS Y & C</h6>
+
+
 </body>
+
 
 </html>
 
