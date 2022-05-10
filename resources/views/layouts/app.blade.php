@@ -25,11 +25,11 @@
 
 </head>
 <body >
-    <div  id="app">
-        <nav id="navv" class="navbar navbar-expand-md navbar-dark">
+    <div>
+        <nav id="nav" class="navbar navbar-expand-md navbar-dark">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <h1 id="oilpo"><i  style="color: rgb(119, 113, 113)">OIL</i><i style="color: blue;" id="PO">PO</i></h1>
+                    <h1 style="color: rgb(0, 0, 0); font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">OILPO</h1>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -85,6 +85,12 @@
             @yield('content')
         </main>
     </div>
+    <style>
+        #nav{
+            background-color: #0000cdcb;
+        }
+
+    </style>
 </body>
 
 </html>
