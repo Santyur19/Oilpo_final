@@ -48,12 +48,12 @@
 <div class="container">
     <div class="card">
         <form method="POST" action="{{ route('login') }}" >
-            <div class="card-header"><h3 class="text-center" id="login">Iniciar sesión</h3></div>
+            <div class="card-header"><h3 class="text-center" id="login">Login</h3></div>
             <div class="card-body">
                 @csrf
                 <div class="mb-4">
                     <br>
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }} " required autocomplete="email" autofocus placeholder=" Correo">
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }} " required autocomplete="email" autofocus placeholder=" E-mail">
                     @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -61,7 +61,7 @@
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder=" Contrasena">
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder=" Password">
                     @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -92,6 +92,7 @@
                 </button>
             </div>
         </form>
+
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
