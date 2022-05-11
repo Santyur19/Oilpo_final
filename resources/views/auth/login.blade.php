@@ -4,9 +4,7 @@
 <br>
 <br>
 <style>
-    .container{
 
-    }
     .card{
         height: 370px;
         width: 40%;

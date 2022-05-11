@@ -77,11 +77,7 @@ class ComprasController extends Controller
         $numero_factura = $_POST['Numero_factura'];
         $foto=(isset($_FILES['Foto']['name']))?$_FILES['Foto']['name']:"";
         $fecha_compra = $_POST['Fecha_compra'];
-        // //IMAGEN
-        // if($request->hasFile('Foto')){
-        //     $foto=$request->file('Foto')->store('uploads', 'public');
 
-        // }
 
         if ($request->hasFile('Foto')) {
             $filenameWithExt = $request->file('Foto')->getClientOriginalName ();
@@ -91,50 +87,88 @@ class ComprasController extends Controller
             $extension = $request->file('Foto')->getClientOriginalExtension();
             // Filename To store
             $fileNameToStore = $filename.'_'. time().'.'.$extension;
-            $path = $request->file('Foto')->storeAs('public/image', $fileNameToStore);
+            $path = $request->file('Foto')->move('img/detalles_compras/', $fileNameToStore);
+
+            $total = $_POST['Total'];
+            $Producto = $_POST['Productos'];
+            $Precio_venta = $_POST['Precios_venta'];
+            $Precio_compra = $_POST['Precios_compra'];
+            $Cantidad = $_POST['Cantidades'];
+
+            $cadena= "INSERT INTO compras (Numero_compras, Nombre_proveedor, Numero_factura, Fecha_compra, Foto, Total,  Producto, Precio_compra, Precio_venta, Cantidad) VALUES ";
+            for ($i = 0; $i <count($Producto); $i++){
+
+                //UPDATE CANTIDAD PRODUCTOS
+
+                $cadena_update= "UPDATE productos SET Cantidad_Producto = ( SELECT Cantidad_Producto + $Cantidad[$i]) WHERE Nombre_Producto = '$Producto[$i]';";
+                DB::update($cadena_update);
+
+                //UPDATE PRECIO DE VENTA PRODUCTOS
+
+                $cadena_update= "UPDATE productos SET Valor_venta =  $Precio_venta[$i] WHERE Nombre_Producto = '$Producto[$i]';";
+                DB::update($cadena_update);
+
+                //UPDATE PRECIO DE COMPRA PRODUCTOS
+
+                $cadena_update= "UPDATE productos SET Valor_compra =  $Precio_compra[$i]  WHERE Nombre_Producto = '$Producto[$i]';";
+                DB::update($cadena_update);
+
+                $cadena.="('".$Numero_compra."', '".$proveedor."',  '".$numero_factura."',  '".$fecha_compra."', '".$fileNameToStore."',  '".$total."' , '".$Producto[$i]."', '".$Precio_compra[$i]."', '".$Precio_venta[$i]."', '".$Cantidad[$i]."'),";
+
+
             }
-            // Else add a dummy image
-            else {
-            $fileNameToStore = 'noimage.jpg';
+            $cadena_final = substr($cadena, 0, -1);
+            $cadena_final.=";";
+            DB::insert($cadena_final);
+
+            return redirect('compras/')
+                ->with('success', ' ', $productos);
             }
 
+        else {
 
-
-          // //END IMAGEN
+        $fileNameToStore = 'noimage.jpg';
         $total = $_POST['Total'];
-        $Producto = $_POST['Productos'];
-        $Precio_venta = $_POST['Precios_venta'];
-        $Precio_compra = $_POST['Precios_compra'];
-        $Cantidad = $_POST['Cantidades'];
+            $Producto = $_POST['Productos'];
+            $Precio_venta = $_POST['Precios_venta'];
+            $Precio_compra = $_POST['Precios_compra'];
+            $Cantidad = $_POST['Cantidades'];
 
-        $cadena= "INSERT INTO compras (Numero_compras, Nombre_proveedor, Numero_factura, Fecha_compra, Foto, Total,  Producto, Precio_compra, Precio_venta, Cantidad) VALUES ";
-        for ($i = 0; $i <count($Producto); $i++){
+            $cadena= "INSERT INTO compras (Numero_compras, Nombre_proveedor, Numero_factura, Fecha_compra, Foto, Total,  Producto, Precio_compra, Precio_venta, Cantidad) VALUES ";
+            for ($i = 0; $i <count($Producto); $i++){
 
-            //UPDATE CANTIDAD PRODUCTOS
+                //UPDATE CANTIDAD PRODUCTOS
 
-            $cadena_update= "UPDATE productos SET Cantidad_Producto = ( SELECT Cantidad_Producto + $Cantidad[$i]) WHERE Nombre_Producto = '$Producto[$i]';";
-            DB::update($cadena_update);
+                $cadena_update= "UPDATE productos SET Cantidad_Producto = ( SELECT Cantidad_Producto + $Cantidad[$i]) WHERE Nombre_Producto = '$Producto[$i]';";
+                DB::update($cadena_update);
 
-            //UPDATE PRECIO DE VENTA PRODUCTOS
+                //UPDATE PRECIO DE VENTA PRODUCTOS
 
-            $cadena_update= "UPDATE productos SET Valor_venta =  $Precio_venta[$i] WHERE Nombre_Producto = '$Producto[$i]';";
-            DB::update($cadena_update);
+                $cadena_update= "UPDATE productos SET Valor_venta =  $Precio_venta[$i] WHERE Nombre_Producto = '$Producto[$i]';";
+                DB::update($cadena_update);
 
-            //UPDATE PRECIO DE COMPRA PRODUCTOS
+                //UPDATE PRECIO DE COMPRA PRODUCTOS
 
-            $cadena_update= "UPDATE productos SET Valor_compra =  $Precio_compra[$i]  WHERE Nombre_Producto = '$Producto[$i]';";
-            DB::update($cadena_update);
+                $cadena_update= "UPDATE productos SET Valor_compra =  $Precio_compra[$i]  WHERE Nombre_Producto = '$Producto[$i]';";
+                DB::update($cadena_update);
 
-            $cadena.="('".$Numero_compra."', '".$proveedor."',  '".$numero_factura."',  '".$fecha_compra."', '".$foto."',  '".$total."' , '".$Producto[$i]."', '".$Precio_compra[$i]."', '".$Precio_venta[$i]."', '".$Cantidad[$i]."'),";
+                $cadena.="('".$Numero_compra."', '".$proveedor."',  '".$numero_factura."',  '".$fecha_compra."', '".$fileNameToStore."',  '".$total."' , '".$Producto[$i]."', '".$Precio_compra[$i]."', '".$Precio_venta[$i]."', '".$Cantidad[$i]."'),";
+
+
+            }
+            $cadena_final = substr($cadena, 0, -1);
+            $cadena_final.=";";
+            DB::insert($cadena_final);
+
+            return redirect('compras/')
+                ->with('success', ' ', $productos);
 
 
         }
-        $cadena_final = substr($cadena, 0, -1);
-        $cadena_final.=";";
-        DB::insert($cadena_final);
 
-        return redirect('compras/')
-            ->with('success', ' ', $productos);
+
+
+
 
 
     }

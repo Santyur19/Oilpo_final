@@ -48,7 +48,7 @@
                                         <td><?php echo $detalle->Cantidad ?></td>
                                         <td><?php echo $detalle->Precio_compra ?></td>
                                         <td><?php echo $detalle->Fecha_compra ?></td>
-                                        <td><img src="\vendor\adminlte\dist\img\<?php echo $detalle->Foto  ?>" alt="A" width="200"></td>
+                                        <td><img  class="img-thumbnail" src="/img/detalles_compras/<?php echo $detalle->Foto ?>" alt="A" width="200"></td>
                                     </tr>
                                 </tbody>
                                 <?php } ?>

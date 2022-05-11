@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Restablecer contraseña</div>
+                <div class="card-header"><h6 class="text-center">Restablecer contraseña</h6></div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('password.update') }}">

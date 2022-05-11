@@ -32,9 +32,15 @@
     <div>
         <nav id="nav" class="navbar navbar-expand-md navbar-dark">
             <div class="container">
-                <a href="#" style="text-decoration: none;">
-                    <img id="img" src="vendor\adminlte\dist\img\Moto_oilpo.png" alt="moto.png"><span id="oilpo">ILPO</span>
-                </a>
+                    <?php if(Request::is('password/reset')){ ?>
+                        <a href="/login" style="text-decoration: none;">
+                            <img id="img" src="\vendor\adminlte\dist\img\Moto_oilpo.png" alt="moto.png"><span id="oilpo">ILPO</span>
+                        </a>
+                    <?php }else{ ?>
+                        <a href="login" style="text-decoration: none;">
+                            <img id="img" src="vendor\adminlte\dist\img\Moto_oilpo.png" alt="moto.png"><span id="oilpo">ILPO</span>
+                        </a>
+                    <?php } ?>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -49,15 +55,25 @@
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         @guest
-                            @if (Route::has('register'))
+                            @if (Request::is('register'))
                                 <li class="nav-item">
-                                    <a style="color:black;" class="btn btn-primary" id="Iniciar_sesion" href="{{ route('login') }}"><h5 style="font-family: Comic Sans MS; ">{{ __('Iniciar sesión') }}</h5></a>
+                                    <a style="color:black;" class="btn btn-primary" href="{{ route('login') }}"><h5 style="font-family: Comic Sans MS; ">{{ __('Iniciar sesión') }}</h5></a>
                                 </li>
                             @endif
 
-                            @if (Route::has('login'))
+                            @if (Request::is('login'))
                                 <li class="nav-item">
-                                    &nbsp;&nbsp;&nbsp;<a style="color:black;" class="btn btn-primary" id="Registrarse" href="{{ route('register') }}" ><h5 style="font-family: Comic Sans MS; ">{{ __('Registrarse') }}</h5></a>
+                                    &nbsp;&nbsp;&nbsp;<a style="color:black;" class="btn btn-primary" href="{{ route('register') }}" ><h5 style="font-family: Comic Sans MS; ">{{ __('Registrarse') }}</h5></a>
+                                </li>
+                            @endif
+
+                            @if (Request::is('password/reset'))
+                                <li class="nav-item">
+                                    <a style="color:black;" class="btn btn-primary" href="{{ route('login') }}"><h5 style="font-family: Comic Sans MS; ">{{ __('Iniciar sesión') }}</h5></a>
+                                </li>
+
+                                <li class="nav-item">
+                                    &nbsp;&nbsp;&nbsp;<a style="color:black;" class="btn btn-primary" href="{{ route('register') }}" ><h5 style="font-family: Comic Sans MS; ">{{ __('Registrarse') }}</h5></a>
                                 </li>
                             @endif
                         @else
@@ -114,9 +130,15 @@
 
 
     </style>
+    <?php if(Request::is('password/reset')){ ?>
+        <div class="position-absolute bottom-0 start-0">
+            <img src="/vendor/adminlte/dist/img/OILMOTORS.png" id="OILMOTORS">
+        </div>
+    <?php }else{ ?>
         <div class="position-absolute bottom-0 start-0">
             <img src="vendor/adminlte/dist/img/OILMOTORS.png" id="OILMOTORS">
         </div>
+    <?php } ?>
 
 </body>
 
