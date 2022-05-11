@@ -79,7 +79,6 @@
                                 </tbody>
                                 @yield('js')
                                     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-
                                     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
                                     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
                                     <script>
@@ -137,11 +136,11 @@
                     @csrf
                     <label for="">Fecha minima</label>
                     <br>
-                    <input type="date" class="form-control" required name="Fecha_minima" id="Fecha_minima" min="">
+                    <input type="date" class="form-control" required name="Fecha_minima" id="Fecha_minima" min="<?php echo $Fecha_minima ?>">
                     </br>
                     <label for="">Fecha Maxima</label>
                     <br>
-                    <input type="date" class="form-control" required name="Fecha_maxima" id="Fecha_maxima" >
+                    <input type="date" class="form-control" required name="Fecha_maxima" id="Fecha_maxima" max="<?php echo $Fecha_maxima ?>">
 
                     <input type="text" hidden name="Desicion" value="Filtrar">
                 </div>

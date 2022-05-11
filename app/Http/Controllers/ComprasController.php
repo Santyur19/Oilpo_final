@@ -14,12 +14,17 @@ class ComprasController extends Controller
     public function index()
 
     {
-        $fecha_filtro ="";
+        $minimos=DB::Select("SELECT min(Fecha_compra) AS Fecha_compra FROM compras where Numero_factura > 0");
+        $maximos=DB::Select("SELECT max(Fecha_compra) AS Fecha_compra FROM compras where Numero_factura > 0");
+
+        foreach ($minimos as $minimo){$Fecha_minima=$minimo->Fecha_compra;}
+        foreach ($maximos as $maximo){$Fecha_maxima=$maximo->Fecha_compra;}
+
         $compra = Compras::paginate(5);
         $nombre = DB:: select("SELECT DISTINCT Numero_factura, p.Nombre_proveedor, Fecha_compra, Total FROM compras  as c JOIN proveedores as p  WHERE c.Nombre_proveedor=p.id");
 
 
-        return view('compras.index', compact('compra', 'nombre', 'fecha_filtro' ))
+        return view('compras.index', compact('compra', 'nombre', 'Fecha_minima', 'Fecha_maxima'))
             ->with('i', (request()->input('page', 1) - 1) * $compra->perPage());
 
     }

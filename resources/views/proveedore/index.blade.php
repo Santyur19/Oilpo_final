@@ -264,24 +264,22 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                                @yield('js')
-                                    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-                                    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-                                    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
-                                    <script>
-                                        $('#tabla').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"}});
-                                        $(document).ready(function(){
-                                            let table = $('#tabla').DataTable({
-                                                reponsive:true
+                            @yield('js')
+                                <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+                                <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+                                <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+                                <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-                                            });
+                                <script>
+                                    $('#tabla').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"}});
+                                    $(document).ready(function(){
+                                        let table = $('#tabla').DataTable();
+                                    });
 
 
-                                        });
-
-                                    </script>
-                                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
+                                </script>
+                                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+                            </div>
                         </div>
                     </div>
                 </div>

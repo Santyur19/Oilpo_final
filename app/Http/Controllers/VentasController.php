@@ -21,12 +21,13 @@ class VentasController extends Controller
     {
         $ventas = Venta::paginate();
         $minimos=DB::Select("SELECT min(Fecha_venta) AS Fecha_venta FROM ventas where Factura > 0");
+        $maximos=DB::Select("SELECT max(Fecha_venta) AS Fecha_venta FROM ventas where Factura > 0");
         $venta = DB:: select("SELECT DISTINCT Factura, Nombre, Fecha_venta, Total FROM ventas where Factura > 0 ");
 
-        foreach ($minimos as $minimo)
-        $Fecha_minima=$minimo->Fecha_venta;
+        foreach ($minimos as $minimo){$Fecha_minima=$minimo->Fecha_venta;}
+        foreach ($maximos as $maximo){$Fecha_maxima=$maximo->Fecha_venta;}
 
-        return view('ventas.index', compact('ventas', 'venta', 'Fecha_minima'))
+        return view('ventas.index', compact('ventas', 'venta', 'Fecha_minima', 'Fecha_maxima'))
             ->with('i', (request()->input('page', 1) - 1) * $ventas->perPage());
 
     }
