@@ -105,13 +105,18 @@
             -webkit-text-stroke: 3px black;
 
         }
+        #OILMOTORS{
+            width: 30%;
+
+        }
 
 
 
 
     </style>
-    &nbsp; &nbsp; &nbsp;<h6>OILMOTORS Y & C</h6>
-
+        <div class="position-absolute bottom-0 start-0">
+            <img src="vendor/adminlte/dist/img/OILMOTORS.png" id="OILMOTORS">
+        </div>
 
 </body>
 
