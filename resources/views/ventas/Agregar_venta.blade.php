@@ -3,12 +3,11 @@
 @section('title', '| Agregar Venta')
 
 @section('css')
-    <link rel="icon" href="https://cdn.discordapp.com/attachments/881318396128526336/921091428321488946/unknown.png">
+    <link rel="icon" href="\vendor\adminlte\dist\img\Moto.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
 @endsection
 @section('template_title')
 
@@ -70,11 +69,11 @@
 
                                         <label for="">Precio</label>
                                         <input type="number" class="form-control" name="precio" id="precio" aria-describedby="helpId" placeholder="">
-                                        <small id="helpId" class="form-text text-muted"></small> 
+                                        <small id="helpId" class="form-text text-muted"></small>
 
                                         <label for="">Iva</label>
                                         <input type="number" class="form-control" name="ivas" id="iva" aria-describedby="helpId" placeholder="" >
-                                        <small id="helpId" class="form-text text-muted"></small> 
+                                        <small id="helpId" class="form-text text-muted"></small>
                                         <div class="text-center" >
                                         <button  id="agregar" type="button" class="btn btn-primary">Agregar producto</button>
 
@@ -173,7 +172,7 @@
             var iva = $('#iva').val();
             var precio = $('#precio').val();
 // Nombre_servicio
-         
+
             //var producto = $("#producto option:selected").val();
             var producto = $("#producto option:selected").val();
             var servicio = $("#servicio option:selected").val();
@@ -185,7 +184,7 @@
                 ivat=ivat+(subtotal[cont]*(iva/100));
                 total = total + (subtotal[cont]+ivat);
                 totalt[cont]=(subtotal[cont]+ivat);
-                
+
                 ivat=0;
 
                 var fila = '<tr id="fila'+cont+'"><td><input readnoly type="text" name="producto[]" value="'+producto+'"><td><input readnoly type="text" name="servicio[]" value="'+servicio+'"></td></td><td><input readnoly type="number" name="Cantidad[]" value="'+cantidad+'"></td><td><input readnoly type="number" name="precio[]" value="'+precio+'"></td><td><input readnoly type="number" name="iva[]" value="'+iva+'"></td><td>'+subtotal[cont]+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
@@ -199,7 +198,7 @@
                     icon: 'error',
                     title: 'Oops...',
                     text: 'No se han llenado todos campos!',
-                    
+
                 })
             }
         }
@@ -233,7 +232,7 @@
             }
             $('#total').html('<h1 class="btn btn-info">Total: $'+total+'</h1>');
             $('#fila'+index).remove();
-            
+
             guardar();
         }
         function cancelar(){

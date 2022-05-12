@@ -67,7 +67,7 @@ return [
     */
 
     'usermenu_enabled' => false,
-    'usermenu_header' => true,
+    'usermenu_header' => false,
     'usermenu_header_class' => 'bg-dark',
     'usermenu_image' => false,
     'usermenu_desc' => false,
@@ -263,7 +263,7 @@ return [
             'label_color' => 'success',
         ],
 
-        
+
         [
             'text'        => 'Permisos',
             'url'         => 'permissions',
