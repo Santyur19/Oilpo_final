@@ -2,6 +2,16 @@
 
 @section('title', '| Menu')
     <link rel="icon" href="https://cdn.discordapp.com/attachments/881318396128526336/921091428321488946/unknown.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
+    <link rel="stylesheet" href="dist/css/adminlte.min.css?v=3.2.0">
+    <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
 @section('content_header')
 @stop
 
@@ -17,6 +27,7 @@
         </div>
     </div>
 <!-- Tarjetas -->
+
     <div class="row">
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-info">
@@ -28,9 +39,8 @@
                     <p>Proveedores</p>
             </div>
             <div class="icon">
-                <i class="ion ion-bag"></i>
+                <i class="ion ion-person"></i>
             </div>
-                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
      </div>
 
@@ -44,9 +54,8 @@
                     <p>Productos</p>
                 </div>
             <div class="icon">
-                <i class="ion ion-stats-bars"></i>
+                <i class="ion ion-bag"></i>
             </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
     </div>
 
@@ -59,9 +68,8 @@
                 <p>Clientes</p>
             </div>
         <div class="icon">
-            <i class="ion ion-person-add"></i>
+            <i class="ion ion-person-stalker"></i>
         </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>  
 
@@ -76,7 +84,6 @@
             <div class="icon">
                 <i class="ion ion-pie-graph"></i>
             </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
 
