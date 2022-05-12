@@ -11,12 +11,74 @@
                 <div class="row mb-3">
 
                     <div class="col-md-12">
-                        <h1 id="texto" class="text-center" >Bienvenido {{ Auth::user()->name }}</h1>
+                    <h1 id="texto" class="text-center" >Bienvenido {{ Auth::user()->name }}</h1>
                     </div>
                 </div>
         </div>
     </div>
+<!-- Tarjetas -->
+    <div class="row">
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-info">
+                    <div class="inner">
+                    <h3>@php  use App\Models\Proveedore; 
+                    echo Proveedore::count();
+                    @endphp
+                    </h3>
+                    <p>Proveedores</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-bag"></i>
+            </div>
+                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+     </div>
 
+
+     <div class="col-lg-3 col-6">
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>@php  use App\Models\Producto; 
+                    echo Producto::count();
+                    @endphp</h3>
+                    <p>Productos</p>
+                </div>
+            <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+            </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+    </div>
+
+    <div class="col-lg-3 col-6">
+        <div class="small-box bg-warning">
+            <div class="inner">
+                <h3>@php  use App\Models\Cliente; 
+                    echo Cliente::count();
+                    @endphp</h3>
+                <p>Clientes</p>
+            </div>
+        <div class="icon">
+            <i class="ion ion-person-add"></i>
+        </div>
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>  
+
+    <div class="col-lg-3 col-6">
+        <div class="small-box bg-danger">
+                <div class="inner">
+                    <h3>@php  use App\Models\Servicio; 
+                    echo Servicio::count();
+                    @endphp</h3>
+                    <p>Servicios</p>
+                </div>
+            <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+            </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
 
 @stop
 
