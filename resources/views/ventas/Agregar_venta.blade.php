@@ -17,7 +17,7 @@
 @section('content')
 
 
-    <div class="row">
+    <div class="row" onload="inicio();">
         <div class="col-md-12">
             <form action="{{ route('Guardar_Venta') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -41,43 +41,51 @@
                                         <label for="">Factura</label>
                                         <input type="text" class="form-control" name="factura" id="" aria-describedby="helpId" readonly value="<?php foreach($Facturas as  $Factura) {echo $Factura->Factura+1;} ?>">
                                         <small id="helpId" class="form-text text-muted"></small>
+
+                                        <button type="button" id="Producto" value="Producto"> Producto</button>
+                                        <button type="button" id="Servicio" value="Servicio" > Servicio</button>
                                     </div>
                                 </div>
 
                             </div>
-                            <div class="col-md-6">
+                            <div  class="col-md-6">
                                 <div class="card">
                                     <div class="card-body">
-                                        <label for="">Producto</label>
+                                        <label id="productol">Producto</label>
                                         <select class="form-select" name="Nombre_producto" id="producto">
                                             <option value="Nada">Seleccione</option>
                                                 <?php  foreach($productos as  $producto){ ?>
                                             <option value="<?php echo $producto->Nombre_Producto ?>"><?php echo $producto->Nombre_Producto ?></option>
+
                                             <?php } ?>
                                         </select>
+                                        <!-- 
+                                        <label for="">Precio producto</label>
+                                        <input type="number" hidden class="form-control" name="precio" id="precio" aria-describedby="helpId" placeholder="">
+                                        <small id="helpId" class="form-text text-muted"></small>  -->
 
-                                        <label for="">Servicio</label>
+                                        <label id="cantidadl">Cantidad</label>
+                                        <input type="number" class="form-control" name="Cantidades" id="cantidad" aria-describedby="helpId" placeholder="">
+                                        <small id="helpId" class="form-text text-muted"></small>
+
+                                        <label id="ival">Iva</label>
+                                        <input type="number" class="form-control" name="ivas" id="iva" aria-describedby="helpId" placeholder="" >
+                                        <small id="helpId" class="form-text text-muted"></small> 
+
+                                        <label id="serviciol">Servicio</label>
                                         <select class="form-select" name="Nombre_servicio" id="servicio">
                                             <option value="Nada">Seleccione</option>
                                                 <?php  foreach($servicios as $servicio){ ?>
                                             <option value="<?php echo $servicio->Nombre_servicio ?>"><?php echo $servicio->Nombre_servicio ?></option>>
                                             <?php } ?>
                                         </select>
-
-                                        <label for="">Cantidad</label>
-                                        <input type="number" class="form-control" name="Cantidades" id="cantidad" aria-describedby="helpId" placeholder="">
-                                        <small id="helpId" class="form-text text-muted"></small>
-
-                                        <label for="">Precio</label>
+                                        
+                                        <label id="preciol">Precio servicio</label>
                                         <input type="number" class="form-control" name="precio" id="precio" aria-describedby="helpId" placeholder="">
                                         <small id="helpId" class="form-text text-muted"></small> 
 
-                                        <label for="">Iva</label>
-                                        <input type="number" class="form-control" name="ivas" id="iva" aria-describedby="helpId" placeholder="" >
-                                        <small id="helpId" class="form-text text-muted"></small> 
                                         <div class="text-center" >
-                                        <button  id="agregar" type="button" class="btn btn-primary">Agregar producto</button>
-
+                                            <button  id="agregar" type="button" class="btn btn-primary">Agregar producto</button>
                                         </div>
                                     </div>
                                 </div>
@@ -96,7 +104,8 @@
                                             <th>Producto</th>
                                             <th>Servicio</th>
                                             <th>Cantidad</th>
-                                            <th>Precio</th>
+                                            <th>Precio servicio</th>
+                                            <th>Precio producto</th>
                                             <th>Iva</th>
                                             <th>Subtotal</th>
                                         </tr>
@@ -138,6 +147,57 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
+
+    <script>
+        function inicio(){
+            $('#lista').show();
+            $('#producto').hide();
+            $('#cantidad').hide();
+            $('#servicio').hide();
+            $('#precio').hide();
+
+            $('#productol').hide();
+            $('#ival').hide();
+            $('#cantidadl').hide();
+            $('#serviciol').hide();
+            $('#preciol').hide();
+            
+        }
+    </script>
+    <script>
+            $(document).ready(function(){
+            $('#Producto').click(function(){
+                Producto();
+
+            });
+        });
+
+            $(document).ready(function(){
+            $('#Servicio').click(function(){
+                Servicio();
+
+            });
+        });
+        
+    </script>
+    <script>
+        function Producto(){
+            $('#producto').show();
+            $('#cantidad').show();
+            $('#iva').show();
+            $('#servicio').hide();
+            $('#precio').hide();
+            
+        } 
+        function Servicio(){
+            $('#servicio').show();
+            $('#precio').show();
+            $('#producto').hide();
+            $('#productol').hide();
+            $('#cantidad').hide();
+            $('#iva').hide();
+        } 
+    </script>
     <script>
         $(document).ready(function() {
             $('#Nombre_cliente').select2();
@@ -180,7 +240,7 @@
             // var Cliente = $("#Nombre_cliente option:selected").text();
 
 
-            if(cantidad > 0 && iva > 0 && precio > 0 && servicio != " " || producto !=" "){
+            if(cantidad > 0 && iva > 0 && precio > 0 && servicio != "Nada" || producto !="Nada"){
                 subtotal[cont]=(cantidad*precio);
                 ivat=ivat+(subtotal[cont]*(iva/100));
                 total = total + (subtotal[cont]+ivat);
@@ -242,13 +302,44 @@
         // function volver(){
         //     history.back();
         // }
+        function Producto(){
+            $('#lista').show();
+            $('#producto').show();
+            $('#cantidad').show();
+            $('#iva').show();
+            $('#servicio').hide();
+            $('#precio').hide();
 
-    </script>
+            $('#productol').show();
+            $('#ival').show();
+            $('#cantidadl').show();
+
+            $('#serviciol').hide();
+            $('#preciol').hide();
+        } 
+        function Servicio(){
+
+            $('#lista').show();
+            $('#producto').hide();
+            $('#cantidad').hide();
+            $('#iva').hide();
+            $('#servicio').show();
+            $('#precio').show();
+
+            $('#productol').hide();
+            $('#ival').hide();
+            $('#cantidadl').hide();
+
+            $('#serviciol').show();
+            $('#preciol').show();
+
+
+        } 
+
+        </script>
+
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-
-
 
 @endsection

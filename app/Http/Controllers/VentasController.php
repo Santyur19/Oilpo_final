@@ -40,7 +40,7 @@ class VentasController extends Controller
 
         $Facturas=DB:: select("SELECT Factura FROM ventas ORDER by ID DESC LIMIT 1 ");
         $ventas = Venta::all();
-        $clientes = Cliente::all();
+        $clientes = DB::Select("SELECT * FROM clientes WHERE estado ='Activo' ");
         $productos=DB::Select("SELECT * FROM productos WHERE estado ='Activo' ");
         $servicios=DB::Select("SELECT * FROM servicios WHERE estado ='Activo' ");
 
