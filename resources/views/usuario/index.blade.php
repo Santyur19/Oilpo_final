@@ -3,7 +3,7 @@
 @section('title', '| Usuarios')
 
 @section('css')
-    <link rel="icon" href="https://cdn.discordapp.com/attachments/881318396128526336/921091428321488946/unknown.png">
+    <link rel="icon" href="\vendor\adminlte\dist\img\Moto.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -120,15 +120,12 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-striped table-hover" id="tabla">
-                                <thead class="thead">
+                                <thead>
                                     <tr>
                                         <th>No</th>
-
 										<th>Usuario</th>
 										<th>Correo</th>
                                         <th></th>
-                                        <th></th>
-
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -136,7 +133,6 @@
                                     @foreach ($usuarios as $usuario)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-
 											<td>{{ $usuario->name }}</td>
 											<td>{{ $usuario->email }}</td>
                                             <td>
@@ -184,78 +180,69 @@
                                         </tr>
                                          <!-- MODAL EDITAR -->
                                         <div class="modal fade" id="editar_usuario{{$usuario->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Editar Usuario</h5>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Editar Usuario</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="{{ route('Editar_usuario',$usuario) }}" method="POST" >
+                                                            @csrf @method('PUT')
+                                                            <div class="mb-3">
+                                                                <label for="recipient-name" class="col-form-label">Documento:</label>
+                                                                <input type="text" name="Documento" class="form-control" id="recipient-name" value="{{old('Documento', $usuario->Documento)}}">
+                                                                <small class="text-danger">{{$errors->first('Documento')}}</small>
                                                             </div>
-                                                            <div class="modal-body">
-
-                                                                <form action="{{ route('Editar_usuario',$usuario) }}" method="POST" >
-                                                                @csrf @method('PUT')
-                                                                    <div class="mb-3">
-                                                                        <label for="recipient-name" class="col-form-label">Documento:</label>
-                                                                        <input type="text" name="Documento" class="form-control" id="recipient-name" value="{{old('Documento', $usuario->Documento)}}">
-                                                                        <small class="text-danger">{{$errors->first('Documento')}}</small>
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="message-text" class="col-form-label">Nombres:</label>
-                                                                        <input type="text" name="Nombres" class="form-control" id="recipient-name" value="{{old('Nombres', $usuario->Nombres)}}">
-                                                                        <small>{{$errors->first('Nombres')}}</small>
-
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="message-text" class="col-form-label">Apellidos:</label>
-                                                                        <input type="text" name="Apellidos" class="form-control" id="recipient-name" value="{{old('Apellidos', $usuario->Apellidos)}}">
-                                                                        <small>{{$errors->first('Apellidos')}}</small>
-                                                                    </div>
-
-                                                                    <div class="mb-3">
-                                                                        <label for="message-text" class="col-form-label">Correo:</label>
-                                                                        <input type="email" name="Correo" class="form-control" id="recipient-name" value="{{old('Correo', $usuario->Correo)}}">
-                                                                        <small>{{$errors->first('Correo')}}</small>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-
-                                                                    <div class="mb-3">
-                                                                        <label for="message-text" class="col-form-label">Usuario:</label>
-                                                                        <input type="text" name="Usuario" class="form-control" id="recipient-name" value="{{old('Usuario', $usuario->Usuario)}}">
-                                                                        <small>{{$errors->first('Usuario')}}</small>
-                                                                    </div>
-
-                                                                    <div class="mb-3">
-                                                                        <label for="message-text" class="col-form-label">Password:</label>
-                                                                        <input type="password" name="Password" class="form-control" id="recipient-name" value="{{old('Password', $usuario->Password)}}">
-                                                                        <small>{{$errors->first('Password')}}</small>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-
-
-                                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
-                                                                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                                                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                                                                            </svg>
-                                                                        </button>
-                                                                        <button type="submit" class="btn btn-warning">Editar
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
-                                                                                <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
-                                                                            </svg>
-                                                                        </button>
-                                                                    </div>
-                                                                </form>
+                                                            <div class="mb-3">
+                                                                <label for="message-text" class="col-form-label">Nombres:</label>
+                                                                <input type="text" name="Nombres" class="form-control" id="recipient-name" value="{{old('Nombres', $usuario->Nombres)}}">
+                                                                <small>{{$errors->first('Nombres')}}</small>
 
                                                             </div>
-
+                                                            <div class="mb-3">
+                                                                <label for="message-text" class="col-form-label">Apellidos:</label>
+                                                                <input type="text" name="Apellidos" class="form-control" id="recipient-name" value="{{old('Apellidos', $usuario->Apellidos)}}">
+                                                                <small>{{$errors->first('Apellidos')}}</small>
                                                             </div>
-                                                        </div>
-                                                        </div>
 
+                                                            <div class="mb-3">
+                                                                <label for="message-text" class="col-form-label">Correo:</label>
+                                                                <input type="email" name="Correo" class="form-control" id="recipient-name" value="{{old('Correo', $usuario->Correo)}}">
+                                                                <small>{{$errors->first('Correo')}}</small>
+                                                            </div>
+                                                            <div class="modal-footer">
 
+                                                            <div class="mb-3">
+                                                                <label for="message-text" class="col-form-label">Usuario:</label>
+                                                                <input type="text" name="Usuario" class="form-control" id="recipient-name" value="{{old('Usuario', $usuario->Usuario)}}">
+                                                                <small>{{$errors->first('Usuario')}}</small>
+                                                            </div>
 
-                                            <!-- MODAL EDITAR -->
-
+                                                            <div class="mb-3">
+                                                                <label for="message-text" class="col-form-label">Password:</label>
+                                                                <input type="password" name="Password" class="form-control" id="recipient-name" value="{{old('Password', $usuario->Password)}}">
+                                                                <small>{{$errors->first('Password')}}</small>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                                                    </svg>
+                                                                </button>
+                                                                <button type="submit" class="btn btn-warning">Editar
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                                                                        <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+                                                                    </svg>
+                                                                </button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- MODAL EDITAR -->
                                     @endforeach
                                 </tbody>
                                 @yield('js')
