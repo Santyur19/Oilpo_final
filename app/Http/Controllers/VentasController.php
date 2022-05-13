@@ -161,7 +161,7 @@ class VentasController extends Controller
             $Nada_iva="update ventas set iva='0' WHERE iva='';";
             $Nada_cantidad="update ventas set Cantidad='0' WHERE Cantidad='';";
             $Nada_servicio="update ventas set Nombre_servicio='Nada' WHERE Nombre_servicio='undefined'  OR Nombre_servicio='' OR Nombre_servicio='Seleccione';";
-            $Nada_producto="update ventas set Nombre_Producto='Nada' WHERE Nombre_Producto='undefined'  OR Nombre_servicio='' OR Nombre_servicio='Seleccione';";
+            $Nada_producto="update ventas set Nombre_Producto='Nada' WHERE Nombre_Producto='undefined'  OR Nombre_servicio='' OR Nombre_Producto='Seleccione';";
             
             DB::update($Nada_iva);
             DB::update($Nada_cantidad);
