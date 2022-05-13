@@ -112,7 +112,7 @@ class VentasController extends Controller
             $cadena= "INSERT INTO ventas (Nombre, Nombre_servicio, Fecha_venta, Total, Nombre_Producto, Cantidad, Iva, factura) VALUES ";
             for ($i = 0; $i <count($Producto); $i++){
                 if ($Producto[$i] != "Nada" && $Producto[$i] != "" && $Producto[$i] != "Seleccione"){
-                    $minimos = DB::SELECT("SELECT Cantidad_Producto,CASE WHEN Cantidad_Producto - $Cantidad[$i] < 0 THEN 0 ELSE 1 END AS MINIMO FROM productos WHERE Nombre_Producto = '$Producto[$i]' ;");
+                    $minimos = DB::SELECT("SELECT CASE WHEN Cantidad_Producto - $Cantidad[$i] < 0 THEN 0 ELSE 1 END AS MINIMO FROM productos WHERE Nombre_Producto = '$Producto[$i]' ;");
 
                     foreach ($minimos as $minimo) {
                         if ($minimo->MINIMO == 1){
@@ -125,7 +125,7 @@ class VentasController extends Controller
                             $venta = DB:: select("SELECT DISTINCT Factura, Nombre, Fecha_venta, Total FROM ventas where Factura > 0 ");
 
                             return redirect('/ventas')
-                            ->with('stock', '');
+                            ->with('stock', ' ');
                         }
                     }
                 }
