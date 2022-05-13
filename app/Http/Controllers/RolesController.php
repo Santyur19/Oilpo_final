@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use App\Http\Request\Role_create;
+use App\Http\Request\Role_edit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -40,6 +42,18 @@ class RolesController extends Controller
         return view(view:'role.create', data: compact(var_name:'permissions'));
     }
     
+    public function store(Request $request)
+    {
+        $roles= Role::create($request->only('name'));
+
+        // $role->permissions()->sync($request->input('permissions', []));
+        $roles->syncPermissions($request->input('permissions', []));
+
+        $rol = Role::all();
+
+
+        return view ('role.index', compact('rol'))->with('success','Rol creado correctamente');
+    }
 
 
     public function guardar(){
@@ -56,13 +70,24 @@ class RolesController extends Controller
     // }
 
 
-    public function editar(Role  $role){
-        $campos = request()->validate([
-            'rol' =>'required',
-            'permisos'=> 'required',
-        ]);
-        $role->update($campos);
-        return redirect()->route('roles.index') ->with('success', ' ');
+    public function edit(Role $rol)
+    {
+        
+
+        $permissions = Permission::all()->pluck('name', 'id');
+        $rol->load('permissions');
+        
+        return view('role.edit', compact('rol', 'permissions'));
+    }
+
+    public function update(Request $request, Role $rol)
+    {
+        $rol->update($request->only('name'));
+
+        // $role->permissions()->sync($request->input('permissions', []));
+        $rol->syncPermissions($request->input('permissions', []));
+
+        return redirect()->route('role.index');
     }
 
     public function destroy($id)
@@ -90,6 +115,9 @@ class RolesController extends Controller
             return redirect()->route('roles.index');
 
         }
+    }
+    public function volver_rol(){
+        return redirect ('roles');
     }
 
 }

@@ -54,7 +54,7 @@
                                     <div class="card-body">
                                         <label id="productol">Producto</label>
                                         <select class="form-select" name="Nombre_producto" id="producto">
-                                            <option value="Nada">Seleccione</option>
+                                            <option value=" ">Seleccione</option>
                                                 <?php  foreach($productos as  $producto){ ?>
                                             <option value="<?php echo $producto->id ?>"><?php echo $producto->Nombre_Producto ?></option>
 
@@ -75,7 +75,7 @@
 
                                         <label id="serviciol">Servicio</label>
                                         <select class="form-select" name="Nombre_servicio" id="servicio">
-                                            <option value="Nada">Seleccione</option>
+                                            <option value=" ">Seleccione</option>
                                                 <?php  foreach($servicios as $servicio){ ?>
                                             <option value="<?php echo $servicio->Nombre_servicio ?>"><?php echo $servicio->Nombre_servicio ?></option>>
                                             <?php } ?>

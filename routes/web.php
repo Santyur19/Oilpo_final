@@ -43,7 +43,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('/roles', App\Http\Controllers\RolesController::class);
 Route::post('/roles/create', [App\Http\Controllers\RolesController::class, 'create' ])->name('Roles_crear');
-Route::post('/roles', [App\Http\Controllers\RolesController::class, 'guardar' ])->name('Roles_guardar');
+Route::post('/roles', [App\Http\Controllers\RolesController::class, 'store' ])->name('Roles_guardar');
+Route::get('/role.index', [App\Http\Controllers\RolesController::class, 'volver_rol'])->name('volver_rol');
 
 Route::put('/roles/edit', [App\Http\Controllers\RolesController::class, 'editar' ])->name('Roles_editar');
 Route::put('/roles', [App\Http\Controllers\RolesController::class, 'update_status'] )->name('Editar_estado_rol');
