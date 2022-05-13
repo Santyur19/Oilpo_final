@@ -3,7 +3,7 @@
 @section('title', '| Detalles')
 
 @section('css')
-    <link rel="icon" href="https://cdn.discordapp.com/attachments/881318396128526336/921091428321488946/unknown.png">
+    <link rel="icon" href="\vendor\adminlte\dist\img\Moto.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -22,7 +22,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <?php foreach ($totales as $total){ ?>   
+                            <?php foreach ($totales as $total){ ?>
                                 <h5>Numero factura  <?php echo $total-> Factura ?></h5>
                             <?php } ?>
                                 <br>
@@ -51,9 +51,9 @@
                                     <tr>
                                         <td>{{ $venta->Factura }}</td>
                                         <td>{{ $venta->Nombre }}</td>
-                                        <td>{{ $venta->Nombre_Producto }}</td>                                        
+                                        <td>{{ $venta->Nombre_Producto }}</td>
                                         <td>{{ $venta->Nombre_servicio }}</td>
-                                        <td>{{ $venta->Fecha_venta }}</td>                                        
+                                        <td>{{ $venta->Fecha_venta }}</td>
                                         <td>{{ $venta->Cantidad }}</td>
                                         <td>{{ $venta->Iva }}</td>
                                     </tr>

@@ -3,12 +3,11 @@
 @section('title', '| Agregar Venta')
 
 @section('css')
-    <link rel="icon" href="https://cdn.discordapp.com/attachments/881318396128526336/921091428321488946/unknown.png">
+    <link rel="icon" href="\vendor\adminlte\dist\img\Moto.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
 @endsection
 @section('template_title')
 
@@ -84,8 +83,14 @@
                                         
                                         <label id="preciol">Precio servicio</label>
                                         <input type="number" class="form-control" name="precio" id="precio" aria-describedby="helpId" placeholder="">
-                                        <small id="helpId" class="form-text text-muted"></small> 
+                                        <small id="helpId" class="form-text text-muted"></small>
 
+<<<<<<< HEAD
+=======
+                                        <label for="">Iva</label>
+                                        <input type="number" class="form-control" name="ivas" id="iva" aria-describedby="helpId" placeholder="" >
+                                        <small id="helpId" class="form-text text-muted"></small>
+>>>>>>> 12f6194159954ea3f92dd08fec277142ca29f592
                                         <div class="text-center" >
                                             <button  id="agregar" type="button" class="btn btn-primary">Agregar producto</button>
                                         </div>
@@ -238,10 +243,15 @@
         function agregar(){
             var cantidad = $('#cantidad').val();
             var iva = $('#iva').val();
+<<<<<<< HEAD
             var precios = $('#precio').val();
 
             if (precios != "undefined"){var precio = parseInt(precios);}
          
+=======
+            var precio = $('#precio').val();
+// Nombre_servicio
+>>>>>>> 12f6194159954ea3f92dd08fec277142ca29f592
 
             //var producto = $("#producto option:selected").val();
             var producto_id = $("#producto option:selected").val();
@@ -252,7 +262,17 @@
             if(cantidad > 0 && iva > 0 && producto != "Nada" || precio > 0 && servicio != "Nada" ){
                 console.log(producto)
 
+<<<<<<< HEAD
                 if(iva==""){
+=======
+            if(cantidad > 0 && iva > 0 && precio > 0 && servicio != " " || producto !=" "){
+                subtotal[cont]=(cantidad*precio);
+                ivat=ivat+(subtotal[cont]*(iva/100));
+                total = total + (subtotal[cont]+ivat);
+                totalt[cont]=(subtotal[cont]+ivat);
+
+                ivat=0;
+>>>>>>> 12f6194159954ea3f92dd08fec277142ca29f592
 
                     subtotal[cont]=precio;
                     totalt[cont]=subtotal[cont];
@@ -289,7 +309,7 @@
                     icon: 'error',
                     title: 'Oops...',
                     text: 'No se han llenado todos campos!',
-                    
+
                 })
             }
         }
@@ -323,7 +343,7 @@
             }
             $('#total').html('<h1 class="btn btn-info">Total: $'+total+'</h1>');
             $('#fila'+index).remove();
-            
+
             guardar();
         }
         function cancelar(){
@@ -372,4 +392,11 @@
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
+<<<<<<< HEAD
 @endsection
+=======
+
+
+
+@endsection
+>>>>>>> 12f6194159954ea3f92dd08fec277142ca29f592

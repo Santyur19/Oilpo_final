@@ -18,7 +18,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Koulen&family=Oleo+Script+Swash+Caps:wght@700&family=Tapestry&display=swap" rel="stylesheet">
 
     {{--ICONO  --}}
-    <link rel="icon" href="vendor\adminlte\dist\img\Moto.png">
+    <link rel="icon" href="\vendor\adminlte\dist\img\Moto.png">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
