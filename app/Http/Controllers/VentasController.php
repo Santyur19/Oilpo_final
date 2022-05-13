@@ -19,6 +19,7 @@ class VentasController extends Controller
     public function index()
 
     {
+
         $ventas = Venta::paginate();
         $minimos=DB::Select("SELECT min(Fecha_venta) AS Fecha_venta FROM ventas where Factura > 0");
         $maximos=DB::Select("SELECT max(Fecha_venta) AS Fecha_venta FROM ventas where Factura > 0");
@@ -45,7 +46,16 @@ class VentasController extends Controller
         $servicios=DB::Select("SELECT * FROM servicios WHERE estado ='Activo' ");
 
 
-        return view('ventas.Agregar_venta', compact('ventas', 'clientes', 'fecha_actual', 'productos', 'Facturas', 'servicios'))
+        $precios = array();
+        $i=1;
+        foreach ($productos as $producto){
+
+            $precios[]= array ("Precio_producto" => $producto->Valor_venta);
+            $i++;
+        }
+        $precio=Json_encode($precios);
+
+        return view('ventas.Agregar_venta', compact('ventas', 'clientes', 'fecha_actual', 'productos', 'Facturas', 'servicios', 'precio'))
             ->with('success', ' ');
 
     }
@@ -101,7 +111,7 @@ class VentasController extends Controller
             $cadena_u="";
             $cadena= "INSERT INTO ventas (Nombre, Nombre_servicio, Fecha_venta, Total, Nombre_Producto, Cantidad, Iva, factura) VALUES ";
             for ($i = 0; $i <count($Producto); $i++){
-                if ($Producto[$i] != "Nada"){
+                if ($Producto[$i] != "Nada" && $Producto[$i] != "" && $Producto[$i] != "Seleccione"){
                     $minimos = DB::SELECT("SELECT Cantidad_Producto,CASE WHEN Cantidad_Producto - $Cantidad[$i] < 0 THEN 0 ELSE 1 END AS MINIMO FROM productos WHERE Nombre_Producto = '$Producto[$i]' ;");
 
                     foreach ($minimos as $minimo) {
@@ -124,6 +134,7 @@ class VentasController extends Controller
                 }
             }
 
+
             // <?php echo $Producto_error
 
 
@@ -138,14 +149,24 @@ class VentasController extends Controller
 
 
 
-
+            // update ventas set Nombre_Producto='Nada' WHERE Nombre_Producto='undefined'; 
+            // update ventas set Cantidad='0' WHERE Cantidad='; 
+            // update ventas set iva='0' WHERE iva=''
 
             $cadena_final = substr($cadena, 0, -1);
             $cadena_final.=";";
 
 
             DB::insert($cadena_final);
-
+            $Nada_iva="update ventas set iva='0' WHERE iva='';";
+            $Nada_cantidad="update ventas set Cantidad='0' WHERE Cantidad='';";
+            $Nada_servicio="update ventas set Nombre_servicio='Nada' WHERE Nombre_servicio='undefined'  OR Nombre_servicio='' OR Nombre_servicio='Seleccione';";
+            $Nada_producto="update ventas set Nombre_Producto='Nada' WHERE Nombre_Producto='undefined'  OR Nombre_servicio='' OR Nombre_servicio='Seleccione';";
+            
+            DB::update($Nada_iva);
+            DB::update($Nada_cantidad);
+            DB::update($Nada_servicio);
+            DB::update($Nada_producto);
 
             return redirect('ventas/')
                 ->with('success', ' ');

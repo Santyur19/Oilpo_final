@@ -15,9 +15,9 @@
 @endsection
 
 @section('content')
+<body onload="inicio();"></body>
 
-
-    <div class="row" onload="inicio();">
+    <div class="row" >
         <div class="col-md-12">
             <form action="{{ route('Guardar_Venta') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -41,9 +41,11 @@
                                         <label for="">Factura</label>
                                         <input type="text" class="form-control" name="factura" id="" aria-describedby="helpId" readonly value="<?php foreach($Facturas as  $Factura) {echo $Factura->Factura+1;} ?>">
                                         <small id="helpId" class="form-text text-muted"></small>
-
-                                        <button type="button" id="Producto" value="Producto"> Producto</button>
-                                        <button type="button" id="Servicio" value="Servicio" > Servicio</button>
+                                        <br>
+                                        <div class="text-center">
+                                            <button type="button" class="btn btn-primary" id="Producto" value="Producto"> Producto</button>
+                                            <button type="button" class="btn btn-primary" id="Servicio" value="Servicio" > Servicio</button>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -55,7 +57,7 @@
                                         <select class="form-select" name="Nombre_producto" id="producto">
                                             <option value="Nada">Seleccione</option>
                                                 <?php  foreach($productos as  $producto){ ?>
-                                            <option value="<?php echo $producto->Nombre_Producto ?>"><?php echo $producto->Nombre_Producto ?></option>
+                                            <option value="<?php echo $producto->id ?>"><?php echo $producto->Nombre_Producto ?></option>
 
                                             <?php } ?>
                                         </select>
@@ -105,7 +107,7 @@
                                             <th>Servicio</th>
                                             <th>Cantidad</th>
                                             <th>Precio servicio</th>
-                                            <th>Precio producto</th>
+                                            <th>Precio productos</th>
                                             <th>Iva</th>
                                             <th>Subtotal</th>
                                         </tr>
@@ -150,7 +152,7 @@
 
     <script>
         function inicio(){
-            $('#lista').show();
+
             $('#producto').hide();
             $('#cantidad').hide();
             $('#servicio').hide();
@@ -158,6 +160,7 @@
 
             $('#productol').hide();
             $('#ival').hide();
+            $('#iva').hide();
             $('#cantidadl').hide();
             $('#serviciol').hide();
             $('#preciol').hide();
@@ -182,20 +185,24 @@
     </script>
     <script>
         function Producto(){
+
             $('#producto').show();
             $('#cantidad').show();
             $('#iva').show();
             $('#servicio').hide();
             $('#precio').hide();
+
             
         } 
         function Servicio(){
+
             $('#servicio').show();
             $('#precio').show();
             $('#producto').hide();
             $('#productol').hide();
             $('#cantidad').hide();
             $('#iva').hide();
+
         } 
     </script>
     <script>
@@ -231,27 +238,50 @@
         function agregar(){
             var cantidad = $('#cantidad').val();
             var iva = $('#iva').val();
-            var precio = $('#precio').val();
-// Nombre_servicio
+            var precios = $('#precio').val();
+
+            if (precios != "undefined"){var precio = parseInt(precios);}
          
+
             //var producto = $("#producto option:selected").val();
-            var producto = $("#producto option:selected").val();
+            var producto_id = $("#producto option:selected").val();
+            var producto = $("#producto option:selected").text();
             var servicio = $("#servicio option:selected").val();
             // var Cliente = $("#Nombre_cliente option:selected").text();
 
+            if(cantidad > 0 && iva > 0 && producto != "Nada" || precio > 0 && servicio != "Nada" ){
+                console.log(producto)
 
-            if(cantidad > 0 && iva > 0 && precio > 0 && servicio != "Nada" || producto !="Nada"){
-                subtotal[cont]=(cantidad*precio);
-                ivat=ivat+(subtotal[cont]*(iva/100));
-                total = total + (subtotal[cont]+ivat);
-                totalt[cont]=(subtotal[cont]+ivat);
-                
-                ivat=0;
+                if(iva==""){
 
-                var fila = '<tr id="fila'+cont+'"><td><input readnoly type="text" name="producto[]" value="'+producto+'"><td><input readnoly type="text" name="servicio[]" value="'+servicio+'"></td></td><td><input readnoly type="number" name="Cantidad[]" value="'+cantidad+'"></td><td><input readnoly type="number" name="precio[]" value="'+precio+'"></td><td><input readnoly type="number" name="iva[]" value="'+iva+'"></td><td>'+subtotal[cont]+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
+                    subtotal[cont]=precio;
+                    totalt[cont]=subtotal[cont];
+                    total = total + subtotal[cont];
+
+
+                }else{
+                    var Array = eval (<?php echo $precio; ?>)
+                    var precio_producto = Array[producto_id-1].Precio_producto;
+
+                    subtotal[cont]=(cantidad*precio_producto);
+                    ivat=ivat+(precio_producto*(iva/100));
+                    totalt[cont]=(subtotal[cont]+ivat);
+                    total = total + totalt[cont];
+
+                    
+                    ivat=0;
+                }
+            
+
+                // if  (producto=="undefined"){producto="Nada"}
+                // if  (iva==""){iva=0}
+                // if  (cantidad==""){Cantidad="Nada"}
+                // if  (Servicio=="undefined"){Cantidad="Nada"}
+
+                var fila = '<tr id="fila'+cont+'"><td><input readnoly type="text" name="producto[]" value="'+producto+'"><td><input readnoly type="text" name="servicio[]" value="'+servicio+'"></td></td><td><input readnoly type="number" name="Cantidad[]" value="'+cantidad+'"></td><td><input readnoly type="number" name="precio[]" value="'+precio+'"></td><td><input readnoly type="number" name="precio[]" value="'+precio_producto+'"></td><td><input readnoly type="number" name="iva[]" value="'+iva+'"></td><td>'+subtotal[cont]+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
                 cont++;
                 limpiar();
-                $('#total').html('<h1 class="btn btn-info">Total: $'+total.toFixed(0)+'<input type="number" hidden name="Total" value="'+total.toFixed(0)+'"  ></h1>');
+                $('#total').html('<h1 class="btn btn-info">Total: $'+total.toFixed(0)+'<input type="number" hidden name="Total" value="'+total+'"  ></h1>');
                 evaluar();
                 $('#tabla').append(fila);
             }else{

@@ -42,6 +42,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive ">
+                            
                             <table id="table" class="table table-striped table-hover display nowrap">
                                 <thead class="thead">
                                     <tr>
