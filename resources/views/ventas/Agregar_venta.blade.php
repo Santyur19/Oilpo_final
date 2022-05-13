@@ -85,9 +85,7 @@
                                         <input type="number" class="form-control" name="precio" id="precio" aria-describedby="helpId" placeholder="">
                                         <small id="helpId" class="form-text text-muted"></small>
 
-                                        <label for="">Iva</label>
-                                        <input type="number" class="form-control" name="ivas" id="iva" aria-describedby="helpId" placeholder="" >
-                                        <small id="helpId" class="form-text text-muted"></small>
+
                                         <div class="text-center" >
                                             <button  id="agregar" type="button" class="btn btn-primary">Agregar producto</button>
                                         </div>
