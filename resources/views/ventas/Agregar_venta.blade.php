@@ -280,7 +280,7 @@
                 // if  (cantidad==""){Cantidad="Nada"}
                 // if  (Servicio=="undefined"){Cantidad="Nada"}
 
-                var fila = '<tr id="fila'+cont+'"><td><input readnoly type="text" name="producto[]" value="'+producto+'"><td><input readnoly type="text" name="servicio[]" value="'+servicio+'"></td></td><td><input readnoly type="number" name="Cantidad[]" value="'+cantidad+'"></td><td><input readnoly type="number" name="precio[]" value="'+precio+'"></td><td><input readnoly type="number" name="precio[]" value="'+precio_producto+'"></td><td><input readnoly type="number" name="iva[]" value="'+iva+'"></td><td>'+subtotal[cont]+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
+                var fila = '<tr id="fila'+cont+'"><td><input class="input-group-text" type="text" name="producto[]" value="'+producto+'" readonly><td><input class="input-group-text" type="text" name="servicio[]" value="'+servicio+'" readonly></td></td><td><input class="input-group-text" type="number" name="Cantidad[]" value="'+cantidad+'" readonly></td><td><input class="input-group-text" type="number" name="precio[]" value="'+precio+'" readonly></td><td><input class="input-group-text" type="number" name="precio[]" value="'+precio_producto+'" readonly></td><td><input class="input-group-text" type="number" name="iva[]" value="'+iva+'" readonly></td><td>'+subtotal[cont]+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
                 cont++;
                 limpiar();
                 $('#total').html('<h1 class="btn btn-info">Total: $'+total.toFixed(0)+'<input type="number" hidden name="Total" value="'+total+'"  ></h1>');
