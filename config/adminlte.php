@@ -248,7 +248,7 @@ return [
             'icon'        => 'fas fa-th',
             'label_color' => 'success',
         ],
-
+        
         [
             'text'        => 'Usuarios',
             'url'         => 'usuarios/',

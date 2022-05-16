@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class PermissionController extends Controller
 {
@@ -15,6 +16,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('Editar_estado_permiso'), 403);
         $permissions = Permission::all();
         return view(view:'permissions.index', data: compact(var_name:'permissions'));
     }
@@ -71,6 +73,7 @@ class PermissionController extends Controller
      */
     
     public function update_status(){
+        abort_if(Gate::denies('Editar_estado_permiso'), 403);
         $id = $_POST['id'];
         $activo = isset($_POST['Activo']);
         $campos = request()->validate([

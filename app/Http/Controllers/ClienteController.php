@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cliente;
 use App\Models\Tipo_documento;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,6 +21,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('ClienteGuardar'), 403);
         $clientes = Cliente::paginate();
         //$Tipo_documento = DB::select("SELECT DISTINCT Tipo_documento FROM clientes WHERE Tipo_documento != id");
 
@@ -29,6 +31,7 @@ class ClienteController extends Controller
     }
 
     public function cliente_guardar(){
+        abort_if(Gate::denies('ClienteGuardar'), 403);
         $campos = request()->validate([
             'Tipo_documento'=> 'required',
             'Documento' =>'required|unique:clientes,Documento',
@@ -77,6 +80,7 @@ class ClienteController extends Controller
      */
     public function show($id)
     {
+        abort_if(Gate::denies('editar_cliente'), 403);
         $cliente = Cliente::find($id);
 
         return view('cliente.show', compact('cliente'));
@@ -112,6 +116,7 @@ class ClienteController extends Controller
 
     // }
     public function Editar_cliente (Cliente  $cliente){
+        abort_if(Gate::denies('editar_cliente'), 403);
         $campos_cliente = request()->validate([
             'Tipo_documento'=> 'required',
             'Documento' =>'required',
@@ -138,6 +143,7 @@ class ClienteController extends Controller
     }
 
     public function update_status(){
+        abort_if(Gate::denies('Editar_estado_cliente'), 403);
         $id = $_POST['id'];
         $activo = isset($_POST['Activo']);
         $campos = request()->validate([
