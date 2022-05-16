@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', '| Crear rol')
+@section('title', '| Editar rol')
 
 @section('css')
     <link rel="icon" href="https://cdn.discordapp.com/attachments/881318396128526336/921091428321488946/unknown.png">
@@ -18,13 +18,13 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
-        <form method="POST" action="{{ route('role.update', $rol->id) }}" class="form-horizontal">
+        <form method="POST" action="{{ route('Editar', $roles->id) }}" class="form-horizontal">
           @csrf
           @method('PUT')
           <div class="card">
             <!--Header-->
             <div class="card-header card-header-primary">
-              <h4 class="card-title">Editar rol</h4>
+              <h4 class="card-title">Editar</h4>
               <p class="card-category">Editar datos del rol</p>
             </div>
             <!--End header-->
@@ -33,7 +33,7 @@
               <div class="row">
                 <label for="name" class="col-sm-2 col-form-label">Nombre</label>
                 <div class="col-sm-7">
-                  <input type="text" class="form-control" name="name" value="{{ old('name', $rol->name) }}" autocomplete="off" autofocus>
+                  <input type="text" class="form-control" name="name" value="{{ old('name', $roles->name) }}" autocomplete="off" autofocus>
                 </div>
               </div>
               <div class="row">
@@ -50,7 +50,7 @@
                                 <div class="form-check">
                                   <label class="form-check-label">
                                     <input class="form-check-input" type="checkbox" name="permissions[]"
-                                      value="{{ $id }}" {{ $role->permissions->contains($id) ? 'checked' : '' }}>
+                                      value="{{ $id }}" {{ $roles->permissions->contains($id) ? 'checked' : '' }}>
                                     <span class="form-check-sign">
                                       <span class="check" value=""></span>
                                     </span>

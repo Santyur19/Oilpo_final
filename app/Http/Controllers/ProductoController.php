@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 
 /**
@@ -20,6 +21,7 @@ class ProductoController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('Editar_estado'), 403);
         $productos = Producto::paginate();
 
         return view('producto.index', compact('productos'))
@@ -55,6 +57,7 @@ class ProductoController extends Controller
     }*/
 
     public function guardar(){
+        abort_if(Gate::denies('ProductoGuardar'), 403);
         $campos = request()->validate([
             'Nombre_Producto' =>'required|unique:productos,Nombre_Producto|min:3',
             'Valor_venta'=> 'required',
@@ -73,6 +76,7 @@ class ProductoController extends Controller
      */
     public function show($id)
     {
+        abort_if(Gate::denies('ProductoGuardar'), 403);
         $producto = Producto::find($id);
 
         return view('producto.show', compact('producto'));
@@ -108,6 +112,7 @@ class ProductoController extends Controller
             ->with('success', 'Producto updated successfully');
     }*/
     public function editar(Producto  $producto){
+        abort_if(Gate::denies('Editar_estado'), 403);
         $campos = request()->validate([
             'Nombre_Producto' =>'required|min:3',
             
@@ -123,6 +128,7 @@ class ProductoController extends Controller
      */
     public function destroy($id)
     {
+        abort_if(Gate::denies('Editar_estado'), 403);
         $producto = Producto::find($id)->delete();
 
         return redirect()->route('productos.index')
@@ -134,6 +140,7 @@ class ProductoController extends Controller
     }
 
     public function update_status(){
+        abort_if(Gate::denies('Editar_estado'), 403);
             $id = $_POST['id'];
             $activo = isset($_POST['Activo']);
             $campos = request()->validate([

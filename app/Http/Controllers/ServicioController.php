@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Servicio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 /**
  * Class ServicioController
@@ -29,6 +30,7 @@ class ServicioController extends Controller
 
     public function index()
     {
+        abort_if(Gate::denies('guardar_Servicio'), 403);
         $servicios = Servicio::paginate();
 
         return view('servicio.index', compact('servicios'))
@@ -63,6 +65,7 @@ class ServicioController extends Controller
     // }
 
     public function servicio_guardar(){
+        abort_if(Gate::denies('guardar_Servicio'), 403);
         $campos = request()->validate([
             'Nombre_servicio' =>'required|unique:servicios,Nombre_servicio',
             'valor'=> 'required',
@@ -79,6 +82,7 @@ class ServicioController extends Controller
      */
     public function show($id)
     {
+        abort_if(Gate::denies('guardar_Servicio'), 403);
         $servicio = Servicio::find($id);
 
         return view('servicio.show', compact('servicio'));
@@ -114,6 +118,7 @@ class ServicioController extends Controller
     //         ->with('success', 'Servicio updated successfully');
     // }
     public function editar_servicio(Servicio  $servicio){
+        abort_if(Gate::denies('Servicio_editar'), 403);
         $campos = request()->validate([
             'Nombre_servicio' =>'required',
             'valor'=> 'required',
@@ -136,6 +141,7 @@ class ServicioController extends Controller
     }
 
     public function update_status(){
+        abort_if(Gate::denies('Editar_estado_servicio'), 403);
         $id = $_POST['id'];
         $activo = isset($_POST['Activo']);
         $campos = request()->validate([
