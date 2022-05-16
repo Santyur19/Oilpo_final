@@ -5,6 +5,7 @@ use App\Models\ciudades;
 use App\Models\Proveedore;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 
 /**
@@ -20,6 +21,7 @@ class ProveedoreController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('Proveedores_guardar'), 403);
         $proveedores = Proveedore::paginate();
         $ciudad = ciudades::paginate(26);
 
@@ -29,6 +31,7 @@ class ProveedoreController extends Controller
 
 
     public function guardar_proveedor(){
+        abort_if(Gate::denies('Proveedores_guardar'), 403);
         $ciudad = ciudades::all();
         $campos_proveeedor = request()->validate([
             'Tipo_Doc_proveedor'=>'required'  ,
@@ -79,6 +82,7 @@ class ProveedoreController extends Controller
      */
     public function show($id)
     {
+        abort_if(Gate::denies('Proveedores_guardar'), 403);
         $proveedore = Proveedore::find($id);
 
         return view('proveedore.show', compact('proveedore'));
@@ -114,6 +118,7 @@ class ProveedoreController extends Controller
     //         ->with('success', 'Proveedore updated successfully');
     // }
     public function editar_proveedor(Proveedore  $proveedore){
+        abort_if(Gate::denies('editar'), 403);
         $campos_proveeedor = request()->validate([
             'Tipo_Doc_proveedor'=>'' ,
             'Documento_proveedor' =>'',
@@ -133,7 +138,7 @@ class ProveedoreController extends Controller
      * @throws \Exception
      */
     public function destroy($id)
-    {
+    {abort_if(Gate::denies('editar'), 403);
         $proveedore = Proveedore::find($id)->delete();
 
         return redirect()->route('proveedores.index')
@@ -144,6 +149,7 @@ class ProveedoreController extends Controller
     }
 
     public function update_status(){
+        abort_if(Gate::denies('Editar_estado_proveedor'), 403);
         $id = $_POST['id'];
         $activo = isset($_POST['Activo']);
         $campos = request()->validate([

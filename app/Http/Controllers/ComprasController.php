@@ -5,6 +5,7 @@ use App\Models\Compras;
 use Illuminate\Http\Request;
 use App\Models\Proveedore;
 use App\Models\Producto;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\DB;
 use App\Exports\comprasExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -14,6 +15,7 @@ class ComprasController extends Controller
     public function index()
 
     {
+        abort_if(Gate::denies('Agregar_compra'), 403);
         $minimos=DB::Select("SELECT min(Fecha_compra) AS Fecha_compra FROM compras where Numero_factura > 0");
         $maximos=DB::Select("SELECT max(Fecha_compra) AS Fecha_compra FROM compras where Numero_factura > 0");
 
@@ -30,6 +32,7 @@ class ComprasController extends Controller
     }
 
     public function detalle(){
+        abort_if(Gate::denies('Detalles'), 403);
 
         $Numero_factura = $_POST['Numero_factura'];
         $Total = $_POST['Total'];
@@ -44,6 +47,7 @@ class ComprasController extends Controller
     public function show()
 
     {
+        abort_if(Gate::denies('Detalles'), 403);
         $proveedores = DB::select("SELECT Nombre_proveedor, id FROM proveedores WHERE estado = 'Activo' ");
         $compra = Compras::paginate();
         $numero_facturas = DB:: select("SELECT Numero_compras FROM Compras ORDER by ID DESC LIMIT 1");
@@ -54,6 +58,7 @@ class ComprasController extends Controller
 
 
     public function Agregar_producto_compra(){
+        abort_if(Gate::denies('Agregar_producto_compra'), 403);
 
         return redirect('compras/Agregar_compra')
             ->with('success', ' ');
@@ -62,6 +67,7 @@ class ComprasController extends Controller
 
     public function destroy($id)
     {
+        abort_if(Gate::denies('Agregar_compra'), 403);
         $compra = Compras::find($id)->delete();
 
         return redirect('compras/Agregar_compra')
@@ -69,6 +75,7 @@ class ComprasController extends Controller
     }
 
     public function Agregar_compra(Request  $request){
+        abort_if(Gate::denies('Agregar_compra'), 403);
 
         request()->validate(Compras::$rules);
         $productos = Producto::all();
@@ -179,6 +186,7 @@ class ComprasController extends Controller
 
     public function exportar_excel()
     {
+        abort_if(Gate::denies('Exportar_excel'), 403);
         date_default_timezone_set("America/Bogota");
         $fecha_actual = date("Y-m-d H:i");
 

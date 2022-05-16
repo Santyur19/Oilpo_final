@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Usuario;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 /**
  * Class UsuarioController
@@ -20,10 +20,39 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $usuarios = User::paginate();
+        abort_if(Gate::denies('Usuario_crear'), 403);
+        $usuarios = User::paginate(50);
+        $roles = Role::all()->pluck('name', 'id');
 
-        return view('usuario.index', compact('usuarios'))
+        return view('usuario.index', compact('usuarios','roles'))
             ->with('i', (request()->input('page', 1) - 1) * $usuarios->perPage());
+    }
+    public function create()
+    {
+        abort_if(Gate::denies('Usuario_crear'), 403);
+        // abort_if(Gate::denies('user_create'), 403);
+        $roles = Role::all()->pluck('name', 'id');
+        return view('usuario.create', compact('roles'));
+    }
+    public function store(Request $request)
+    {
+        // $request->validate([
+        //     'name' => 'required|min:3|max:5',
+        //     'username' => 'required',
+        //     'email' => 'required|email|unique:users',
+        //     'password' => 'required'
+        // ]);
+        $usuario = User::create($request->only('name', 'username', 'email')
+            + [
+                'password' => bcrypt($request->input('password')),
+            ]);
+
+        $roles = $request->input('roles', []);
+        $usuario->syncRoles($roles);
+        $usuarios = User::paginate();
+        $roles = Role::all()->pluck('name', 'id');
+
+        return view('usuario.index', compact('usuarios','roles'))->with('success', ' ');
     }
 
     /**
@@ -61,12 +90,13 @@ class UsuarioController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $usuario = Usuario::find($id);
+    // public function show($id)
+    // {
+    //     $usuario = Usuario::find($id);
 
-        return view('usuario.show', compact('usuario'));
-    }
+    //     return view('usuario.show', compact('usuario'));
+    // }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -98,7 +128,8 @@ class UsuarioController extends Controller
     //         ->with('success', 'Usuario updated successfully');
     // }
 
-    public function editar_usuario(Usuario  $usuario){
+    public function edit(User  $usuario){
+        abort_if(Gate::denies('Editar_usuario'), 403);
         $campos = request()->validate([
             'Documento' =>'required',
             'Nombres'=> 'required',
@@ -109,7 +140,12 @@ class UsuarioController extends Controller
 
         ]);
         $usuario->update($campos);
-        return redirect()->route('usuarios.index')->with('success', 'Usuario updated successfully');
+        return redirect()->route('usuarios.edit')->with('success', 'Usuario updated successfully');
+    }
+
+    public function editar_usuario($id){
+
+        
     }
 
     /**
@@ -126,26 +162,24 @@ class UsuarioController extends Controller
     // }
 
     public function update_status(){
+        abort_if(Gate::denies('Editar_estado_usuario'), 403);
         $id = $_POST['id'];
         $activo = isset($_POST['Activo']);
         $campos = request()->validate([
             'estado' =>' '
         ]);
         if($activo=="Activo"){
-            DB::update("UPDATE usuarios SET estado ='Inactivo' WHERE id='".$id."'");
+            DB::update("UPDATE users SET estado ='Inactivo' WHERE id='".$id."'");
             return redirect()->route('usuarios.index');
-
-
-
         }else{
-            DB::update("UPDATE usuarios SET estado ='Activo' WHERE id ='".$id."'");
+            DB::update("UPDATE users SET estado ='Activo' WHERE id ='".$id."'");
             return redirect()->route('usuarios.index');
 
         }
+    }
 
 
-
-
-
+    public function volver_usuario(){
+        return redirect ('usuarios');
     }
 }

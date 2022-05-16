@@ -121,8 +121,11 @@
 
         </div>
         <div class="text-center">
+            @can('Guardar_compra')
             <button id="guardar" type="submit" class="btn btn-primary">Agregar</button>
+            @endcan
             <button id="cancelar" type="button" onclick="cancelar()" class="btn btn-danger">Cancelar</button>
+
         </div>
 
     </form>

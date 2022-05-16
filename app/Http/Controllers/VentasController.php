@@ -11,6 +11,7 @@ use App\Models\Producto;
 use App\Exports\ventas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Maatwebsite\Excel\Facades\Excel;
 
 
@@ -19,6 +20,7 @@ class VentasController extends Controller
     public function index()
 
     {
+        abort_if(Gate::denies('Agregar_venta'), 403);
 
         $ventas = Venta::paginate();
         $minimos=DB::Select("SELECT min(Fecha_venta) AS Fecha_venta FROM ventas where Factura > 0");
@@ -35,6 +37,7 @@ class VentasController extends Controller
 
 
     public function Agregar_venta(){
+        abort_if(Gate::denies('Agregar_venta'), 403);
 
         date_default_timezone_set("America/Bogota");
         $fecha_actual = date("Y-m-d");
@@ -94,6 +97,7 @@ class VentasController extends Controller
 
 
     public function Guardar_venta(){
+        abort_if(Gate::denies('Guardar_Venta'), 403);
 
 
         $Cliente=$_POST['Nombre'];
@@ -182,6 +186,7 @@ class VentasController extends Controller
     }
 
     public function Detalles(){
+        abort_if(Gate::denies('Detalles_ventas'), 403);
 
 
         $Factura = $_POST['Factura'];
@@ -198,6 +203,7 @@ class VentasController extends Controller
     }
 
     public function Exportar(){
+        abort_if(Gate::denies('Exportar'), 403);
         date_default_timezone_set("America/Bogota");
         $fecha_actual = date("Y-m-d H:i");
 
