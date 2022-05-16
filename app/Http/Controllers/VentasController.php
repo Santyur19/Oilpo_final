@@ -136,6 +136,7 @@ class VentasController extends Controller
                 else{
                     $cadena.="('".$Cliente."',  '".$Servicio[$i]."', '".$Fecha."',  '".$total."',  '".$Producto[$i]."' , '".$Cantidad[$i]."', '".$Iva[$i]."', '".$factura."'),";
                 }
+                
             }
 
 

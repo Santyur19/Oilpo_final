@@ -195,7 +195,7 @@
                                                 <form action="{{ route('editar_cliente', $cliente) }}" method="POST" >
                                                     @csrf @method('PUT')
 
-                                                    <label for="message-text" class="col-form-label">Tipo Documento:</label>
+                                                    <label for="message-text" class="col-form-label">Tipo Documento <small style="color:red;">*</small></label>
                                                     <select require class="form-select"  id="" name="Tipo_documento" >
                                                         <option class="form-control" id="recipient-name" value="{{old('Tipo_documento', $cliente->Tipo_documento)}}">{{old('Tipo_documento', $cliente->Tipo_documento)}}</option>
                                                             <option class="form-control" hidden id="recipient-name" value="{{old('Tipo_documento', $cliente->Tipo_documento)}}">{{old('Tipo_documento', $cliente->Tipo_documento)}}</option>
@@ -204,28 +204,28 @@
                                                             <?php } ?>
                                                     </select>
                                                     <div class="mb-3">
-                                                        <label for="message-text" class="col-form-label">Documento</label>
+                                                        <label for="message-text" class="col-form-label">Documento <small style="color:red;">*</small></label>
                                                         <input type="number" name="Documento" class="form-control" id="recipient-name" value="{{old('Documento', $cliente->Documento)}}">
                                                         <small class="text-danger">{{$errors->first('Documento')}}</small>
 
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="message-text" class="col-form-label">Nombres</label>
+                                                        <label for="message-text" class="col-form-label">Nombres <small style="color:red;">*</small></label>
                                                         <input type="text" name="Nombre" class="form-control" id="recipient-name" value="{{old('Nombre', $cliente->Nombre)}}">
                                                         <small class="text-danger">{{$errors->first('Nombre')}}</small>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="message-text" class="col-form-label">Apellidos</label>
+                                                        <label for="message-text" class="col-form-label">Apellidos <small style="color:red;">*</small></label>
                                                         <input type="text" name="Apellidos" class="form-control" id="recipient-name" value="{{old('Apellidos', $cliente->Apellidos)}}">
                                                         <small class="text-danger">{{$errors->first('Apellidos')}}</small>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="message-text" class="col-form-label">Teléfono</label>
+                                                        <label for="message-text" class="col-form-label">Teléfono <small style="color:red;">*</small></label>
                                                         <input type="number" name="Telefono" class="form-control" id="recipient-name" value="{{old('Telefono', $cliente->Telefono)}}">
                                                         <small class="text-danger">{{$errors->first('Telefono')}}</small>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="message-text" class="col-form-label">Dirección</label>
+                                                        <label for="message-text" class="col-form-label">Dirección <small style="color:red;">*</small></label>
                                                         <input type="text" name="Direccion" class="form-control" id="recipient-name" value="{{old('Direccion', $cliente->Direccion)}}">
                                                         <small class="text-danger">{{$errors->first('Direccion')}}</small>
                                                     </div>

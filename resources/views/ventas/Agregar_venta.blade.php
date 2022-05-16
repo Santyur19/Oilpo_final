@@ -26,7 +26,7 @@
                             <div class="col-md-6">
                                 <div class="card">
                                     <div class="card-body">
-                                        <label for="">Cliente</label>
+                                        <label for="">Cliente <small style="color:red;">*</small></label>
                                     <select class="form-select" name="Nombre" id="Nombre_cliente" required>
                                         <option value=" ">Seleccione</option>
                                         <?php foreach($clientes as  $cliente){ ?>
@@ -52,7 +52,7 @@
                             <div  class="col-md-6">
                                 <div class="card">
                                     <div class="card-body">
-                                        <label id="productol">Producto</label>
+                                        <label id="productol">Producto <small style="color:red;">*</small></label>
                                         <select class="form-select" name="Nombre_producto" id="producto">
                                             <option value=" ">Seleccione</option>
                                                 <?php  foreach($productos as  $producto){ ?>
@@ -65,15 +65,15 @@
                                         <input type="number" hidden class="form-control" name="precio" id="precio" aria-describedby="helpId" placeholder="">
                                         <small id="helpId" class="form-text text-muted"></small>  -->
 
-                                        <label id="cantidadl">Cantidad</label>
+                                        <label id="cantidadl">Cantidad <small style="color:red;">*</small></label>
                                         <input type="number" class="form-control" name="Cantidades" id="cantidad" aria-describedby="helpId" placeholder="">
                                         <small id="helpId" class="form-text text-muted"></small>
 
-                                        <label id="ival">Iva</label>
+                                        <label id="ival">Iva <small style="color:red;">*</small></label>
                                         <input type="number" class="form-control" name="ivas" id="iva" aria-describedby="helpId" placeholder="" >
                                         <small id="helpId" class="form-text text-muted"></small> 
 
-                                        <label id="serviciol">Servicio</label>
+                                        <label id="serviciol">Servicio <small style="color:red;">*</small></label>
                                         <select class="form-select" name="Nombre_servicio" id="servicio">
                                             <option value=" ">Seleccione</option>
                                                 <?php  foreach($servicios as $servicio){ ?>
@@ -81,7 +81,7 @@
                                             <?php } ?>
                                         </select>
                                         
-                                        <label id="preciol">Precio servicio</label>
+                                        <label id="preciol">Precio servicio <small style="color:red;">*</small></label>
                                         <input type="number" class="form-control" name="precio" id="precio" aria-describedby="helpId" placeholder="">
                                         <small id="helpId" class="form-text text-muted"></small>
 

@@ -189,18 +189,18 @@
                                                 <form action="{{ route('ProductoEditar',$producto) }}" method="POST" >
                                                 @csrf @method('PUT')
                                                     <div class="mb-3">
-                                                        <label for="recipient-name" class="col-form-label">Nombre:</label>
+                                                        <label for="recipient-name" class="col-form-label">Nombre <small style="color:red;">*</small></label>
                                                         <input type="text" name="Nombre_Producto" class="form-control" id="recipient-name" value="{{old('Nombre_Producto', $producto->Nombre_Producto)}}">
                                                         <small class="text-danger">{{$errors->first('Nombre_Producto')}}</small>
                                                     </div>
                                                     {{-- <div class="mb-3">
-                                                        <label for="message-text" class="col-form-label">Valor:</label>
+                                                        <label for="message-text" class="col-form-label">Valor <small style="color:red;">*</small></label>
                                                         <input type="number" name="Valor_Producto" class="form-control" id="recipient-name" value="{{old('Valor_Producto', $producto->Valor_Producto)}}">
                                                         <small>{{$errors->first('Valor_Producto')}}</small>
 
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="message-text" class="col-form-label">Cantidad:</label>
+                                                        <label for="message-text" class="col-form-label">Cantidad <small style="color:red;">*</small></label>
                                                         <input type="number" name="Cantidad_Producto" class="form-control" id="recipient-name" value="{{old('Cantidad_Producto', $producto->Cantidad_Producto)}}">
                                                         <small>{{$errors->first('Cantidad_Producto')}}</small>
                                                     </div> --}}

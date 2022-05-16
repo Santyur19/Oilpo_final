@@ -49,12 +49,12 @@
                             <form action="{{ route('guardar_Servicio') }}" method="POST" >
                             @csrf
                                 <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label">Nombre:</label>
-                                    <input type="text" name="Nombre_servicio" class="form-control" id="recipient-name" value="{{old('Nombre_servicio')}}">
+                                    <label for="recipient-name" class="col-form-label">Nombre <small style="color:red;">*</small></label>
+                                    <input type="text" name="Nombre_servicio" class="form-control"  id="recipient-name" value="{{old('Nombre_servicio')}}">
                                     <small class="text-danger">{{$errors->first('Nombre_servicio')}}</small>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="message-text" class="col-form-label">Valor:</label>
+                                    <label for="message-text" class="col-form-label">Valor <small style="color:red;">*</small></label>
                                     <input type="number" name="valor" class="form-control" id="recipient-name" value="{{old('valor')}}">
                                     <small class="text-danger">{{$errors->first('valor')}}</small>
 
@@ -158,12 +158,12 @@
                             <form action="{{ route('Servicio_editar', $servicio) }}" method="POST" >
                             @csrf
                                 <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label">Nombre:</label>
+                                    <label for="recipient-name" class="col-form-label">Nombre <small style="color:red;">*</small></label>
                                     <input type="text" name="Nombre_servicio" class="form-control" id="recipient-name" value="{{old('Nombre_servicio', $servicio->Nombre_servicio)}}">
                                     <small class="text-danger">{{$errors->first('Nombre_servicio')}}</small>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="message-text" class="col-form-label">Valor:</label>
+                                    <label for="message-text" class="col-form-label">Valor <small style="color:red;">*</small></label>
                                     <input type="number" name="valor" class="form-control" id="recipient-name" value="{{old('valor', $servicio->valor)}}">
                                     <small class="text-danger">{{$errors->first('valor')}}</small>
 
