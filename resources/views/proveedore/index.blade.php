@@ -41,7 +41,7 @@
                         <form action="{{ route('Proveedores_guardar') }}" method="POST" >
                             @csrf
                             <div class="mb-3">
-                                <label for="message-text" class="col-form-label">Tipo Documento:</label>
+                                <label for="message-text" class="col-form-label">Tipo Documento <small style="color:red;">*</small></label>
                                 <select require class="form-select"  id="" name="Tipo_Doc_proveedor" >
                                     <option class="form-control" id="recipient-name" value="" >Seleccione tipo documento...</option>
                                     <option class="form-control" id="recipient-name" value="Cédula de ciudadania">Cédula de ciudadania</option>
@@ -65,7 +65,8 @@
                                 <input type="number" name="Telefono_proveedor" class="form-control" id="recipient-name" value="{{old('Telefono_proveedor')}}">
                                 <small class="text-danger">{{$errors->first('Telefono_proveedor')}}</small>
                             </div>
-                                <label for="message-text" class="col-form-label">Ciudad:</label>
+                            <div>
+                                <label for="message-text" class="col-form-label">Ciudad <small style="color:red;">*</small></label>
                                 <select  class="form-select" id="recipient-name" name="Ciudad_proveedor" >
                                     <option class="form-select" id="recipient-name" value="">Seleccione</option>
                                 <?php foreach($ciudad as $ciudades){ ?>
@@ -76,7 +77,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="message-text" class="col-form-label">Dirección <small style="color:red;">*</small></label>
-                                <input type="text" name="Direccion_proveedor" class="form-control" id="recipient-name" value="{{old('Direccion_proveedor')}}">
+                                <input type="text" name="Direccion_proveedor" class="form-control" id="recipient-name" value="{{old('Direccion_proveedor')}}"></input>
                                 <small class="text-danger">{{$errors->first('Direccion_proveedor')}}</small>
                             </div>
                             <div class="modal-footer">
@@ -174,7 +175,7 @@
                                         <form action="{{ route('editar', $proveedore) }}" method="POST" >
                                             @csrf @method('PUT')
                                             <div class="mb-3">
-                                                <label for="message-text" class="col-form-label" >Tipo Documento:</label>
+                                                <label for="message-text" class="col-form-label" >Tipo Documento <small style="color:red;">*</small></label>
                                                 <select require class="form-select" id="recipient-name" name="Tipo_Doc_proveedor" >
                                                     <option class="form-select" id="recipient-name" value="" disable>Seleccione </option>
                                                     <option class="form-select" id="recipient-name" value="Cédula de ciudadania">Cédula de ciudadania</option>
@@ -184,36 +185,34 @@
                                                 <small class="text-danger">{{$errors->first('Tipo_Doc_proveedor')}}</small>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="message-text" class="col-form-label">Documento:</label>
+                                                <label for="message-text" class="col-form-label">Documento <small style="color:red;">*</small></label>
                                                 <input type="number" name="Documento_proveedor" class="form-control" id="recipient-name" value="{{old('Documento_proveedor', $proveedore->Documento_proveedor)}}">
                                                 <small class="text-danger">{{$errors->first('Documento_proveedor')}}</small>
 
                                             </div>
                                             <div class="mb-3">
-                                                <label for="message-text" class="col-form-label">Nombre:</label>
+                                                <label for="message-text" class="col-form-label">Nombre <small style="color:red;">*</small></label>
                                                 <input type="text" name="Nombre_proveedor" class="form-control" id="recipient-name" value="{{old('Nombre_proveedor', $proveedore->Nombre_proveedor)}}">
                                                 <small class="text-danger">{{$errors->first('Nombre_proveedor')}}</small>
 
                                             </div>
                                             <div class="mb-3">
-                                                <label for="message-text" class="col-form-label">Teléfono:</label>
+                                                <label for="message-text" class="col-form-label">Teléfono <small style="color:red;">*</small></label>
                                                 <input type="number" name="Telefono_proveedor" class="form-control" id="recipient-name" value="{{old('Telefono_proveedor' , $proveedore->Telefono_proveedor)}}">
                                                 <small class="text-danger">{{$errors->first('Telefono_proveedor')}}</small>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="message-text" class="col-form-label">Ciudad:</label>
+                                                <label for="message-text" class="col-form-label">Ciudad <small style="color:red;">*</small></label>
                                                 <select require class="form-select" id="recipient-name" name="Ciudad_proveedor" >
                                                     <?php foreach($ciudad as $ciudades){ ?>
-
                                                         <option class="form-select" id="recipient-name" value="<?php echo $ciudades->Nombre ?>"><?php echo $ciudades->Nombre ?></option>
-
                                                     <?php }?>
                                                 </select>
                                                 <small class="text-danger">{{$errors->first('Ciudad_proveedor')}}</small>
                                             </div>
 
                                             <div class="mb-3">
-                                                <label for="message-text" class="col-form-label">Dirección:</label>
+                                                <label for="message-text" class="col-form-label">Dirección <small style="color:red;">*</small></label>
                                                 <input type="text" name="Direccion_proveedor" class="form-control" id="recipient-name" value="{{old('Direccion_proveedor', $proveedore->Direccion_proveedor)}}">
                                                 <small class="text-danger">{{$errors->first('Direccion_proveedor')}}</small>
                                             </div>
@@ -254,10 +253,8 @@
                     });
                 </script>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-                </div>
             </div>
-
-
+        </div>
     </div>
 </div>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
