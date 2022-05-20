@@ -21,11 +21,12 @@ class UsuarioController extends Controller
     public function index()
     {
         abort_if(Gate::denies('Usuario_crear'), 403);
-        $usuarios = User::paginate(50);
+        $usuarios = User::all();
         $roles = Role::all()->pluck('name', 'id');
 
         return view('usuario.index', compact('usuarios','roles'))
-            ->with('i', (request()->input('page', 1) - 1) * $usuarios->perPage());
+            // ->with('i', (request()->input('page', 1) - 1) * $usuarios->perPage());
+            ;
     }
     public function create()
     {
@@ -36,12 +37,13 @@ class UsuarioController extends Controller
     }
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'name' => 'required|min:3|max:5',
-        //     'username' => 'required',
-        //     'email' => 'required|email|unique:users',
-        //     'password' => 'required'
-        // ]);
+        $request->validate([
+            'name' => 'required|min:3',
+            'username' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required',
+            'roles' => 'required'
+        ]);
         $usuario = User::create($request->only('name', 'username', 'email')
             + [
                 'password' => bcrypt($request->input('password')),
