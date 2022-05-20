@@ -272,9 +272,14 @@
 </div>
 
 <script>
-        $(document).ready(function(){
-            $('#cerrar').click(function(){
-                cerrar();
+    document.addEventListener('keydown', function(event){
+        if(event.key === "Escape"){
+            cerrar();
+        }
+    });
+    $(document).ready(function(){
+        $('#cerrar').click(function(){
+            cerrar();
 
             });
         });
