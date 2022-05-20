@@ -47,13 +47,11 @@
                                     
                                     </button>
                                 </div>
-                                <div class="modal-body">
+                            <div class="modal-body">
                                 <form action="{{ route('Usuario_guardar') }}" method="post" class="form-horizontal">
                                     @csrf
                                     <div class="card">
-                                        
                                         <div class="card-body">
-                                    
                                             <!-- <div class="alert alert-danger">
                                                 <ul>
                                                 @foreach ($errors->all() as $error)
@@ -62,40 +60,40 @@
                                                 </ul>
                                             </div> -->
                                     
-                                        <div class="row">
-                                            <label for="name" class="col-sm-2 col-form-label">Nombre <small style="color:red;">*</small></label>
+                                            <div class="row">
+                                                <label for="name" class="col-sm-2 col-form-label">Nombre <small style="color:red;">*</small></label>
                                             <div class="col-sm-7">
-                                            <input type="text" class="form-control" name="name" placeholder="Ingrese su nombre" value="" autofocus>
-                                            @if ($errors->has('name'))
-                                                <span class="error text-danger" for="input-name">{{ $errors->first('name') }}</span>
-                                            @endif
+                                                <input type="text" class="form-control" name="name" placeholder="Ingrese su nombre" value="" autofocus>
+                                                @if ($errors->has('name'))
+                                                    <span class="error text-danger" for="input-name">{{ $errors->first('name') }}</span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <label for="username" class="col-sm-2 col-form-label">Nombre de usuario <small style="color:red;">*</small></label>
+                                                <label for="username" class="col-sm-2 col-form-label">Nombre de usuario <small style="color:red;">*</small></label>
                                             <div class="col-sm-7">
-                                            <input type="text" class="form-control" name="username" placeholder="Ingrese su nombre de usuario" value="">
-                                            @if ($errors->has('name'))
-                                                <span class="error text-danger" for="input-username">{{ $errors->first('name') }}</span>
-                                            @endif
+                                                <input type="text" class="form-control" name="username" placeholder="Ingrese su nombre de usuario" value="">
+                                                @if ($errors->has('name'))
+                                                    <span class="error text-danger" for="input-username">{{ $errors->first('name') }}</span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="row">
                                             <label for="email" class="col-sm-2 col-form-label">Correo <small style="color:red;">*</small></label>
                                             <div class="col-sm-7">
-                                            <input type="email" class="form-control" name="email" placeholder="Ingrese su correo" value="">
-                                            @if ($errors->has('email'))
-                                                <span class="error text-danger" for="input-email">{{ $errors->first('email') }}</span>
-                                            @endif
+                                                <input type="email" class="form-control" name="email" placeholder="Ingrese su correo" value="">
+                                                @if ($errors->has('email'))
+                                                    <span class="error text-danger" for="input-email">{{ $errors->first('email') }}</span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="row">
                                             <label for="password" class="col-sm-2 col-form-label">Contraseña <small style="color:red;">*</small></label>
                                             <div class="col-sm-7">
-                                            <input type="password" class="form-control" name="password" placeholder="Contraseña">
-                                            @if ($errors->has('password'))
-                                                <span class="error text-danger" for="input-password">{{ $errors->first('password') }}</span>
-                                            @endif
+                                                <input type="password" class="form-control" name="password" placeholder="Contraseña">
+                                                @if ($errors->has('password'))
+                                                    <span class="error text-danger" for="input-password">{{ $errors->first('password') }}</span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="row">
@@ -174,21 +172,21 @@
                             </div>
                             @endif
                             <div class="row">
-                            <div class="col-12 text-right">
-                                @can('usuario_crear')
-                                <a href="{{ route('usuarios.create') }}" class="btn btn-sm btn-facebook">Añadir usuario</a>
-                                @endcan
-                            </div>
+                                <div class="col-12 text-right">
+                                    @can('usuario_crear')
+                                    <a href="{{ route('usuarios.create') }}" class="btn btn-sm btn-facebook">Añadir usuario</a>
+                                    @endcan
+                                </div>
                             </div>
                             <div class="table-responsive">
                             <table id="tabla" class="table">
                                 <thead >
-                                <th>#</th>
-                                <th>Nombre</th>
-                                <th>Correo</th>
-                                <th>Roles</th>
-                                <th>Estado</th>
-                                <th class="text-right">Acciones</th>
+                                    <th>#</th>
+                                    <th>Nombre</th>
+                                    <th>Correo</th>
+                                    <th>Roles</th>
+                                    <th>Estado</th>
+                                    <th class="text-right">Acciones</th>
                                 </thead>
                                 <tbody>
                                 <?php foreach ($usuarios as $usuario){?>
@@ -236,30 +234,105 @@
                                         
                                         <form action="{{ route('Editar_usuario') }}" method="POST">
                                             @csrf @method('PUT')
-                                                <?php if($usuario->estado=="Activo"){ ?>
-                                                    @can('Editar_usuario')
-                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editar{{ $usuario->id }}" data-bs-whatever="@fat">Editar
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
-                                                        <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
-                                                    </svg>
-                                                    </button>
-                                                    @endcan
-                                                <?php }else{ ?>
-                                                    @can('Editar_usuario')
-                                                    <button disabled type="button" class="btn btn-warning" data-bs-target="#editar{{ $usuario->id }}" data-bs-whatever="@mdo">Editar
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
-                                                        <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
-                                                    </svg>
-                                                    </button>
-                                                    @endcan
-                                                <?php } ?>
+                                            <?php if($usuario->estado=="Activo"){ ?>
+                                                @can('Editar_usuario')
+                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editar{{ $usuario->id }}" data-bs-whatever="@fat">Editar
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                                                    <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+                                                </svg>
+                                                </button>
+                                                @endcan
+                                            <?php }else{ ?>
+                                                @can('Editar_usuario')
+                                                <button disabled type="button" class="btn btn-warning" data-bs-target="#editar{{ $usuario->id }}" data-bs-whatever="@mdo">Editar
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                                                    <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+                                                </svg>
+                                                </button>
+                                                @endcan
+                                            <?php } ?>
                                         </form>                    
                                     </td>
 
                                 </tr>
-                                    
-                                
-                                   
+
+                                <div class="modal fade" id="editar{{ $usuario->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <div class="row">
+                                                        <label for="name" class="col-sm-2 col-form-label">Nombre <small style="color:red;">*</small></label>
+                                                    <div class="col-sm-7">
+                                                        <input type="text" class="form-control" name="name" placeholder="Ingrese su nombre" value="{{old('name', $usuario->name)}}" autofocus>
+                                                        @if ($errors->has('name'))
+                                                            <span class="error text-danger" for="input-name">{{ $errors->first('name') }}</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                        <label for="username" class="col-sm-2 col-form-label">Nombre de usuario <small style="color:red;">*</small></label>
+                                                    <div class="col-sm-7">
+                                                        <input type="text" class="form-control" name="username" placeholder="Ingrese su nombre de usuario" value="{{old('name', $usuario->name)}}">
+                                                        @if ($errors->has('name'))
+                                                            <span class="error text-danger" for="input-username">{{ $errors->first('name') }}</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <label for="email" class="col-sm-2 col-form-label">Correo <small style="color:red;">*</small></label>
+                                                    <div class="col-sm-7">
+                                                        <input type="email" class="form-control" name="email" placeholder="Ingrese su correo" value="{{old('email', $usuario->email)}}">
+                                                        @if ($errors->has('email'))
+                                                            <span class="error text-danger" for="input-email">{{ $errors->first('email') }}</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-7">
+                                                        <div class="form-group">
+                                                            <div class="tab-content">
+                                                                <div class="tab-pane active">
+                                                                    <table class="table">
+                                                                        <tbody>
+                                                                            @foreach ($roles as $id => $role)
+                                                                            <tr>
+                                                                                <td>                                                                        
+                                                                                    <div class="form-check">
+                                                                                        <label class="form-check-label">
+                                                                                            <input class="form-check-input" type="radio" name="roles[]" value="{{ $id }}">
+                                                                                            <span class="form-check-sign">
+                                                                                                <span class="check"></span>
+                                                                                            </span>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    {{ $role }}
+                                                                                </td>
+                                                                            </tr>
+                                                                            @endforeach
+                                                                            <span class="error text-danger" for="input-password">{{ $errors->first('roles') }}</span>
+                                                                        </tbody>  
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>    
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Send message</button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <?php } ?>
                             </tbody>
                             @yield('js')
