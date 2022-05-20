@@ -45,9 +45,11 @@ class RolesController extends Controller
     
     public function store(Request $request)
     {
-        abort_if(Gate::denies('Roles_crear'), 403);
+        $request->validate([
+            'name' => 'required',
+            'permissions'=> 'required'
+        ]);
         $roles= Role::create($request->only('name'));
-
         // $role->permissions()->sync($request->input('permissions', []));
         $roles->syncPermissions($request->input('permissions', []));
 

@@ -24,7 +24,8 @@
             <div class="mb-3">
                 <label for="recipient-name" class="col-form-label">Nombre <small style="color:red;">*</small></label>
                 <input type="text" name="name" class="form-control" id="recipient-name" value="{{old('Nombre_Rol')}}">
-                <small class="text-danger">{{$errors->first('Nombre_Rol')}}</small>
+                <span class="error text-danger" for="input-Nombre_Rol">{{ $errors->first('Nombre_Rol') }}</span>
+                
             </div>
           
             <div class="row">
