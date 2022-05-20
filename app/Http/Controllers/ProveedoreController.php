@@ -23,8 +23,9 @@ class ProveedoreController extends Controller
     {
         abort_if(Gate::denies('Proveedores_guardar'), 403);
         $proveedores = Proveedore::paginate();
-        $ciudad = ciudades::paginate(26);
 
+        $ciudad = ciudades::paginate(26);
+        
         return view('proveedore.index', compact('proveedores', 'ciudad'))
             ->with('i', (request()->input('page', 1) - 1) * $proveedores->perPage());
     }
