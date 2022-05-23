@@ -195,13 +195,32 @@
                                                 <form action="{{ route('editar_cliente', $cliente) }}" method="POST" >
                                                     @csrf @method('PUT')
 
-                                                    <label for="message-text" class="col-form-label">Tipo Documento:</label>
+                                                    <label for="message-text" class="col-form-label">Tipo Documento:<small style="color:red;">*</small></label>
                                                     <select require class="form-select"  id="" name="Tipo_documento" >
-                                                        <option class="form-control" id="recipient-name" value="{{old('Tipo_documento', $cliente->Tipo_documento)}}">{{old('Tipo_documento', $cliente->Tipo_documento)}}</option>
-                                                            <option class="form-control" hidden id="recipient-name" value="{{old('Tipo_documento', $cliente->Tipo_documento)}}">{{old('Tipo_documento', $cliente->Tipo_documento)}}</option>
-                                                            <?php foreach ($Tipo_documento as $Tipo_documentos){ ?>
-                                                                <option class="form-control" id="recipient-name" value="{{ $Tipo_documentos->Tipo_documento }}">{{ $Tipo_documentos->Tipo_documento }}</option>
-                                                            <?php } ?>
+                                                    <?php 
+                                                
+                                                switch($cliente->Tipo_documento){
+
+                                                    case "NIT":
+                                                    echo '<option class="form-select" id="recipient-name" value="'.$cliente->Tipo_documento.'" disable>'.$cliente->Tipo_documento.'</option>';
+                                                    echo '<option class="form-select" id="recipient-name" value="Cédula de ciudadania">Cédula de ciudadania</option>';
+                                                    echo '<option class="form-select" id="recipient-name" value="Cédula Extranjeria">Cédula Extranjeria</option>';
+                                                        break;
+
+                                                    case "Cédula Extranjeria":
+                                                    echo '<option class="form-select" id="recipient-name" value="'.$cliente->Tipo_documento.'" disable>'.$cliente->Tipo_documento.'</option>';
+                                                    echo '<option class="form-select" id="recipient-name" value="NIT">NIT</option>';
+                                                    echo '<option class="form-select" id="recipient-name" value="Cédula de ciudadania">Cédula de ciudadania</option>';
+                                                        break;
+
+                                                    case "Cédula de ciudadania":
+                                                    echo '<option class="form-select" id="recipient-name" value="'.$cliente->Tipo_documento.'" disable>'.$cliente->Tipo_documento.'</option>';
+                                                    echo '<option class="form-select" id="recipient-name" value="NIT">NIT</option>';
+                                                    echo '<option class="form-select" id="recipient-name" value="Cédula Extranjeria">Cédula Extranjeria</option>';
+                                                        break;
+                                                };
+                                                
+                                                ?>
                                                     </select>
                                                     <div class="mb-3">
                                                         <label for="message-text" class="col-form-label">Documento</label>
@@ -229,13 +248,7 @@
                                                         <input type="text" name="Direccion" class="form-control" id="recipient-name" value="{{old('Direccion', $cliente->Direccion)}}">
                                                         <small class="text-danger">{{$errors->first('Direccion')}}</small>
                                                     </div>
-                                                <!--  <div class="mb-3">
-                                                        <label for="message-text" class="col-form-label">Estado:</label>
-                                                        <select require class="form-control" id="recipient-name">
-                                                            <option class="form-control" id="recipient-name" value="">Seleccione</option>
-                                                            <option class="form-control" id="recipient-name" value=""></option>
-                                                        </select>
-                                                    </div> -->
+        
                                                     <div class="modal-footer">
                                                         <a href="" type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
