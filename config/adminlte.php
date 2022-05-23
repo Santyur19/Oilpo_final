@@ -243,7 +243,7 @@ return [
         ],
 
         [
-            'text'        => 'Menu',
+            'text'        => 'Menú',
             'url'         => '/',
             'icon'        => 'fas fa-th',
             'label_color' => 'success',

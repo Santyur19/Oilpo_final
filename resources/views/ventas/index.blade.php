@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', '| Gestion Compras')
+@section('title', '| Gestión Compras')
 
 @section('css')
     <link rel="icon" href="\vendor\adminlte\dist\img\Moto.png">
@@ -28,7 +28,7 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <br>
                             <span id="card_title">
-                                <h3>Gestion Ventas</h3>
+                                <h3>Gestión Ventas</h3>
                             </span>
                             <form action="{{ route('Agregar_venta') }}" method="post">
                                 @csrf
