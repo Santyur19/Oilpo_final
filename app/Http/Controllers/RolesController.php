@@ -38,7 +38,7 @@ class RolesController extends Controller
     public function create()
     {
         abort_if(Gate::denies('Roles_crear'), 403);
-        $permissions = Permission::all()->pluck(value:'name', key:'id');  
+        $permissions = Permission::all()->where('estado', 'Activo')->pluck(value:'name', key:'id');  
 
         return view(view:'role.create', data: compact(var_name:'permissions'));
     }

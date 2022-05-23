@@ -156,10 +156,5 @@ class ServicioController extends Controller
             return redirect()->route('servicios.index');
 
         }
-
-
-
-
-
-}
+    }
 }

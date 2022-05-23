@@ -57,13 +57,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($rol as $roles){?>
+                <?php
+
+                    foreach ($rol as $roles){ 
+                        $Color=array("secondary","success","info","danger",);
+                        $Color_f=array_rand( $Color, 1); 
+                        $Color_final = $Color[$Color_f];
+                        ?>
                         <tr>
                             <td>{{ $roles->id }}</td>
                             <td>{{ $roles->name }}</td>
                             <td>
                                 @forelse ($roles->permissions as $permisos)
-                                    <span class="badge badge-info">{{$permisos->name}}</span>
+                                    <span class="badge badge-<?php echo $Color_final?>" >{{$permisos->name}}</span>
                                 @empty
                                     <span class="badge badge-danger">No hay, no existe</span>
                                 @endforelse
@@ -82,7 +88,7 @@
                                         <input  hidden type="number" name="id" value="<?php echo $roles->id ?>">
                                         <input hidden type="text" name="Activo" id="" value="<?php echo $roles->estado ?>">
                                         @can('Editar_estado_rol')
-                                        <button type="submit" class="btn btn-success"><?php echo $roles->estado ?>
+                                        <button type="submit" class="btn btn-success"><?php echo $roles->estado?>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16">
                                                 <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/>
                                                 <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/>
