@@ -7,7 +7,7 @@
     <link rel="icon" href="\vendor\adminlte\dist\img\Moto.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net /npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 @endsection
 @section('template_title')
 
@@ -53,12 +53,6 @@
                                     <input type="text" name="Nombre_servicio" class="form-control"  id="recipient-name" value="{{old('Nombre_servicio')}}">
                                     <small class="text-danger">{{$errors->first('Nombre_servicio')}}</small>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="message-text" class="col-form-label">Valor <small style="color:red;">*</small></label>
-                                    <input type="number" name="valor" class="form-control" id="recipient-name" value="{{old('valor')}}">
-                                    <small class="text-danger">{{$errors->first('valor')}}</small>
-
-                                </div>
                                 <div class="modal-footer">
                                     <a type="button" class="btn btn-danger" id="cerrar">Cancelar
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
@@ -88,7 +82,6 @@
                                     <tr>
                                         <th>No</th>
 										<th>Nombre</th>
-										<th>Valor</th>
                                         <th></th>
                                         <th></th>
                                     </tr>
@@ -99,7 +92,6 @@
                                             <td>{{ ++$i }}</td>
 
 											<td>{{ $servicio->Nombre_servicio }}</td>
-											<td>$ {{ $servicio->valor }}</td>
                                             <td>
                                                <?php if($servicio->estado=="Activo"){ ?>
                                                 @can('Servicio_editar')
@@ -161,12 +153,6 @@
                                     <label for="recipient-name" class="col-form-label">Nombre <small style="color:red;">*</small></label>
                                     <input type="text" name="Nombre_servicio" class="form-control" id="recipient-name" value="{{old('Nombre_servicio', $servicio->Nombre_servicio)}}">
                                     <small class="text-danger">{{$errors->first('Nombre_servicio')}}</small>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="message-text" class="col-form-label">Valor <small style="color:red;">*</small></label>
-                                    <input type="number" name="valor" class="form-control" id="recipient-name" value="{{old('valor', $servicio->valor)}}">
-                                    <small class="text-danger">{{$errors->first('valor')}}</small>
-
                                 </div>
                                 <div class="modal-footer">
                                     <a type="button" class="btn btn-danger" id="cerrar">Cancelar
