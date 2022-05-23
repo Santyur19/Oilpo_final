@@ -28,7 +28,7 @@
                             <div class="form-group">
                                 <div class="mb-3">
                                     <input type="number" hidden name="Numero_compras" id="" value="<?php foreach($numero_facturas as $numero_factura){ echo $numero_factura->Numero_compras+1; } ?>">
-                                    <label for="">Proveedor</label>
+                                    <label for="">Proveedor <small style="color:red;">*</small></label>
                                     <select  style="width: 100%" class="js-example-theme-single" name="Nombre_proveedor" id="">
                                         <option value="">Seleccione</option>
                                         <?php foreach($proveedores as  $proveedor){ ?>
@@ -39,17 +39,17 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="">Numero de factura</label>
+                                <label for="">Numero de factura <small style="color:red;">*</small></label>
                                 <input type="number" class="form-control" name="Numero_factura" id="" aria-describedby="helpId" placeholder="" value="{{ old('Numero_factura') }}">
                                 <small class="text-danger">{{$errors->first('Numero_factura')}}</small>
                             </div>
                             <div class="mb-3">
-                                <label for="">Fecha de compra</label>
+                                <label for="">Fecha de compra <small style="color:red;">*</small></label>
                                 <input type="date" class="form-control" name="Fecha_compra" id="" aria-describedby="helpId" placeholder="" value="{{ old('Fecha_compra') }}">
                                 <small class="text-danger">{{$errors->first('Fecha_compra')}}</small>
                             </div>
                             <div class="mb-3">
-                                <label for="">Foto</label>
+                                <label for="">Foto <small style="color:red;">*</small></label>
                                 <input type="file" class="form-control" name="Foto" id="Foto" aria-describedby="helpId" placeholder="">
                                 <small class="text-danger">{{$errors->first('Foto')}}</small>
                             </div>
@@ -59,7 +59,7 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <label for="">Nombre Producto</label>
+                            <label for="">Nombre Producto <small style="color:red;">*</small></label>
                             <select style="width: 100%" class="js-example-theme-single" name="Producto" id="Producto">
                                 <option value="">Seleccione</option>
                                 <?php foreach($productos as  $producto){ ?>
@@ -67,15 +67,15 @@
                                 <?php } ?>
                             </select>
                             <br></br>
-                            <label for="">Precio compra</label>
+                            <label for="">Precio compra <small style="color:red;">*</small></label>
                             <input type="number" class="form-control" id="Precio_compra" aria-describedby="helpId" placeholder="">
                             <small style="color:red;"><p id="Precio_error"> </p></small>
 
-                            <label for="">Precio venta</label>
+                            <label for="">Precio venta <small style="color:red;">*</small></label>
                             <input type="number" class="form-control" id="Precio_venta" aria-describedby="helpId" placeholder="">
                             <small id="helpId" class="form-text text-muted"></small>
 
-                            <label for="">Cantidad</label>
+                            <label for="">Cantidad <small style="color:red;">*</small></label>
                             <input type="number" class="form-control" id="Cantidad" aria-describedby="helpId" placeholder="">
                             <small id="helpId" class="form-text text-muted"></small>
                             <br>
@@ -121,8 +121,11 @@
 
         </div>
         <div class="text-center">
+            @can('Guardar_compra')
             <button id="guardar" type="submit" class="btn btn-primary">Agregar</button>
+            @endcan
             <button id="cancelar" type="button" onclick="cancelar()" class="btn btn-danger">Cancelar</button>
+
         </div>
 
     </form>
@@ -186,7 +189,7 @@
             precio_venta = $('#Precio_venta').val();
             cantidad = $('#Cantidad').val();
 
-            if(producto !="" && cantidad > 0 && precio_compra > 0){
+            if(producto !="" && cantidad > 0 && precio_compra > 0 && precio_venta > 0){
                 subtotal[cont]=(cantidad*precio_compra);
                 total = total+subtotal[cont];
 

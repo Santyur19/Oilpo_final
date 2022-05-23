@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Venta;
 use App\Models\Compras;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\DB;
 
 class InformeController extends Controller
 {
     public function index(){
+        abort_if(Gate::denies('Informe_ventas'), 403);
 
         //INFORME DE VENTAS
         DB::statement("SET lc_time_names = 'es_MX'");

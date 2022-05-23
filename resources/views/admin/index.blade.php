@@ -28,11 +28,13 @@
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-info">
                     <div class="inner">
-                    <h3>@php  use App\Models\Proveedore;
-                    echo Proveedore::count();
-                    @endphp
-                    </h3>
-                    <p>Proveedores</p>
+                    <a href="proveedores" style="text-decoration: none; color:white">
+                        <h3 >@php  use App\Models\Proveedore;
+                        echo Proveedore::count();
+                        @endphp
+                        </h3>
+                        <p>Proveedores</p>
+                    </a>
                 </div>
                 <div class="icon">
                     <i class="ion ion-person"></i>
@@ -42,10 +44,12 @@
         <div class="col-lg-3 col-6">
             <div class="small-box bg-success">
                 <div class="inner">
-                    <h3>@php  use App\Models\Producto;
-                    echo Producto::count();
-                    @endphp</h3>
-                    <p>Productos</p>
+                    <a href="productos" style="text-decoration: none; color:white">
+                        <h3>@php  use App\Models\Producto;
+                        echo Producto::count();
+                        @endphp</h3>
+                        <p>Productos</p>
+                    </a>
                 </div>
                 <div class="icon">
                     <i class="ion ion-bag"></i>
@@ -55,10 +59,13 @@
         <div class="col-lg-3 col-6">
             <div class="small-box bg-warning">
                 <div class="inner">
-                    <h3>@php  use App\Models\Cliente;
-                        echo Cliente::count();
-                        @endphp</h3>
-                    <p>Clientes</p>
+                    <a href="clientes" style="text-decoration: none; color:white">
+
+                        <h3>@php  use App\Models\Cliente;
+                            echo Cliente::count();
+                            @endphp</h3>
+                        <p>Clientes</p>
+                    </a>
                 </div>
                 <div class="icon">
                     <i class="ion ion-person-stalker"></i>
@@ -68,10 +75,13 @@
         <div class="col-lg-3 col-6">
             <div class="small-box bg-danger">
                 <div class="inner">
-                    <h3>@php  use App\Models\Servicio;
-                    echo Servicio::count();
-                    @endphp</h3>
-                    <p>Servicios</p>
+                    <a href="servicios" style="text-decoration: none; color:white">
+
+                        <h3>@php  use App\Models\Servicio;
+                        echo Servicio::count();
+                        @endphp</h3>
+                        <p>Servicios</p>
+                    </a>
                 </div>
                 <div class="icon">
                     <i class="ion ion-pie-graph"></i>

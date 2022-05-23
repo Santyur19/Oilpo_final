@@ -26,7 +26,7 @@
                             <div class="col-md-6">
                                 <div class="card">
                                     <div class="card-body">
-                                        <label for="">Cliente</label>
+                                        <label for="">Cliente <small style="color:red;">*</small></label>
                                     <select class="form-select" name="Nombre" id="Nombre_cliente" required>
                                         <option value=" ">Seleccione</option>
                                         <?php foreach($clientes as  $cliente){ ?>
@@ -52,9 +52,9 @@
                             <div  class="col-md-6">
                                 <div class="card">
                                     <div class="card-body">
-                                        <label id="productol">Producto</label>
+                                        <label id="productol">Producto <small style="color:red;">*</small></label>
                                         <select class="form-select" name="Nombre_producto" id="producto">
-                                            <option value="Nada">Seleccione</option>
+                                            <option value=" ">Seleccione</option>
                                                 <?php  foreach($productos as  $producto){ ?>
                                             <option value="<?php echo $producto->id ?>"><?php echo $producto->Nombre_Producto ?></option>
 
@@ -65,23 +65,23 @@
                                         <input type="number" hidden class="form-control" name="precio" id="precio" aria-describedby="helpId" placeholder="">
                                         <small id="helpId" class="form-text text-muted"></small>  -->
 
-                                        <label id="cantidadl">Cantidad</label>
+                                        <label id="cantidadl">Cantidad <small style="color:red;">*</small></label>
                                         <input type="number" class="form-control" name="Cantidades" id="cantidad" aria-describedby="helpId" placeholder="">
                                         <small id="helpId" class="form-text text-muted"></small>
 
-                                        <label id="ival">Iva</label>
+                                        <label id="ival">Iva <small style="color:red;">*</small></label>
                                         <input type="number" class="form-control" name="ivas" id="iva" aria-describedby="helpId" placeholder="" >
                                         <small id="helpId" class="form-text text-muted"></small> 
 
-                                        <label id="serviciol">Servicio</label>
+                                        <label id="serviciol">Servicio <small style="color:red;">*</small></label>
                                         <select class="form-select" name="Nombre_servicio" id="servicio">
-                                            <option value="Nada">Seleccione</option>
+                                            <option value=" ">Seleccione</option>
                                                 <?php  foreach($servicios as $servicio){ ?>
                                             <option value="<?php echo $servicio->Nombre_servicio ?>"><?php echo $servicio->Nombre_servicio ?></option>>
                                             <?php } ?>
                                         </select>
                                         
-                                        <label id="preciol">Precio servicio</label>
+                                        <label id="preciol">Precio servicio <small style="color:red;">*</small></label>
                                         <input type="number" class="form-control" name="precio" id="precio" aria-describedby="helpId" placeholder="">
                                         <small id="helpId" class="form-text text-muted"></small>
 
@@ -280,7 +280,7 @@
                 // if  (cantidad==""){Cantidad="Nada"}
                 // if  (Servicio=="undefined"){Cantidad="Nada"}
 
-                var fila = '<tr id="fila'+cont+'"><td><input readnoly type="text" name="producto[]" value="'+producto+'"><td><input readnoly type="text" name="servicio[]" value="'+servicio+'"></td></td><td><input readnoly type="number" name="Cantidad[]" value="'+cantidad+'"></td><td><input readnoly type="number" name="precio[]" value="'+precio+'"></td><td><input readnoly type="number" name="precio[]" value="'+precio_producto+'"></td><td><input readnoly type="number" name="iva[]" value="'+iva+'"></td><td>'+subtotal[cont]+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
+                var fila = '<tr id="fila'+cont+'"><td><input class="input-group-text" type="text" name="producto[]" value="'+producto+'" readonly><td><input class="input-group-text" type="text" name="servicio[]" value="'+servicio+'" readonly></td></td><td><input class="input-group-text" type="number" name="Cantidad[]" value="'+cantidad+'" readonly></td><td><input class="input-group-text" type="number" name="precio[]" value="'+precio+'" readonly></td><td><input class="input-group-text" type="number" name="precio[]" value="'+precio_producto+'" readonly></td><td><input class="input-group-text" type="number" name="iva[]" value="'+iva+'" readonly></td><td>'+subtotal[cont]+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
                 cont++;
                 limpiar();
                 $('#total').html('<h1 class="btn btn-info">Total: $'+total.toFixed(0)+'<input type="number" hidden name="Total" value="'+total+'"  ></h1>');

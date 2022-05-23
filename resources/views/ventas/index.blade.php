@@ -30,6 +30,7 @@
                             <span id="card_title">
                                 <h3>Gestión Ventas</h3>
                             </span>
+                            @can('Agregar_venta')
                             <form action="{{ route('Agregar_venta') }}" method="post">
                                 @csrf
                                 <button class="btn btn-success" type="submit">Agregar
@@ -38,6 +39,7 @@
                                     </svg>
                                 </button>
                             </form>
+                            @endcan
                         </div>
                     </div>
                     <div class="card-body">
@@ -62,6 +64,7 @@
                                             <td>{{ $ventas->Fecha_venta }}</td>
                                             <td>{{ $ventas->Total }}</td>
                                             <td>
+                                                @can('Detalles_ventas')
                                                 <form action="{{ route('Detalles_ventas') }}" method="POST">
                                                     @csrf
                                                     <input hidden name="Factura" type="number" value="<?php echo $ventas->Factura  ?>">
@@ -74,6 +77,7 @@
                                                         Detalles
                                                     </button>
                                                 </form>
+                                                @endcan
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -119,14 +123,17 @@
             <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">Filtrado de descarga</h5>
+                @can('Exportar')
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
+                @endcan
             </div>
 
                 @csrf
                 <div class="modal-body">
                 <div class="Text-center">
+                @can('Exportar')
                 <form action="{{ route('Exportar')}}" method="post">
                     @csrf
                     <div class="text-center" >
@@ -134,6 +141,7 @@
                         <button type="submit" class="btn btn-secondary" >Descargar todo</button>
                     </div>
                 </form>
+                @endcan
 
                 <form action="{{ route('Exportar')}}" method="post">
                     @csrf

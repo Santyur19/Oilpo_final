@@ -11,6 +11,7 @@ use App\Models\Producto;
 use App\Exports\ventas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Maatwebsite\Excel\Facades\Excel;
 
 
@@ -19,6 +20,7 @@ class VentasController extends Controller
     public function index()
 
     {
+        abort_if(Gate::denies('Agregar_venta'), 403);
 
         $ventas = Venta::paginate();
         $minimos=DB::Select("SELECT min(Fecha_venta) AS Fecha_venta FROM ventas where Factura > 0");
@@ -35,6 +37,7 @@ class VentasController extends Controller
 
 
     public function Agregar_venta(){
+        abort_if(Gate::denies('Agregar_venta'), 403);
 
         date_default_timezone_set("America/Bogota");
         $fecha_actual = date("Y-m-d");
@@ -94,6 +97,7 @@ class VentasController extends Controller
 
 
     public function Guardar_venta(){
+        abort_if(Gate::denies('Guardar_Venta'), 403);
 
 
         $Cliente=$_POST['Nombre'];
@@ -112,7 +116,7 @@ class VentasController extends Controller
             $cadena= "INSERT INTO ventas (Nombre, Nombre_servicio, Fecha_venta, Total, Nombre_Producto, Cantidad, Iva, factura) VALUES ";
             for ($i = 0; $i <count($Producto); $i++){
                 if ($Producto[$i] != "Nada" && $Producto[$i] != "" && $Producto[$i] != "Seleccione"){
-                    $minimos = DB::SELECT("SELECT Cantidad_Producto,CASE WHEN Cantidad_Producto - $Cantidad[$i] < 0 THEN 0 ELSE 1 END AS MINIMO FROM productos WHERE Nombre_Producto = '$Producto[$i]' ;");
+                    $minimos = DB::SELECT("SELECT CASE WHEN Cantidad_Producto - $Cantidad[$i] < 0 THEN 0 ELSE 1 END AS MINIMO FROM productos WHERE Nombre_Producto = '$Producto[$i]' ;");
 
                     foreach ($minimos as $minimo) {
                         if ($minimo->MINIMO == 1){
@@ -125,13 +129,14 @@ class VentasController extends Controller
                             $venta = DB:: select("SELECT DISTINCT Factura, Nombre, Fecha_venta, Total FROM ventas where Factura > 0 ");
 
                             return redirect('/ventas')
-                            ->with('stock', '');
+                            ->with('stock', ' ');
                         }
                     }
                 }
                 else{
                     $cadena.="('".$Cliente."',  '".$Servicio[$i]."', '".$Fecha."',  '".$total."',  '".$Producto[$i]."' , '".$Cantidad[$i]."', '".$Iva[$i]."', '".$factura."'),";
                 }
+                
             }
 
 
@@ -161,7 +166,7 @@ class VentasController extends Controller
             $Nada_iva="update ventas set iva='0' WHERE iva='';";
             $Nada_cantidad="update ventas set Cantidad='0' WHERE Cantidad='';";
             $Nada_servicio="update ventas set Nombre_servicio='Nada' WHERE Nombre_servicio='undefined'  OR Nombre_servicio='' OR Nombre_servicio='Seleccione';";
-            $Nada_producto="update ventas set Nombre_Producto='Nada' WHERE Nombre_Producto='undefined'  OR Nombre_servicio='' OR Nombre_servicio='Seleccione';";
+            $Nada_producto="update ventas set Nombre_Producto='Nada' WHERE Nombre_Producto='undefined'  OR Nombre_servicio='' OR Nombre_Producto='Seleccione';";
             
             DB::update($Nada_iva);
             DB::update($Nada_cantidad);
@@ -182,6 +187,7 @@ class VentasController extends Controller
     }
 
     public function Detalles(){
+        abort_if(Gate::denies('Detalles_ventas'), 403);
 
 
         $Factura = $_POST['Factura'];
@@ -198,6 +204,7 @@ class VentasController extends Controller
     }
 
     public function Exportar(){
+        abort_if(Gate::denies('Exportar'), 403);
         date_default_timezone_set("America/Bogota");
         $fecha_actual = date("Y-m-d H:i");
 
