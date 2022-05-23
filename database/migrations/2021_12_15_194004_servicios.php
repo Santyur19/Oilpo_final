@@ -16,7 +16,6 @@ class Servicios extends Migration
         Schema::create('servicios', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->String('Nombre_servicio');
-            $table->Integer('valor');
             $table ->enum('estado', ['Activo', 'Inactivo']);
             $table->timestamps();
         });

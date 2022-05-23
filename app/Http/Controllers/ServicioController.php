@@ -68,7 +68,6 @@ class ServicioController extends Controller
         abort_if(Gate::denies('guardar_Servicio'), 403);
         $campos = request()->validate([
             'Nombre_servicio' =>'required|unique:servicios,Nombre_servicio',
-            'valor'=> 'required',
         ]);
         Servicio::create($campos);
         return redirect()->route('servicios.index') ->with('success', 'El producto se ha guardado.');
@@ -121,7 +120,6 @@ class ServicioController extends Controller
         abort_if(Gate::denies('Servicio_editar'), 403);
         $campos = request()->validate([
             'Nombre_servicio' =>'required',
-            'valor'=> 'required',
         ]);
         $servicio->update($campos);
         return redirect()->route('servicios.index') ->with('success', ' ');
@@ -158,10 +156,5 @@ class ServicioController extends Controller
             return redirect()->route('servicios.index');
 
         }
-
-
-
-
-
-}
+    }
 }

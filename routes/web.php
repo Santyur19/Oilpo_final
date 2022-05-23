@@ -98,6 +98,8 @@ Route::post('ventas.Agregar_ventas', [App\Http\Controllers\VentasController::cla
 Route::post('/ventas/Detalles_ventas', [App\Http\Controllers\VentasController::class, 'Detalles'])->name('Detalles_ventas');
 Route::get('/ventas.index', [App\Http\Controllers\VentasController::class, 'volver'])->name('volver');
 Route::post('/Exportar', [App\Http\Controllers\VentasController::class, 'Exportar'])->name('Exportar');
+Route::put('/venta', [App\Http\Controllers\VentasController::class, 'estado'] )->name('Editar_estado_ventas');
+
 
 //RUTAS INFORMES
 Route::resource('/informes', App\Http\Controllers\InformeController::class);

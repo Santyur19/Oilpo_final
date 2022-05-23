@@ -25,7 +25,6 @@
             <!--Header-->
             <div class="card-header card-header-primary">
               <h4 class="card-title">Editar</h4>
-              <p class="card-category">Editar datos del rol</p>
             </div>
             <!--End header-->
             <!--Body-->

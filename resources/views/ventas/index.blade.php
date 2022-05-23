@@ -53,6 +53,7 @@
                                         <th>Fecha de venta</th>
                                         <th>Total</th>
                                         <th> </th>
+                                        <th> </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -79,8 +80,28 @@
                                                 </form>
                                                 @endcan
                                             </td>
-                                        </tr>
+
+                                            <td>
+                                                
+                                                <form action="{{ route('Editar_estado_ventas') }}" method="POST">
+                                                    @csrf @method('PUT')
+
+                                                    <?php if($ventas->estado=="Activo") { ?>
+                                                        <input  hidden type="number" name="id" value="<?php echo $ventas->Factura ?>">
+                                                        <button type="submit" class="btn btn-success"><?php echo $ventas->estado ?>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16">
+                                                                <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/>
+                                                                <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/>
+                                                            </svg>
+                                                        </button>
+                                                    <?php }else{ ?>
+                                                        <button onclick="Inactivo()" type="button" class="btn btn-secondary"><?php echo $ventas->estado ?></button>
+                                                    <?php } ?>
+                                                </form>
+                                            </td>
                                     <?php } ?>
+
+                                        </tr>
                                 </tbody>
                                     @yield('js')
                                     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -148,7 +169,7 @@
                     <label for="">Fecha minima</label>
                     <br>
                     <input type="date" class="form-control" required name="Fecha_minima" id="Fecha_minima" min="<?php echo $Fecha_minima ?>" >
-                    </br>
+                    <br>
                     <label for="">Fecha Maxima</label>
                     <br>
                     <input type="date" class="form-control" required name="Fecha_maxima" id="Fecha_maxima" max="<?php echo $Fecha_maxima ?>" >
@@ -163,6 +184,17 @@
         </div>
     </div>
 <!------------------------------------------------------------------------------------------------------------------------------------------------  -->
+    <script>
+        function Inactivo(){
+            Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'La venta ya fue inhabilitada, no se puede activar de nuevo!',
+            })
+        }
+
+    </script>
+
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <?php if($message = Session::get('success')){ ?>
             <script>

@@ -25,7 +25,7 @@ class VentasController extends Controller
         $ventas = Venta::paginate();
         $minimos=DB::Select("SELECT min(Fecha_venta) AS Fecha_venta FROM ventas where Factura > 0");
         $maximos=DB::Select("SELECT max(Fecha_venta) AS Fecha_venta FROM ventas where Factura > 0");
-        $venta = DB:: select("SELECT DISTINCT Factura, Nombre, Fecha_venta, Total FROM ventas where Factura > 0 ");
+        $venta = DB:: select("SELECT DISTINCT Factura, Nombre, Fecha_venta, Total, estado FROM ventas where Factura > 0 ");
 
         foreach ($minimos as $minimo){$Fecha_minima=$minimo->Fecha_venta;}
         foreach ($maximos as $maximo){$Fecha_maxima=$maximo->Fecha_venta;}
@@ -111,9 +111,10 @@ class VentasController extends Controller
             $Iva = $_POST['iva'];
             $Cantidad = $_POST['Cantidad'];
             $factura = $_POST['factura'];
+            $estado="Activo";
 
             $cadena_u="";
-            $cadena= "INSERT INTO ventas (Nombre, Nombre_servicio, Fecha_venta, Total, Nombre_Producto, Cantidad, Iva, factura) VALUES ";
+            $cadena= "INSERT INTO ventas (Nombre, Nombre_servicio, Fecha_venta, Total, Nombre_Producto, Cantidad, Iva, factura, estado) VALUES ";
             for ($i = 0; $i <count($Producto); $i++){
                 if ($Producto[$i] != "Nada" && $Producto[$i] != "" && $Producto[$i] != "Seleccione"){
                     $minimos = DB::SELECT("SELECT CASE WHEN Cantidad_Producto - $Cantidad[$i] < 0 THEN 0 ELSE 1 END AS MINIMO FROM productos WHERE Nombre_Producto = '$Producto[$i]' ;");
@@ -123,7 +124,7 @@ class VentasController extends Controller
                             $cadena_update= "UPDATE productos SET Cantidad_Producto = ( SELECT Cantidad_Producto - $Cantidad[$i]) WHERE Nombre_Producto = '$Producto[$i]';";
                             DB::update($cadena_update);
 
-                            $cadena.="('".$Cliente."',  '".$Servicio[$i]."', '".$Fecha."',  '".$total."',  '".$Producto[$i]."' , '".$Cantidad[$i]."', '".$Iva[$i]."', '".$factura."'),";
+                            $cadena.="('".$Cliente."',  '".$Servicio[$i]."', '".$Fecha."',  '".$total."',  '".$Producto[$i]."' , '".$Cantidad[$i]."', '".$Iva[$i]."', '".$factura."', '".$estado."'),";
                         }else{
                             $Producto_error= $Producto[$i];
                             $venta = DB:: select("SELECT DISTINCT Factura, Nombre, Fecha_venta, Total FROM ventas where Factura > 0 ");
@@ -134,7 +135,7 @@ class VentasController extends Controller
                     }
                 }
                 else{
-                    $cadena.="('".$Cliente."',  '".$Servicio[$i]."', '".$Fecha."',  '".$total."',  '".$Producto[$i]."' , '".$Cantidad[$i]."', '".$Iva[$i]."', '".$factura."'),";
+                    $cadena.="('".$Cliente."',  '".$Servicio[$i]."', '".$Fecha."',  '".$total."',  '".$Producto[$i]."' , '".$Cantidad[$i]."', '".$Iva[$i]."', '".$factura."', '".$estado."'),";
                 }
                 
             }
@@ -302,5 +303,20 @@ class VentasController extends Controller
         }
         // return Excel::download(new ventas, 'Ventas '.$fecha_actual.'.csv');
     }
+
+    public function estado(){
+        // abort_if(Gate::denies('Editar_estado_ventas'), 403);
+        $id = $_POST['id'];
+        $Venta=DB::Select("Select * from ventas where Factura ='".$id."' AND Nombre_Producto =! Nada");
+
+        foreach ($Venta as $ventas){
+            echo $ventas;
+            DB::update("UPDATE productos SET Cantidad_Producto= Cantidad_Producto +".$venta->cantidad." WHERE ventas.Factura =  AND productos.Nombre_Producto ='".$venta->Nombre_Producto."'");
+        }
+        DB::update("UPDATE ventas SET estado ='Inactivo' WHERE Factura='".$id."'");
+        return $this->index();
+    }
+
 }
 
+// UPDATE productos INNER JOIN ventas SET productos.Cantidad_Producto= productos.Cantidad_Producto + ventas.Cantidad WHERE ventas.Factura = 20 AND productos.Nombre_Producto ="apblo"

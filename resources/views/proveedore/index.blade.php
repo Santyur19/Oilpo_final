@@ -190,10 +190,31 @@
                                             <div class="mb-3">
                                                 <label for="message-text" class="col-form-label" >Tipo Documento <small style="color:red;">*</small></label>
                                                 <select require class="form-select" id="recipient-name" name="Tipo_Doc_proveedor" >
-                                                    <option class="form-select" id="recipient-name" value="" disable>Seleccione </option>
-                                                    <option class="form-select" id="recipient-name" value="Cédula de ciudadania">Cédula de ciudadania</option>
-                                                    <option class="form-select" id="recipient-name" value="Cédula Extranjeria">Cédula Extranjeria</option>
-                                                    <option class="form-select" id="recipient-name" value="NIT">NIT</option>
+
+                                                <?php 
+                                                
+                                                switch($proveedore->Tipo_Doc_proveedor){
+
+                                                    case "NIT":
+                                                    echo '<option class="form-select" id="recipient-name" value="'.$proveedore->Tipo_Doc_proveedor.'" disable>'.$proveedore->Tipo_Doc_proveedor.'</option>';
+                                                    echo '<option class="form-select" id="recipient-name" value="Cédula de ciudadania">Cédula de ciudadania</option>';
+                                                    echo '<option class="form-select" id="recipient-name" value="Cédula Extranjeria">Cédula Extranjeria</option>';
+                                                        break;
+
+                                                    case "Cédula Extranjeria":
+                                                    echo '<option class="form-select" id="recipient-name" value="'.$proveedore->Tipo_Doc_proveedor.'" disable>'.$proveedore->Tipo_Doc_proveedor.'</option>';
+                                                    echo '<option class="form-select" id="recipient-name" value="NIT">NIT</option>';
+                                                    echo '<option class="form-select" id="recipient-name" value="Cédula de ciudadania">Cédula de ciudadania</option>';
+                                                        break;
+
+                                                    case "Cédula de ciudadania":
+                                                    echo '<option class="form-select" id="recipient-name" value="'.$proveedore->Tipo_Doc_proveedor.'" disable>'.$proveedore->Tipo_Doc_proveedor.'</option>';
+                                                    echo '<option class="form-select" id="recipient-name" value="NIT">NIT</option>';
+                                                    echo '<option class="form-select" id="recipient-name" value="Cédula Extranjeria">Cédula Extranjeria</option>';
+                                                        break;
+                                                };
+                                                
+                                                ?>
                                                 </select>
                                                 <small class="text-danger">{{$errors->first('Tipo_Doc_proveedor')}}</small>
                                             </div>
@@ -217,6 +238,7 @@
                                             <div class="mb-3">
                                                 <label for="message-text" class="col-form-label">Ciudad <small style="color:red;">*</small></label>
                                                 <select require class="form-select" id="recipient-name" name="Ciudad_proveedor" >
+                                                    <option value="{{old('Ciudad_proveedor', $proveedore->Ciudad_proveedor)}}">{{old('Ciudad_proveedor', $proveedore->Ciudad_proveedor)}}</option>
                                                     <?php foreach($ciudad as $ciudades){ ?>
                                                         <option class="form-select" id="recipient-name" value="<?php echo $ciudades->Nombre ?>"><?php echo $ciudades->Nombre ?></option>
                                                     <?php }?>
