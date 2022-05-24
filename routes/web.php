@@ -72,7 +72,7 @@ Route::resource('/usuarios', App\Http\Controllers\UsuarioController::class);
 Route::get('/usuario/create', [App\Http\Controllers\UsuarioController::class, 'create' ])->name('Usuario_crear');
 Route::post('/usuarios', [App\Http\Controllers\UsuarioController::class, 'store' ])->name('Usuario_guardar');
 Route::get('/usuario.index', [App\Http\Controllers\UsuarioController::class, 'volver_usuario'])->name('volver_usuario');
-Route::put('/usuarios/edit', [App\Http\Controllers\UsuarioController::class , 'editar_usuario'])->name('Editar_usuario');
+Route::put('/usuarios.index', [App\Http\Controllers\UsuarioController::class , 'edit'])->name('Editar_usuario');
 Route::put('/usuarios', [App\Http\Controllers\UsuarioController::class, 'update_status'] )->name('Editar_estado_usuario');
 
 //RUTAS PRODUCTOS

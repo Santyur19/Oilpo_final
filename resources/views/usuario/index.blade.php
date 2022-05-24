@@ -106,29 +106,25 @@
                                                                 <tbody>
                                                                     
                                                                     @foreach ($roles as $id => $role)
-                                                                    
-                                                                    <tr>
-                                                                        <td>                                                                        
-                                                                            <div class="form-check">
-                                                                                <label class="form-check-label">
-                                                                                    <input class="form-check-input" type="radio" name="roles[]"
-                                                                                        value="{{ $id }}"
-                                                                                    >
-                                                                                    <span class="form-check-sign">
-                                                                                        <span class="check"></span>
+                                                                        <tr>
+                                                                            <td>                                                                        
+                                                                                <div class="form-check">
+                                                                                    <label class="form-check-label">
+                                                                                        <input class="form-check-input" type="radio" name="roles[]"
+                                                                                            value="{{ $id }}"
+                                                                                        >
+                                                                                        <span class="form-check-sign">
+                                                                                            <span class="check"></span>
+                                                                                            
+                                                                                        </span>
                                                                                         
-                                                                                    </span>
-                                                                                    
-                                                                                </label>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td>
-                                                                            {{ $role }}
-                                                                            
-                                                                        </td>
-                                                                        
-                                                                    </tr>
-                                                                    
+                                                                                    </label>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                {{ $role }}
+                                                                            </td>
+                                                                        </tr>
                                                                     @endforeach
                                                                     <span class="error text-danger" for="input-password">{{ $errors->first('roles') }}</span>
                                                                 </tbody>
@@ -189,7 +185,7 @@
                                     <th class="text-right">Acciones</th>
                                 </thead>
                                 <tbody>
-                                <?php foreach ($usuarios as $usuario){?>
+                            <?php foreach ($usuarios as $usuario){?>
                                     <tr>
                                     <td>{{ $usuario->id }}</td>
                                     <td>{{ $usuario->name }}</td>
@@ -255,7 +251,7 @@
                                     </td>
 
                                 </tr>
-
+                                <!-- EDITAR -->
                                 <div class="modal fade" id="editar{{ $usuario->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -264,10 +260,12 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <form>
+                                    <form action="{{ route('Editar_usuario') }}" method="POST">
+                                                @csrf @method('PUT')
                                                 <div class="row">
                                                         <label for="name" class="col-sm-2 col-form-label">Nombre <small style="color:red;">*</small></label>
                                                     <div class="col-sm-7">
+                                                        <input type="number" name="id" value="{{ $usuario->id }}">
                                                         <input type="text" class="form-control" name="name" placeholder="Ingrese su nombre" value="{{old('name', $usuario->name)}}" autofocus>
                                                         @if ($errors->has('name'))
                                                             <span class="error text-danger" for="input-name">{{ $errors->first('name') }}</span>
@@ -293,44 +291,24 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
+                                                    <label for="email" class="col-sm-2 col-form-label">Rol <small style="color:red;">*</small></label>
                                                     <div class="col-sm-7">
-                                                        <div class="form-group">
-                                                            <div class="tab-content">
-                                                                <div class="tab-pane active">
-                                                                    <table class="table">
-                                                                        <tbody>
-                                                                            @foreach ($roles as $id => $role)
-                                                                            <tr>
-                                                                                <td>                                                                        
-                                                                                    <div class="form-check">
-                                                                                        <label class="form-check-label">
-                                                                                            <input class="form-check-input" type="radio" name="roles[]" value="{{ $id }}">
-                                                                                            <span class="form-check-sign">
-                                                                                                <span class="check"></span>
-                                                                                            </span>
-                                                                                        </label>
-                                                                                    </div>
-                                                                                </td>
-                                                                                <td>
-                                                                                    {{ $role }}
-                                                                                </td>
-                                                                            </tr>
-                                                                            @endforeach
-                                                                            <span class="error text-danger" for="input-password">{{ $errors->first('roles') }}</span>
-                                                                        </tbody>  
-                                                                    </table>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>    
+                                                       <select class="form-select" name="roles[]" id="">
+                                                           <option value="">Seleccione</option>
+                                                            @foreach ($roles as $id => $role)
+                                                                <option value="{{ $id }}">{{ $role }}</option>
+                                                            @endforeach
+                                                       </select>
+                                                       <span class="error text-danger" for="input-password">{{ $errors->first('roles') }}</span>
+                                                    </div>
                                                 </div>
-                                            </form>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Send message</button>
+                                        <div class="modal-footer">  
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                            <button type="submit" class="btn btn-primary">Editar</button>
                                         </div>
                                         </div>
+                                    </form>
                                     </div>
                                 </div>
                                 <?php } ?>
