@@ -308,7 +308,8 @@ class VentasController extends Controller
             DB::update("UPDATE productos SET Cantidad_Producto= Cantidad_Producto +".$ventas->Cantidad." WHERE Nombre_Producto ='".$ventas->Nombre_Producto."'");
         }
         DB::update("UPDATE ventas SET estado ='Inactivo' WHERE Factura='".$id."'");
-        return $this->index();
+        return redirect('ventas')
+            ->with('inhabilitado', ' ');    
     }
 
 }
