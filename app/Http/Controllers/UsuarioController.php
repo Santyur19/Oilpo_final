@@ -130,10 +130,9 @@ class UsuarioController extends Controller
     //         ->with('success', 'Usuario updated successfully');
     // }
 
-    public function edit(Request $request){
-        //$usuario = $_POST['id'];
-         // $user=User::findOrFail($id);
-        //$data = $request->only('name', 'username', 'email');
+    public function edit(Request $request, User $usuario){
+        //$user=User::findOrFail($id);
+        $data = $request->only('name', 'username', 'email');
         //  $password=$request->input('password');
         //  if($password)
         //      $data['password'] = bcrypt($password);
@@ -146,11 +145,11 @@ class UsuarioController extends Controller
         //  //     $data['password']=bcrypt($request->password);
         //  // }
  
-        //$usuario->update($data);
+        $usuario->update($data);
 
         $roles = $request->input('roles', []);
-        $user->syncRoles($roles);
-        return redirect()->route('usuarios.edit')->with('success', ' ');
+        $usuario->syncRoles($roles);
+        return redirect()->route('usuarios.index')->with('success', ' ');
     }
 
     public function editar_usuario($id){
