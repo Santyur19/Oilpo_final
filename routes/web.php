@@ -45,7 +45,7 @@ Route::post('/roles', [App\Http\Controllers\RolesController::class, 'store' ])->
 Route::get('/roles/index', [App\Http\Controllers\RolesController::class, 'volver_rol'])->name('volver_rol');
 Route::get('/role/{roles}/edit', [App\Http\Controllers\RolesController::class, 'edit' ])->name('Edit');
 Route::put('/roles', [App\Http\Controllers\RolesController::class, 'update_status'] )->name('Editar_estado_rol');
-Route::post('/roles/index', [App\Http\Controllers\RolesController::class, 'update'] )->name('Editar');
+Route::put('/roles{roles}', [App\Http\Controllers\RolesController::class, 'update'] )->name('Editar');
 
 
 
