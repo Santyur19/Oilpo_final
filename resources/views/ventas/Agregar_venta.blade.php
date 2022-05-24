@@ -171,6 +171,7 @@
             $(document).ready(function(){
             $('#Producto').click(function(){
                 Producto();
+                limpiar();
 
             });
         });
@@ -178,6 +179,7 @@
             $(document).ready(function(){
             $('#Servicio').click(function(){
                 Servicio();
+                limpiar();
 
             });
         });
@@ -202,7 +204,6 @@
             $('#productol').hide();
             $('#cantidad').hide();
             $('#iva').hide();
-
         } 
     </script>
     <script>
@@ -250,6 +251,8 @@
             var servicio = $("#servicio option:selected").val();
             // var Cliente = $("#Nombre_cliente option:selected").text();
 
+            // if (producto == "Seleccione" or producto == "undefined"){producto="";}
+
             if(cantidad > 0 && iva > 0 && producto != "Nada" || precio > 0 && servicio != "Nada" ){
                 console.log(producto)
 
@@ -279,8 +282,13 @@
                 // if  (iva==""){iva=0}
                 // if  (cantidad==""){Cantidad="Nada"}
                 // if  (Servicio=="undefined"){Cantidad="Nada"}
-
-                var fila = '<tr id="fila'+cont+'"><td><input class="input-group-text" type="text" name="producto[]" value="'+producto+'" readonly><td><input class="input-group-text" type="text" name="servicio[]" value="'+servicio+'" readonly></td></td><td><input class="input-group-text" type="number" name="Cantidad[]" value="'+cantidad+'" readonly></td><td><input class="input-group-text" type="number" name="precio[]" value="'+precio+'" readonly></td><td><input class="input-group-text" type="number" name="precio[]" value="'+precio_producto+'" readonly></td><td><input class="input-group-text" type="number" name="iva[]" value="'+iva+'" readonly></td><td>'+subtotal[cont]+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
+                // else if (iva == "Seleccione" or iva == "undefined"){Servicio="";}
+                if (iva==""){
+                    var fila = '<tr id="fila'+cont+'"><td><input class="input-group-text" type="text" name="producto[]" value="" readonly><td><input class="input-group-text" type="text" name="servicio[]" value="'+servicio+'" readonly></td></td><td><input class="input-group-text" type="number" name="Cantidad[]" value="'+cantidad+'" readonly></td><td><input class="input-group-text" type="number" name="precio[]" value="'+precio+'" readonly></td><td><input class="input-group-text" type="number" name="precio[]" value="'+precio_producto+'" readonly></td><td><input class="input-group-text" type="number" name="iva[]" value="'+iva+'" readonly></td><td>'+subtotal[cont]+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
+                }
+                else{
+                    var fila = '<tr id="fila'+cont+'"><td><input class="input-group-text" type="text" name="producto[]" value="'+producto+'" readonly><td><input class="input-group-text" type="text" name="servicio[]" value=" " readonly></td></td><td><input class="input-group-text" type="number" name="Cantidad[]" value="'+cantidad+'" readonly></td><td><input class="input-group-text" type="number" name="precio[]" value="'+precio+'" readonly></td><td><input class="input-group-text" type="number" name="precio[]" value="'+precio_producto+'" readonly></td><td><input class="input-group-text" type="number" name="iva[]" value="'+iva+'" readonly></td><td>'+subtotal[cont]+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
+                }
                 cont++;
                 limpiar();
                 $('#total').html('<h1 class="btn btn-info">Total: $'+total.toFixed(0)+'<input type="number" hidden name="Total" value="'+total+'"  ></h1>');

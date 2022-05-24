@@ -164,15 +164,10 @@ class VentasController extends Controller
 
 
             DB::insert($cadena_final);
-            $Nada_iva="update ventas set iva='0' WHERE iva='';";
-            $Nada_cantidad="update ventas set Cantidad='0' WHERE Cantidad='';";
-            $Nada_servicio="update ventas set Nombre_servicio='Nada' WHERE Nombre_servicio='undefined'  OR Nombre_servicio='' OR Nombre_servicio='Seleccione';";
-            $Nada_producto="update ventas set Nombre_Producto='Nada' WHERE Nombre_Producto='undefined'  OR Nombre_servicio='' OR Nombre_Producto='Seleccione';";
-            
-            DB::update($Nada_iva);
-            DB::update($Nada_cantidad);
-            DB::update($Nada_servicio);
-            DB::update($Nada_producto);
+            DB::update("update ventas set iva='0' WHERE iva='';");
+            DB::update("update ventas set Cantidad='0' WHERE Cantidad='';");
+            DB::update("update ventas set Nombre_servicio='Nada' WHERE Nombre_servicio='undefined'  OR Nombre_servicio='' OR Nombre_servicio='Seleccione';");
+            DB::update("update ventas set Nombre_Producto='Nada' WHERE Nombre_Producto='undefined'  OR Nombre_Producto='' OR Nombre_Producto='Seleccione';");
 
             return redirect('ventas/')
                 ->with('success', ' ');
@@ -307,11 +302,10 @@ class VentasController extends Controller
     public function estado(){
         // abort_if(Gate::denies('Editar_estado_ventas'), 403);
         $id = $_POST['id'];
-        $Venta=DB::Select("Select * from ventas where Factura ='".$id."' AND Nombre_Producto =! Nada");
+        $Venta=DB::Select("Select * from ventas where Factura ='".$id."' AND Nombre_Producto != 'Nada'");
 
         foreach ($Venta as $ventas){
-            echo $ventas;
-            DB::update("UPDATE productos SET Cantidad_Producto= Cantidad_Producto +".$venta->cantidad." WHERE ventas.Factura =  AND productos.Nombre_Producto ='".$venta->Nombre_Producto."'");
+            DB::update("UPDATE productos SET Cantidad_Producto= Cantidad_Producto +".$ventas->Cantidad." WHERE Nombre_Producto ='".$ventas->Nombre_Producto."'");
         }
         DB::update("UPDATE ventas SET estado ='Inactivo' WHERE Factura='".$id."'");
         return $this->index();

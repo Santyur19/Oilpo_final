@@ -189,7 +189,7 @@
             Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'La venta ya fue inhabilitada, no se puede activar de nuevo!',
+            text: 'La venta fue inhabilitada, no se puede activar de nuevo!',
             })
         }
 
