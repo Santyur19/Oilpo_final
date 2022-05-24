@@ -166,8 +166,8 @@ class VentasController extends Controller
             DB::insert($cadena_final);
             DB::update("update ventas set iva='0' WHERE iva='';");
             DB::update("update ventas set Cantidad='0' WHERE Cantidad='';");
-            DB::update("update ventas set Nombre_servicio='Nada' WHERE Nombre_servicio='undefined'  OR Nombre_servicio='' OR Nombre_servicio='Seleccione';");
-            DB::update("update ventas set Nombre_Producto='Nada' WHERE Nombre_Producto='undefined'  OR Nombre_Producto='' OR Nombre_Producto='Seleccione';");
+            DB::update("update ventas set Nombre_servicio='' WHERE Nombre_servicio='undefined'  OR Nombre_servicio='' OR Nombre_servicio='Seleccione';");
+            DB::update("update ventas set Nombre_Producto='' WHERE Nombre_Producto='undefined'  OR Nombre_Producto='' OR Nombre_Producto='Seleccione';");
 
             return redirect('ventas/')
                 ->with('success', ' ');

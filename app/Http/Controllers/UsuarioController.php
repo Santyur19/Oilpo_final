@@ -131,22 +131,21 @@ class UsuarioController extends Controller
     // }
 
     public function edit(Request $request){
-        //$usuario = $_POST['id'];
-         // $user=User::findOrFail($id);
-        //$data = $request->only('name', 'username', 'email');
-        //  $password=$request->input('password');
-        //  if($password)
-        //      $data['password'] = bcrypt($password);
-        //  // if(trim($request->password)=='')
-        //  // {
-        //  //     $data=$request->except('password');
-        //  // }
-        //  // else{
-        //  //     $data=$request->all();
-        //  //     $data['password']=bcrypt($request->password);
-        //  // }
+       
+        $data = $request->only('name', 'username', 'email');
+         $password=$request->input('password');
+        if($password)
+             $data['password'] = bcrypt($password);
+         if(trim($request->password)=='')
+         {
+             $data=$request->except('password');
+         }
+         else{
+             $data=$request->all();
+             $data['password']=bcrypt($request->password);
+         }
  
-        //$usuario->update($data);
+        $usuario->update($data);
 
         $roles = $request->input('roles', []);
         $user->syncRoles($roles);
