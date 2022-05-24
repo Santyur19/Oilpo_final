@@ -130,6 +130,7 @@ class UsuarioController extends Controller
     //         ->with('success', 'Usuario updated successfully');
     // }
 
+
     public function edit(Request $request, User $usuario){
         //$user=User::findOrFail($id);
         $data = $request->only('name', 'username', 'email');
@@ -144,7 +145,6 @@ class UsuarioController extends Controller
         //  //     $data=$request->all();
         //  //     $data['password']=bcrypt($request->password);
         //  // }
- 
         $usuario->update($data);
 
         $roles = $request->input('roles', []);
