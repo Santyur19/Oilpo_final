@@ -44,12 +44,13 @@
                                         <div class="text-center">
                                             <button type="button" class="btn btn-primary" id="Producto" value="Producto"> Producto</button>
                                             <button type="button" class="btn btn-primary" id="Servicio" value="Servicio" > Servicio</button>
+                                            <input type="text" hidden value="" id="Validar">
                                         </div>
                                     </div>
                                 </div>
 
                             </div>
-                            <div  class="col-md-6">
+                            <div  class="col-md-6" id="estorbo">
                                 <div class="card">
                                     <div class="card-body">
                                         <label id="productol">Producto <small style="color:red;">*</small></label>
@@ -87,44 +88,35 @@
 
 
                                         <div class="text-center" >
-                                            <button  id="agregar" type="button" class="btn btn-primary">Agregar producto</button>
+                                        <br>
+                                        <button  id="agregar_producto" type="button" class="btn btn-primary">Agregar producto</button>
+                                        <button  id="agregar_servicio" type="button" class="btn btn-primary">Agregar servicio</button>
                                         </div>
                                     </div>
                                 </div>
+                                
+                            </div>
+                            <div id="table" class="table-responsive">
+
+                            <p id="total"></p>
+                                <table id="tabla" class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>Servicio</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio servicio</th>
+                                        <th>Precio productos</th>
+                                        <th>Iva</th>
+                                        <th>Subtotal</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-xs-1-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <p id="total"></p>
-                                    <table id="tabla" class="table">
-                                        <thead>
-
-                                        <tr>
-                                            <th>Producto</th>
-                                            <th>Servicio</th>
-                                            <th>Cantidad</th>
-                                            <th>Precio servicio</th>
-                                            <th>Precio productos</th>
-                                            <th>Iva</th>
-                                            <th>Subtotal</th>
-                                        </tr>
-                                        </thead>
-
-
-                                        <tbody>
-
-                                        </tbody>
-
-
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
                 <div class="text-center">
                     <button id="guardar" type="submit" class="btn btn-primary">Agregar</button>
@@ -152,6 +144,10 @@
 
     <script>
         function inicio(){
+            $('#agregar_servicio').hide();
+            $('#agregar_producto').hide();
+
+            $('#table').hide();
 
             $('#producto').hide();
             $('#cantidad').hide();
@@ -165,11 +161,19 @@
             $('#serviciol').hide();
             $('#preciol').hide();
             
+            $('#estorbo').hide();
+
         }
     </script>
     <script>
             $(document).ready(function(){
             $('#Producto').click(function(){
+                $('#estorbo').show();
+
+                $('#agregar_servicio').hide();
+                $('#agregar_producto').show();
+
+                $('#Validar').val('Producto');
                 Producto();
                 limpiar();
 
@@ -178,6 +182,12 @@
 
             $(document).ready(function(){
             $('#Servicio').click(function(){
+                $('#estorbo').show();
+
+                $('#agregar_servicio').show();
+                $('#agregar_producto').hide();
+
+                $('#Validar').val('Servicio');
                 Servicio();
                 limpiar();
 
@@ -187,7 +197,7 @@
     </script>
     <script>
         function Producto(){
-
+            $('#Validar').val('Producto');
             $('#producto').show();
             $('#cantidad').show();
             $('#iva').show();
@@ -214,16 +224,16 @@
     </script>
     <script>
         $(document).ready(function(){
-            $('#agregar').click(function(){
+            $('#agregar_producto').click(function(){
+                agregar();
+
+            });
+            $('#agregar_servicio').click(function(){
                 agregar();
 
             });
             $('#cancelar').click(function(){
                 cancelar();
-
-            });
-            $('#volver').click(function(){
-                volver();
 
             });
 
@@ -237,12 +247,17 @@
         $('#guardar').hide();
         $('#cancelar').hide();
         function agregar(){
+            $('#table').show();
+
             var cantidad = $('#cantidad').val();
             var iva = $('#iva').val();
             var precios = $('#precio').val();
+            console.log(precios)
 
-            if (precios != "undefined"){var precio = parseInt(precios);}
-         
+            if (precios != ""){var precio = parseInt(precios);} else{precio = "";}
+
+            var validar = $('#Validar').val();
+
 
 
             //var producto = $("#producto option:selected").val();
@@ -250,21 +265,53 @@
             var producto = $("#producto option:selected").text();
             var servicio = $("#servicio option:selected").val();
             // var Cliente = $("#Nombre_cliente option:selected").text();
-
+            if (servicio == undefined){servicio="";}
             // if (producto == "Seleccione" or producto == "undefined"){producto="";}
+            console.log(validar);
+            console.log(producto)
+            console.log(cantidad)
+            console.log(iva)
+            console.log(precios)
+            console.log(servicio)
 
-            if(cantidad > 0 && iva > 0 && producto != "Nada" || precio > 0 && servicio != "Nada" ){
-                console.log(producto)
+            if (validar == "Servicio"){
 
-                if(iva==""){
+                if (precio < 0 || precio == "" || servicio == " " || servicio == "" ) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'No se han llenado todos campos!',
 
+                    })
+                    if (total == 0){
+                        $('#table').hide();
 
+                    }
+                }
+                else{
                     subtotal[cont]=precio;
                     totalt[cont]=subtotal[cont];
                     total = total + subtotal[cont];
 
+                    var fila = '<tr id="fila'+cont+'"><td><input class="input-group-text" type="text" name="producto[]" value="" readonly><td><input class="input-group-text" type="text" name="servicio[]" value="'+servicio+'" readonly></td></td><td><input class="input-group-text" type="number" name="Cantidad[]" value="" readonly></td><td><input class="input-group-text" type="number" name="precio[]" value="'+precio+'" readonly></td><td><input class="input-group-text" type="number" name="precio[]" value="'+precio_producto+'" readonly></td><td><input class="input-group-text" type="number" name="iva[]" value="" readonly></td><td>'+subtotal[cont]+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
 
-                }else{
+                }
+            }
+            else if (validar == "Producto"){
+
+                if (cantidad == "" || iva == "" || producto =="" || producto =="Seleccione") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'No se han llenado todos campos!',
+
+                    })
+                    if (total == 0){
+                        $('#table').hide();
+
+                    }
+                }
+                else{
                     var Array = eval (<?php echo $precio; ?>)
                     var precio_producto = Array[producto_id-1].Precio_producto;
 
@@ -275,33 +322,18 @@
 
                     
                     ivat=0;
+
+                    var fila = '<tr id="fila'+cont+'"><td><input class="input-group-text" type="text" name="producto[]" value="'+producto+'" readonly><td><input class="input-group-text" type="text" name="servicio[]" value=" " readonly></td></td><td><input class="input-group-text" type="number" name="Cantidad[]" value="'+cantidad+'" readonly></td><td><input class="input-group-text" type="number" name="precio[]" value="" readonly></td><td><input class="input-group-text" type="number" name="precio[]" value="'+precio_producto+'" readonly></td><td><input class="input-group-text" type="number" name="iva[]" value="'+iva+'" readonly></td><td>'+subtotal[cont]+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
+
                 }
             
-
-                // if  (producto=="undefined"){producto="Nada"}
-                // if  (iva==""){iva=0}
-                // if  (cantidad==""){Cantidad="Nada"}
-                // if  (Servicio=="undefined"){Cantidad="Nada"}
-                // else if (iva == "Seleccione" or iva == "undefined"){Servicio="";}
-                if (iva==""){
-                    var fila = '<tr id="fila'+cont+'"><td><input class="input-group-text" type="text" name="producto[]" value="" readonly><td><input class="input-group-text" type="text" name="servicio[]" value="'+servicio+'" readonly></td></td><td><input class="input-group-text" type="number" name="Cantidad[]" value="'+cantidad+'" readonly></td><td><input class="input-group-text" type="number" name="precio[]" value="'+precio+'" readonly></td><td><input class="input-group-text" type="number" name="precio[]" value="'+precio_producto+'" readonly></td><td><input class="input-group-text" type="number" name="iva[]" value="'+iva+'" readonly></td><td>'+subtotal[cont]+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
-                }
-                else{
-                    var fila = '<tr id="fila'+cont+'"><td><input class="input-group-text" type="text" name="producto[]" value="'+producto+'" readonly><td><input class="input-group-text" type="text" name="servicio[]" value=" " readonly></td></td><td><input class="input-group-text" type="number" name="Cantidad[]" value="'+cantidad+'" readonly></td><td><input class="input-group-text" type="number" name="precio[]" value="'+precio+'" readonly></td><td><input class="input-group-text" type="number" name="precio[]" value="'+precio_producto+'" readonly></td><td><input class="input-group-text" type="number" name="iva[]" value="'+iva+'" readonly></td><td>'+subtotal[cont]+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
-                }
-                cont++;
-                limpiar();
-                $('#total').html('<h1 class="btn btn-info">Total: $'+total.toFixed(0)+'<input type="number" hidden name="Total" value="'+total+'"  ></h1>');
-                evaluar();
-                $('#tabla').append(fila);
-            }else{
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'No se han llenado todos campos!',
-
-                })
             }
+            cont++;
+            limpiar();
+            $('#total').html('<h1 class="btn btn-info">Total: $'+total.toFixed(0)+'<input type="number" hidden name="Total" value="'+total+'"  ></h1>');
+            evaluar();
+            $('#tabla').append(fila);
+            
         }
         function limpiar(){
             $('#producto').val('');
@@ -327,6 +359,7 @@
         function eliminar(index){
             total=total-totalt[index];
             if (total <= 0){
+                $('#table').hide();
                 $('#guardar').hide();
                 $('#cancelar').hide();
                 $('#volver').show();
