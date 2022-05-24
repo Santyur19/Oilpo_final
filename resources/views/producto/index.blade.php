@@ -42,7 +42,6 @@
                         <div class="modal-header">
 
                             <h5 class="modal-title" id="exampleModalLabel">Agregar Producto</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
 
@@ -70,14 +69,6 @@
                                     <input hidden type="number" name="Cantidad_Producto" class="form-control" id="recipient-name" value=0 readonly>
                                     <small class="text-danger">{{$errors->first('Cantidad_Producto')}}</small>
                                 </div>
-
-                               <!--  <div class="mb-3">
-                                    <label for="message-text" class="col-form-label">Estado:</label>
-                                    <select require class="form-control" id="recipient-name">
-                                        <option class="form-control" id="recipient-name" value="">Seleccione</option>
-                                        <option class="form-control" id="recipient-name" value=""></option>
-                                    </select>
-                                </div> -->
                                 <div class="modal-footer">
                                     <a type="button" class="btn btn-danger" id="cerrar">Cancelar
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
@@ -205,14 +196,12 @@
                                                         <small>{{$errors->first('Cantidad_Producto')}}</small>
                                                     </div> --}}
                                                     <div class="modal-footer">
-
-
-                                                        <button type="button" class="btn btn-danger" id="cerrar">Cancelar
+                                                        <a href="" type="button" id="cerrar" class="btn btn-danger" data-bs-dismiss="modal">Cancelar
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
                                                                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                                                 <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                                                             </svg>
-                                                        </button>
+                                                        </a>
                                                         <button type="submit" class="btn btn-warning">Editar
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
                                                                 <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
@@ -259,9 +248,9 @@
                             </div>
                             </div>
                         </div>
-                        </div>
+                    </div>
                     <!-- End modal detalles productos -->
-                                    @endforeach
+                                @endforeach
                                 </tbody>
                                 @yield('js')
                                     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>

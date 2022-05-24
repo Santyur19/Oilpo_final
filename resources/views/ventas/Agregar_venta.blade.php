@@ -133,7 +133,7 @@
             </form>
             <form action="{{ route('volver') }}" method="get">
                 @csrf
-                    <button id="volver" type="submit" name="volver" value="volver" class="btn btn-success">Volver</button>
+                    <button id="volver" type="submit" name="volver" value="volver" class="btn btn-danger">Volver</button>
                     </div>
 
             </form>

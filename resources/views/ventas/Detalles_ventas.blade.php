@@ -70,7 +70,7 @@
                 <form action="{{ route('volver') }}" method="get">
                 @csrf
                     <div class="text-center">
-                    <button id="volver" type="submit" name="volver" value="volver" class="btn btn-success">Volver</button>
+                    <button id="volver" type="submit" name="volver" value="volver" class="btn btn-danger">Volver</button>
                     </div>
 
             </form>

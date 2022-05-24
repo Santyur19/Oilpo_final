@@ -58,8 +58,15 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> 
         </div>
+        <form action="{{ route('volver_compra') }}" method="get">
+        @csrf
+            <div class="text-center" >
+            <button id="volver" type="submit" name="volver" value="volver" class="btn btn-danger">Volver</button>
+            </div>
+
+    </form>
     </div>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
