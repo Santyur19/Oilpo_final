@@ -3,10 +3,9 @@
 @section('title', '| Editar rol')
 
 @section('css')
-    <link rel="icon" href="https://cdn.discordapp.com/attachments/881318396128526336/921091428321488946/unknown.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https:////cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css">
+
 @endsection
 @section('template_title')
 
@@ -41,7 +40,7 @@
                   <div class="form-group">
                     <div class="tab-content">
                       <div class="tab-pane active" id="profile">
-                        <table class="table">
+                        <table id="tabla" class="table">
                           <tbody>
                             @foreach ($permissions as $id => $permission)
                             <tr>
@@ -62,6 +61,12 @@
                             </tr>
                             @endforeach
                           </tbody>
+                            <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+                            <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.js"></script>                            <script>
+                                $(document).ready( function () {
+                                    $('#tabla').DataTable();
+                                } );
+                            </script>
                         </table>
                       </div>
                     </div>
