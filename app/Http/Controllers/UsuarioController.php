@@ -130,19 +130,27 @@ class UsuarioController extends Controller
     //         ->with('success', 'Usuario updated successfully');
     // }
 
-    public function edit(User  $usuario){
-        abort_if(Gate::denies('Editar_usuario'), 403);
-        $campos = request()->validate([
-            'Documento' =>'required',
-            'Nombres'=> 'required',
-            'Apellidos' => 'required',
-            'Correo' => 'required',
-            'Usuario' => 'required',
-            'Password' => 'required'
+    public function edit(Request $request){
+        //$usuario = $_POST['id'];
+         // $user=User::findOrFail($id);
+        //$data = $request->only('name', 'username', 'email');
+        //  $password=$request->input('password');
+        //  if($password)
+        //      $data['password'] = bcrypt($password);
+        //  // if(trim($request->password)=='')
+        //  // {
+        //  //     $data=$request->except('password');
+        //  // }
+        //  // else{
+        //  //     $data=$request->all();
+        //  //     $data['password']=bcrypt($request->password);
+        //  // }
+ 
+        //$usuario->update($data);
 
-        ]);
-        $usuario->update($campos);
-        return redirect()->route('usuarios.edit')->with('success', 'Usuario updated successfully');
+        $roles = $request->input('roles', []);
+        $user->syncRoles($roles);
+        return redirect()->route('usuarios.edit')->with('success', ' ');
     }
 
     public function editar_usuario($id){
