@@ -130,26 +130,26 @@ class UsuarioController extends Controller
     //         ->with('success', 'Usuario updated successfully');
     // }
 
-    public function edit(Request $request){
-       
+
+    public function edit(Request $request, User $usuario){
+        //$user=User::findOrFail($id);
         $data = $request->only('name', 'username', 'email');
-         $password=$request->input('password');
-        if($password)
-             $data['password'] = bcrypt($password);
-         if(trim($request->password)=='')
-         {
-             $data=$request->except('password');
-         }
-         else{
-             $data=$request->all();
-             $data['password']=bcrypt($request->password);
-         }
- 
+        //  $password=$request->input('password');
+        //  if($password)
+        //      $data['password'] = bcrypt($password);
+        //  // if(trim($request->password)=='')
+        //  // {
+        //  //     $data=$request->except('password');
+        //  // }
+        //  // else{
+        //  //     $data=$request->all();
+        //  //     $data['password']=bcrypt($request->password);
+        //  // }
         $usuario->update($data);
 
         $roles = $request->input('roles', []);
-        $user->syncRoles($roles);
-        return redirect()->route('usuarios.edit')->with('success', ' ');
+        $usuario->syncRoles($roles);
+        return redirect()->route('usuarios.index')->with('success', ' ');
     }
 
     public function editar_usuario($id){

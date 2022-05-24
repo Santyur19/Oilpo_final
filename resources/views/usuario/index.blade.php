@@ -163,7 +163,6 @@
                         </div>
                         <div class="card-body">
                             @if (session('success'))
-                            <div class="alert alert-success" role="success">
                             {{ session('success') }}
                             </div>
                             @endif
@@ -228,7 +227,7 @@
                                     </td>
                                     <td>
                                         
-                                        <form action="{{ route('Editar_usuario') }}" method="POST">
+                                        <form action="{{ route('Editar_usuario', $usuario) }}" method="POST">
                                             @csrf @method('PUT')
                                             <?php if($usuario->estado=="Activo"){ ?>
                                                 @can('Editar_usuario')
@@ -260,12 +259,11 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                    <form action="{{ route('Editar_usuario') }}" method="POST">
+                                    <form action="{{ route('Editar_usuario', $usuario) }}" method="POST">
                                                 @csrf @method('PUT')
                                                 <div class="row">
                                                         <label for="name" class="col-sm-2 col-form-label">Nombre <small style="color:red;">*</small></label>
                                                     <div class="col-sm-7">
-                                                        <input type="number" name="id" value="{{ $usuario->id }}">
                                                         <input type="text" class="form-control" name="name" placeholder="Ingrese su nombre" value="{{old('name', $usuario->name)}}" autofocus>
                                                         @if ($errors->has('name'))
                                                             <span class="error text-danger" for="input-name">{{ $errors->first('name') }}</span>
@@ -296,7 +294,7 @@
                                                        <select class="form-select" name="roles[]" id="">
                                                            <option value="">Seleccione</option>
                                                             @foreach ($roles as $id => $role)
-                                                                <option value="{{ $id }}">{{ $role }}</option>
+                                                                <option value="{{old('id', $usuario->id)}}">{{ $usuario->role  }}</option>
                                                             @endforeach
                                                        </select>
                                                        <span class="error text-danger" for="input-password">{{ $errors->first('roles') }}</span>
