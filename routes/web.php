@@ -110,8 +110,6 @@ Route::post('/informes/informe_compras', [App\Http\Controllers\InformeController
 Route::resource('/permissions', controller: App\Http\Controllers\PermissionController::class);
 Route::put('/permissions', [App\Http\Controllers\PermissionController::class, 'update_status'] )->name('Editar_estado_permiso');
 
-
-
 });
 
 

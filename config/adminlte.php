@@ -288,7 +288,7 @@ return [
                 ],
 
                 [
-                    'text' => 'Gestion de compras',
+                    'text' => 'Gestión de compras',
                     'url'  => 'compras/',
                     'icon' => 'fas fa-cart-plus',
                 ],
@@ -337,7 +337,7 @@ return [
                 ],
 
                 [
-                    'text' => 'Gestion de ventas',
+                    'text' => 'Gestión de ventas',
                     'url'  => 'ventas/',
                     'icon' => 'fas fa-cart-plus',
                     ],
