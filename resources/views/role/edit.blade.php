@@ -18,7 +18,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
-        <form method="POST" action="{{ route('Editar', $roles->id) }}" class="form-horizontal">
+        <form method="POST" action="{{ route('Editar', $roles) }}" class="form-horizontal">
           @csrf
           @method('PUT')
           <div class="card">
