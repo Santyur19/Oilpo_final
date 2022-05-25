@@ -1,3 +1,4 @@
+
 @extends('adminlte::page')
 
 @section('title', '| Agregar Venta')
@@ -14,7 +15,7 @@
 @endsection
 
 @section('content')
-<body onload="inicio();"></body>
+<body onload="inicio_esconder(); inicio()"></body>
 
     <div class="row" >
         <div class="col-md-12">
@@ -123,12 +124,7 @@
                     <button id="cancelar" type="button" onclick="cancelar()" class="btn btn-danger">Cancelar</button>
 
             </form>
-            <form action="{{ route('volver') }}" method="get">
-                @csrf
-                    <button id="volver" type="submit" name="volver" value="volver" class="btn btn-danger">Volver</button>
-                    </div>
-
-            </form>
+            <a class="btn btn-danger" href="/ventas">Volver</a>
         </div>
     </div>
     @yield('js')
@@ -143,7 +139,7 @@
 
 
     <script>
-        function inicio(){
+        function inicio_esconder(){
             $('#agregar_servicio').hide();
             $('#agregar_producto').hide();
 
@@ -410,6 +406,22 @@
         } 
 
         </script>
+    <script>
+        function inicio(){
+            var rol = eval (<?php echo $rol; ?>);
+            var nombre= rol[0].name;
+            
+            if (nombre=="Empleado"){
+
+                $('#usuarios').hide();
+                $('#Roles').hide();
+                $('#Permisos').hide();
+                $('#Compras').hide();
+                $('#Informes').hide();
+            }
+        }
+
+  </script>
 
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>

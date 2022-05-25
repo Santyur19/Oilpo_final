@@ -63,7 +63,7 @@ class RoleSeeder extends Seeder
         $permission = Permission::create(['name' => 'Exportar_Excel'])->assignRole('Admin');
         
         $permission = Permission::create(['name' => 'ventas'])->syncRoles(['Admin', 'Empleado']);
-        $permission = Permission::create(['name' => 'Agregar_venta'])->syncRoles(['Admin']);
+        $permission = Permission::create(['name' => 'Agregar_venta'])->syncRoles(['Admin', 'Empleado']);
         $permission = Permission::create(['name' => 'Guardar_Venta'])->syncRoles(['Admin', 'Empleado']);
         $permission = Permission::create(['name' => 'Buscar_clientes'])->syncRoles(['Admin', 'Empleado']);
         $permission = Permission::create(['name' => 'Detalles_ventas'])->syncRoles(['Admin', 'Empleado']);

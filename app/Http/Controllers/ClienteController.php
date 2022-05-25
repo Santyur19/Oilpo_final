@@ -24,10 +24,10 @@ class ClienteController extends Controller
         abort_if(Gate::denies('ClienteGuardar'), 403);
         $clientes = Cliente::paginate();
         //$Tipo_documento = DB::select("SELECT DISTINCT Tipo_documento FROM clientes WHERE Tipo_documento != id");
-
+        $rol=auth()->user()->roles;
         $Tipo_documento = Tipo_documento::all();
 
-        return view('cliente.index', compact('clientes', 'Tipo_documento'))->with('i', (request()->input('page', 1) - 1) * $clientes->perPage());
+        return view('cliente.index', compact('clientes', 'Tipo_documento', 'rol'))->with('i', (request()->input('page', 1) - 1) * $clientes->perPage());
     }
 
     public function cliente_guardar(){
@@ -42,7 +42,9 @@ class ClienteController extends Controller
         ]);
 
         Cliente::create($campos);
-        return redirect()->route('clientes.index') ->with('success', ' ');
+        $rol=auth()->user()->roles;
+
+        return redirect()->route('clientes.index', compact('rol')) ->with('success', ' ');
     }
 
     /**
@@ -126,7 +128,9 @@ class ClienteController extends Controller
             'Direccion'=>'required'
         ]);
         $cliente->update($campos_cliente);
-        return redirect()->route('clientes.index') ->with('success', 'cliente created successfully.');
+        $rol=auth()->user()->roles;
+
+        return redirect()->route('clientes.index',compact('rol')) ->with('success', 'cliente created successfully.');
     }
 
     /**
@@ -138,7 +142,9 @@ class ClienteController extends Controller
     {
         $cliente = Cliente::find($id)->delete();
 
-        return redirect()->route('clientes.index')
+        $rol=auth()->user()->roles;
+
+        return redirect()->route('clientes.index', compact('rol'))
             ->with('borrado', 'Proveedore deleted successfully');
     }
 
@@ -151,13 +157,17 @@ class ClienteController extends Controller
         ]);
         if($activo=="Activo"){
             DB::update("UPDATE clientes SET estado ='Inactivo' WHERE id='".$id."'");
-            return redirect()->route('clientes.index');
+            $rol=auth()->user()->roles;
+
+            return redirect()->route('clientes.index', compact('rol'));
 
 
 
         }else{
             DB::update("UPDATE clientes SET estado ='Activo' WHERE id ='".$id."'");
-            return redirect()->route('clientes.index');
+            $rol=auth()->user()->roles;
+
+            return redirect()->route('clientes.index',compact('rol'));
 
         }
 

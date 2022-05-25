@@ -32,8 +32,10 @@ class ServicioController extends Controller
     {
         abort_if(Gate::denies('guardar_Servicio'), 403);
         $servicios = Servicio::paginate();
+        $rol=auth()->user()->roles;
 
-        return view('servicio.index', compact('servicios'))
+
+        return view('servicio.index', compact('servicios','rol'))
             ->with('i', (request()->input('page', 1) - 1) * $servicios->perPage());
     }
 
@@ -66,11 +68,13 @@ class ServicioController extends Controller
 
     public function servicio_guardar(){
         abort_if(Gate::denies('guardar_Servicio'), 403);
+        $rol=auth()->user()->roles;
+
         $campos = request()->validate([
             'Nombre_servicio' =>'required|unique:servicios,Nombre_servicio',
         ]);
         Servicio::create($campos);
-        return redirect()->route('servicios.index') ->with('success', 'El producto se ha guardado.');
+        return redirect()->route('servicios.index', compact('rol')) ->with('success', 'El producto se ha guardado.');
     }
 
     /**
@@ -118,11 +122,13 @@ class ServicioController extends Controller
     // }
     public function editar_servicio(Servicio  $servicio){
         abort_if(Gate::denies('Servicio_editar'), 403);
+        $rol=auth()->user()->roles;
+
         $campos = request()->validate([
             'Nombre_servicio' =>'required',
         ]);
         $servicio->update($campos);
-        return redirect()->route('servicios.index') ->with('success', ' ');
+        return redirect()->route('servicios.index', compact('rol')) ->with('success', ' ');
     }
 
     /**
@@ -133,8 +139,9 @@ class ServicioController extends Controller
     public function destroy($id)
     {
         $servicio = Servicio::find($id)->delete();
+        $rol=auth()->user()->roles;
 
-        return redirect()->route('servicios.index')
+        return redirect()->route('servicios.index', compact('rol'))
             ->with('borrado', 'Servicio deleted successfully');
     }
 
@@ -142,18 +149,20 @@ class ServicioController extends Controller
         abort_if(Gate::denies('Editar_estado_servicio'), 403);
         $id = $_POST['id'];
         $activo = isset($_POST['Activo']);
+        $rol=auth()->user()->roles;
+
         $campos = request()->validate([
             'estado' =>' '
         ]);
         if($activo=="Activo"){
             DB::update("UPDATE servicios SET estado ='Inactivo' WHERE id='".$id."'");
-            return redirect()->route('servicios.index');
+            return redirect()->route('servicios.index', compact('rol'));
 
 
 
         }else{
             DB::update("UPDATE servicios SET estado ='Activo' WHERE id ='".$id."'");
-            return redirect()->route('servicios.index');
+            return redirect()->route('servicios.index', compact('rol'));
 
         }
     }

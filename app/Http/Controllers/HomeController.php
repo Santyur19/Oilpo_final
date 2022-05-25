@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Auth;
+
 
 class HomeController extends Controller
 {
@@ -23,6 +27,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.index');
+        $rol=auth()->user()->roles;
+        return view('admin.index', compact('rol'));
     }
 }

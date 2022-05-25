@@ -247,6 +247,7 @@ return [
             'url'         => '/',
             'icon'        => 'fas fa-th',
             'label_color' => 'success',
+
         ],
         
         [
@@ -254,6 +255,7 @@ return [
             'url'         => 'usuarios/',
             'icon'        => 'fas fa-user',
             'label_color' => 'success',
+            'id' =>'usuarios',
         ],
 
         [
@@ -261,6 +263,7 @@ return [
             'url'         => 'roles',
             'icon'        => 'fas fa-tag',
             'label_color' => 'success',
+            'id' =>'Roles',
         ],
 
 
@@ -269,6 +272,7 @@ return [
             'url'         => 'permissions',
             'icon'        => 'fas fa-unlock-alt',
             'label_color' => 'success',
+            'id' =>'Permisos',
         ],
 
 
@@ -281,6 +285,7 @@ return [
         [
             'text'    => ' Compras',
             'icon'    => 'fas fa-fw fa-shopping-cart ',
+            'id' =>'Compras',
             'submenu' => [
                 [
                     'text' => 'Productos',
@@ -330,6 +335,7 @@ return [
         [
             'text'    => 'Ventas',
             'icon'    => 'fas fa-fw fa-credit-card ',
+            'id' =>'Ventas',
             'submenu' => [
                 [
                     'text' => 'Servicios',
@@ -384,6 +390,7 @@ return [
             'url'         => 'informes/',
             'icon'        => 'fas fa-calendar-check',
             'label_color' => 'success',
+            'id' =>'Informes',
         ],
 
 

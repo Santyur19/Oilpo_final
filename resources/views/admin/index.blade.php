@@ -18,11 +18,13 @@
 @section('content')
 
 <br>
+<body onload="inicio();"></body>
 <div class="card">
     <div class="card-header">
         <h1 id="texto" class="text-center" >Bienvenido {{ Auth::user()->name }}</h1>
     </div>
     <div class="card-body">
+
         <!-- Tarjetas -->
         <div class="row">
             <div class="col-lg-3 col-6">
@@ -90,6 +92,22 @@
         </div>
     </div>
   </div>
+  <script>
+        function inicio(){
+            var rol = eval (<?php echo $rol; ?>);
+            var nombre= rol[0].name;
+            
+            if (nombre=="Empleado"){
+
+                $('#usuarios').hide();
+                $('#Roles').hide();
+                $('#Permisos').hide();
+                $('#Compras').hide();
+                $('#Informes').hide();
+            }
+        }
+
+  </script>
 @stop
 
 @section('css')

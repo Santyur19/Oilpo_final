@@ -20,7 +20,8 @@ class VentasController extends Controller
     public function index()
 
     {
-        abort_if(Gate::denies('Agregar_venta'), 403);
+        abort_if(Gate::denies('ventas'), 403);
+        $rol=auth()->user()->roles;
 
         $ventas = Venta::paginate();
         $minimos=DB::Select("SELECT min(Fecha_venta) AS Fecha_venta FROM ventas where Factura > 0");
@@ -30,7 +31,7 @@ class VentasController extends Controller
         foreach ($minimos as $minimo){$Fecha_minima=$minimo->Fecha_venta;}
         foreach ($maximos as $maximo){$Fecha_maxima=$maximo->Fecha_venta;}
 
-        return view('ventas.index', compact('ventas', 'venta', 'Fecha_minima', 'Fecha_maxima'))
+        return view('ventas.index', compact('ventas', 'venta', 'Fecha_minima', 'Fecha_maxima','rol'))
             ->with('i', (request()->input('page', 1) - 1) * $ventas->perPage());
 
     }
@@ -38,6 +39,7 @@ class VentasController extends Controller
 
     public function Agregar_venta(){
         abort_if(Gate::denies('Agregar_venta'), 403);
+        $rol=auth()->user()->roles;
 
         date_default_timezone_set("America/Bogota");
         $fecha_actual = date("Y-m-d");
@@ -58,11 +60,12 @@ class VentasController extends Controller
         }
         $precio=Json_encode($precios);
 
-        return view('ventas.Agregar_venta', compact('ventas', 'clientes', 'fecha_actual', 'productos', 'Facturas', 'servicios', 'precio'))
+        return view('ventas.Agregar_venta', compact('ventas', 'clientes', 'fecha_actual', 'productos', 'Facturas', 'servicios', 'precio', 'rol'))
             ->with('success', ' ');
 
     }
     public function Buscar_cliente(){
+        $rol=auth()->user()->roles;
 
         $Nombre= $_POST['Nombre'];
 
@@ -77,27 +80,31 @@ class VentasController extends Controller
         $clientes = Cliente::all();
         $productos=Producto::all();
 
-        return view('ventas.Agregar_venta', compact('ventas', 'clientes', 'fecha_actual', 'productos', 'documento'))
+        return view('ventas.Agregar_venta', compact('ventas', 'clientes', 'fecha_actual', 'productos', 'documento', 'rol'))
             ->with('success', ' ');
     }
 
     public function show(){
+        $rol=auth()->user()->roles;
 
-        return view('ventas.index');
+        return view('ventas.index', compact('rol'));
     }
 
 
     public function destroy($id)
     {
+        $rol=auth()->user()->roles;
+
         $ventas = Venta::find($id)->delete();
 
-        return redirect('ventas/Agregar_ventas')
+        return redirect('ventas/Agregar_ventas', compact('rol'))
             ->with('borrado', 'Venta deleted successfully');
     }
 
 
     public function Guardar_venta(){
         abort_if(Gate::denies('Guardar_Venta'), 403);
+        $rol=auth()->user()->roles;
 
 
         $Cliente=$_POST['Nombre'];
@@ -169,7 +176,7 @@ class VentasController extends Controller
             DB::update("update ventas set Nombre_servicio='' WHERE Nombre_servicio='undefined'  OR Nombre_servicio='' OR Nombre_servicio='Seleccione';");
             DB::update("update ventas set Nombre_Producto='' WHERE Nombre_Producto='undefined'  OR Nombre_Producto='' OR Nombre_Producto='Seleccione';");
 
-            return redirect('ventas/')
+            return redirect('ventas/', compact('rol'))
                 ->with('success', ' ');
         }
         else{
@@ -177,13 +184,14 @@ class VentasController extends Controller
         $ventas = Venta::paginate();
         $venta = DB:: select("SELECT DISTINCT Factura, Nombre, Fecha_venta, Total FROM ventas where Factura > 0 ");
 
-        return redirect('ventas')
+        return redirect('ventas', compact('rol'))
             ->with('Error', ' ');
         }
     }
 
     public function Detalles(){
         abort_if(Gate::denies('Detalles_ventas'), 403);
+        $rol=auth()->user()->roles;
 
 
         $Factura = $_POST['Factura'];
@@ -191,16 +199,15 @@ class VentasController extends Controller
         $totales = DB:: select("SELECT DISTINCT(Total), Factura FROM ventas WHERE Factura = '".$Factura."'");
         $ventas = DB:: select("SELECT *  FROM ventas WHERE Factura ='".$Factura."'");
 
-        return view('ventas.Detalles_ventas', compact('ventas', 'totales'));
+        return view('ventas.Detalles_ventas', compact('ventas', 'totales', 'rol'));
 
 
-    }
-    public function volver(){
-        return redirect ('ventas');
     }
 
     public function Exportar(){
         abort_if(Gate::denies('Exportar'), 403);
+        $rol=auth()->user()->roles;
+
         date_default_timezone_set("America/Bogota");
         $fecha_actual = date("Y-m-d H:i");
 
@@ -293,13 +300,15 @@ class VentasController extends Controller
             }
         }
         else {
-            return redirect('ventas')
+            return redirect('ventas', compact('rol'))
                 ->with('Vacio', ' ');
         }
         // return Excel::download(new ventas, 'Ventas '.$fecha_actual.'.csv');
     }
 
     public function estado(){
+        $rol=auth()->user()->roles;
+
         // abort_if(Gate::denies('Editar_estado_ventas'), 403);
         $id = $_POST['id'];
         $Venta=DB::Select("Select * from ventas where Factura ='".$id."' AND Nombre_Producto != 'Nada'");
@@ -308,7 +317,7 @@ class VentasController extends Controller
             DB::update("UPDATE productos SET Cantidad_Producto= Cantidad_Producto +".$ventas->Cantidad." WHERE Nombre_Producto ='".$ventas->Nombre_Producto."'");
         }
         DB::update("UPDATE ventas SET estado ='Inactivo' WHERE Factura='".$id."'");
-        return redirect('ventas')
+        return redirect('ventas', compact('rol'))
             ->with('inhabilitado', ' ');    
     }
 

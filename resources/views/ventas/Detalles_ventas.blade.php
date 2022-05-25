@@ -1,3 +1,5 @@
+<body onload="inicio();"></body>
+
 @extends('adminlte::page')
 
 @section('title', '| Detalles')
@@ -78,5 +80,21 @@
         </div>
     </div>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function inicio(){
+            var rol = eval (<?php echo $rol; ?>);
+            var nombre= rol[0].name;
+            
+            if (nombre=="Empleado"){
 
+                $('#usuarios').hide();
+                $('#Roles').hide();
+                $('#Permisos').hide();
+                $('#Compras').hide();
+                $('#Informes').hide();
+            }
+        }
+
+  </script>
+    
 @endsection
