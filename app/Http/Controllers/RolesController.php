@@ -27,7 +27,7 @@ class RolesController extends Controller
     {
         abort_if(Gate::denies('Roles_guardar'), 403);
         $rol = Role::all();
-        
+
 
         // $roles = DB::select("SELECT id, rol, id_user, permisos FROM roles");
         //return view(view:'role.index', data: compact(var_name:'rol'));
@@ -38,11 +38,11 @@ class RolesController extends Controller
     public function create()
     {
         abort_if(Gate::denies('Roles_crear'), 403);
-        $permissions = Permission::all()->where('estado', 'Activo')->pluck(value:'name', key:'id');  
+        $permissions = Permission::all()->where('estado', 'Activo')->pluck(value:'name', key:'id');
 
         return view(view:'role.create', data: compact(var_name:'permissions'));
     }
-    
+
     public function store(Request $request)
     {
         $request->validate([
@@ -64,7 +64,7 @@ class RolesController extends Controller
         abort_if(Gate::denies('Roles_guardar'), 403);
 
         return view('role.index');
-       
+
     }
 
     // public function show($id)
@@ -78,11 +78,11 @@ class RolesController extends Controller
     public function edit(Role $roles)
     {
         abort_if(Gate::denies('Roles_editar'), 403);
-        
+
 
         $permissions = Permission::all()->pluck('name', 'id');
         $roles->load('permissions');
-        
+
         return view('role.edit', compact('roles', 'permissions'));
     }
 
