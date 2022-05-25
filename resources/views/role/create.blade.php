@@ -28,14 +28,14 @@
         </div>
         <div class="card-body">
             <table id="tabla" class="table">
-                    <thead class="thead">
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th>Permisos</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <thead class="thead">
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th>Permisos</th>
+                    </tr>
+                </thead>
+                <tbody>
                     @foreach ($permissions as $id => $permission)
                     <tr>
                         <td></td>
@@ -68,7 +68,7 @@
         </div>
 
         <div class="card-footer text-muted">
-           
+
 
             <a class="btn btn-danger" href="/roles">Cancelar</a>
 

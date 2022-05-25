@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('plugins/Chosen/chosen.css') }}">
 @endsection
 @section('template_title')
 
@@ -29,7 +30,7 @@
                                 <div class="mb-3">
                                     <input type="number" hidden name="Numero_compras" id="" value="<?php foreach($numero_facturas as $numero_factura){ echo $numero_factura->Numero_compras+1; } ?>">
                                     <label for="">Proveedor <small style="color:red;">*</small></label>
-                                    <select  style="width: 100%" class="js-example-theme-single" name="Nombre_proveedor" id="">
+                                    <select  style="width: 100%" class="chosen-select" name="Nombre_proveedor" id="select_proveedor">
                                         <option value="">Seleccione</option>
                                         <?php foreach($proveedores as  $proveedor){ ?>
                                         <option value="<?php echo $proveedor->id ?>"><?php echo $proveedor->Nombre_proveedor ?></option>
@@ -49,7 +50,7 @@
                                 <small class="text-danger">{{$errors->first('Fecha_compra')}}</small>
                             </div>
                             <div class="mb-3">
-                                <label for="">Foto <small style="color:red;">*</small></label>
+                                <label for="">Foto <small style="color:red;"></small></label>
                                 <input type="file" class="form-control" name="Foto" id="Foto" aria-describedby="helpId" placeholder="">
                                 <small class="text-danger">{{$errors->first('Foto')}}</small>
                             </div>
@@ -60,8 +61,8 @@
                     <div class="card">
                         <div class="card-body">
                             <label for="">Nombre Producto <small style="color:red;">*</small></label>
-                            <select style="width: 100%" class="js-example-theme-single" name="Producto" id="Producto">
-                                <option value="">Seleccione</option>
+                            <select style="width: 100%" class="chosen-select" name="Producto" id="Producto">
+                                <option value=" ">Seleccione</option>
                                 <?php foreach($productos as  $producto){ ?>
                                 <option value="<?php echo $producto->Nombre_Producto ?>"><?php echo $producto->Nombre_Producto ?></option>
                                 <?php } ?>
@@ -87,37 +88,32 @@
                 </div>
                 </div>
             </div>
-            <div class="row">
-              <div class="col-xs-1-12">
-                <div class="card">
-                    <div class="card-body">
-                    <p id="total"></p>
-                    <table id="tabla" class="table">
-                        <thead>
+                <span id="total">
 
-                            <tr>
-                                <th>Producto</th>
-                                <th>Cantidad</th>
-                                <th>Precio compra</th>
-                                <th>Precio venta</th>
-                                <th>Sub total</th>
-                                <th>Acciones</th>
-                            </tr>
+                </span>
+            <table id="tabla" class="table">
+                <thead>
 
-                        </thead>
-
-
-                        <tbody>
-
-
-                        </tbody>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio compra</th>
+                        <th>Precio venta</th>
+                        <th>Sub total</th>
+                        <th>
+                            <button id="borrar" type="button" class="btn btn-danger">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                    <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+                                </svg>
+                            </button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
 
 
-                        </table>
-                  </div>
-                </div>
-              </div>
-            </div>
+                </tbody>
+            </table>
 
         </div>
         <div class="text-center">
@@ -132,12 +128,15 @@
     <form action="{{ route('volver_compra') }}" method="get">
         @csrf
             <div class="text-center" >
-            <button id="volver" type="submit" name="volver" value="volver" class="btn btn-danger">Volver</button>
+            <button id="volver" type="submit" name="volver" value="volver" class="btn btn-danger">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z"/>
+                    <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
+                </svg>
+                Volver
+            </button>
             </div>
-
     </form>
-
-
     </div>
 </div>
 @yield('js')
@@ -180,6 +179,7 @@
         var cont = 0;
         total = 0;
         subtotal=[];
+        $('#tabla').hide();
         $('#guardar').hide();
         $('#cancelar').hide();
         function agregar(){
@@ -189,11 +189,11 @@
             precio_venta = $('#Precio_venta').val();
             cantidad = $('#Cantidad').val();
 
-            if(producto !="" && cantidad > 0 && precio_compra > 0 && precio_venta > 0){
+            if(producto !="Seleccione" && cantidad > 0 && precio_compra > 0 && precio_venta > 0){
                 subtotal[cont]=(cantidad*precio_compra);
                 total = total+subtotal[cont];
 
-                var fila = '<tr id="fila'+cont+'"><td><input  type="text" name="Productos[]" value="'+producto+'"></td><td><input type="number" name="Cantidades[]" value="'+cantidad+'"></td><td><input type="number" name="Precios_compra[]" value="'+precio_compra+'"></td><td><input type="number" name="Precios_venta[]" value="'+precio_venta+'"></td><td>'+subtotal[cont]+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
+                var fila = '<tr id="fila'+cont+'"><td><input  type="text" name="Productos[]" class="form-control" aria-label="Amount (to the nearest dollar)" value="'+producto+'" readonly ></td><td><input type="number" name="Cantidades[]" class="form-control" aria-label="Amount (to the nearest dollar)" value="'+cantidad+'" readonly ></td><td><input type="number" name="Precios_compra[]" class="form-control" aria-label="Amount (to the nearest dollar)" value="'+precio_compra+'" readonly></td><td><input type="number" name="Precios_venta[]" class="form-control" aria-label="Amount (to the nearest dollar)" value="'+precio_venta+'" readonly></td><td><input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" value="'+subtotal[cont]+'" readonly></td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
                 cont++;
                 limpiar();
                 $('#total').html('<h1 class="btn btn-info">Total: $'+total+'<input type="number" hidden name="Total" value="'+total+'"  ></h1>');
@@ -222,6 +222,7 @@
                 $('#guardar').show();
                 $('#cancelar').show();
                 $('#volver').hide();
+                $('#tabla').show();
             }else{
                 $('#guardar').hide();
                 $('#cancelar').hide();
@@ -252,8 +253,19 @@
 <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="{{ asset('plugins/Chosen/chosen.jquery.js') }}"></script>
 
-
-
+<script>
+    $(".chosen-select").chosen();
+</script>
+<style>
+    .chosen-container-single .chosen-single div {
+        padding-top: 4px;
+    }
+    .chosen-container-single .chosen-single {
+        height: 32px !important;
+        padding: 4px 0 0 10px !important;
+    }
+</style>
 
 @endsection

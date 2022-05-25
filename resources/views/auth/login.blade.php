@@ -3,46 +3,6 @@
 @section('content')
 <br>
 <br>
-<style>
-
-    .card{
-        height: 370px;
-        width: 40%;
-        position: center;
-        background-color: #e6e6fab6;
-        border-radius: 5px;
-        border-color:rgba(114, 114, 114, 0.774);
-        display: block;
-
-    }
-    #password_request{
-        text-align: end;
-    }
-
-    body{
-        font-family:Georgia, 'Times New Roman', Times, serif;
-        background-position: center center;
-        background-attachment: fixed;
-        background-color: #66999;
-        background-size: cover;
-        background-image: url('vendor/adminlte/dist/img/Fondo_login.png');
-        background-repeat: no-repeat;
-    }
-
-    #email::placeholder{
-        font-family: "Font Awesome 6 Free";
-    }
-
-    #password::placeholder{
-        font: var(--fa-font-solid);
-        content: "\f007";
-    }
-
-    #sesion{
-        height: 66px;
-        font-size: 20px;
-    }
-</style>
 <div class="container">
     <div class="card">
         <form method="POST" action="{{ route('login') }}" >
@@ -111,5 +71,4 @@
             })
         </script>
     <?php } ?>
-
 @endsection

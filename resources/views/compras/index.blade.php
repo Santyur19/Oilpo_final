@@ -100,7 +100,7 @@
                             </table>
                         </div>
                         <div class="text-center" >
-                @can('Exportar_excel')
+                @can('Exportar_Excel')
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Fecha">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
                         <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
@@ -108,7 +108,7 @@
                     </svg>
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-file-earmark-spreadsheet" viewBox="0 0 16 16">
                         <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z"/>
-                    </svg>                
+                    </svg>
                 </button>
                 @endcan
                 <!-- <a class="btn btn-danger" onclick="Fecha()" href="{{ route('Exportar')}}">Exportar</a> -->
@@ -117,50 +117,51 @@
     </div>
 <!------------------------------------------------------------------------------------------------------------------------------------------------  -->
 
-    <div class="modal fade" id="Fecha" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Filtrado de descarga</h5>
-                @can('Exportar_excel')
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-                @endcan
-            </div>
+                        <div class="modal fade" id="Fecha" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Filtrado de descarga</h5>
+                                    @can('Exportar_excel')
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    @endcan
+                                </div>
 
-                @csrf
-                <div class="modal-body">
-                <div class="Text-center">
-                <form action="{{ route('Exportar_excel')}}" method="post">
-                    @csrf
-                    <div class="text-center" >
-                        <input type="text" hidden name="Desicion" value="Todo">
-                        @can('Exportar_excel')
-                        <button type="submit" class="btn btn-secondary" >Descargar todo</button>
-                        @endcan
-                    </div>
-                </form>
+                                    @csrf
+                                    <div class="modal-body">
+                                    <div class="Text-center">
+                                    <form action="{{ route('Exportar_excel')}}" method="post">
+                                        @csrf
+                                        <div class="text-center" >
+                                            <input type="text" hidden name="Desicion" value="Todo">
+                                            @can('Exportar_excel')
+                                            <button type="submit" class="btn btn-secondary" >Descargar todo</button>
+                                            @endcan
+                                        </div>
+                                    </form>
 
-                <form action="{{ route('Exportar_excel')}}" method="post">
-                    @csrf
-                    <label for="">Fecha minima</label>
-                    <br>
-                    <input type="date" class="form-control" required name="Fecha_minima" id="Fecha_minima" min="<?php echo $Fecha_minima ?>">
-                    </br>
-                    <label for="">Fecha Maxima</label>
-                    <br>
-                    <input type="date" class="form-control" required name="Fecha_maxima" id="Fecha_maxima" max="<?php echo $Fecha_maxima ?>">
+                                    <form action="{{ route('Exportar_excel')}}" method="post">
+                                        @csrf
+                                        <label for="">Fecha minima</label>
+                                        <br>
+                                        <input type="date" class="form-control" required name="Fecha_minima" id="Fecha_minima" min="<?php echo $Fecha_minima ?>">
+                                        </br>
+                                        <label for="">Fecha Maxima</label>
+                                        <br>
+                                        <input type="date" class="form-control" required name="Fecha_maxima" id="Fecha_maxima" max="<?php echo $Fecha_maxima ?>">
 
-                    <input type="text" hidden name="Desicion" value="Filtrar">
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Aceptar</button>
-                </div>
-                </div>
-            </form>
-        </div>
-    </div>
+                                        <input type="text" hidden name="Desicion" value="Filtrar">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a type="button" class="btn btn-danger" href="compras">Cancelar</a>
+                                        <button type="submit" class="btn btn-primary">Aceptar</button>
+                                    </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
 <!------------------------------------------------------------------------------------------------------------------------------------------------  -->
                     </div>
                 </div>
