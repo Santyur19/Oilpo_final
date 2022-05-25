@@ -27,9 +27,9 @@ class RoleSeeder extends Seeder
         $permission = Permission::create(['name' => 'Roles_editar'])->assignRole('Admin');
         $permission = Permission::create(['name' => 'Editar_estado_rol'])->assignRole('Admin');
 
-        $permission = Permission::create(['name' => 'guardar_Servicio'])->assignRole('Admin');
-        $permission = Permission::create(['name' => 'servicios'])->assignRole('Admin');
-        $permission = Permission::create(['name' => 'Servicio_editar'])->assignRole('Admin');
+        $permission = Permission::create(['name' => 'guardar_Servicio'])->assignRole('Admin', 'Empleado');
+        $permission = Permission::create(['name' => 'servicios'])->assignRole('Admin', 'Empleado');
+        $permission = Permission::create(['name' => 'Servicio_editar'])->assignRole('Admin', 'Empleado');
         $permission = Permission::create(['name' => 'Editar_estado_servicio'])->assignRole('Admin');
 
         $permission = Permission::create(['name' => 'clientes'])->syncRoles(['Admin', 'Empleado']);
@@ -61,14 +61,15 @@ class RoleSeeder extends Seeder
         $permission = Permission::create(['name' => 'Detalles'])->assignRole('Admin');
         $permission = Permission::create(['name' => 'volver_compra'])->assignRole('Admin');
         $permission = Permission::create(['name' => 'Exportar_Excel'])->assignRole('Admin');
-
+        
         $permission = Permission::create(['name' => 'ventas'])->syncRoles(['Admin', 'Empleado']);
-        $permission = Permission::create(['name' => 'Agregar_venta'])->syncRoles(['Admin', 'Empleado']);
+        $permission = Permission::create(['name' => 'Agregar_venta'])->syncRoles(['Admin']);
         $permission = Permission::create(['name' => 'Guardar_Venta'])->syncRoles(['Admin', 'Empleado']);
         $permission = Permission::create(['name' => 'Buscar_clientes'])->syncRoles(['Admin', 'Empleado']);
         $permission = Permission::create(['name' => 'Detalles_ventas'])->syncRoles(['Admin', 'Empleado']);
+        $permission = Permission::create(['name' => 'Editar_estado_ventas'])->syncRoles(['Admin']);
         $permission = Permission::create(['name' => 'volver'])->syncRoles(['Admin', 'Empleado']);
-        $permission = Permission::create(['name' => 'Exportar'])->syncRoles(['Admin', 'Empleado']);
+        $permission = Permission::create(['name' => 'Exportar'])->syncRoles(['Admin']);
         
         $permission = Permission::create(['name' => 'informes'])->assignRole('Admin');
         $permission = Permission::create(['name' => 'Informe_ventas'])->assignRole('Admin');

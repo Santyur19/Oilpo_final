@@ -70,7 +70,7 @@
         <div class="card-footer text-muted">
            
 
-            <a href="/roles">Cancelar</a>
+            <a class="btn btn-danger" href="/roles">Cancelar</a>
 
             <button type="submit" class="btn btn-success">Agregar
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-circle-dotted" viewBox="0 0 16 16">
