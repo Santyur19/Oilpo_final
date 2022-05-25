@@ -30,7 +30,7 @@
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-info">
                     <div class="inner">
-                    <a href="proveedores" style="text-decoration: none; color:white">
+                    <a id="link_proveedores" href="proveedores" style="text-decoration: none; color:white">
                         <h3 >@php  use App\Models\Proveedore;
                         echo Proveedore::count();
                         @endphp
@@ -46,7 +46,7 @@
         <div class="col-lg-3 col-6">
             <div class="small-box bg-success">
                 <div class="inner">
-                    <a href="productos" style="text-decoration: none; color:white">
+                    <a id="link_productos" href="productos" style="text-decoration: none; color:white">
                         <h3>@php  use App\Models\Producto;
                         echo Producto::count();
                         @endphp</h3>
@@ -61,7 +61,7 @@
         <div class="col-lg-3 col-6">
             <div class="small-box bg-warning">
                 <div class="inner">
-                    <a href="clientes" style="text-decoration: none; color:white">
+                    <a id="link_clientes" href="clientes" style="text-decoration: none; color:white">
 
                         <h3>@php  use App\Models\Cliente;
                             echo Cliente::count();
@@ -77,7 +77,7 @@
         <div class="col-lg-3 col-6">
             <div class="small-box bg-danger">
                 <div class="inner">
-                    <a href="servicios" style="text-decoration: none; color:white">
+                    <a id="link_servicios" href="servicios" style="text-decoration: none; color:white">
 
                         <h3>@php  use App\Models\Servicio;
                         echo Servicio::count();
@@ -96,7 +96,7 @@
         function inicio(){
             var rol = eval (<?php echo $rol; ?>);
             var nombre= rol[0].name;
-            
+
             if (nombre=="Empleado"){
 
                 $('#usuarios').hide();
@@ -104,6 +104,13 @@
                 $('#Permisos').hide();
                 $('#Compras').hide();
                 $('#Informes').hide();
+
+                //links
+                $('#link_proveedores').removeAttr('href');
+                $('#link_productos').removeAttr('href');
+                $('#link_clientes').removeAttr('href');
+                $('#link_servicios').removeAttr('href');
+
             }
         }
 
