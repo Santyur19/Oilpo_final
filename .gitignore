@@ -1,4 +1,5 @@
 /vendor/
+!vendor\laravel\framework\src\Illuminate\Foundation\Exceptions\views
 node_modules/
 npm-debug.log
 yarn-error.log
