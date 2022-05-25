@@ -19,7 +19,6 @@ class UserSeeder extends Seeder
             'email'=> 'OILPO@gmail.com',
             'password'=> bcrypt('12345678')
         ])->syncRoles('Admin');
-
         
     }
 }
