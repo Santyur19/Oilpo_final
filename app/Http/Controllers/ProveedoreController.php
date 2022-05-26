@@ -122,7 +122,7 @@ class ProveedoreController extends Controller
         abort_if(Gate::denies('editar'), 403);
         $campos_proveeedor = request()->validate([
             'Tipo_Doc_proveedor'=>'required' ,
-            'Documento_proveedor' =>'required|unique:proveedores,Documento_proveedor',
+            'Documento_proveedor' =>'',
             'Nombre_proveedor'=>'required' ,
             'Telefono_proveedor'=>'required' ,
             'Ciudad_proveedor'=>'required',
