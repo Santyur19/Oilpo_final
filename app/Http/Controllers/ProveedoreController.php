@@ -25,7 +25,7 @@ class ProveedoreController extends Controller
         $proveedores = Proveedore::paginate();
 
         $ciudad = ciudades::paginate(26);
-        
+
         return view('proveedore.index', compact('proveedores', 'ciudad'))
             ->with('i', (request()->input('page', 1) - 1) * $proveedores->perPage());
     }
@@ -121,12 +121,12 @@ class ProveedoreController extends Controller
     public function editar_proveedor(Proveedore  $proveedore){
         abort_if(Gate::denies('editar'), 403);
         $campos_proveeedor = request()->validate([
-            'Tipo_Doc_proveedor'=>'' ,
-            'Documento_proveedor' =>'',
-            'Nombre_proveedor'=>'' ,
-            'Telefono_proveedor'=>'' ,
-            'Ciudad_proveedor'=>'',
-            'Direccion_proveedor'=>''
+            'Tipo_Doc_proveedor'=>'required' ,
+            'Documento_proveedor' =>'required|unique:proveedores,Documento_proveedor',
+            'Nombre_proveedor'=>'required' ,
+            'Telefono_proveedor'=>'required' ,
+            'Ciudad_proveedor'=>'required',
+            'Direccion_proveedor'=>'required'
         ]);
         $proveedore->update($campos_proveeedor);
         return redirect()->route('proveedores.index') ->with('success', 'Proveedore created successfully.');

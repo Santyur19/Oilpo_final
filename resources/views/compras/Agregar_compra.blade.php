@@ -161,94 +161,112 @@
 </script>
 
 <script>
-        $(document).ready(function(){
-            $('#agregar').click(function(){
-                agregar();
+    //LIMITE INPUT PRECIO COMPRA
+    var input=  document.getElementById('Precio_compra');
+    input.addEventListener('input',function(){
+    if (this.value.length > 0)
+        this.value = this.value.slice(0,8);
+    })
+    //LIMITE INPUT PRECIO VENTA
+    var input=  document.getElementById('Precio_venta');
+    input.addEventListener('input',function(){
+    if (this.value.length > 0)
+        this.value = this.value.slice(0,8);
+    })
 
-        });
-        $('#cancelar').click(function(){
-            cancelar();
-
-        });
-        $('#volver').click(function(){
-                volver();
-
-        });
-
-        });
-        var cont = 0;
-        total = 0;
-        subtotal=[];
-        $('#tabla').hide();
-        $('#guardar').hide();
-        $('#cancelar').hide();
-        function agregar(){
-            // producto = $('#Productos').val();
-            var producto = $("#Producto option:selected").text();
-            precio_compra = $('#Precio_compra').val();
-            precio_venta = $('#Precio_venta').val();
-            cantidad = $('#Cantidad').val();
-
-            if(producto !="Seleccione" && cantidad > 0 && precio_compra > 0 && precio_venta > 0){
-                subtotal[cont]=(cantidad*precio_compra);
-                total = total+subtotal[cont];
-
-                var fila = '<tr id="fila'+cont+'"><td><input  type="text" name="Productos[]" class="form-control" aria-label="Amount (to the nearest dollar)" value="'+producto+'" readonly ></td><td><input type="number" name="Cantidades[]" class="form-control" aria-label="Amount (to the nearest dollar)" value="'+cantidad+'" readonly ></td><td><input type="number" name="Precios_compra[]" class="form-control" aria-label="Amount (to the nearest dollar)" value="'+precio_compra+'" readonly></td><td><input type="number" name="Precios_venta[]" class="form-control" aria-label="Amount (to the nearest dollar)" value="'+precio_venta+'" readonly></td><td><input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" value="'+subtotal[cont]+'" readonly></td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
-                cont++;
-                limpiar();
-                $('#total').html('<h1 class="btn btn-info">Total: $'+total+'<input type="number" hidden name="Total" value="'+total+'"  ></h1>');
-                evaluar();
-                $('#tabla').append(fila);
-
-            }else{
-
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Por favor llene todos los campos',
-                })
+    //LIMITE INPUT CANTIDAD
+    var input=  document.getElementById('Cantidad');
+    input.addEventListener('input',function(){
+    if (this.value.length > 0)
+        this.value = this.value.slice(0,4);
+    })
 
 
-            }
+    $(document).ready(function(){
+        $('#agregar').click(function(){
+            agregar();
+
+    });
+    $('#cancelar').click(function(){
+        cancelar();
+
+    });
+    $('#volver').click(function(){
+            volver();
+
+    });
+
+    });
+    var cont = 0;
+    total = 0;
+    subtotal=[];
+    $('#tabla').hide();
+    $('#guardar').hide();
+    $('#cancelar').hide();
+    function agregar(){
+        // producto = $('#Productos').val();
+        var producto = $("#Producto option:selected").text();
+        precio_compra = $('#Precio_compra').val();
+        precio_venta = $('#Precio_venta').val();
+        cantidad = $('#Cantidad').val();
+
+        if(producto !="Seleccione" && cantidad > 0 && precio_compra > 0 && precio_venta > 0){
+            subtotal[cont]=(cantidad*precio_compra);
+            total = total+subtotal[cont];
+
+            var fila = '<tr id="fila'+cont+'"><td><input  type="text" name="Productos[]" class="form-control" aria-label="Amount (to the nearest dollar)" value="'+producto+'" readonly ></td><td><input type="number" name="Cantidades[]" class="form-control" aria-label="Amount (to the nearest dollar)" value="'+cantidad+'" readonly ></td><td><input type="number" name="Precios_compra[]" class="form-control" aria-label="Amount (to the nearest dollar)" value="'+precio_compra+'" readonly></td><td><input type="number" name="Precios_venta[]" class="form-control" aria-label="Amount (to the nearest dollar)" value="'+precio_venta+'" readonly></td><td><input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" value="'+subtotal[cont]+'" readonly></td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
+            cont++;
+            limpiar();
+            $('#total').html('<h1 class="btn btn-info">Total: $'+total+'<input type="number" hidden name="Total" value="'+total+'"  ></h1>');
+            evaluar();
+            $('#tabla').append(fila);
+
+        }else{
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Por favor llene todos los campos',
+            })
+
+
         }
-        function limpiar(){
-            $('#Producto').val('');
-            $('#Precio_compra').val('');
-            $('#Precio_venta').val('');
-            $('#Cantidad').val('');
-        }
-        function evaluar(){
-            if (total>0){
-                $('#guardar').show();
-                $('#cancelar').show();
-                $('#volver').hide();
-                $('#tabla').show();
-            }else{
-                $('#guardar').hide();
-                $('#cancelar').hide();
-                $('#volver').show();
+    }
+    function limpiar(){
+        $('#Producto').val('');
+        $('#Precio_compra').val('');
+        $('#Precio_venta').val('');
+        $('#Cantidad').val('');
+    }
+    function evaluar(){
+        if (total>0){
+            $('#guardar').show();
+            $('#cancelar').show();
+            $('#volver').hide();
+            $('#tabla').show();
+        }else{
+            $('#guardar').hide();
+            $('#cancelar').hide();
+            $('#volver').show();
 
-            }
-
-        }
-        function eliminar(index){
-            total=total-subtotal[index];
-            if (total <= 0){
-                $('#guardar').hide();
-                $('#cancelar').hide();
-                $('#volver').show();
-            }
-            $('#total').html('<h1 class="btn btn-info">Total: $'+total+'</h1>');
-            $('#fila'+index).remove();
-            guardar();
         }
 
-        function cancelar(){
-            location.reload();
+    }
+    function eliminar(index){
+        total=total-subtotal[index];
+        if (total <= 0){
+            $('#guardar').hide();
+            $('#cancelar').hide();
+            $('#volver').show();
         }
+        $('#total').html('<h1 class="btn btn-info">Total: $'+total+'</h1>');
+        $('#fila'+index).remove();
+        guardar();
+    }
 
-
-
+    function cancelar(){
+        location.reload();
+    }
 </script>
 <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
