@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 
 
 class VentasController extends Controller
@@ -144,7 +145,7 @@ class VentasController extends Controller
                 else{
                     $cadena.="('".$Cliente."',  '".$Servicio[$i]."', '".$Fecha."',  '".$total."',  '".$Producto[$i]."' , '".$Cantidad[$i]."', '".$Iva[$i]."', '".$factura."', '".$estado."'),";
                 }
-                
+
             }
 
 
@@ -162,8 +163,8 @@ class VentasController extends Controller
 
 
 
-            // update ventas set Nombre_Producto='Nada' WHERE Nombre_Producto='undefined'; 
-            // update ventas set Cantidad='0' WHERE Cantidad='; 
+            // update ventas set Nombre_Producto='Nada' WHERE Nombre_Producto='undefined';
+            // update ventas set Cantidad='0' WHERE Cantidad=';
             // update ventas set iva='0' WHERE iva=''
 
             $cadena_final = substr($cadena, 0, -1);
@@ -291,7 +292,7 @@ class VentasController extends Controller
                                 <td>".$ventas->Fecha_venta."</td>
                                 <td>".$ventas->Cantidad."</td>
                                 <td>".$ventas->Iva."</td>
-                                <td>".$ventas->Total."</td>                                
+                                <td>".$ventas->Total."</td>
                             </tr>
                     ";
                 }
@@ -323,7 +324,15 @@ class VentasController extends Controller
         }
         DB::update("UPDATE ventas SET estado ='Inactivo' WHERE Factura='".$id."'");
         return redirect('ventas', compact('rol'))
-            ->with('inhabilitado', ' ');    
+            ->with('inhabilitado', ' ');
+    }
+
+    public function pdf(){
+
+        $pdf = PDF::loadView('ventas.pdf');
+        $pdf->loadHTML('<h1>Test</h1>');
+        return $pdf->stream();
+        return view('ventas.pdf');
     }
 
 }
