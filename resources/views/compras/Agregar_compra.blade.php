@@ -125,6 +125,7 @@
         </div>
 
     </form>
+
         <div class="text-center"> 
                         <a type="button" class="btn btn-info" href="/ventas">
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">

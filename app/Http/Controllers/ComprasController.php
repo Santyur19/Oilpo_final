@@ -172,13 +172,7 @@ class ComprasController extends Controller
             return redirect('compras/')
                 ->with('success', ' ', $productos);
 
-
         }
-
-
-
-
-
 
     }
 
@@ -188,7 +182,6 @@ class ComprasController extends Controller
 
     public function exportar_excel()
     {
-        abort_if(Gate::denies('Exportar_excel'), 403);
         date_default_timezone_set("America/Bogota");
         $fecha_actual = date("Y-m-d H:i");
 
@@ -222,14 +215,15 @@ class ComprasController extends Controller
 
             if ($Desicion=="Todo"){
 
-
-                $compras = DB:: select("SELECT DISTINCT Numero_factura, p.Nombre_proveedor, Fecha_compra, Total FROM compras  as c JOIN proveedores as p  WHERE c.Nombre_proveedor=p.id ");
                 date_default_timezone_set("America/Bogota");
                 $fecha_actual = date("Y-m-d H:i");
                 header("Content-Type: application/xls");
                 header("Content-Disposition: attachment; filename=Compras ". $fecha_actual .".xls");
                 header("Pragma: no-cache");
                 header("Expires: 0");
+                
+                $compras = DB:: select("SELECT DISTINCT Numero_factura, p.Nombre_proveedor, Fecha_compra, Total FROM compras  as c JOIN proveedores as p  WHERE c.Nombre_proveedor=p.id ");
+               
                 // $Ventas = DB:: select("SELECT DISTINCT Factura, Nombre, Nombre_Producto, Nombre_servicio, Fecha_venta, Cantidad, Iva,  Total FROM Ventas  BETWEEN $Fecha_minima and $Fecha_maxima");
 
                 foreach ($compras as $compra) {

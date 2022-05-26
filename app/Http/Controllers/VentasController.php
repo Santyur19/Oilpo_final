@@ -205,7 +205,6 @@ class VentasController extends Controller
     }
 
     public function Exportar(){
-        abort_if(Gate::denies('Exportar'), 403);
         $rol=auth()->user()->roles;
 
         date_default_timezone_set("America/Bogota");
@@ -248,6 +247,12 @@ class VentasController extends Controller
 
                 $Ventas = DB:: select("SELECT DISTINCT Factura, Nombre, Nombre_Producto, Nombre_servicio, Fecha_venta, Cantidad, Iva,  Total FROM Ventas WHERE Factura > 0");
                 // $Ventas = DB:: select("SELECT DISTINCT Factura, Nombre, Nombre_Producto, Nombre_servicio, Fecha_venta, Cantidad, Iva,  Total FROM Ventas  BETWEEN $Fecha_minima and $Fecha_maxima");
+                date_default_timezone_set("America/Bogota");
+                $fecha_actual = date("Y-m-d H:i");
+                header("Content-Type: application/xls");
+                header("Content-Disposition: attachment; filename=Ventas ". $fecha_actual .".xls");
+                header("Pragma: no-cache");
+                header("Expires: 0");
 
                 foreach ($Ventas as $ventas) {
                     $tabla .="
