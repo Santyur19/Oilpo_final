@@ -97,8 +97,13 @@ Route::post('/ventas', [App\Http\Controllers\VentasController::class, 'Guardar_v
 Route::post('ventas.Agregar_ventas', [App\Http\Controllers\VentasController::class, 'Buscar_cliente'])->name('Buscar_clientes');
 Route::post('/ventas/Detalles_ventas', [App\Http\Controllers\VentasController::class, 'Detalles'])->name('Detalles_ventas');
 Route::get('/ventas.index', [App\Http\Controllers\VentasController::class, 'volver'])->name('volver');
+Route::get('/ventas/Detalles_ventas/pdf', [App\Http\Controllers\VentasController::class, 'pdf'])->name('PDF');
 Route::post('/Exportar', [App\Http\Controllers\VentasController::class, 'Exportar'])->name('Exportar');
 Route::put('/venta', [App\Http\Controllers\VentasController::class, 'estado'] )->name('Editar_estado_ventas');
+// Route::post('/ventas.Detalles_ventas', [App\Http\Controllers\VentasController::class, 'Export_pdf'])->name('Exportar_pdf');
+
+
+
 
 
 //RUTAS INFORMES
