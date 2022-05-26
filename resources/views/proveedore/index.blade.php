@@ -37,9 +37,9 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Agregar Proveedor</h5>
-                        
+
                         <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-                       
+
                     </div>
                     <div class="modal-body">
                         <form action="{{ route('Proveedores_guardar') }}" method="POST" >
@@ -191,8 +191,8 @@
                                                 <label for="message-text" class="col-form-label" >Tipo Documento <small style="color:red;">*</small></label>
                                                 <select require class="form-select" id="recipient-name" name="Tipo_Doc_proveedor" >
 
-                                                <?php 
-                                                
+                                                <?php
+
                                                 switch($proveedore->Tipo_Doc_proveedor){
 
                                                     case "NIT":
@@ -213,7 +213,7 @@
                                                     echo '<option class="form-select" id="recipient-name" value="Cédula Extranjeria">Cédula Extranjeria</option>';
                                                         break;
                                                 };
-                                                
+
                                                 ?>
                                                 </select>
                                                 <small class="text-danger">{{$errors->first('Tipo_Doc_proveedor')}}</small>
@@ -269,6 +269,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
                             <!-- END MODAL EDITAR -->
                         @endforeach
                     </tbody>
@@ -376,11 +377,9 @@
 
 
 <?php } ?>
-        <?php if($errors->any()){ ?>
+    <?php if($errors->any()){ ?>
         <script>
             $(document).ready(function(){
-
-                $('#exampleModal').modal('show')
                 $('#modalproveedores').modal('show')
             })
         </script>
