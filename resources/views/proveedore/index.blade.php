@@ -219,8 +219,8 @@
                                                 <small class="text-danger">{{$errors->first('Tipo_Doc_proveedor')}}</small>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="message-text" class="col-form-label">Documento <small style="color:red;">*</small></label>
-                                                <input type="number" name="Documento_proveedor" class="form-control" id="recipient-name" value="{{old('Documento_proveedor', $proveedore->Documento_proveedor)}}">
+                                                <label for="message-text" class="col-form-label">Documento <small style="color:red;" >*</small></label>
+                                                <input type="number" name="Documento_proveedor" class="form-control" id="recipient-name" value="{{old('Documento_proveedor', $proveedore->Documento_proveedor)}}" disabled>
                                                 <small class="text-danger">{{$errors->first('Documento_proveedor')}}</small>
 
                                             </div>

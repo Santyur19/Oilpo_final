@@ -171,9 +171,5 @@ class ClienteController extends Controller
 
         }
 
-
-
-
-
 }
 }
