@@ -54,7 +54,7 @@ class UsuarioController extends Controller
         $usuarios = User::paginate();
         $roles = Role::all()->pluck('name', 'id');
 
-        return view('usuario.index', compact('usuarios','roles'))->with('success', ' ');
+        return redirect()->route('usuarios.index', compact('usuarios','roles'))->with('success', ' ');
     }
 
     /**

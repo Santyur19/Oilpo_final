@@ -4,7 +4,7 @@
 
 @section('css')
     <link rel="icon" href="\vendor\adminlte\dist\img\Moto.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 @endsection
@@ -12,6 +12,7 @@
 @endsection
 
 @section('content')
+<br>
 <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
@@ -94,7 +95,7 @@
                                                 @foreach ($roles as $id => $role)
                                                 <div class="form-check">
                                                     <label class="form-check-label">
-                                                        <input class="form-check-input" type="checkbox" name="roles[]" value="{{ $id }}">
+                                                        <input class="form-check-input" type="radio" name="roles[]" value="{{ $id }}">
                                                         <span class="form-check-sign">
                                                             <span class="check">
                                                                 {{ $role  }}
@@ -262,7 +263,7 @@
                                                         <div class="form-check">
                                                             <div class="form-check">
                                                                 <label class="form-check-label">
-                                                                    <input class="form-check-input" type="checkbox"
+                                                                    <input class="form-check-input" type="radio"
                                                                         name="roles[]"
                                                                         value="{{ $id }}" {{ $usuario->roles->contains($id) ? 'checked' : ' '}}>
                                                                     <span class="form-check-sign">
@@ -319,6 +320,19 @@
             </div>
         </div>
     </div>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <?php if($message = Session::get('success')){ ?>
+        <script>
+            Swal.fire({
+                position: 'top-center',
+                icon: 'success',
+                title: 'GUARDADO CON EXITO!',
+                showConfirmButton: false,
+                timer: 1500
+            })
+
+        </script>
+    <?php } ?>
     <script>
     document.addEventListener('keydown', function(event){
         if(event.key === "Escape"){

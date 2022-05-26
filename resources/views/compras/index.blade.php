@@ -135,13 +135,14 @@
                                     <form action="{{ route('Exportar_excel')}}" method="post">
                                         @csrf
                                         <div class="text-center" >
-                                            <input type="text" hidden name="Desicion" value="Todo">
-                                            @can('Exportar_excel')
-                                            <button type="submit" class="btn btn-secondary" >Descargar todo</button>
-                                            @endcan
+                                            <input type="text" hidden name="Desicion" value="Todo"> 
+                                            <?php if($todo>1){ ?>
+                                                <button type="submit" class="btn btn-secondary">Descargar todo</button>
+                                            <?php }else{ ?>
+                                                <button type="submit" class="btn btn-secondary" disabled>Descargar todo</button>
+                                            <?php } ?>
                                         </div>
                                     </form>
-
                                     <form action="{{ route('Exportar_excel')}}" method="post">
                                         @csrf
                                         <label for="">Fecha minima</label>

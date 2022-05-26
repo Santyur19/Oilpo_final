@@ -19,6 +19,9 @@ class ComprasController extends Controller
         $minimos=DB::Select("SELECT min(Fecha_compra) AS Fecha_compra FROM compras where Numero_factura > 0");
         $maximos=DB::Select("SELECT max(Fecha_compra) AS Fecha_compra FROM compras where Numero_factura > 0");
 
+        $todo = DB::Select("SELECT COUNT(*) AS todo FROM compras");
+        foreach ($todo as $todos){ $todo=$todos->todo; }
+
         foreach ($minimos as $minimo){$Fecha_minima=$minimo->Fecha_compra;}
         foreach ($maximos as $maximo){$Fecha_maxima=$maximo->Fecha_compra;}
 
@@ -26,7 +29,7 @@ class ComprasController extends Controller
         $nombre = DB:: select("SELECT DISTINCT Numero_factura, p.Nombre_proveedor, Fecha_compra, Total FROM compras  as c JOIN proveedores as p  WHERE c.Nombre_proveedor=p.id");
 
 
-        return view('compras.index', compact('compra', 'nombre', 'Fecha_minima', 'Fecha_maxima'))
+        return view('compras.index', compact('compra', 'nombre', 'Fecha_minima', 'Fecha_maxima', 'todo'))
             ->with('i', (request()->input('page', 1) - 1) * $compra->perPage());
 
     }
@@ -49,11 +52,10 @@ class ComprasController extends Controller
     {
         abort_if(Gate::denies('Detalles'), 403);
         $proveedores = DB::select("SELECT Nombre_proveedor, id FROM proveedores WHERE estado = 'Activo' ");
-        $compra = Compras::paginate();
+        $compra = Compras::all();
         $numero_facturas = DB:: select("SELECT Numero_compras FROM Compras ORDER by ID DESC LIMIT 1");
         $productos = DB::select("SELECT Nombre_Producto FROM productos WHERE estado ='Activo'");
-        return view('compras.Agregar_compra', compact('compra', 'proveedores', 'productos', 'numero_facturas'))
-            ->with('i', (request()->input('page', 1) - 1) * $compra->perPage());
+        return view('compras.Agregar_compra', compact('compra', 'proveedores', 'productos', 'numero_facturas'));
     }
 
 
@@ -222,6 +224,12 @@ class ComprasController extends Controller
 
 
                 $compras = DB:: select("SELECT DISTINCT Numero_factura, p.Nombre_proveedor, Fecha_compra, Total FROM compras  as c JOIN proveedores as p  WHERE c.Nombre_proveedor=p.id ");
+                date_default_timezone_set("America/Bogota");
+                $fecha_actual = date("Y-m-d H:i");
+                header("Content-Type: application/xls");
+                header("Content-Disposition: attachment; filename=Compras ". $fecha_actual .".xls");
+                header("Pragma: no-cache");
+                header("Expires: 0");
                 // $Ventas = DB:: select("SELECT DISTINCT Factura, Nombre, Nombre_Producto, Nombre_servicio, Fecha_venta, Cantidad, Iva,  Total FROM Ventas  BETWEEN $Fecha_minima and $Fecha_maxima");
 
                 foreach ($compras as $compra) {
