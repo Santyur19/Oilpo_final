@@ -158,7 +158,6 @@
                 @csrf
                 <div class="modal-body">
                 <div class="Text-center">
-                @can('Exportar')
                 <form action="{{ route('Exportar')}}" method="post">
                     @csrf
                     <div class="text-center" >
@@ -166,7 +165,6 @@
                         <button type="submit" class="btn btn-secondary" >Descargar todo</button>
                     </div>
                 </form>
-                @endcan
 
                 <form action="{{ route('Exportar')}}" method="post">
                     @csrf
