@@ -241,7 +241,6 @@
                                                         <strong>Cantidad Producto:</strong>
                                                         {{ $producto->Cantidad_Producto }}
                                                     </div>
-
                                                 </div>
                                             </div>
                                             </div>
@@ -255,7 +254,7 @@
                                             var id = $('#id_m').val();
                                             $(document).ready(function(){
                                                 $('#editar_producto'+id).modal('show');
-                                                $('#exampleModal').remove();
+                                                // $('#exampleModal').remove();
 
                                             })
                                             
