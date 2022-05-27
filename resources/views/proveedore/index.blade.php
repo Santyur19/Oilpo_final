@@ -3,10 +3,12 @@
 @section('title', '| Preveedores')
 
 @section('css')
-    <link rel="icon" href="\vendor\adminlte\dist\img\Moto.png">
+<link rel="icon" href="\vendor\adminlte\dist\img\Moto.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('plugins/Chosen/chosen.css') }}">
 @endsection
 @section('template_title')
 
@@ -69,13 +71,12 @@
                                 <input type="number" name="Telefono_proveedor" class="form-control" id="recipient-name" value="">
                                 <small class="text-danger">{{$errors->first('Telefono_proveedor')}}</small>
                             </div>
-                            <div>
-                                <label for="message-text" class="col-form-label">Ciudad <small style="color:red;">*</small></label>
-
-                                <select  class="form-select" id="recipient-name" name="Ciudad_proveedor" >
-                                    <option class="form-select" id="recipient-name" value="">Seleccione</option>
+                            <div class="mb-3">
+                                <label>Ciudad <small style="color:red;">*</small></label>
+                                <select style="width: 100%" class="chosen-select"  name="Ciudad_proveedor" >
+                                    <option value="">Seleccione</option>
                                 <?php foreach($ciudad as $ciudades){ ?>
-                                    <option  class="form-select" id="recipient-name" value="<?php echo $ciudades->Nombre ?>"><?php echo $ciudades->Nombre ?></option>
+                                    <option value="<?php echo $ciudades->Nombre ?>"><?php echo $ciudades->Nombre ?></option>
                                 <?php } ?>
                                 </select>
                                 <small class="text-danger">{{$errors->first('Ciudad_proveedor')}}</small>
@@ -237,7 +238,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="message-text" class="col-form-label">Ciudad <small style="color:red;">*</small></label>
-                                                <select require class="form-select" id="recipient-name" name="Ciudad_proveedor" >
+                                                <select require class="chosen-select" id="recipient-name" name="Ciudad_proveedor" >
                                                     <option value="{{old('Ciudad_proveedor', $proveedore->Ciudad_proveedor)}}">{{old('Ciudad_proveedor', $proveedore->Ciudad_proveedor)}}</option>
                                                     <?php foreach($ciudad as $ciudades){ ?>
                                                         <option class="form-select" id="recipient-name" value="<?php echo $ciudades->Nombre ?>"><?php echo $ciudades->Nombre ?></option>
@@ -306,7 +307,19 @@
         </div>
     </div>
 </div>
-
+    <style>
+        .chosen-container-single .chosen-single div {
+            padding-top: 4px;
+        }
+        .chosen-container-single .chosen-single {
+            height: 32px !important;
+            padding: 4px 0 0 10px !important;
+        }
+    </style>
+    <script src="{{ asset('plugins/Chosen/chosen.jquery.js') }}"></script>
+    <script>
+        $(".chosen-select").chosen();
+    </script>
     <script>
         document.addEventListener('keydown', function(event){
             if(event.key === "Escape"){
@@ -405,4 +418,5 @@
             $('#modalproveedores').modal({backdrop: 'static', keyboard: false})
         })
     </script>
+    
 @endsection

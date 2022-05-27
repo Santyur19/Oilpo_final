@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('plugins/Chosen/chosen.css') }}">
+
 @endsection
 @section('template_title')
 
@@ -28,7 +30,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <label for="">Cliente <small style="color:red;">*</small></label>
-                                    <select class="form-select" name="Nombre" id="Nombre_cliente" required>
+                                    <select style="width: 100%" class="chosen-select" name="Nombre" id="Nombre_cliente" required>
                                         <option value=" ">Seleccione</option>
                                         <?php foreach($clientes as  $cliente){ ?>
                                         <option value="<?php echo $cliente->Nombre ?>"><?php echo $cliente->Nombre ?></option>
@@ -55,11 +57,11 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <label id="productol">Producto <small style="color:red;">*</small></label>
-                                        <select class="form-select" name="Nombre_producto" id="producto" >
+                                        <select style="width: 100%" class="chosen-select"  name="Nombre_producto" id="producto" >
                                             <option value=" ">Seleccione</option>
                                                 <?php  foreach($productos as  $producto){ ?>
-                                            <option value="<?php echo $producto->id ?>"><?php echo $producto->Nombre_Producto ?></option>
-                                            <?php } ?>
+                                                    <option value="<?php echo $producto->id ?>"><?php echo $producto->Nombre_Producto ?></option>
+                                                <?php } ?>
                                         </select>
 
                                         <label id="lable_Precio_producto">Precio Producto</label>
@@ -83,8 +85,8 @@
                                         <select class="form-select" name="Nombre_servicio" id="servicio">
                                             <option value=" ">Seleccione</option>
                                                 <?php  foreach($servicios as $servicio){ ?>
-                                            <option value="<?php echo $servicio->Nombre_servicio ?>"><?php echo $servicio->Nombre_servicio ?></option>>
-                                            <?php } ?>
+                                                    <option value="<?php echo $servicio->Nombre_servicio ?>"><?php echo $servicio->Nombre_servicio ?></option>>
+                                                <?php } ?>
                                         </select>
                                         
                                         <label id="preciol">Precio servicio <small style="color:red;">*</small></label>
@@ -460,6 +462,19 @@
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="{{ asset('plugins/Chosen/chosen.jquery.js') }}"></script>
+    <script>
+    $(".chosen-select").chosen();
+    </script>
+    <style>
+        .chosen-container-single .chosen-single div {
+            padding-top: 4px;
+        }
+        .chosen-container-single .chosen-single {
+            height: 32px !important;
+            padding: 4px 0 0 10px !important;
+        }
+    </style>
 
 @endsection
 
