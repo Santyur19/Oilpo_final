@@ -67,7 +67,7 @@
                                 <option value="<?php echo $producto->Nombre_Producto ?>"><?php echo $producto->Nombre_Producto ?></option>
                                 <?php } ?>
                             </select>
-                            <br></br>
+                            <br>
                             <label for="">Precio compra <small style="color:red;">*</small></label>
                             <input type="number" class="form-control" id="Precio_compra" aria-describedby="helpId" placeholder="">
                             <small style="color:red;"><p id="Precio_error"> </p></small>
