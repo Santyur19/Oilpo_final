@@ -6,7 +6,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" href="Oilpo_proyecto_final\resources\css\app.css">
 @endsection
 
 
@@ -172,7 +171,7 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Editar Producto</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">Editar Producto<?php echo "EL ID: ".$producto->id; ?></h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
@@ -180,6 +179,7 @@
                                                 <form action="{{ route('ProductoEditar',$producto) }}" method="POST" >
                                                 @csrf @method('PUT')
                                                     <div class="mb-3">
+                                                        <input type="number" id="id_m" value="{{old('id', $producto->id)}}">
                                                         <label for="recipient-name" class="col-form-label">Nombre <small style="color:red;">*</small></label>
                                                         <input type="text" name="Nombre_Producto" class="form-control" id="recipient-name" value="{{old('Nombre_Producto', $producto->Nombre_Producto)}}">
                                                         <small class="text-danger">{{$errors->first('Nombre_Producto')}}</small>
@@ -215,7 +215,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <!-- modal editar  -->
                                     <!-- Modal detalles  productos-->
                                     <div class="modal fade" id="detalles_producto{{$producto->id}}" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
@@ -250,6 +249,18 @@
                                         </div>
                                     </div>
                                     <!-- End modal detalles productos -->
+                                    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+                                    <?php if($errors->any()){ ?>
+                                        <script>
+                                            var id = $('#id_m').val();
+                                            $(document).ready(function(){
+                                                $('#editar_producto'+id).modal('show');
+                                                $('#exampleModal').remove();
+
+                                            })
+                                            
+                                    </script>
+                                    <?php } ?>
                                 @endforeach
                                 </tbody>
                                 @yield('js')
