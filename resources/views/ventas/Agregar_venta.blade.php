@@ -55,18 +55,22 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <label id="productol">Producto <small style="color:red;">*</small></label>
-                                        <select class="form-select" name="Nombre_producto" id="producto">
+                                        <select class="form-select" name="Nombre_producto" id="producto" >
                                             <option value=" ">Seleccione</option>
                                                 <?php  foreach($productos as  $producto){ ?>
                                             <option value="<?php echo $producto->id ?>"><?php echo $producto->Nombre_Producto ?></option>
-
                                             <?php } ?>
                                         </select>
+
+                                        <label id="lable_Precio_producto">Precio Producto</label>
+                                        <input readonly type="number" class="form-control" id="Precio_producto" aria-describedby="helpId" placeholder="">
+                                        <small id="helpId" class="form-text text-muted"></small>
+
                                         <!-- 
                                         <label for="">Precio producto</label>
                                         <input type="number" hidden class="form-control" name="precio" id="precio" aria-describedby="helpId" placeholder="">
                                         <small id="helpId" class="form-text text-muted"></small>  -->
-
+                                        
                                         <label id="cantidadl">Cantidad <small style="color:red;">*</small></label>
                                         <input type="number" class="form-control" name="Cantidades" id="cantidad" aria-describedby="helpId" placeholder="">
                                         <small id="helpId" class="form-text text-muted"></small>
@@ -146,13 +150,31 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
+    <script>
+        document.getElementById('producto').addEventListener('change', function() {
 
+            if (this.value == " "){
+                $('#Precio_producto').hide();
+                $('#lable_Precio_producto').hide();
+            }else{
+                
+                var Array = eval (<?php echo $precio; ?>)
+
+                $('#Precio_producto').show();
+                $('#lable_Precio_producto').show();
+                $('#Precio_producto').val(Array[this.value-1].Precio_producto);
+            }
+        });
+    </script>
     <script>
         function inicio_esconder(){
             $('#agregar_servicio').hide();
             $('#agregar_producto').hide();
 
             $('#table').hide();
+
+            $('#Precio_producto').hide();
+            $('#lable_Precio_producto').hide();
 
             $('#producto').hide();
             $('#cantidad').hide();
@@ -341,6 +363,9 @@
             
         }
         function limpiar(){
+            $('#Precio_producto').hide();
+            $('#lable_Precio_producto').hide();
+
             $('#producto').val('');
             $('#cantidad').val('');
             $('#precio').val('');
