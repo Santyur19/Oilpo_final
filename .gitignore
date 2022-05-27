@@ -1,5 +1,5 @@
 /vendor/
-!/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/
+!/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/views/
 
 node_modules/
 npm-debug.log
