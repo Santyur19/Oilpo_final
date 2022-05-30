@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-A
+
         <title>@yield('title')</title>
 
         <!-- Fonts -->
@@ -13,8 +13,8 @@ A
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
-                color: #636b6f;
+                background-color: rgb(30, 205, 218);
+                color: #0588c9;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 100;
                 height: 100vh;

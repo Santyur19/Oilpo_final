@@ -36,7 +36,7 @@
                         </div>
                     </div>
 
-                    <!-- MODAL AGREGAR -->      
+                    <!-- MODAL AGREGAR -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -127,7 +127,7 @@
 										<th>Apellidos</th>
 										<th>Teléfono</th>
 										<th>Dirección</th>
-                                        <th></th>
+                                        <th>Estado</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -143,25 +143,7 @@
 											<td>{{ $cliente->Telefono }}</td>
 											<td>{{ $cliente->Direccion }}</td>
 
-                                            <td>
-                                                <?php if($cliente->estado=="Activo"){ ?>
-                                                @can('editar_cliente')
-                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editar_cliente{{$cliente->id}}" data-bs-whatever="@mdo">Editar
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
-                                                        <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
-                                                    </svg>
-                                                </button>
-                                                @endcan
-                                                <?php }else{ ?>
-                                                    @can('editar_cliente')
-                                                    <button disabled type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editar_cliente{{$cliente->id}}" data-bs-whatever="@mdo">Editar
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
-                                                            <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
-                                                        </svg>
-                                                    </button>
-                                                    @endcan
-                                                <?php } ?>
-                                            </td>
+
                                             <td>
                                                 <form action="{{ route('Editar_estado_cliente') }}" method="POST">
                                                     @csrf @method('PUT')
@@ -186,6 +168,25 @@
                                                     <?php } ?>
                                                 </form>
                                             </td>
+                                            <td>
+                                                <?php if($cliente->estado=="Activo"){ ?>
+                                                @can('editar_cliente')
+                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editar_cliente{{$cliente->id}}" data-bs-whatever="@mdo">Editar
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                                                        <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+                                                    </svg>
+                                                </button>
+                                                @endcan
+                                                <?php }else{ ?>
+                                                    @can('editar_cliente')
+                                                    <button disabled type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editar_cliente{{$cliente->id}}" data-bs-whatever="@mdo">Editar
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                                                            <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+                                                        </svg>
+                                                    </button>
+                                                    @endcan
+                                                <?php } ?>
+                                            </td>
                                         </tr>
                                         <!-- modal editar -->
                                         <div class="modal fade" id="editar_cliente{{$cliente->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -199,9 +200,9 @@
                                                     @csrf @method('PUT')
 
                                                     <label for="message-text" class="col-form-label">Tipo Documento:<small style="color:red;">*</small></label>
-                                                    <select require class="form-select"  id="" name="Tipo_documento" >
-                                                    <?php 
-                                                
+                                                    <select require class="form-select"  id="" name="Tipo_documento" required>
+                                                    <?php
+
                                                 switch($cliente->Tipo_documento){
 
                                                     case "NIT":
@@ -222,38 +223,38 @@
                                                     echo '<option class="form-select" id="recipient-name" value="Cédula Extranjeria">Cédula Extranjeria</option>';
                                                         break;
                                                 };
-                                                
+
                                                 ?>
                                                     </select>
                                                     <div class="mb-3">
                                                         <label for="message-text" class="col-form-label">Documento<small style="color:red;">*</small></label>
-                                                        <input type="number" name="Documento" class="form-control" id="recipient-name" value="{{old('Documento', $cliente->Documento)}}">
+                                                        <input type="number" name="Documento" class="form-control" id="recipient-name" value="{{old('Documento', $cliente->Documento)}}" required>
                                                         <small class="text-danger">{{$errors->first('Documento')}}</small>
 
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="message-text" class="col-form-label">Nombres<small style="color:red;">*</small></label>
-                                                        <input type="text" name="Nombre" class="form-control" id="recipient-name" value="{{old('Nombre', $cliente->Nombre)}}">
+                                                        <input type="text" name="Nombre" class="form-control" id="recipient-name" value="{{old('Nombre', $cliente->Nombre)}}" required>
                                                         <small class="text-danger">{{$errors->first('Nombre')}}</small>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="message-text" class="col-form-label">Apellidos<small style="color:red;">*</small></label>
-                                                        <input type="text" name="Apellidos" class="form-control" id="recipient-name" value="{{old('Apellidos', $cliente->Apellidos)}}">
+                                                        <input type="text" name="Apellidos" class="form-control" id="recipient-name" value="{{old('Apellidos', $cliente->Apellidos)}}" required>
                                                         <small class="text-danger">{{$errors->first('Apellidos')}}</small>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="message-text" class="col-form-label">Teléfono<small style="color:red;">*</small></label>
-                                                        <input type="number" name="Telefono" class="form-control" id="recipient-name" value="{{old('Telefono', $cliente->Telefono)}}">
+                                                        <input type="number" name="Telefono" class="form-control" id="recipient-name" value="{{old('Telefono', $cliente->Telefono)}}" required>
                                                         <small class="text-danger">{{$errors->first('Telefono')}}</small>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="message-text" class="col-form-label">Dirección<small style="color:red;">*</small></label>
-                                                        <input type="text" name="Direccion" class="form-control" id="recipient-name" value="{{old('Direccion', $cliente->Direccion)}}">
+                                                        <input type="text" name="Direccion" class="form-control" id="recipient-name" value="{{old('Direccion', $cliente->Direccion)}}" required>
                                                         <small class="text-danger">{{$errors->first('Direccion')}}</small>
                                                     </div>
-        
+
                                                     <div class="modal-footer">
-                                                        <a href="" type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar
+                                                        <button id="cerrar" type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
                                                                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                                                 <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
@@ -396,7 +397,7 @@
         function inicio(){
             var rol = eval (<?php echo $rol; ?>);
             var nombre= rol[0].name;
-            
+
             if (nombre=="Empleado"){
 
                 $('#usuarios').hide();

@@ -104,6 +104,7 @@
                                                     </label>
                                                 </div>
                                                 @endforeach
+                                                <span class="error text-danger" for="input-password">{{ $errors->first('roles') }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -236,21 +237,21 @@
                                                 @csrf @method('PUT')
                                                 <div class="mb-3">
                                                     <label for="name" class="col-form-label">Nombre <small style="color:red;">*</small></label>
-                                                    <input type="text" class="form-control" name="name" placeholder="Ingrese su nombre" value="{{old('name', $usuario->name)}}" autofocus>
+                                                    <input type="text" class="form-control" name="name" placeholder="Ingrese su nombre" value="{{old('name', $usuario->name)}}" autofocus required>
                                                     @if ($errors->has('name'))
                                                         <span class="error text-danger" for="input-name">{{ $errors->first('name') }}</span>
                                                     @endif
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="username" class="col-form-label">Nombre de usuario <small style="color:red;">*</small></label>
-                                                    <input type="text" class="form-control" name="username" placeholder="Ingrese su nombre de usuario" value="{{old('name', $usuario->name)}}">
+                                                    <input type="text" class="form-control" name="username" placeholder="Ingrese su nombre de usuario" value="{{old('name', $usuario->name)}}" required>
                                                     @if ($errors->has('name'))
                                                         <span class="error text-danger" for="input-username">{{ $errors->first('name') }}</span>
                                                     @endif
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="email" class="col-form-label">Correo <small style="color:red;">*</small></label>
-                                                    <input type="email" class="form-control" name="email" placeholder="Ingrese su correo" value="{{old('email', $usuario->email)}}">
+                                                    <input type="email" class="form-control" name="email" placeholder="Ingrese su correo" value="{{old('email', $usuario->email)}}" required>
                                                     @if ($errors->has('email'))
                                                         <span class="error text-danger" for="input-email">{{ $errors->first('email') }}</span>
                                                     @endif
@@ -265,7 +266,7 @@
                                                                 <label class="form-check-label">
                                                                     <input class="form-check-input" type="radio"
                                                                         name="roles[]"
-                                                                        value="{{ $id }}" {{ $usuario->roles->contains($id) ? 'checked' : ' '}}>
+                                                                        value="{{ $id }}" {{ $usuario->roles->contains($id) ? 'checked' : ' '}} required>
                                                                     <span class="form-check-sign">
                                                                         <span class="check" value="">{{ $role }}</span>
                                                                     </span>

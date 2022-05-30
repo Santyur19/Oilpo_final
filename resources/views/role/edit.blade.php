@@ -20,8 +20,10 @@
     <div class="card text-center">
         <div class="card-header">
             <label for="">Nombre</label>
-            <input type="text" class="form-control" name="name" value="{{ old('name', $roles->name) }}" autocomplete="off" autofocus>
+            <input type="text" class="form-control" name="name" value="{{ old('name', $roles->name) }}" required>
+            <span class="error text-danger" for="input-Nombre_Rol">{{ $errors->first('name') }}</span>
         </div>
+        <br>
         <div class="card-body">
             <table id="tabla" class="table">
                 <thead>
@@ -34,7 +36,7 @@
                 @foreach ($permissions as $id => $permission)
                     <tr>
                         <td>
-                            <input class="form-check-input" type="checkbox" name="permissions[]" value="{{ $id }}" {{ $roles->permissions->contains($id) ? 'checked' : '' }}>
+                            <input class="form-check-input" type="checkbox" name="permissions[]" value="{{ $id }}" {{ $roles->permissions->contains($id) ? 'checked' : '' }} >
                             <span class="form-check-sign">
                                 <span class="check" value=""></span>
                             </span>

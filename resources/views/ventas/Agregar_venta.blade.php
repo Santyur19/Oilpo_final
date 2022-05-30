@@ -57,7 +57,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <label id="productol">Producto <small style="color:red;">*</small></label>
-                                        <select style="width: 100%" class="chosen-select"  name="Nombre_producto" id="producto" >
+                                        <select class="form-select"  name="Nombre_producto" id="producto" >
                                             <option value=" ">Seleccione</option>
                                                 <?php  foreach($productos as  $producto){ ?>
                                                     <option value="<?php echo $producto->id ?>"><?php echo $producto->Nombre_Producto ?></option>
@@ -68,18 +68,18 @@
                                         <input readonly type="number" class="form-control" id="Precio_producto" aria-describedby="helpId" placeholder="">
                                         <small id="helpId" class="form-text text-muted"></small>
 
-                                        <!-- 
+                                        <!--
                                         <label for="">Precio producto</label>
                                         <input type="number" hidden class="form-control" name="precio" id="precio" aria-describedby="helpId" placeholder="">
                                         <small id="helpId" class="form-text text-muted"></small>  -->
-                                        
+
                                         <label id="cantidadl">Cantidad <small style="color:red;">*</small></label>
                                         <input type="number" class="form-control" name="Cantidades" id="cantidad" aria-describedby="helpId" placeholder="">
                                         <small id="helpId" class="form-text text-muted"></small>
 
                                         <label id="ival">Iva <small style="color:red;">*</small></label>
                                         <input type="number" class="form-control" name="ivas" id="iva" aria-describedby="helpId" placeholder="" >
-                                        <small id="helpId" class="form-text text-muted"></small> 
+                                        <small id="helpId" class="form-text text-muted"></small>
 
                                         <label id="serviciol">Servicio <small style="color:red;">*</small></label>
                                         <select class="form-select" name="Nombre_servicio" id="servicio">
@@ -88,7 +88,7 @@
                                                     <option value="<?php echo $servicio->Nombre_servicio ?>"><?php echo $servicio->Nombre_servicio ?></option>>
                                                 <?php } ?>
                                         </select>
-                                        
+
                                         <label id="preciol">Precio servicio <small style="color:red;">*</small></label>
                                         <input type="number" class="form-control" name="precio" id="precio" aria-describedby="helpId" placeholder="">
                                         <small id="helpId" class="form-text text-muted"></small>
@@ -101,7 +101,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                             <div id="table" class="table-responsive">
 
@@ -131,7 +131,7 @@
             </form>
             <br>
             <br>
-            <div class="text-center"> 
+            <div class="text-center">
                     <a id="volver" type="button" class="btn btn-info" href="/ventas">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z"/>
@@ -159,7 +159,7 @@
                 $('#Precio_producto').hide();
                 $('#lable_Precio_producto').hide();
             }else{
-                
+
                 var Array = eval (<?php echo $precio; ?>)
 
                 $('#Precio_producto').show();
@@ -189,7 +189,7 @@
             $('#cantidadl').hide();
             $('#serviciol').hide();
             $('#preciol').hide();
-            
+
             $('#estorbo').hide();
 
         }
@@ -222,7 +222,7 @@
 
             });
         });
-        
+
     </script>
     <script>
         function Producto(){
@@ -233,8 +233,8 @@
             $('#servicio').hide();
             $('#precio').hide();
 
-            
-        } 
+
+        }
         function Servicio(){
 
             $('#servicio').show();
@@ -243,7 +243,7 @@
             $('#productol').hide();
             $('#cantidad').hide();
             $('#iva').hide();
-        } 
+        }
     </script>
     <script>
         $(document).ready(function() {
@@ -349,20 +349,20 @@
                     totalt[cont]=(subtotal[cont]+ivat);
                     total = total + totalt[cont];
 
-                    
+
                     ivat=0;
 
                     var fila = '<tr id="fila'+cont+'"><td><input class="input-group-text" type="text" name="producto[]" value="'+producto+'" readonly><td><input class="input-group-text" type="text" name="servicio[]" value=" " readonly></td></td><td><input class="input-group-text" type="number" name="Cantidad[]" value="'+cantidad+'" readonly></td><td><input class="input-group-text" type="number" name="precio[]" value="" readonly></td><td><input class="input-group-text" type="number" name="precio[]" value="'+precio_producto+'" readonly></td><td><input class="input-group-text" type="number" name="iva[]" value="'+iva+'" readonly></td><td>'+subtotal[cont]+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
 
                 }
-            
+
             }
             cont++;
             limpiar();
             $('#total').html('<h1 class="btn btn-info">Total: $'+total.toFixed(0)+'<input type="number" hidden name="Total" value="'+total+'"  ></h1>');
             evaluar();
             $('#tabla').append(fila);
-            
+
         }
         function limpiar(){
             $('#Precio_producto').hide();
@@ -421,7 +421,7 @@
 
             $('#serviciol').hide();
             $('#preciol').hide();
-        } 
+        }
         function Servicio(){
 
             $('#lista').show();
@@ -439,14 +439,14 @@
             $('#preciol').show();
 
 
-        } 
+        }
 
         </script>
     <script>
         function inicio(){
             var rol = eval (<?php echo $rol; ?>);
             var nombre= rol[0].name;
-            
+
             if (nombre=="Empleado"){
 
                 $('#usuarios').hide();
@@ -464,17 +464,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="{{ asset('plugins/Chosen/chosen.jquery.js') }}"></script>
     <script>
-    $(".chosen-select").chosen();
+        $(".chosen-select").chosen();
     </script>
-    <style>
-        .chosen-container-single .chosen-single div {
-            padding-top: 4px;
-        }
-        .chosen-container-single .chosen-single {
-            height: 32px !important;
-            padding: 4px 0 0 10px !important;
-        }
-    </style>
-
 @endsection
 
