@@ -121,22 +121,18 @@
             <button id="guardar" type="submit" class="btn btn-primary">Agregar</button>
             @endcan
             <button id="cancelar" type="button" onclick="cancelar()" class="btn btn-danger">Cancelar</button>
-
         </div>
-
     </form>
-
-        <div class="text-center"> 
-                        <a type="button" class="btn btn-info" href="/ventas">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z"/>
-                                <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
-                            </svg>
-                        
-                            Volver
-                        </a>
-                    </div>
+        <div class="text-center">
+            <a id="volver" type="button" class="btn btn-info" href="/compras">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z"/>
+                    <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
+                </svg>
+                Volver
+            </a>
         </div>
+    </div>
 </div>
 @yield('js')
 
@@ -146,18 +142,6 @@
 <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-{{-- SELECT 2   --}}
-
-<script>
-    $(document).ready(function() {
-        $('.js-example-theme-single').select2({
-            width: 'resolve',
-            theme: "classic"
-        });
-    });
-
-</script>
 
 <script>
     //LIMITE INPUT PRECIO COMPRA
@@ -246,7 +230,7 @@
         }else{
             $('#guardar').hide();
             $('#cancelar').hide();
-            $('#volver').show();
+            $('#volver').hide();
 
         }
 
@@ -256,7 +240,7 @@
         if (total <= 0){
             $('#guardar').hide();
             $('#cancelar').hide();
-            $('#volver').show();
+            $('#volver').hide();
         }
         $('#total').html('<h1 class="btn btn-info">Total: $'+total+'</h1>');
         $('#fila'+index).remove();

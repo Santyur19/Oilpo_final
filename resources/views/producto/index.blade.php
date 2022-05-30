@@ -101,8 +101,8 @@
 										<th>Valor venta</th>
                                         <th>Valor compra</th>
 										<th>Cantidad Producto</th>
-                                        <th></th>
                                         <th>Estado</th>
+                                        <th></th>
 
                                     </tr>
                                 </thead>
@@ -115,32 +115,7 @@
                                             <td>$ {{ $producto->Valor_compra }}</td>
 											<td>{{ $producto->Cantidad_Producto }}</td>
 
-                                            <td>
-                                                <form class="borrar" action="{{ route('productos.destroy',$producto->id) }}" method="POST">
-                                                    <!-- ESTADO ACTIVO -->
-                                                    <?php if($producto->estado=="Activo"){ ?>
-                                                    @can('ProductoEditar')
-                                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editar_producto{{$producto->id}}" data-bs-whatever="@mdo">Editar
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
-                                                            <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
-                                                    </svg>
-                                                    </button>
-                                                    @endcan
-                                                    <?php }else{ ?>
-                                                        <!-- ESTADO INACTIVO -->
-                                                        @can('ProductoEditar')
-                                                        <button disabled type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editar_producto{{$producto->id}}" data-bs-whatever="@mdo">Editar
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
-                                                                <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
-                                                        </svg>
-                                                        </button>
-                                                        @endcan
-                                                    <?php } ?>
-                                                    @csrf
 
-
-                                                </form>
-                                            </td>
                                             <td>
                                                 <form action="{{ route('Editar_estado') }}" method="POST">
                                                     @csrf @method('PUT')
@@ -165,13 +140,39 @@
                                                     <?php } ?>
                                                 </form>
                                             </td>
+                                            <td>
+                                                <form class="borrar" action="{{ route('productos.destroy',$producto->id) }}" method="POST">
+                                                    <!-- ESTADO ACTIVO -->
+                                                    <?php if($producto->estado=="Activo"){ ?>
+                                                    @can('ProductoEditar')
+                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editar_producto{{$producto->id}}" data-bs-whatever="@mdo">Editar
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                                                            <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+                                                    </svg>
+                                                    </button>
+                                                    @endcan
+                                                    <?php }else{ ?>
+                                                        <!-- ESTADO INACTIVO -->
+                                                        @can('ProductoEditar')
+                                                        <button disabled type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editar_producto{{$producto->id}}" data-bs-whatever="@mdo">Editar
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                                                                <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+                                                        </svg>
+                                                        </button>
+                                                        @endcan
+                                                    <?php } ?>
+                                                    @csrf
+
+
+                                                </form>
+                                            </td>
                                         </tr>
                                         <!-- modal editar  -->
                                         <div class="modal fade" id="editar_producto{{$producto->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Editar Producto<?php echo "EL ID: ".$producto->id; ?></h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">Editar Producto</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
@@ -179,9 +180,8 @@
                                                 <form action="{{ route('ProductoEditar',$producto) }}" method="POST" >
                                                 @csrf @method('PUT')
                                                     <div class="mb-3">
-                                                        <input type="number" id="id_m" value="{{old('id', $producto->id)}}">
                                                         <label for="recipient-name" class="col-form-label">Nombre <small style="color:red;">*</small></label>
-                                                        <input type="text" name="Nombre_Producto" class="form-control" id="recipient-name" value="{{old('Nombre_Producto', $producto->Nombre_Producto)}}">
+                                                        <input type="text" name="Nombre_Producto" class="form-control" id="recipient-name" value="{{old('Nombre_Producto', $producto->Nombre_Producto)}}" required>
                                                         <small class="text-danger">{{$errors->first('Nombre_Producto')}}</small>
                                                     </div>
                                                     {{-- <div class="mb-3">
@@ -257,7 +257,7 @@
                                                 // $('#exampleModal').remove();
 
                                             })
-                                            
+
                                     </script>
                                     <?php } ?>
                                 @endforeach

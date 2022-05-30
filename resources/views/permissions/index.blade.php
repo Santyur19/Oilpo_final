@@ -26,7 +26,7 @@
         <tr>
         <th scope="col">#</th>
         <th scope="col">Nombre</th>
-        <th></th>
+        <th>Estado</th>
         </tr>
     </thead>
     <tbody>

@@ -56,7 +56,7 @@ class RolesController extends Controller
         $rol = Role::all();
 
 
-        return view ('role.index', compact('rol'))->with('success','Rol creado correctamente');
+        return view ('role.index', compact('rol'))->with('success',' ');
     }
 
 
@@ -89,6 +89,10 @@ class RolesController extends Controller
     public function update(Request $request, Role $roles)
     {
         abort_if(Gate::denies('Roles_editar'), 403);
+        $request->validate([
+            'name' => 'required',
+            'permissions'=> 'required'
+        ]);
         $roles->update($request->only('name'));
 
         // $role->permissions()->sync($request->input('permissions', []));
