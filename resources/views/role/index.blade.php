@@ -52,7 +52,7 @@
                     <th scope="col">Permisos</th>
                     <th scope="col">Estado</th>
                     <th scope="col"></th>
-                    <th></th>
+                    <th>Acciones</th>
 
                     </tr>
                 </thead>

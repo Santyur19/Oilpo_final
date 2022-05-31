@@ -54,8 +54,8 @@
                                         <th>Cliente</th>
                                         <th>Fecha de venta</th>
                                         <th>Total</th>
-                                        <th> </th>
-                                        <th> </th>
+                                        <th >Acciones</th>
+                                        <th >Estado</th>
                                     </tr>
                                 </thead>
                                 <tbody>

@@ -128,7 +128,7 @@
 										<th>Teléfono</th>
 										<th>Dirección</th>
                                         <th>Estado</th>
-                                        <th></th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>

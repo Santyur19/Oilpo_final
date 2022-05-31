@@ -102,8 +102,7 @@
                                         <th>Valor compra</th>
 										<th>Cantidad Producto</th>
                                         <th>Estado</th>
-                                        <th></th>
-
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>

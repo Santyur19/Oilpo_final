@@ -46,7 +46,7 @@
                                         <th>Proveedor</th>
                                         <th>Numero de factura</th>
                                         <th>Fecha de compra</th>
-                                        <th></th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>

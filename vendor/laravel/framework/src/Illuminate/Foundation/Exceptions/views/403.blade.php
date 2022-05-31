@@ -1,4 +1,3 @@
-
 @extends('errors::illustrated-layout')
 
 @section('title', __('No autorizado'))
@@ -11,14 +10,18 @@
 <style>
     body{
         background-color: rgb(45, 143, 255);
-
     }
     #image{
         width: 80%;
         position: absolute;
     }
-
 </style>
 @endsection
 
 @section('message', __($exception->getMessage() ?: 'No autorizado'))
+© 2022 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
