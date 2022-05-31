@@ -96,6 +96,7 @@
         function inicio(){
             var rol = eval (<?php echo $rol; ?>);
             var nombre= rol[0].name;
+            console.log(nombre);
 
             if (nombre=="Empleado"){
 

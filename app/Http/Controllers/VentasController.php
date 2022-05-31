@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 
 class VentasController extends Controller
@@ -318,6 +319,11 @@ class VentasController extends Controller
         DB::update("UPDATE ventas SET estado ='Inactivo' WHERE Factura='".$id."'");
         return redirect('ventas')
             ->with('inhabilitado', ' ');    
+    }
+    public function pdf(){
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTML('<h1>Test</h1>');
+        return redirect ('ventas');
     }
 
 }

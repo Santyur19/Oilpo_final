@@ -68,6 +68,7 @@ Route::put('/proveedores{proveedore}', [App\Http\Controllers\ProveedoreControlle
 Route::put('/proveedores', [App\Http\Controllers\ProveedoreController::class, 'update_status'])->name('Editar_estado_proveedor');
 
 //RUTAS USUARIOS
+
 Route::resource('/usuarios', App\Http\Controllers\UsuarioController::class);
 Route::get('/usuario/create', [App\Http\Controllers\UsuarioController::class, 'create' ])->name('Usuario_crear');
 Route::post('/usuarios', [App\Http\Controllers\UsuarioController::class, 'store' ])->name('Usuario_guardar');
