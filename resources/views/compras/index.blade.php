@@ -136,11 +136,7 @@
                                         @csrf
                                         <div class="text-center" >
                                             <input type="text" hidden name="Desicion" value="Todo"> 
-                                            <?php if($todo>1){ ?>
-                                                <button type="submit" class="btn btn-secondary">Descargar todo</button>
-                                            <?php }else{ ?>
-                                                <button type="submit" class="btn btn-secondary" disabled>Descargar todo</button>
-                                            <?php } ?>
+                                            <button type="submit" class="btn btn-secondary">Descargar todo</button>
                                         </div>
                                     </form>
                                     <form action="{{ route('Exportar_excel')}}" method="post">
@@ -170,6 +166,20 @@
         </div>
     </div>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <?php if($message = Session::get('Vacio')){ ?>
+        <p>{{$message}}</p>
+        <script>
+
+        Swal.fire({
+            position: 'top-center',
+            icon: 'warning',
+            title: 'No hay datos para descargar!',
+            showConfirmButton: false,
+            timer: 1500
+        })
+
+        </script>
+    <?php } ?>
 
     <?php if($message = Session::get('Vacio')){ ?>
         <p>{{$message}}</p>

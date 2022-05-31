@@ -28,6 +28,7 @@ class HomeController extends Controller
     public function index()
     {
         $rol=auth()->user()->roles;
+        
         return view('admin.index', compact('rol'));
     }
 }

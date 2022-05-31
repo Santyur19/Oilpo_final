@@ -47,7 +47,7 @@
                                     </button>
                                 </div>
                             <div class="modal-body">
-                            <form action="{{ route('Usuario_guardar') }}" method="post" class="form-horizontal">
+                            <form action="{{ route('Usuario_guardar') }}" method="POST" class="form-horizontal">
                                     @csrf
                                     <div class="card">
                                         <div class="card-body">
@@ -157,71 +157,70 @@
                                     <th class="text-right">Acciones</th>
                                 </thead>
                                 <tbody>
-                            <?php foreach ($usuarios as $usuario){?>
-                                    <tr>
-                                    <td>{{ $usuario->id }}</td>
-                                    <td>{{ $usuario->name }}</td>
-                                    <td>{{ $usuario->email }}</td>
+                                    <?php foreach ($usuarios as $usuario){?>
+                                        <tr>
+                                            <td>{{ $usuario->id }}</td>
+                                            <td>{{ $usuario->name }}</td>
+                                            <td>{{ $usuario->email }}</td>
 
-                                    <td>
-                                    @forelse ($usuario->roles as $rol)
-                                        <span class="badge badge-info">{{ $rol->name }}</span>
-                                    @empty
-                                        <span class="badge badge-danger">No roles</span>
-                                    @endforelse
-                                    </td>
-                                    <td>
-                                    @can('usuario_edit')
-                                        <a href="{{ route('Editar_usuario', $usuario->id) }}" class="btn btn-success"> <i
-                                        class="material-icons">edit</i> </a>
-                                    @endcan
-                                    <form action="{{ route('Editar_estado_usuario') }}" method="POST">
-                                        @csrf @method('PUT')
-
-                                        <?php if($usuario->estado=="Activo") { ?>
-                                            <input  hidden type="number" name="id" value="<?php echo $usuario->id ?>">
-                                            <input hidden type="text" name="Activo" id="" value="<?php echo $usuario->estado ?>">
-                                            @can('Editar_estado_usuario')
-                                            <button type="submit" class="btn btn-success"><?php echo $usuario->estado ?>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16">
-                                                    <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/>
-                                                    <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/>
-                                                </svg>
-                                            </button>
+                                            <td>
+                                            @forelse ($usuario->roles as $rol)
+                                                <span class="badge badge-info">{{ $rol->name }}</span>
+                                            @empty
+                                                <span class="badge badge-danger">No roles</span>
+                                            @endforelse
+                                            </td>
+                                            <td>
+                                            @can('usuario_edit')
+                                                <a href="{{ route('Editar_usuario', $usuario->id) }}" class="btn btn-success"> <i
+                                                class="material-icons">edit</i> </a>
                                             @endcan
-                                        <?php }else{ ?>
-                                            <input hidden  type="number" name="id" value="<?php echo $usuario->id ?>">
-                                            <input hidden  type="text" name="Inactivo" id="" value="<?php echo $usuario->estado ?>">
-                                            @can('Editar_estado_usuario')
-                                            <button type="submit" class="btn btn-secondary"><?php echo $usuario->estado ?></button>
-                                            @endcan
-                                        <?php } ?>
-                                    </form>
-                                    </td>
-                                    <td>
-                                        <form action="{{ route('Editar_usuario', $usuario) }}" method="POST">
-                                            @csrf @method('PUT')
-                                            <?php if($usuario->estado=="Activo"){ ?>
-                                                @can('Editar_usuario')
-                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editar{{ $usuario->id }}" data-bs-whatever="@fat">Editar
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
-                                                    <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
-                                                </svg>
-                                                </button>
-                                                @endcan
-                                            <?php }else{ ?>
-                                                @can('Editar_usuario')
-                                                <button disabled type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editar{{ $usuario->id }}" data-bs-whatever="@fat">Editar
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
-                                                        <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
-                                                    </svg>
-                                                </button>
-                                                @endcan
-                                            <?php } ?>
-                                        </form>
-                                    </td>
+                                            <form action="{{ route('Editar_estado_usuario') }}" method="POST">
+                                                @csrf @method('PUT')
 
-                                </tr>
+                                                <?php if($usuario->estado=="Activo") { ?>
+                                                    <input  hidden type="number" name="id" value="<?php echo $usuario->id ?>">
+                                                    <input hidden type="text" name="Activo" id="" value="<?php echo $usuario->estado ?>">
+                                                    @can('Editar_estado_usuario')
+                                                    <button type="submit" class="btn btn-success"><?php echo $usuario->estado ?>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16">
+                                                            <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/>
+                                                            <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/>
+                                                        </svg>
+                                                    </button>
+                                                    @endcan
+                                                <?php }else{ ?>
+                                                    <input hidden  type="number" name="id" value="<?php echo $usuario->id ?>">
+                                                    <input hidden  type="text" name="Inactivo" id="" value="<?php echo $usuario->estado ?>">
+                                                    @can('Editar_estado_usuario')
+                                                    <button type="submit" class="btn btn-secondary"><?php echo $usuario->estado ?></button>
+                                                    @endcan
+                                                <?php } ?>
+                                            </form>
+                                            </td>
+                                            <td>
+                                                <form action="{{ route('Editar_usuario', $usuario) }}" method="POST">
+                                                    @csrf @method('PUT')
+                                                    <?php if($usuario->estado=="Activo"){ ?>
+                                                        @can('Editar_usuario')
+                                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editar{{ $usuario->id }}" data-bs-whatever="@fat">Editar
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                                                            <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+                                                        </svg>
+                                                        </button>
+                                                        @endcan
+                                                    <?php }else{ ?>
+                                                        @can('Editar_usuario')
+                                                        <button disabled type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editar{{ $usuario->id }}" data-bs-whatever="@fat">Editar
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                                                                <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+                                                            </svg>
+                                                        </button>
+                                                        @endcan
+                                                    <?php } ?>
+                                                </form>
+                                            </td>
+                                        </tr>
                                 <!-- EDITAR -->
                                 <div class="modal fade" id="editar{{ $usuario->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -231,7 +230,7 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                    <form action="{{ route('Editar_usuario', $usuario) }}" method="POST">
+                                            <form action="{{ route('Editar_usuario', $usuario) }}" method="POST">
                                                 @csrf @method('PUT')
                                                 <div class="mb-3">
                                                     <label for="name" class="col-form-label">Nombre <small style="color:red;">*</small></label>
