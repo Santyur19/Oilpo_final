@@ -26,11 +26,7 @@
                         </span>
                     @enderror
                 </div>
-                <div class="mb-12 form-check">
-                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                    <label class="form-check-label" for="exampleCheck1">Recuérdame</label>
-                </div>
-                <div id="password_request">
+                <div id="password_request" class="text-center">
                     @if (Route::has('password.request'))
                         <a class="btn btn-link" href="{{ route('password.request') }}">
                             {{ __('¿Olvidaste tu contraseña?') }}
@@ -38,6 +34,7 @@
                     @endif
                 </div>
             </div>
+            <br>
             <div class="card-footer-fluid">
                 <button id="sesion" type="submit" class="btn btn-primary form-control">
                     Iniciar sesión
