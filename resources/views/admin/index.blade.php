@@ -120,7 +120,7 @@
 
         for (var i = 0; i < Array.length; i++){
             var permisos = Array[i].permiso;
-
+            
             switch (permisos){
 
                 case 1:
