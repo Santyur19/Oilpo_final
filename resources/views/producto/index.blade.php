@@ -248,18 +248,6 @@
                                         </div>
                                     </div>
                                     <!-- End modal detalles productos -->
-                                    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-                                    <?php if($errors->any()){ ?>
-                                        <script>
-                                            var id = $('#id_m').val();
-                                            $(document).ready(function(){
-                                                $('#editar_producto'+id).modal('show');
-                                                // $('#exampleModal').remove();
-
-                                            })
-
-                                    </script>
-                                    <?php } ?>
                                 @endforeach
                                 </tbody>
                                 @yield('js')
@@ -382,7 +370,7 @@
         $('#informes').hide();
         $('#permisos').hide();
         $('#proveedores').hide();
-        
+
         //links
         $('#link_proveedores').removeAttr('href');
         $('#link_productos').removeAttr('href');

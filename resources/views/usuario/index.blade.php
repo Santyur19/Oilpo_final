@@ -167,7 +167,11 @@
 
                                             <td>
                                             @forelse ($usuario->roles as $rol)
-                                                <span class="badge badge-info">{{ $rol->name }}</span>
+                                                <?php if($rol->name == "Admin"){ ?>
+                                                    <span class="badge badge-primary">{{ $rol->name }}</span>
+                                                <?php }else{ ?>
+                                                    <span class="badge badge-success">{{ $rol->name }}</span>
+                                                <?php } ?>
                                             @empty
                                                 <span class="badge badge-danger">No roles</span>
                                             @endforelse
@@ -364,7 +368,7 @@
     <script>
         function inicio(){
 
-            <?php 
+            <?php
 
                 $role=auth()->user()->roles[0]->id;
                 $Permiso_consulta=DB::Select("SELECT permission_id as permiso FROM role_has_permissions WHERE role_id = $role");
