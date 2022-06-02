@@ -30,7 +30,7 @@ class ServicioController extends Controller
 
     public function index()
     {
-        abort_if(Gate::denies('guardar_Servicio'), 403);
+        abort_if(Gate::denies('guardar_Servicio'), 401);
 
         // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
         $role=auth()->user()->roles[0]->id;
@@ -80,7 +80,7 @@ class ServicioController extends Controller
     // }
 
     public function servicio_guardar(){
-        abort_if(Gate::denies('guardar_Servicio'), 403);
+        abort_if(Gate::denies('guardar_Servicio'), 401);
         $rol=auth()->user()->roles;
 
         $campos = request()->validate([
@@ -98,7 +98,7 @@ class ServicioController extends Controller
      */
     public function show($id)
     {
-        abort_if(Gate::denies('guardar_Servicio'), 403);
+        abort_if(Gate::denies('guardar_Servicio'), 401);
 
         // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
         $role=auth()->user()->roles[0]->id;
@@ -148,7 +148,7 @@ class ServicioController extends Controller
     //         ->with('success', 'Servicio updated successfully');
     // }
     public function editar_servicio(Servicio  $servicio){
-        abort_if(Gate::denies('Servicio_editar'), 403);
+        abort_if(Gate::denies('Servicio_editar'), 401);
 
         $campos = request()->validate([
             'Nombre_servicio' =>'required',
@@ -171,7 +171,7 @@ class ServicioController extends Controller
     }
 
     public function update_status(){
-        abort_if(Gate::denies('Editar_estado_servicio'), 403);
+        abort_if(Gate::denies('Editar_estado_servicio'), 401);
         $id = $_POST['id'];
         $activo = isset($_POST['Activo']);
 

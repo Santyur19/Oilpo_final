@@ -15,7 +15,7 @@ class ComprasController extends Controller
     public function index()
 
     {
-        abort_if(Gate::denies('Agregar_compra'), 403);
+        abort_if(Gate::denies('Agregar_compra'), 401);
 
         // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
         $role=auth()->user()->roles[0]->id;
@@ -29,7 +29,7 @@ class ComprasController extends Controller
         }
         $rol=Json_encode($Permiso_inicial);
         //------------------------------------------------------------------------------------------------------------------------
-        
+
         $minimos=DB::Select("SELECT min(Fecha_compra) AS Fecha_compra FROM compras where Numero_factura > 0");
         $maximos=DB::Select("SELECT max(Fecha_compra) AS Fecha_compra FROM compras where Numero_factura > 0");
 
@@ -49,7 +49,7 @@ class ComprasController extends Controller
     }
 
     public function detalle(){
-        abort_if(Gate::denies('Detalles'), 403);
+        abort_if(Gate::denies('Detalles'), 401);
 
         // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
         $role=auth()->user()->roles[0]->id;
@@ -77,7 +77,7 @@ class ComprasController extends Controller
     public function show()
 
     {
-        abort_if(Gate::denies('Detalles'), 403);
+        abort_if(Gate::denies('Detalles'), 401);
 
         // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
         $role=auth()->user()->roles[0]->id;
@@ -101,7 +101,7 @@ class ComprasController extends Controller
 
 
     public function Agregar_producto_compra(){
-        abort_if(Gate::denies('Agregar_producto_compra'), 403);
+        abort_if(Gate::denies('Agregar_producto_compra'), 401);
 
         return redirect('compras/Agregar_compra')
             ->with('success', ' ');
@@ -110,7 +110,7 @@ class ComprasController extends Controller
 
     public function destroy($id)
     {
-        abort_if(Gate::denies('Agregar_compra'), 403);
+        abort_if(Gate::denies('Agregar_compra'), 401);
         $compra = Compras::find($id)->delete();
 
         return redirect('compras/Agregar_compra')
@@ -118,7 +118,7 @@ class ComprasController extends Controller
     }
 
     public function Agregar_compra(Request  $request){
-        abort_if(Gate::denies('Agregar_compra'), 403);
+        abort_if(Gate::denies('Agregar_compra'), 401);
 
         request()->validate(Compras::$rules);
         $productos = Producto::all();
@@ -262,9 +262,9 @@ class ComprasController extends Controller
                 header("Content-Disposition: attachment; filename=Compras ". $fecha_actual .".xls");
                 header("Pragma: no-cache");
                 header("Expires: 0");
-                
+
                 $compras = DB:: select("SELECT DISTINCT Numero_factura, p.Nombre_proveedor, Fecha_compra, Total FROM compras  as c JOIN proveedores as p  WHERE c.Nombre_proveedor=p.id ");
-               
+
                 // $Ventas = DB:: select("SELECT DISTINCT Factura, Nombre, Nombre_Producto, Nombre_servicio, Fecha_venta, Cantidad, Iva,  Total FROM Ventas  BETWEEN $Fecha_minima and $Fecha_maxima");
 
                 foreach ($compras as $compra) {

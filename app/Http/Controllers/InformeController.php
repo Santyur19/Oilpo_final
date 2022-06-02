@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 class InformeController extends Controller
 {
     public function index(){
-        abort_if(Gate::denies('Informe_ventas'), 403);
+        abort_if(Gate::denies('Informe_ventas'), 401);
 
         //INFORME DE VENTAS
         DB::statement("SET lc_time_names = 'es_MX'");

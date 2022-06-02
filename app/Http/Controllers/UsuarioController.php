@@ -20,7 +20,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        abort_if(Gate::denies('Usuario_crear'), 403);
+        abort_if(Gate::denies('Usuario_crear'), 401);
         $usuarios = User::all();
         $roles = Role::all()->pluck('name', 'id');
 
@@ -30,7 +30,7 @@ class UsuarioController extends Controller
     }
     public function create()
     {
-        abort_if(Gate::denies('Usuario_crear'), 403);
+        abort_if(Gate::denies('Usuario_crear'), 401);
         // abort_if(Gate::denies('user_create'), 403);
         $roles = Role::all()->pluck('name', 'id');
         return view('usuario.create', compact('roles'));
@@ -98,7 +98,7 @@ class UsuarioController extends Controller
 
     //     return view('usuario.show', compact('usuario'));
     // }
-    
+
 
     /**
      * Show the form for editing the specified resource.
@@ -154,7 +154,7 @@ class UsuarioController extends Controller
 
     public function editar_usuario($id){
 
-        
+
     }
 
     /**
@@ -171,7 +171,7 @@ class UsuarioController extends Controller
     // }
 
     public function update_status(){
-        abort_if(Gate::denies('Editar_estado_usuario'), 403);
+        abort_if(Gate::denies('Editar_estado_usuario'), 401);
         $id = $_POST['id'];
         $activo = isset($_POST['Activo']);
         $campos = request()->validate([

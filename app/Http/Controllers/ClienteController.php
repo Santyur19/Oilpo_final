@@ -19,10 +19,10 @@ class ClienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+
     public function index()
     {
-        abort_if(Gate::denies('ClienteGuardar'), 403);
+        abort_if(Gate::denies('ClienteGuardar'), 401);
 
         // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
         $role=auth()->user()->roles[0]->id;
@@ -44,7 +44,7 @@ class ClienteController extends Controller
     }
 
     public function cliente_guardar(){
-        abort_if(Gate::denies('ClienteGuardar'), 403);
+        abort_if(Gate::denies('ClienteGuardar'), 401);
 
         // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
         $role=auth()->user()->roles[0]->id;
@@ -109,7 +109,7 @@ class ClienteController extends Controller
      */
     public function show($id)
     {
-        abort_if(Gate::denies('editar_cliente'), 403);
+        abort_if(Gate::denies('editar_cliente'), 401);
         $cliente = Cliente::find($id);
 
         return view('cliente.show', compact('cliente'));
@@ -145,7 +145,7 @@ class ClienteController extends Controller
 
     // }
     public function Editar_cliente (Cliente  $cliente){
-        abort_if(Gate::denies('editar_cliente'), 403);
+        abort_if(Gate::denies('editar_cliente'), 401);
 
 
         // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
@@ -200,7 +200,7 @@ class ClienteController extends Controller
     }
 
     public function update_status(){
-        abort_if(Gate::denies('Editar_estado_cliente'), 403);
+        abort_if(Gate::denies('Editar_estado_cliente'), 401);
         $id = $_POST['id'];
         $activo = isset($_POST['Activo']);
         $campos = request()->validate([

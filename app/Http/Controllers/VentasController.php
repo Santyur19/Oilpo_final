@@ -21,7 +21,7 @@ class VentasController extends Controller
     public function index()
 
     {
-        abort_if(Gate::denies('Agregar_venta'), 403);
+        abort_if(Gate::denies('Agregar_venta'), 401);
 
         // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
         $role=auth()->user()->roles[0]->id;
@@ -65,7 +65,7 @@ class VentasController extends Controller
         $rol=Json_encode($Permiso_inicial);
         //------------------------------------------------------------------------------------------------------------------------
 
-        abort_if(Gate::denies('Agregar_venta'), 403);
+        abort_if(Gate::denies('Agregar_venta'), 401);
 
         date_default_timezone_set("America/Bogota");
         $fecha_actual = date("Y-m-d");
@@ -138,7 +138,7 @@ class VentasController extends Controller
 
 
     public function Guardar_venta(){
-        abort_if(Gate::denies('Guardar_Venta'), 403);
+        abort_if(Gate::denies('Guardar_Venta'), 401);
 
 
         $Cliente=$_POST['Nombre'];
@@ -178,7 +178,7 @@ class VentasController extends Controller
                 else{
                     $cadena.="('".$Cliente."',  '".$Servicio[$i]."', '".$Fecha."',  '".$total."',  '".$Producto[$i]."' , '".$Cantidad[$i]."', '".$Iva[$i]."', '".$factura."', '".$estado."'),";
                 }
-                
+
             }
 
 
@@ -196,8 +196,8 @@ class VentasController extends Controller
 
 
 
-            // update ventas set Nombre_Producto='Nada' WHERE Nombre_Producto='undefined'; 
-            // update ventas set Cantidad='0' WHERE Cantidad='; 
+            // update ventas set Nombre_Producto='Nada' WHERE Nombre_Producto='undefined';
+            // update ventas set Cantidad='0' WHERE Cantidad=';
             // update ventas set iva='0' WHERE iva=''
 
             $cadena_final = substr($cadena, 0, -1);
@@ -224,7 +224,7 @@ class VentasController extends Controller
     }
 
     public function Detalles(){
-        abort_if(Gate::denies('Detalles_ventas'), 403);
+        abort_if(Gate::denies('Detalles_ventas'), 401);
 
         // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
         $role=auth()->user()->roles[0]->id;
@@ -253,7 +253,7 @@ class VentasController extends Controller
     }
 
     public function Exportar(){
-        abort_if(Gate::denies('Exportar'), 403);
+        abort_if(Gate::denies('Exportar'), 401);
         date_default_timezone_set("America/Bogota");
         $fecha_actual = date("Y-m-d H:i");
 
@@ -332,7 +332,7 @@ class VentasController extends Controller
                                 <td>".$ventas->Fecha_venta."</td>
                                 <td>".$ventas->Cantidad."</td>
                                 <td>".$ventas->Iva."</td>
-                                <td>".$ventas->Total."</td>                                
+                                <td>".$ventas->Total."</td>
                             </tr>
                     ";
                 }
@@ -353,7 +353,7 @@ class VentasController extends Controller
     }
 
     public function estado(){
-        
+
         // abort_if(Gate::denies('Editar_estado_ventas'), 403);
         $id = $_POST['id'];
         $Venta=DB::Select("Select * from ventas where Factura ='".$id."' AND Nombre_Producto != 'Nada'");
@@ -363,7 +363,7 @@ class VentasController extends Controller
         }
         DB::update("UPDATE ventas SET estado ='Inactivo' WHERE Factura='".$id."'");
         return redirect('ventas')
-            ->with('inhabilitado', ' ');    
+            ->with('inhabilitado', ' ');
     }
     public function pdf(){
         $pdf = App::make('dompdf.wrapper');
