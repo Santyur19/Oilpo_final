@@ -247,6 +247,7 @@ return [
             'url'         => '/',
             'icon'        => 'fas fa-th',
             'label_color' => 'success',
+            'id' =>'menu'
 
         ],
         
@@ -263,7 +264,7 @@ return [
             'url'         => 'roles',
             'icon'        => 'fas fa-tag',
             'label_color' => 'success',
-            'id' =>'Roles',
+            'id' =>'roles',
         ],
 
 
@@ -272,7 +273,7 @@ return [
             'url'         => 'permissions',
             'icon'        => 'fas fa-unlock-alt',
             'label_color' => 'success',
-            'id' =>'Permisos',
+            'id' =>'permisos',
         ],
 
 
@@ -285,18 +286,20 @@ return [
         [
             'text'    => ' Compras',
             'icon'    => 'fas fa-fw fa-shopping-cart ',
-            'id' =>'Compras',
+            'id' =>'compras',
             'submenu' => [
                 [
                     'text' => 'Productos',
                     'url'  => 'productos/',
                     'icon' => 'fas fa-cubes',
+                    'id' =>'productos'
                 ],
 
                 [
                     'text' => 'Gestión de compras',
                     'url'  => 'compras/',
                     'icon' => 'fas fa-cart-plus',
+                    'id' =>'G_compras'
                 ],
                 // [
                 //     'text'    => 'Nivel uno',
@@ -326,6 +329,7 @@ return [
                     'text' => 'Proveedores',
                     'url'  => 'proveedores/',
                     'icon' => 'fas fa-users',
+                    'id' =>'proveedores',
                 ],
             ],
         ],
@@ -335,24 +339,27 @@ return [
         [
             'text'    => 'Ventas',
             'icon'    => 'fas fa-fw fa-credit-card ',
-            'id' =>'Ventas',
+            'id' =>'ventas',
             'submenu' => [
                 [
                     'text' => 'Servicios',
                     'url'  => 'servicios/',
                     'icon' => 'fas fa-cogs',
+                    'id' =>'servicios'
                 ],
 
                 [
                     'text' => 'Gestión de ventas',
                     'url'  => 'ventas/',
                     'icon' => 'fas fa-cart-plus',
+                    'id' =>'G_ventas'
                     ],
 
                 [
                     'text' => 'Clientes',
                     'url'  => 'clientes/',
                     'icon' => 'fas fa-user-plus',
+                    'id' =>'clientes'
                 ],
 
 
@@ -390,7 +397,7 @@ return [
             'url'         => 'informes/',
             'icon'        => 'fas fa-calendar-check',
             'label_color' => 'success',
-            'id' =>'Informes',
+            'id' =>'informes',
         ],
 
 

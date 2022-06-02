@@ -137,19 +137,86 @@
     </div>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        function inicio(){
-            var rol = eval (<?php echo $rol; ?>);
-            var nombre= rol[0].name;
+    <script>
+    function inicio(){
+        var Array = eval (<?php echo $rol; ?>);
+        let contador_ventas = 0;
+        let contador_compras = 0;
 
-            if (nombre=="Empleado"){
+        $('#menu').hide();
+        $('#roles').hide();
+        $('#servicios').hide();
+        $('#clientes').hide();
+        $('#usuarios').hide();
+        $('#productos').hide();
+        $('#G_compras').hide();
+        $('#G_ventas').hide();
+        $('#informes').hide();
+        $('#permisos').hide();
+        $('#proveedores').hide();
 
-                $('#usuarios').hide();
-                $('#Roles').hide();
-                $('#Permisos').hide();
-                $('#Compras').hide();
-                $('#Informes').hide();
+        //links
+        $('#link_proveedores').removeAttr('href');
+        $('#link_productos').removeAttr('href');
+        $('#link_clientes').removeAttr('href');
+        $('#link_servicios').removeAttr('href');
+
+        for (var i = 0; i < Array.length; i++){
+            var permisos = Array[i].permiso;
+
+            switch (permisos){
+
+                case 1:
+                    $('#menu').show();
+                    break;
+                case 2:
+                    $('#roles').show();
+                    break;
+                case 9:
+                    $('#servicios').show();
+                    contador_ventas++;
+                    break;
+                case 12:
+                    $('#clientes').show();
+                    contador_ventas++;
+                    break;
+                case 16:
+                    $('#proveedores').show();
+                    contador_compras++;
+                    break;
+                case 20:
+                    $('#usuarios').show();
+                    break;
+                case 26:
+                    $('#productos').show();
+                    contador_compras++;
+                    break;
+                case 30:
+                    $('#G_compras').show();
+                    contador_compras++;
+                    break;
+                case 37:
+                    $('#G_ventas').show();
+                    contador_ventas++;
+                    break;
+                case 45:
+                    $('#informes').show();
+                    break;
+                case 47:
+                    $('#permisos').show();
+                    break;
             }
         }
+        
+        if (contador_ventas == 0){
+            $('#ventas').hide();
+
+        }
+        if (contador_compras == 0){
+            $('#compras').hide();
+
+        }
+    }
 
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>

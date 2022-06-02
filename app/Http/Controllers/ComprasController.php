@@ -16,6 +16,20 @@ class ComprasController extends Controller
 
     {
         abort_if(Gate::denies('Agregar_compra'), 403);
+
+        // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
+        $role=auth()->user()->roles[0]->id;
+        $Permiso_consulta=DB::Select("SELECT permission_id as permiso FROM role_has_permissions WHERE role_id = $role");
+
+
+
+        foreach ($Permiso_consulta as $permisos){
+
+            $Permiso_inicial[]= array ("permiso" => $permisos->permiso);
+        }
+        $rol=Json_encode($Permiso_inicial);
+        //------------------------------------------------------------------------------------------------------------------------
+        
         $minimos=DB::Select("SELECT min(Fecha_compra) AS Fecha_compra FROM compras where Numero_factura > 0");
         $maximos=DB::Select("SELECT max(Fecha_compra) AS Fecha_compra FROM compras where Numero_factura > 0");
 
@@ -29,7 +43,7 @@ class ComprasController extends Controller
         $nombre = DB:: select("SELECT DISTINCT Numero_factura, p.Nombre_proveedor, Fecha_compra, Total FROM compras  as c JOIN proveedores as p  WHERE c.Nombre_proveedor=p.id");
 
 
-        return view('compras.index', compact('compra', 'nombre', 'Fecha_minima', 'Fecha_maxima', 'todo'))
+        return view('compras.index', compact('compra', 'nombre', 'Fecha_minima', 'Fecha_maxima', 'todo', 'rol'))
             ->with('i', (request()->input('page', 1) - 1) * $compra->perPage());
 
     }
@@ -37,10 +51,23 @@ class ComprasController extends Controller
     public function detalle(){
         abort_if(Gate::denies('Detalles'), 403);
 
+        // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
+        $role=auth()->user()->roles[0]->id;
+        $Permiso_consulta=DB::Select("SELECT permission_id as permiso FROM role_has_permissions WHERE role_id = $role");
+
+
+
+        foreach ($Permiso_consulta as $permisos){
+
+            $Permiso_inicial[]= array ("permiso" => $permisos->permiso);
+        }
+        $rol=Json_encode($Permiso_inicial);
+        //------------------------------------------------------------------------------------------------------------------------
+
         $Numero_factura = $_POST['Numero_factura'];
         $Total = $_POST['Total'];
         $detalles = DB:: select("SELECT `Producto`, `Precio_compra`, `Cantidad`, `Numero_factura`, Fecha_compra, `Foto`, Total  FROM `compras` WHERE `Numero_factura`='".$Numero_factura."'");
-        return view('compras.detalles', compact('detalles', 'Numero_factura', 'Total'));
+        return view('compras.detalles', compact('detalles', 'Numero_factura', 'Total', 'rol'));
 
 
 
@@ -51,11 +78,25 @@ class ComprasController extends Controller
 
     {
         abort_if(Gate::denies('Detalles'), 403);
+
+        // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
+        $role=auth()->user()->roles[0]->id;
+        $Permiso_consulta=DB::Select("SELECT permission_id as permiso FROM role_has_permissions WHERE role_id = $role");
+
+
+
+        foreach ($Permiso_consulta as $permisos){
+
+            $Permiso_inicial[]= array ("permiso" => $permisos->permiso);
+        }
+        $rol=Json_encode($Permiso_inicial);
+        //------------------------------------------------------------------------------------------------------------------------
+
         $proveedores = DB::select("SELECT Nombre_proveedor, id FROM proveedores WHERE estado = 'Activo' ");
         $compra = Compras::all();
         $numero_facturas = DB:: select("SELECT Numero_compras FROM Compras ORDER by ID DESC LIMIT 1");
         $productos = DB::select("SELECT Nombre_Producto FROM productos WHERE estado ='Activo'");
-        return view('compras.Agregar_compra', compact('compra', 'proveedores', 'productos', 'numero_facturas'));
+        return view('compras.Agregar_compra', compact('compra', 'proveedores', 'productos', 'numero_facturas', 'rol'));
     }
 
 

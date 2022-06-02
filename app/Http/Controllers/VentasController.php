@@ -23,7 +23,18 @@ class VentasController extends Controller
     {
         abort_if(Gate::denies('Agregar_venta'), 403);
 
-        $rol=auth()->user()->roles;
+        // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
+        $role=auth()->user()->roles[0]->id;
+        $Permiso_consulta=DB::Select("SELECT permission_id as permiso FROM role_has_permissions WHERE role_id = $role");
+
+
+
+        foreach ($Permiso_consulta as $permisos){
+
+            $Permiso_inicial[]= array ("permiso" => $permisos->permiso);
+        }
+        $rol=Json_encode($Permiso_inicial);
+        //------------------------------------------------------------------------------------------------------------------------
 
         $ventas = Venta::paginate();
         $minimos=DB::Select("SELECT min(Fecha_venta) AS Fecha_venta FROM ventas where Factura > 0");
@@ -40,7 +51,19 @@ class VentasController extends Controller
 
 
     public function Agregar_venta(){
-        $rol=auth()->user()->roles;
+
+        // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
+        $role=auth()->user()->roles[0]->id;
+        $Permiso_consulta=DB::Select("SELECT permission_id as permiso FROM role_has_permissions WHERE role_id = $role");
+
+
+
+        foreach ($Permiso_consulta as $permisos){
+
+            $Permiso_inicial[]= array ("permiso" => $permisos->permiso);
+        }
+        $rol=Json_encode($Permiso_inicial);
+        //------------------------------------------------------------------------------------------------------------------------
 
         abort_if(Gate::denies('Agregar_venta'), 403);
 
@@ -69,7 +92,18 @@ class VentasController extends Controller
     }
     public function Buscar_cliente(){
 
-        $rol=auth()->user()->roles;
+        // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
+        $role=auth()->user()->roles[0]->id;
+        $Permiso_consulta=DB::Select("SELECT permission_id as permiso FROM role_has_permissions WHERE role_id = $role");
+
+
+
+        foreach ($Permiso_consulta as $permisos){
+
+            $Permiso_inicial[]= array ("permiso" => $permisos->permiso);
+        }
+        $rol=Json_encode($Permiso_inicial);
+        //------------------------------------------------------------------------------------------------------------------------
 
         $Nombre= $_POST['Nombre'];
 
@@ -192,9 +226,20 @@ class VentasController extends Controller
     public function Detalles(){
         abort_if(Gate::denies('Detalles_ventas'), 403);
 
+        // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
+        $role=auth()->user()->roles[0]->id;
+        $Permiso_consulta=DB::Select("SELECT permission_id as permiso FROM role_has_permissions WHERE role_id = $role");
+
+
+
+        foreach ($Permiso_consulta as $permisos){
+
+            $Permiso_inicial[]= array ("permiso" => $permisos->permiso);
+        }
+        $rol=Json_encode($Permiso_inicial);
+        //------------------------------------------------------------------------------------------------------------------------
 
         $Factura = $_POST['Factura'];
-        $rol=auth()->user()->roles;
 
         $totales = DB:: select("SELECT DISTINCT(Total), Factura FROM ventas WHERE Factura = '".$Factura."'");
         $ventas = DB:: select("SELECT *  FROM ventas WHERE Factura ='".$Factura."'");

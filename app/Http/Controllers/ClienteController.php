@@ -19,12 +19,25 @@ class ClienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
         abort_if(Gate::denies('ClienteGuardar'), 403);
+
+        // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
+        $role=auth()->user()->roles[0]->id;
+        $Permiso_consulta=DB::Select("SELECT permission_id as permiso FROM role_has_permissions WHERE role_id = $role");
+
+
+
+        foreach ($Permiso_consulta as $permisos){
+
+            $Permiso_inicial[]= array ("permiso" => $permisos->permiso);
+        }
+        $rol=Json_encode($Permiso_inicial);
+        //------------------------------------------------------------------------------------------------------------------------
         $clientes = Cliente::paginate();
         //$Tipo_documento = DB::select("SELECT DISTINCT Tipo_documento FROM clientes WHERE Tipo_documento != id");
-        $rol=auth()->user()->roles;
         $Tipo_documento = Tipo_documento::all();
 
         return view('cliente.index', compact('clientes', 'Tipo_documento', 'rol'))->with('i', (request()->input('page', 1) - 1) * $clientes->perPage());
@@ -32,6 +45,20 @@ class ClienteController extends Controller
 
     public function cliente_guardar(){
         abort_if(Gate::denies('ClienteGuardar'), 403);
+
+        // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
+        $role=auth()->user()->roles[0]->id;
+        $Permiso_consulta=DB::Select("SELECT permission_id as permiso FROM role_has_permissions WHERE role_id = $role");
+
+
+
+        foreach ($Permiso_consulta as $permisos){
+
+            $Permiso_inicial[]= array ("permiso" => $permisos->permiso);
+        }
+        $rol=Json_encode($Permiso_inicial);
+        //------------------------------------------------------------------------------------------------------------------------
+
         $campos = request()->validate([
             'Tipo_documento'=> 'required',
             'Documento' =>'required|unique:clientes,Documento',
@@ -42,7 +69,7 @@ class ClienteController extends Controller
         ]);
 
         Cliente::create($campos);
-        $rol=auth()->user()->roles;
+
 
         return redirect()->route('clientes.index', compact('rol')) ->with('success', ' ');
     }
@@ -119,6 +146,21 @@ class ClienteController extends Controller
     // }
     public function Editar_cliente (Cliente  $cliente){
         abort_if(Gate::denies('editar_cliente'), 403);
+
+
+        // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
+        $role=auth()->user()->roles[0]->id;
+        $Permiso_consulta=DB::Select("SELECT permission_id as permiso FROM role_has_permissions WHERE role_id = $role");
+
+
+
+        foreach ($Permiso_consulta as $permisos){
+
+            $Permiso_inicial[]= array ("permiso" => $permisos->permiso);
+        }
+        $rol=Json_encode($Permiso_inicial);
+        //------------------------------------------------------------------------------------------------------------------------
+
         $campos_cliente = request()->validate([
             'Tipo_documento'=> 'required',
             'Documento' =>'required',
@@ -128,7 +170,6 @@ class ClienteController extends Controller
             'Direccion'=>'required'
         ]);
         $cliente->update($campos_cliente);
-        $rol=auth()->user()->roles;
 
         return redirect()->route('clientes.index',compact('rol')) ->with('success', 'cliente created successfully.');
     }
@@ -142,8 +183,18 @@ class ClienteController extends Controller
     {
         $cliente = Cliente::find($id)->delete();
 
-        $rol=auth()->user()->roles;
+        // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
+        $role=auth()->user()->roles[0]->id;
+        $Permiso_consulta=DB::Select("SELECT permission_id as permiso FROM role_has_permissions WHERE role_id = $role");
 
+
+
+        foreach ($Permiso_consulta as $permisos){
+
+            $Permiso_inicial[]= array ("permiso" => $permisos->permiso);
+        }
+        $rol=Json_encode($Permiso_inicial);
+        //------------------------------------------------------------------------------------------------------------------------
         return redirect()->route('clientes.index', compact('rol'))
             ->with('borrado', 'Proveedore deleted successfully');
     }
@@ -156,17 +207,39 @@ class ClienteController extends Controller
             'estado' =>' '
         ]);
         if($activo=="Activo"){
-            DB::update("UPDATE clientes SET estado ='Inactivo' WHERE id='".$id."'");
-            $rol=auth()->user()->roles;
+        DB::update("UPDATE clientes SET estado ='Inactivo' WHERE id='".$id."'");
 
+        // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
+        $role=auth()->user()->roles[0]->id;
+        $Permiso_consulta=DB::Select("SELECT permission_id as permiso FROM role_has_permissions WHERE role_id = $role");
+
+
+
+        foreach ($Permiso_consulta as $permisos){
+
+            $Permiso_inicial[]= array ("permiso" => $permisos->permiso);
+        }
+        $rol=Json_encode($Permiso_inicial);
+        //------------------------------------------------------------------------------------------------------------------------
             return redirect()->route('clientes.index', compact('rol'));
 
 
 
         }else{
             DB::update("UPDATE clientes SET estado ='Activo' WHERE id ='".$id."'");
-            $rol=auth()->user()->roles;
 
+        // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
+        $role=auth()->user()->roles[0]->id;
+        $Permiso_consulta=DB::Select("SELECT permission_id as permiso FROM role_has_permissions WHERE role_id = $role");
+
+
+
+        foreach ($Permiso_consulta as $permisos){
+
+            $Permiso_inicial[]= array ("permiso" => $permisos->permiso);
+        }
+        $rol=Json_encode($Permiso_inicial);
+        //------------------------------------------------------------------------------------------------------------------------
             return redirect()->route('clientes.index',compact('rol'));
 
         }

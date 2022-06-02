@@ -1,3 +1,4 @@
+<body onload="inicio();"></body>
 
 @extends('adminlte::page')
 
@@ -130,7 +131,21 @@
 
                         </tr>
                     <?php } ?>
+                    <?php 
 
+                    $role=auth()->user()->roles[0]->id;
+                    $Permiso_consulta=DB::Select("SELECT permission_id as permiso FROM role_has_permissions WHERE role_id = $role");
+
+
+
+                    foreach ($Permiso_consulta as $permisos){
+
+                        $Permiso_inicial[]= array ("permiso" => $permisos->permiso);
+                    }
+                     $roles=Json_encode($Permiso_inicial);
+
+                    echo "<input hidden type=text id='permiso' value='".$roles."' >"
+                    ?>
                 </tbody>
                 @yield('js')
                     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -150,4 +165,101 @@
                     </script>
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
             </table>
+    <script>
+        function inicio(){
+
+            <?php 
+
+                $role=auth()->user()->roles[0]->id;
+                $Permiso_consulta=DB::Select("SELECT permission_id as permiso FROM role_has_permissions WHERE role_id = $role");
+
+
+
+                foreach ($Permiso_consulta as $permisos){
+
+                    $Permiso_inicial[]= array ("permiso" => $permisos->permiso);
+                }
+                $roles=Json_encode($Permiso_inicial);
+
+                echo "var Array=".$roles."";
+            ?>
+
+            let contador_ventas = 0;
+            let contador_compras = 0;
+
+            $('#menu').hide();
+            $('#roles').hide();
+            $('#servicios').hide();
+            $('#clientes').hide();
+            $('#usuarios').hide();
+            $('#productos').hide();
+            $('#G_compras').hide();
+            $('#G_ventas').hide();
+            $('#informes').hide();
+            $('#permisos').hide();
+            $('#proveedores').hide();
+
+            //links
+            $('#link_proveedores').removeAttr('href');
+            $('#link_productos').removeAttr('href');
+            $('#link_clientes').removeAttr('href');
+            $('#link_servicios').removeAttr('href');
+
+            for (var i = 0; i < Array.length; i++){
+                var permisos = Array[i].permiso;
+                switch (permisos){
+
+                    case 1:
+                        $('#menu').show();
+                        break;
+                    case 2:
+                        $('#roles').show();
+                        break;
+                    case 9:
+                        $('#servicios').show();
+                        contador_ventas++;
+                        break;
+                    case 12:
+                        $('#clientes').show();
+                        contador_ventas++;
+                        break;
+                    case 16:
+                        $('#proveedores').show();
+                        contador_compras++;
+                        break;
+                    case 20:
+                        $('#usuarios').show();
+                        break;
+                    case 26:
+                        $('#productos').show();
+                        contador_compras++;
+                        break;
+                    case 30:
+                        $('#G_compras').show();
+                        contador_compras++;
+                        break;
+                    case 37:
+                        $('#G_ventas').show();
+                        contador_ventas++;
+                        break;
+                    case 45:
+                        $('#informes').show();
+                        break;
+                    case 47:
+                        $('#permisos').show();
+                        break;
+                }
+            }
+
+        if (contador_ventas == 0){
+            $('#ventas').hide();
+
+        }
+        if (contador_compras == 0){
+            $('#compras').hide();
+
+        }
+        }
+
+  </script>
 @endsection

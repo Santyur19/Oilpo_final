@@ -33,9 +33,7 @@
                         </a>
                     @endif
                 </div>
-            </div>
-            <br>
-            <div class="card-footer-fluid">
+                <br>
                 <button id="sesion" type="submit" class="btn btn-primary form-control">
                     Iniciar sesión
                     &nbsp;

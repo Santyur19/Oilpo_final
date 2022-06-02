@@ -22,9 +22,23 @@ class ProductoController extends Controller
     public function index()
     {
         abort_if(Gate::denies('Editar_estado'), 403);
+
+        // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
+        $role=auth()->user()->roles[0]->id;
+        $Permiso_consulta=DB::Select("SELECT permission_id as permiso FROM role_has_permissions WHERE role_id = $role");
+
+
+
+        foreach ($Permiso_consulta as $permisos){
+
+            $Permiso_inicial[]= array ("permiso" => $permisos->permiso);
+        }
+        $rol=Json_encode($Permiso_inicial);
+        //------------------------------------------------------------------------------------------------------------------------
+
         $productos = Producto::paginate();
 
-        return view('producto.index', compact('productos'))
+        return view('producto.index', compact('productos', 'rol'))
             ->with('i', (request()->input('page', 1) - 1) * $productos->perPage());
     }
 
@@ -76,10 +90,24 @@ class ProductoController extends Controller
      */
     public function show($id)
     {
+
+        // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
+        $role=auth()->user()->roles[0]->id;
+        $Permiso_consulta=DB::Select("SELECT permission_id as permiso FROM role_has_permissions WHERE role_id = $role");
+
+
+
+        foreach ($Permiso_consulta as $permisos){
+
+            $Permiso_inicial[]= array ("permiso" => $permisos->permiso);
+        }
+        $rol=Json_encode($Permiso_inicial);
+        //------------------------------------------------------------------------------------------------------------------------
+
         abort_if(Gate::denies('ProductoGuardar'), 403);
         $producto = Producto::find($id);
 
-        return view('producto.show', compact('producto'));
+        return view('producto.show', compact('producto', 'rol'));
     }
 
     /**
