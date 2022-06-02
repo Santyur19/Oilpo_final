@@ -21,7 +21,7 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        abort_if(Gate::denies('Editar_estado'), 403);
+        abort_if(Gate::denies('Editar_estado'), 401);
 
         // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
         $role=auth()->user()->roles[0]->id;
@@ -71,7 +71,7 @@ class ProductoController extends Controller
     }*/
 
     public function guardar(){
-        abort_if(Gate::denies('ProductoGuardar'), 403);
+        abort_if(Gate::denies('ProductoGuardar'), 401);
         $campos = request()->validate([
             'Nombre_Producto' =>'required|unique:productos,Nombre_Producto|min:3',
             'Valor_venta'=> 'required',
@@ -104,7 +104,7 @@ class ProductoController extends Controller
         $rol=Json_encode($Permiso_inicial);
         //------------------------------------------------------------------------------------------------------------------------
 
-        abort_if(Gate::denies('ProductoGuardar'), 403);
+        abort_if(Gate::denies('ProductoGuardar'), 401);
         $producto = Producto::find($id);
 
         return view('producto.show', compact('producto', 'rol'));
@@ -140,10 +140,10 @@ class ProductoController extends Controller
             ->with('success', 'Producto updated successfully');
     }*/
     public function editar(Producto  $producto){
-        abort_if(Gate::denies('Editar_estado'), 403);
+        abort_if(Gate::denies('Editar_estado'), 401);
         $campos = request()->validate([
             'Nombre_Producto' =>'required|min:3',
-            
+
         ]);
         $producto->update($campos);
         return redirect()->route('productos.index') ->with('success', ' ');
@@ -156,7 +156,7 @@ class ProductoController extends Controller
      */
     public function destroy($id)
     {
-        abort_if(Gate::denies('Editar_estado'), 403);
+        abort_if(Gate::denies('Editar_estado'), 401);
         $producto = Producto::find($id)->delete();
 
         return redirect()->route('productos.index')
@@ -168,7 +168,7 @@ class ProductoController extends Controller
     }
 
     public function update_status(){
-        abort_if(Gate::denies('Editar_estado'), 403);
+        abort_if(Gate::denies('Editar_estado'), 401);
             $id = $_POST['id'];
             $activo = isset($_POST['Activo']);
             $campos = request()->validate([

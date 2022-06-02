@@ -25,7 +25,7 @@ class RolesController extends Controller
 
     public function index()
     {
-        abort_if(Gate::denies('Roles_guardar'), 403);
+        abort_if(Gate::denies('Roles_guardar'), 401);
         $rol = Role::all();
 
 
@@ -37,7 +37,7 @@ class RolesController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('Roles_crear'), 403);
+        abort_if(Gate::denies('Roles_crear'), 401);
         $permissions = Permission::all()->where('estado', 'Activo')->pluck(value:'name', key:'id');
 
         return view(view:'role.create', data: compact(var_name:'permissions'));
@@ -61,7 +61,7 @@ class RolesController extends Controller
 
 
     public function guardar(){
-        abort_if(Gate::denies('Roles_guardar'), 403);
+        abort_if(Gate::denies('Roles_guardar'), 401);
 
         return view('role.index');
 
@@ -77,7 +77,7 @@ class RolesController extends Controller
 
     public function edit(Role $roles)
     {
-        abort_if(Gate::denies('Roles_editar'), 403);
+        abort_if(Gate::denies('Roles_editar'), 401);
 
 
         $permissions = Permission::all()->pluck('name', 'id');
@@ -88,7 +88,7 @@ class RolesController extends Controller
 
     public function update(Request $request, Role $roles)
     {
-        abort_if(Gate::denies('Roles_editar'), 403);
+        abort_if(Gate::denies('Roles_editar'), 401);
         $request->validate([
             'name' => 'required',
             'permissions'=> 'required'
@@ -110,7 +110,7 @@ class RolesController extends Controller
     }
 
     public function update_status(){
-        abort_if(Gate::denies('Editar_estado_rol'), 403);
+        abort_if(Gate::denies('Editar_estado_rol'), 401);
         $id = $_POST['id'];
         $activo = isset($_POST['Activo']);
         $campos = request()->validate([

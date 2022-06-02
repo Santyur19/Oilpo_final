@@ -16,7 +16,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        abort_if(Gate::denies('Editar_estado_permiso'), 403);
+        abort_if(Gate::denies('Editar_estado_permiso'), 401);
         $permissions = Permission::all();
         return view(view:'permissions.index', data: compact(var_name:'permissions'));
     }
@@ -71,9 +71,9 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    
+
     public function update_status(){
-        abort_if(Gate::denies('Editar_estado_permiso'), 403);
+        abort_if(Gate::denies('Editar_estado_permiso'), 401);
         $id = $_POST['id'];
         $activo = isset($_POST['Activo']);
         $campos = request()->validate([
@@ -91,7 +91,7 @@ class PermissionController extends Controller
 
         }
     }
-    
+
 
     /**
      * Remove the specified resource from storage.

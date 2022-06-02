@@ -21,7 +21,7 @@ class ProveedoreController extends Controller
      */
     public function index()
     {
-        abort_if(Gate::denies('Proveedores_guardar'), 403);
+        abort_if(Gate::denies('Proveedores_guardar'), 401);
 
         // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
         $role=auth()->user()->roles[0]->id;
@@ -46,7 +46,7 @@ class ProveedoreController extends Controller
 
 
     public function guardar_proveedor(){
-        abort_if(Gate::denies('Proveedores_guardar'), 403);
+        abort_if(Gate::denies('Proveedores_guardar'), 401);
         $ciudad = ciudades::all();
         $campos_proveeedor = request()->validate([
             'Tipo_Doc_proveedor'=>'required'  ,
@@ -111,7 +111,7 @@ class ProveedoreController extends Controller
         $rol=Json_encode($Permiso_inicial);
         //------------------------------------------------------------------------------------------------------------------------
 
-        abort_if(Gate::denies('Proveedores_guardar'), 403);
+        abort_if(Gate::denies('Proveedores_guardar'), 401);
         $proveedore = Proveedore::find($id);
 
         return view('proveedore.show', compact('proveedore', 'rol'));
@@ -147,7 +147,7 @@ class ProveedoreController extends Controller
     //         ->with('success', 'Proveedore updated successfully');
     // }
     public function editar_proveedor(Proveedore  $proveedore){
-        abort_if(Gate::denies('editar'), 403);
+        abort_if(Gate::denies('editar'), 401);
         $campos_proveeedor = request()->validate([
             'Tipo_Doc_proveedor'=>'required' ,
             'Documento_proveedor' =>'',
@@ -167,7 +167,7 @@ class ProveedoreController extends Controller
      * @throws \Exception
      */
     public function destroy($id)
-    {abort_if(Gate::denies('editar'), 403);
+    {abort_if(Gate::denies('editar'), 401);
         $proveedore = Proveedore::find($id)->delete();
 
         return redirect()->route('proveedores.index')
@@ -178,7 +178,7 @@ class ProveedoreController extends Controller
     }
 
     public function update_status(){
-        abort_if(Gate::denies('Editar_estado_proveedor'), 403);
+        abort_if(Gate::denies('Editar_estado_proveedor'), 401);
         $id = $_POST['id'];
         $activo = isset($_POST['Activo']);
         $campos = request()->validate([
