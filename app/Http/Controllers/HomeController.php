@@ -29,16 +29,27 @@ class HomeController extends Controller
     public function index()
     {
         // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
-        $role=auth()->user()->roles[0]->id;
-        $Permiso_consulta=DB::Select("SELECT permission_id as permiso FROM role_has_permissions WHERE role_id = $role");
+        
+        if (isset(auth()->user()->roles[0])){
 
-
-
-        foreach ($Permiso_consulta as $permisos){
-
-            $Permiso_inicial[]= array ("permiso" => $permisos->permiso);
+            $role=auth()->user()->roles[0]->id;
+        
+            $Permiso_consulta=DB::Select("SELECT permission_id as permiso FROM role_has_permissions WHERE role_id = $role");
+    
+    
+    
+            foreach ($Permiso_consulta as $permisos){
+    
+                $Permiso_inicial[]= array ("permiso" => $permisos->permiso);
+            }
         }
+        else{
+            $Permiso_inicial[0]= ["permiso"=>1];
+            
+        }
+
         $rol=Json_encode($Permiso_inicial);
+        // dd( $rol);
         //------------------------------------------------------------------------------------------------------------------------
         return view('admin.index', compact('rol'));
     }
