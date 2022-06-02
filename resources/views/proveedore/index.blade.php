@@ -271,20 +271,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
                                     <!-- END MODAL EDITAR -->
-
-                                    <?php $id = $proveedore->id;  ?>
-                                    <?php if($errors->any()){ ?>
-                                        <script>
-                                            var id = JSON.parse(`<?php echo $id;  ?>`)
-                                            $(document).ready(function(){
-                                                $('#editar'+id).modal('show');
-                                                $('#modalproveedores').remove();
-
-                                            })
-                                        </script>
-                                    <?php } ?>
                                 @endforeach
                             </tbody>
                             <script src="https://code.jquery.com/jquery-3.5.1.js"></script>

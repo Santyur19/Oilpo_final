@@ -1,13 +1,5 @@
+@extends('errors::minimal')
 
-@extends('errors::illustrated-layout')
-
-@section('title', __('No autorizado'))
+@section('title', __('Forbidden'))
 @section('code', '403')
-
-@section('image')
-<div class="absolute pin bg-cover bg-no-repeat md:bg-left lg:bg-center">
-</div>
-
-@endsection
-
-@section('message', __($exception->getMessage() ?: 'No autorizado'))
+@section('message', __($exception->getMessage() ?: 'Forbidden'))
