@@ -31,8 +31,21 @@ class ServicioController extends Controller
     public function index()
     {
         abort_if(Gate::denies('guardar_Servicio'), 403);
+
+        // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
+        $role=auth()->user()->roles[0]->id;
+        $Permiso_consulta=DB::Select("SELECT permission_id as permiso FROM role_has_permissions WHERE role_id = $role");
+
+
+
+        foreach ($Permiso_consulta as $permisos){
+
+            $Permiso_inicial[]= array ("permiso" => $permisos->permiso);
+        }
+        $rol=Json_encode($Permiso_inicial);
+        //------------------------------------------------------------------------------------------------------------------------
+
         $servicios = Servicio::paginate();
-        $rol=auth()->user()->roles;
 
 
         return view('servicio.index', compact('servicios','rol'))
@@ -86,9 +99,23 @@ class ServicioController extends Controller
     public function show($id)
     {
         abort_if(Gate::denies('guardar_Servicio'), 403);
+
+        // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
+        $role=auth()->user()->roles[0]->id;
+        $Permiso_consulta=DB::Select("SELECT permission_id as permiso FROM role_has_permissions WHERE role_id = $role");
+
+
+
+        foreach ($Permiso_consulta as $permisos){
+
+            $Permiso_inicial[]= array ("permiso" => $permisos->permiso);
+        }
+        $rol=Json_encode($Permiso_inicial);
+        //------------------------------------------------------------------------------------------------------------------------
+
         $servicio = Servicio::find($id);
 
-        return view('servicio.show', compact('servicio'));
+        return view('servicio.show', compact('servicio', 'rol'));
     }
 
     /**
@@ -122,13 +149,12 @@ class ServicioController extends Controller
     // }
     public function editar_servicio(Servicio  $servicio){
         abort_if(Gate::denies('Servicio_editar'), 403);
-        $rol=auth()->user()->roles;
 
         $campos = request()->validate([
             'Nombre_servicio' =>'required',
         ]);
         $servicio->update($campos);
-        return redirect()->route('servicios.index', compact('rol')) ->with('success', ' ');
+        return redirect()->route('servicios.index') ->with('success', ' ');
     }
 
     /**
@@ -139,9 +165,8 @@ class ServicioController extends Controller
     public function destroy($id)
     {
         $servicio = Servicio::find($id)->delete();
-        $rol=auth()->user()->roles;
 
-        return redirect()->route('servicios.index', compact('rol'))
+        return redirect()->route('servicios.index')
             ->with('borrado', 'Servicio deleted successfully');
     }
 
@@ -149,20 +174,19 @@ class ServicioController extends Controller
         abort_if(Gate::denies('Editar_estado_servicio'), 403);
         $id = $_POST['id'];
         $activo = isset($_POST['Activo']);
-        $rol=auth()->user()->roles;
 
         $campos = request()->validate([
             'estado' =>' '
         ]);
         if($activo=="Activo"){
             DB::update("UPDATE servicios SET estado ='Inactivo' WHERE id='".$id."'");
-            return redirect()->route('servicios.index', compact('rol'));
+            return redirect()->route('servicios.index');
 
 
 
         }else{
             DB::update("UPDATE servicios SET estado ='Activo' WHERE id ='".$id."'");
-            return redirect()->route('servicios.index', compact('rol'));
+            return redirect()->route('servicios.index');
 
         }
     }

@@ -69,6 +69,8 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'rol'
+            
         ]);
     }
 
@@ -77,9 +79,9 @@ class RegisterController extends Controller
             'name' => 'required',
             'email' => 'required',
             'password' => Hash::make($data['password']),
-        ]);
 
+        ]);
         User::create($campos);
-        return redirect()->route('usuarios.index') ->with('success', 'El producto se ha guardado.');
+        return redirect()->route('usuarios.index') ->with('success', 'El usuario se ha guardado.');
     }
 }

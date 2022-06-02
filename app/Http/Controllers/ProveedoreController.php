@@ -22,11 +22,25 @@ class ProveedoreController extends Controller
     public function index()
     {
         abort_if(Gate::denies('Proveedores_guardar'), 403);
+
+        // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
+        $role=auth()->user()->roles[0]->id;
+        $Permiso_consulta=DB::Select("SELECT permission_id as permiso FROM role_has_permissions WHERE role_id = $role");
+
+
+
+        foreach ($Permiso_consulta as $permisos){
+
+            $Permiso_inicial[]= array ("permiso" => $permisos->permiso);
+        }
+        $rol=Json_encode($Permiso_inicial);
+        //------------------------------------------------------------------------------------------------------------------------
+
         $proveedores = Proveedore::paginate();
 
         $ciudad = ciudades::paginate(26);
 
-        return view('proveedore.index', compact('proveedores', 'ciudad'))
+        return view('proveedore.index', compact('proveedores', 'ciudad', 'rol'))
             ->with('i', (request()->input('page', 1) - 1) * $proveedores->perPage());
     }
 
@@ -83,10 +97,24 @@ class ProveedoreController extends Controller
      */
     public function show($id)
     {
+
+        // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
+        $role=auth()->user()->roles[0]->id;
+        $Permiso_consulta=DB::Select("SELECT permission_id as permiso FROM role_has_permissions WHERE role_id = $role");
+
+
+
+        foreach ($Permiso_consulta as $permisos){
+
+            $Permiso_inicial[]= array ("permiso" => $permisos->permiso);
+        }
+        $rol=Json_encode($Permiso_inicial);
+        //------------------------------------------------------------------------------------------------------------------------
+
         abort_if(Gate::denies('Proveedores_guardar'), 403);
         $proveedore = Proveedore::find($id);
 
-        return view('proveedore.show', compact('proveedore'));
+        return view('proveedore.show', compact('proveedore', 'rol'));
     }
 
     /**
