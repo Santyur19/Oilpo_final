@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
-
+use App;
 
 class VentasController extends Controller
 {
@@ -367,8 +367,8 @@ class VentasController extends Controller
     }
     public function pdf(){
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadHTML('<h1>Test</h1>');
-        return redirect ('ventas');
+        $pdf->loadView("/ventas/pdf");
+        return $pdf->stream();
     }
 
 }

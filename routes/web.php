@@ -70,7 +70,6 @@ Route::put('/proveedores', [App\Http\Controllers\ProveedoreController::class, 'u
 //RUTAS USUARIOS
 
 Route::resource('/usuarios', App\Http\Controllers\UsuarioController::class);
-Route::get('/usuario/create', [App\Http\Controllers\UsuarioController::class, 'create' ])->name('Usuario_crear');
 Route::post('/usuarios', [App\Http\Controllers\UsuarioController::class, 'store' ])->name('Usuario_guardar');
 Route::get('/usuario.index', [App\Http\Controllers\UsuarioController::class, 'volver_usuario'])->name('volver_usuario');
 Route::put('/usuarios{usuario}', [App\Http\Controllers\UsuarioController::class , 'edit'])->name('Editar_usuario');
