@@ -147,20 +147,6 @@ class ClienteController extends Controller
     public function Editar_cliente (Cliente  $cliente){
         abort_if(Gate::denies('editar_cliente'), 401);
 
-
-        // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
-        $role=auth()->user()->roles[0]->id;
-        $Permiso_consulta=DB::Select("SELECT permission_id as permiso FROM role_has_permissions WHERE role_id = $role");
-
-
-
-        foreach ($Permiso_consulta as $permisos){
-
-            $Permiso_inicial[]= array ("permiso" => $permisos->permiso);
-        }
-        $rol=Json_encode($Permiso_inicial);
-        //------------------------------------------------------------------------------------------------------------------------
-
         $campos_cliente = request()->validate([
             'Tipo_documento'=> 'required',
             'Documento' =>'required',
@@ -171,7 +157,7 @@ class ClienteController extends Controller
         ]);
         $cliente->update($campos_cliente);
 
-        return redirect()->route('clientes.index',compact('rol')) ->with('success', 'cliente created successfully.');
+        return redirect()->route('clientes.index')->with('success', 'cliente created successfully.');
     }
 
     /**
