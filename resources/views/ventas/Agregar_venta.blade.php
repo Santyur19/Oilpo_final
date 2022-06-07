@@ -328,7 +328,7 @@
             }
             else if (validar == "Producto"){
 
-                if (cantidad == "" || iva == "" || producto =="" || producto =="Seleccione") {
+                if (cantidad == "" || cantidad == "0" || iva == "" || producto =="" || producto =="Seleccione") {
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',

@@ -54,8 +54,9 @@
                                         <th>Cliente</th>
                                         <th>Fecha de venta</th>
                                         <th>Total</th>
-                                        <th >Acciones</th>
-                                        <th >Estado</th>
+                                        <th>Acciones</th>
+                                        <th>Comprobante</th>
+                                        <th>Estado</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -81,6 +82,66 @@
                                                     </button>
                                                 </form>
                                                 @endcan
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Comprobante</button>
+                                                {{-- MODAL COMPROBANTE DE PAGO --}}
+                                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Comprobante de pago</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                        <div class="card">
+                                                            <h5 class="card-header">OILMOTORS Y & C</h5>
+                                                           
+                                                            <div class="card-body">
+                                                                <b>Cliente: </b>  pepe
+                                                                <br> <br>
+                                                                <table class="table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Producto/Servicio</th>
+                                                                            <th>Cantidad</th>
+                                                                            <th>Sub-total</th>
+                                                                            <th>Iva</th>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td></td>
+                                                                            <td></td>
+                                                                            <td></td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+
+                                                                <table class="table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                       
+                                                                    </tbody>
+                                                                </table>
+
+                                                            </div>
+                                                            <h5>&nbsp;&nbsp; Total: 1</h5>                                                       
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                            <form action="{{ route('PDF') }}" method="get">
+                                                                @csrf
+                                                                <button type="submit" class="btn btn-primary">Exportar</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                {{-- END COMROBANTE DE PAGO --}}
                                             </td>
 
                                             <td>

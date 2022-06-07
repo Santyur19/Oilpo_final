@@ -70,58 +70,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Comprobante</button>
-                {{-- MODAL COMPROBANTE DE PAGO --}}
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <h3>Comprobante</h3>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Producto</th>
-                                        <th>Cantidad</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <?php foreach ($ventas as $venta){ ?>
-
-                                            <td>{{ $venta->Nombre_Producto }}</td>
-                                            <td>{{ $venta->Cantidad }}</td>
-                                        <?php } ?>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th>Total: </th><td>$ 46467477474</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <form action="{{ route('PDF') }}" method="get">
-                                @csrf
-                                <button type="submit" class="btn btn-primary">Exportar</button>
-                            </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                {{-- END COMROBANTE DE PAGO --}}
+               
                 <div class="text-center">
                     <a id="volver" type="button" class="btn btn-info" href="/ventas">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
