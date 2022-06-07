@@ -23,6 +23,12 @@ class CheckBanned
             $request->session()->regenerateToken();
             return redirect()->route('login')->with('error', 'Este usuario esta inactivo.');
         }
+        if (auth()->check() && (auth()->user()->roles[0]->estado == "Inactivo")){
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+            return redirect()->route('login')->with('error_rol', 'Este rol esta inactivo.');
+        }
         return $next($request);
     }
 }
