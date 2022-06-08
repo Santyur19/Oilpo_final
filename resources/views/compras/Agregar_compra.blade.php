@@ -150,20 +150,20 @@
     var input=  document.getElementById('Precio_compra');
     input.addEventListener('input',function(){
     if (this.value.length > 0)
-        this.value = this.value.slice(0,8);
+        this.value = this.value.slice(0,7);
     })
     //LIMITE INPUT PRECIO VENTA
     var input=  document.getElementById('Precio_venta');
     input.addEventListener('input',function(){
     if (this.value.length > 0)
-        this.value = this.value.slice(0,8);
+        this.value = this.value.slice(0,7);
     })
 
     //LIMITE INPUT CANTIDAD
     var input=  document.getElementById('Cantidad');
     input.addEventListener('input',function(){
     if (this.value.length > 0)
-        this.value = this.value.slice(0,4);
+        this.value = this.value.slice(0,2);
     })
 
 

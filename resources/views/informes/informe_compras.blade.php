@@ -16,13 +16,19 @@
 @endsection
 
 @section('content')
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
             <br>
                 <div class="card">
                     <div class="card-header">
+                        <a href="/informes" type="button" class="btn btn-success">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z"/>
+                                <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
+                            </svg>
+                            Volver
+                        </a>
                         <h1 class="text-center">Informes compras</h1>
                         <canvas id="line_chart" width="400" height="190"></canvas>
                     </div>
@@ -33,13 +39,14 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+
     <script>
         var cData = JSON.parse(`<?php echo $data;  ?>`)
         var div_line_chart = document.getElementById("line_chart");
         var myLineChart = new Chart(div_line_chart, {
             type: 'line',
             data: {
-                labels:cData.label,
+                labels:cData.label_año,
                 //labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul"],
                 datasets: [
                     {
@@ -75,7 +82,7 @@
 <script>
         function inicio(){
 
-            <?php 
+            <?php
 
                 $role=auth()->user()->roles[0]->id;
                 $Permiso_consulta=DB::Select("SELECT permission_id as permiso FROM role_has_permissions WHERE role_id = $role");
