@@ -48,6 +48,7 @@ class DatabaseSeeder extends Seeder
         $factura->Cantidad = 0;
         $factura->Iva = 0;
         $factura->Total = 0;
+        $factura->Sub_Total = 0;
         $factura ->save();
 
 

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
+    <meta name="_token" content="{!! csrf_token() !!}"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
@@ -46,7 +46,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive ">
-                            
+
                             <table id="table" class="table table-striped table-hover display nowrap">
                                 <thead class="thead">
                                     <tr>
@@ -55,7 +55,6 @@
                                         <th>Fecha de venta</th>
                                         <th>Total</th>
                                         <th>Acciones</th>
-                                        <th>Comprobante</th>
                                         <th>Estado</th>
                                     </tr>
                                 </thead>
@@ -83,67 +82,6 @@
                                                 </form>
                                                 @endcan
                                             </td>
-                                            <td>
-                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Comprobante</button>
-                                                {{-- MODAL COMPROBANTE DE PAGO --}}
-                                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Comprobante de pago</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                        <div class="card">
-                                                            <h5 class="card-header">OILMOTORS Y & C</h5>
-                                                           
-                                                            <div class="card-body">
-                                                                <b>Cliente: </b>  pepe
-                                                                <br> <br>
-                                                                <table class="table">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Producto/Servicio</th>
-                                                                            <th>Cantidad</th>
-                                                                            <th>Sub-total</th>
-                                                                            <th>Iva</th>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-
-                                                                <table class="table">
-                                                                    <thead>
-                                                                        <tr>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                       
-                                                                    </tbody>
-                                                                </table>
-
-                                                            </div>
-                                                            <h5>&nbsp;&nbsp; Total: 1</h5>                                                       
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                                            <form action="{{ route('PDF') }}" method="get">
-                                                                @csrf
-                                                                <button type="submit" class="btn btn-primary">Exportar</button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                    </div>
-                                                </div>
-                                                {{-- END COMROBANTE DE PAGO --}}
-                                            </td>
-
                                             <td>
                                                 @can('Editar_estado_ventas')
 
@@ -201,7 +139,6 @@
         </div>
     </div>
 <!------------------------------------------------------------------------------------------------------------------------------------------------  -->
-
     <div class="modal fade" id="Fecha" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -245,6 +182,7 @@
         </div>
     </div>
 <!------------------------------------------------------------------------------------------------------------------------------------------------  -->
+
 <script>
 $('.boton').submit(function(e){
     e.preventDefault();
@@ -417,7 +355,7 @@ $('.boton').submit(function(e){
                     break;
             }
         }
-        
+
         if (contador_ventas == 0){
             $('#ventas').hide();
 
@@ -429,4 +367,5 @@ $('.boton').submit(function(e){
     }
 
   </script>
+
 @endsection
