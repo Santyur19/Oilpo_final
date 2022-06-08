@@ -40,6 +40,7 @@ class VentasController extends Controller
         $minimos=DB::Select("SELECT min(Fecha_venta) AS Fecha_venta FROM ventas where Factura > 0");
         $maximos=DB::Select("SELECT max(Fecha_venta) AS Fecha_venta FROM ventas where Factura > 0");
         $venta = DB:: select("SELECT DISTINCT Factura, Nombre, Fecha_venta, Total, estado FROM ventas where Factura > 0 ");
+        // $comprobante = DB::select("SELECT id, Cantidad, Iva, IF(Nombre_Producto = ' ', Nombre_servicio, Nombre_Producto ) as Nombre FROM ventas");
 
         foreach ($minimos as $minimo){$Fecha_minima=$minimo->Fecha_venta;}
         foreach ($maximos as $maximo){$Fecha_maxima=$maximo->Fecha_venta;}
@@ -146,6 +147,7 @@ class VentasController extends Controller
 
             $Fecha=$_POST['Fecha_venta'];
             $total = $_POST['Total'];
+            $sub_total = $_POST['subtotal'];
             $Producto = $_POST['producto'];
             $Servicio = $_POST['servicio'];
             $Precio = $_POST['precio'];
@@ -155,7 +157,7 @@ class VentasController extends Controller
             $estado="Activo";
 
             $cadena_u="";
-            $cadena= "INSERT INTO ventas (Nombre, Nombre_servicio, Fecha_venta, Total, Nombre_Producto, Cantidad, Iva, factura, estado) VALUES ";
+            $cadena= "INSERT INTO ventas (Nombre, Nombre_servicio, Fecha_venta, Total, Nombre_Producto, Cantidad, Iva, Sub_Total, factura, estado) VALUES ";
             for ($i = 0; $i <count($Producto); $i++){
                 if ($Producto[$i] != "Nada" && $Producto[$i] != "" && $Producto[$i] != "Seleccione"){
                     $minimos = DB::SELECT("SELECT CASE WHEN Cantidad_Producto - $Cantidad[$i] < 0 THEN 0 ELSE 1 END AS MINIMO FROM productos WHERE Nombre_Producto = '$Producto[$i]' ;");
@@ -165,7 +167,7 @@ class VentasController extends Controller
                             $cadena_update= "UPDATE productos SET Cantidad_Producto = ( SELECT Cantidad_Producto - $Cantidad[$i]) WHERE Nombre_Producto = '$Producto[$i]';";
                             DB::update($cadena_update);
 
-                            $cadena.="('".$Cliente."',  '".$Servicio[$i]."', '".$Fecha."',  '".$total."',  '".$Producto[$i]."' , '".$Cantidad[$i]."', '".$Iva[$i]."', '".$factura."', '".$estado."'),";
+                            $cadena.="('".$Cliente."',  '".$Servicio[$i]."', '".$Fecha."',  '".$total."',  '".$Producto[$i]."' , '".$Cantidad[$i]."', '".$Iva[$i]."', '".$sub_total[$i]."'  , '".$factura."', '".$estado."'),";
                         }else{
                             $Producto_error= $Producto[$i];
                             $venta = DB:: select("SELECT DISTINCT Factura, Nombre, Fecha_venta, Total FROM ventas where Factura > 0 ");
@@ -176,7 +178,7 @@ class VentasController extends Controller
                     }
                 }
                 else{
-                    $cadena.="('".$Cliente."',  '".$Servicio[$i]."', '".$Fecha."',  '".$total."',  '".$Producto[$i]."' , '".$Cantidad[$i]."', '".$Iva[$i]."', '".$factura."', '".$estado."'),";
+                    $cadena.="('".$Cliente."',  '".$Servicio[$i]."', '".$Fecha."',  '".$total."',  '".$Producto[$i]."' , '".$Cantidad[$i]."', '".$Iva[$i]."', '".$sub_total[$i]."', '".$factura."', '".$estado."'),";
                 }
 
             }
@@ -243,8 +245,9 @@ class VentasController extends Controller
 
         $totales = DB:: select("SELECT DISTINCT(Total), Factura FROM ventas WHERE Factura = '".$Factura."'");
         $ventas = DB:: select("SELECT *  FROM ventas WHERE Factura ='".$Factura."'");
+        $comprobante = DB::select("SELECT DISTINCT Cantidad, Iva, Sub_Total, IF(Nombre_Producto = ' ', Nombre_servicio, Nombre_Producto ) as pro_o_ser FROM ventas WHERE Factura = '".$Factura."' ");
 
-        return view('ventas.Detalles_ventas', compact('ventas', 'totales', 'rol'));
+        return view('ventas.Detalles_ventas', compact('ventas', 'totales', 'rol', 'comprobante'));
 
 
     }
@@ -366,9 +369,15 @@ class VentasController extends Controller
             ->with('inhabilitado', ' ');
     }
     public function pdf(){
+        $Factura = $_POST['Num_Factura'];
+        $id = $_POST['id'];
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView("/ventas/pdf");
+        $dato_D = DB::select("SELECT Factura, Nombre, Total FROM ventas WHERE  id='".$id."' ");
+        $dato = DB::select("SELECT DISTINCT  Factura, Nombre, Cantidad, Iva, Sub_Total, Total,  IF(Nombre_Producto = ' ', Nombre_servicio, Nombre_Producto ) as pro_o_ser FROM ventas  WHERE Factura ='".$Factura."'");
+        $pdf->loadView("/ventas/pdf", ['dato'=>$dato], ['dato_D'=>$dato_D]);
         return $pdf->stream();
     }
+
+
 
 }
