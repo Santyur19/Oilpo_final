@@ -15,26 +15,26 @@ class InformeController extends Controller
 
         //INFORME DE VENTAS
         DB::statement("SET lc_time_names = 'es_MX'");
-        $ventas = DB::select("SELECT DISTINCT MonthName(Fecha_venta) AS Mes, MONTH(Fecha_venta) AS MONTH, COUNT(*) AS Numero_ventas FROM ventas WHERE MonthName(Fecha_venta) IS NOT NULL GROUP BY MONTH, MES DESC");
+        $ventas = DB::select("SELECT DISTINCT MonthName(Fecha_venta) AS Mes, YEAR(Fecha_venta) AS Año, MONTH(Fecha_venta) AS MONTH, COUNT(*) AS Numero_ventas FROM ventas WHERE MonthName(Fecha_venta) IS NOT NULL GROUP BY YEAR(Fecha_venta), MONTH, MES DESC");
         $data = [];
 
         foreach ($ventas as $venta) {
             $data['label'][] = $venta->Mes;
-
+            $data['label_año'][] = $venta->Mes.' - '.$venta->Año;
             $data['data'][] = $venta->Numero_ventas;
         }
         $data['data'] = json_encode($data);
 
         //INFORME DE COMPRAS
         DB::statement("SET lc_time_names = 'es_MX'");
-        $compras = DB::select("SELECT DISTINCT Fecha_compra, MonthName(Fecha_compra) AS MONTH, COUNT(*) AS Numero_compras FROM compras WHERE MonthName(Fecha_compra) IS NOT NULL GROUP BY Fecha_compra");
+        $compras = DB::select("SELECT DISTINCT MonthName(Fecha_compra) AS Mes, YEAR(Fecha_compra) AS Año,  MONTH(Fecha_compra) AS MONTH, COUNT(*) AS Numero_compras FROM compras WHERE MonthName(Fecha_compra) IS NOT NULL  GROUP BY YEAR(Fecha_compra), MONTH, Mes DESC ");
 
 
         $data_compras = [];
 
         foreach ($compras as $compra) {
-            $data_compras['label_compras'][] = $compra->MONTH;
-
+            $data_compras['label_compras'][] = $compra->Mes;
+            $data_compras['label_año'][] = $compra->Mes.' - '.$compra->Año;
             $data_compras['data_compras'][] = $compra->Numero_compras;
         }
         $data_compras['data_compras'] = json_encode($data_compras);
@@ -45,33 +45,39 @@ class InformeController extends Controller
     public function informe_ventas(){
         // $ventas = DB::select("SELECT COUNT(id) AS NumberOfProducts FROM ventas;");
         DB::statement("SET lc_time_names = 'es_MX'");
-        $Año = DB::select("SELECT DISTINCT YEAR(Fecha_venta) AS Año FROM ventas");
-        $ventas = DB::select("SELECT DISTINCT MonthName(Fecha_venta) AS Mes, MONTH(Fecha_venta) AS MONTH, COUNT(*) AS Numero_ventas FROM ventas WHERE MonthName(Fecha_venta) IS NOT NULL GROUP BY MONTH, MES DESC");
+        // $Año = DB::select("SELECT DISTINCT YEAR(Fecha_venta) AS Año FROM ventas");
+        $ventas = DB::select("SELECT DISTINCT MonthName(Fecha_venta) AS Mes, YEAR(Fecha_venta) AS Año, MONTH(Fecha_venta) AS MONTH, COUNT(*) AS Numero_ventas FROM ventas WHERE MonthName(Fecha_venta) IS NOT NULL GROUP BY YEAR(Fecha_venta), MONTH, MES DESC");
         $data = [];
 
         foreach ($ventas as $venta) {
             $data['label'][] = $venta->Mes;
-
+            $data['label_año'][] = $venta->Mes.' - '.$venta->Año;
             $data['data'][] = $venta->Numero_ventas;
         }
         $data['data'] = json_encode($data);
-        return view('informes.informe_ventas ', compact('Año'), $data);
+        return view('informes.informe_ventas ', $data);
     }
 
     public function informe_compras(){
         //$compras = Compras::all();
         DB::statement("SET lc_time_names = 'es_MX'");
-        $compras = DB::select("SELECT DISTINCT MonthName(Fecha_compra) AS MONTH, COUNT(*) AS Numero_compras FROM compras WHERE MonthName(Fecha_compra) IS NOT NULL GROUP BY Fecha_compra");
+        // $Año = DB::select("SELECT DISTINCT  FROM ventas");
+        $compras = DB::select("SELECT DISTINCT MonthName(Fecha_compra) AS Mes, YEAR(Fecha_compra) AS Año,  MONTH(Fecha_compra) AS MONTH, COUNT(*) AS Numero_compras FROM compras WHERE MonthName(Fecha_compra) IS NOT NULL GROUP BY YEAR(Fecha_compra), MONTH, Mes DESC ");
 
 
         $data = [];
 
         foreach ($compras as $compra) {
-            $data['label'][] = $compra->MONTH;
+            $data['label'][] = $compra->Mes;
 
             $data['data'][] = $compra->Numero_compras;
+
+            $data['label_año'][] = $compra->Mes.' - '.$compra->Año;
+            $data['año'][] = $compra->Año;
+
         }
         $data['data'] = json_encode($data);
+
 
 
         return view('informes.informe_compras', $data);
