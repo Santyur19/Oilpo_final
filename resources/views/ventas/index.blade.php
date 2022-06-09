@@ -138,7 +138,7 @@
             </div>
         </div>
     </div>
-<!------------------------------------------------------------------------------------------------------------------------------------------------  -->
+<!-- MODAL  EXPORTAR  -->
     <div class="modal fade" id="Fecha" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -164,17 +164,18 @@
 
                 <form action="{{ route('Exportar')}}" method="post">
                     @csrf
-                    <label for="">Fecha minima</label>
+                    <label for="">Fecha Mínima</label>
                     <br>
                     <input type="date" class="form-control" required name="Fecha_minima" id="Fecha_minima" min="<?php echo $Fecha_minima ?>" >
                     <br>
-                    <label for="">Fecha Maxima</label>
+                    <label for="">Fecha Máxima</label>
                     <br>
                     <input type="date" class="form-control" required name="Fecha_maxima" id="Fecha_maxima" max="<?php echo $Fecha_maxima ?>" >
 
                     <input type="text" hidden name="Desicion" value="Filtrar">
                 </div>
                 <div class="modal-footer">
+                    <a type="button" class="btn btn-danger" href="ventas">Cancelar</a>
                     <button type="submit" class="btn btn-primary">Aceptar</button>
                 </div>
                 </div>
