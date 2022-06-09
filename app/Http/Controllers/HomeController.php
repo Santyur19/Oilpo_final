@@ -29,7 +29,7 @@ class HomeController extends Controller
     public function index()
     {
         // Variable para el permiso en las vistas ---------------------------------------------------------------------------------
-        
+        // dd();
         if (isset(auth()->user()->roles[0])){
 
             $role=auth()->user()->roles[0]->id;
@@ -46,6 +46,10 @@ class HomeController extends Controller
         else{
             $Permiso_inicial[0]= ["permiso"=>1];
             
+        }
+        if (auth()->user()->roles[0]->Permiso_rol==null){
+            $Permiso_inicial[0]= ["permiso"=>1];
+
         }
 
         $rol=Json_encode($Permiso_inicial);
