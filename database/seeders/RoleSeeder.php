@@ -17,10 +17,10 @@ class RoleSeeder extends Seeder
     {
         $rol = Role::create(['name' => 'Admin']);
         $rol = Role::create(['name' => 'Empleado']);
-        // $rol = Role::create(['name' => 'Registrado']);
+        $rol = Role::create(['name' => 'Registrado']);
 
-        $permission = Permission::create(['name' => 'home'])->syncRoles(['Admin', 'Empleado']);
-
+        $permission = Permission::create(['name' => 'home'])->syncRoles(['Admin', 'Empleado', 'Registrado']);
+        
         $permission = Permission::create(['name' => 'roles'])->assignRole('Admin');
         $permission = Permission::create(['name' => 'Roles_crear'])->assignRole('Admin');
         $permission = Permission::create(['name' => 'Roles_guardar'])->assignRole('Admin');

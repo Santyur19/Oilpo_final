@@ -23,6 +23,7 @@ class Venta extends Migration
             $table->String('Cantidad');
             $table->String('Iva');
             $table->String('Total');
+            $table->String('Sub_Total');
             $table ->enum('estado', ['Activo', 'Inactivo']);
             $table->timestamps();
         });

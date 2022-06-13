@@ -81,7 +81,7 @@
     const myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels:cData.label,
+            labels:cData.label_año,
             //labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
 
             datasets: [{
@@ -127,9 +127,9 @@
      var cData = JSON.parse(`<?php echo $data_compras;  ?>`)
         var div_line_chart = document.getElementById("line_chart");
         var myLineChart = new Chart(div_line_chart, {
-            type: 'line',
+            type: 'bar',
             data: {
-                labels:cData.label_compras,
+                labels:cData.label_año,
                 //labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul"],
                 datasets: [
                     {
@@ -165,7 +165,7 @@
 <script>
         function inicio(){
 
-            <?php 
+            <?php
 
                 $role=auth()->user()->roles[0]->id;
                 $Permiso_consulta=DB::Select("SELECT permission_id as permiso FROM role_has_permissions WHERE role_id = $role");

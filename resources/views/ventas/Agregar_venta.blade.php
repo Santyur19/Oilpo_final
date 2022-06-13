@@ -116,6 +116,7 @@
                                         <th>Precio productos</th>
                                         <th>Iva</th>
                                         <th>Subtotal</th>
+                                        <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -322,7 +323,7 @@
                     totalt[cont]=subtotal[cont];
                     total = total + subtotal[cont];
 
-                    var fila = '<tr id="fila'+cont+'"><td><input class="input-group-text" type="text" name="producto[]" value="" readonly><td><input class="input-group-text" type="text" name="servicio[]" value="'+servicio+'" readonly></td></td><td><input class="input-group-text" type="number" name="Cantidad[]" value="" readonly></td><td><input class="input-group-text" type="number" name="precio[]" value="'+precio+'" readonly></td><td><input class="input-group-text" type="number" name="precio[]" value="'+precio_producto+'" readonly></td><td><input class="input-group-text" type="number" name="iva[]" value="" readonly></td><td>'+subtotal[cont]+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
+                    var fila = '<tr id="fila'+cont+'"><td><input class="input-group-text" type="text" name="producto[]" value="" readonly><td><input class="input-group-text" type="text" name="servicio[]" value="'+servicio+'" readonly></td></td><td><input class="input-group-text" type="number" name="Cantidad[]" value="" readonly></td><td><input class="input-group-text" type="number" name="precio[]" value="'+precio+'" readonly></td><td><input class="input-group-text" type="number" name="precio[]" value="'+precio_producto+'" readonly></td><td><input class="input-group-text" type="number" name="iva[]" value="" readonly></td><td><input class="input-group-text" value="'+subtotal[cont]+'" name="subtotal[]"></td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
 
                 }
             }
@@ -352,7 +353,7 @@
 
                     ivat=0;
 
-                    var fila = '<tr id="fila'+cont+'"><td><input class="input-group-text" type="text" name="producto[]" value="'+producto+'" readonly><td><input class="input-group-text" type="text" name="servicio[]" value=" " readonly></td></td><td><input class="input-group-text" type="number" name="Cantidad[]" value="'+cantidad+'" readonly></td><td><input class="input-group-text" type="number" name="precio[]" value="" readonly></td><td><input class="input-group-text" type="number" name="precio[]" value="'+precio_producto+'" readonly></td><td><input class="input-group-text" type="number" name="iva[]" value="'+iva+'" readonly></td><td>'+subtotal[cont]+'</td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
+                    var fila = '<tr id="fila'+cont+'"><td><input class="input-group-text" type="text" name="producto[]" value="'+producto+'" readonly></td><td><input class="input-group-text" type="text" name="servicio[]" value=" " readonly></td><td><input class="input-group-text" type="number" name="Cantidad[]" value="'+cantidad+'" readonly></td><td><input class="input-group-text" type="number" name="precio[]" value="" readonly></td><td><input class="input-group-text" type="number" name="precio[]" value="'+precio_producto+'" readonly></td><td><input class="input-group-text" type="number" name="iva[]" value="'+iva+'" readonly></td><td><input class="input-group-text" value="'+subtotal[cont]+'"" name="subtotal[]" readonly></td><td><button class="btn btn-danger" onclick="eliminar('+cont+');" >X</button></td></tr>';
 
                 }
 
@@ -459,7 +460,7 @@
         $('#informes').hide();
         $('#permisos').hide();
         $('#proveedores').hide();
-        
+
         //links
         $('#link_proveedores').removeAttr('href');
         $('#link_productos').removeAttr('href');

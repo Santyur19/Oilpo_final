@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
+    <meta name="_token" content="{!! csrf_token() !!}"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
@@ -46,7 +46,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive ">
-                            
+
                             <table id="table" class="table table-striped table-hover display nowrap">
                                 <thead class="thead">
                                     <tr>
@@ -54,8 +54,8 @@
                                         <th>Cliente</th>
                                         <th>Fecha de venta</th>
                                         <th>Total</th>
-                                        <th >Acciones</th>
-                                        <th >Estado</th>
+                                        <th>Acciones</th>
+                                        <th>Estado</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -82,13 +82,13 @@
                                                 </form>
                                                 @endcan
                                             </td>
-
                                             <td>
                                                 @can('Editar_estado_ventas')
 
                                                     <form class="boton" action="{{ route('Editar_estado_ventas') }}" method="POST">
                                                         @csrf @method('PUT')
                                                         <?php if($ventas->estado=="Activo") { ?>
+                                                            <input type="text" value="<?php echo $ventas->Factura ?>" name="id" hidden>
                                                             <button class="btn btn-success" type="submit" ><?php echo $ventas->estado ?>
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16">
                                                                     <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/>
@@ -139,8 +139,7 @@
             </div>
         </div>
     </div>
-<!------------------------------------------------------------------------------------------------------------------------------------------------  -->
-
+<!-- MODAL  EXPORTAR  -->
     <div class="modal fade" id="Fecha" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -166,17 +165,18 @@
 
                 <form action="{{ route('Exportar')}}" method="post">
                     @csrf
-                    <label for="">Fecha minima</label>
+                    <label for="">Fecha Mínima</label>
                     <br>
                     <input type="date" class="form-control" required name="Fecha_minima" id="Fecha_minima" min="<?php echo $Fecha_minima ?>" >
                     <br>
-                    <label for="">Fecha Maxima</label>
+                    <label for="">Fecha Máxima</label>
                     <br>
                     <input type="date" class="form-control" required name="Fecha_maxima" id="Fecha_maxima" max="<?php echo $Fecha_maxima ?>" >
 
                     <input type="text" hidden name="Desicion" value="Filtrar">
                 </div>
                 <div class="modal-footer">
+                    <a type="button" class="btn btn-danger" href="ventas">Cancelar</a>
                     <button type="submit" class="btn btn-primary">Aceptar</button>
                 </div>
                 </div>
@@ -184,6 +184,7 @@
         </div>
     </div>
 <!------------------------------------------------------------------------------------------------------------------------------------------------  -->
+
 <script>
 $('.boton').submit(function(e){
     e.preventDefault();
@@ -356,7 +357,7 @@ $('.boton').submit(function(e){
                     break;
             }
         }
-        
+
         if (contador_ventas == 0){
             $('#ventas').hide();
 
@@ -368,4 +369,5 @@ $('.boton').submit(function(e){
     }
 
   </script>
+
 @endsection
