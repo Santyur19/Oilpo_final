@@ -193,7 +193,8 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Editar Cliente</h5>                                            </div>
+                                                <h5 class="modal-title" id="exampleModalLabel">Editar Cliente</h5>                                            
+                                            </div>
                                             <div class="modal-body">
 
                                                 <form action="{{ route('editar_cliente', $cliente) }}" method="POST" >
