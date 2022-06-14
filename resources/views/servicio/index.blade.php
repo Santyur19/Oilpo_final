@@ -259,7 +259,7 @@
 Swal.fire({
     position: 'top-center',
     icon: 'success',
-    title: 'ELIMINADO CON EXITO!',
+    title: 'ELIMINADO CON ÉXITO!',
     showConfirmButton: false,
     timer: 1500
 })
@@ -272,7 +272,7 @@ Swal.fire({
         Swal.fire({
             position: 'top-center',
             icon: 'success',
-            title: 'GUARDADO CON EXITO!',
+            title: 'GUARDADO CON ÉXITO!',
             showConfirmButton: false,
             timer: 1500
         })

@@ -318,7 +318,7 @@
             Swal.fire({
                 position: 'top-center',
                 icon: 'success',
-                title: 'GUARDADO CON EXITO!',
+                title: 'GUARDADO CON ÉXITO!',
                 showConfirmButton: false,
                 timer: 1500
             })
