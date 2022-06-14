@@ -31,6 +31,7 @@
 
 </head>
 <body >
+    
 
     <div>
         <nav id="nav" class="navbar navbar-expand-md navbar-dark">
@@ -142,6 +143,7 @@
             <img src="vendor/adminlte/dist/img/OILMOTORS.png" id="OILMOTORS">
         </div>
     <?php } ?>
+    
 
 </body>
 
