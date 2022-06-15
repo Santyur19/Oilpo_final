@@ -77,7 +77,7 @@ class DatabaseSeeder extends Seeder
         $proveedor->Nombre_proveedor = "YAMAHA";
         $proveedor->Telefono_proveedor = "3136784903";
         $proveedor->Ciudad_proveedor = "Springfield";
-        $proveedor->Direccion_proveedor = "avenida siempre viva 742";
+        $proveedor->Direccion_proveedor = "CL 105 # 22 A - 39";
         $proveedor->save();
 
 

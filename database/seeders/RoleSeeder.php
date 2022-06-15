@@ -17,10 +17,10 @@ class RoleSeeder extends Seeder
     {
         $rol = Role::create(['name' => 'Admin']);
         $rol = Role::create(['name' => 'Empleado']);
-        $rol = Role::create(['name' => 'Registrado']);
+        // $rol = Role::create(['name' => 'Registrado']);
 
-        $permission = Permission::create(['name' => 'home'])->syncRoles(['Admin', 'Empleado', 'Registrado']);
-        
+        $permission = Permission::create(['name' => 'home'])->syncRoles(['Admin', 'Empleado']);
+
         $permission = Permission::create(['name' => 'roles'])->assignRole('Admin');
         $permission = Permission::create(['name' => 'Roles_crear'])->assignRole('Admin');
         $permission = Permission::create(['name' => 'Roles_guardar'])->assignRole('Admin');
@@ -62,7 +62,7 @@ class RoleSeeder extends Seeder
         $permission = Permission::create(['name' => 'Detalles'])->assignRole('Admin');
         $permission = Permission::create(['name' => 'volver_compra'])->assignRole('Admin');
         $permission = Permission::create(['name' => 'Exportar_Excel'])->assignRole('Admin');
-        
+
         $permission = Permission::create(['name' => 'ventas'])->syncRoles(['Admin', 'Empleado']);
         $permission = Permission::create(['name' => 'Agregar_venta'])->syncRoles(['Admin', 'Empleado']);
         $permission = Permission::create(['name' => 'Guardar_Venta'])->syncRoles(['Admin', 'Empleado']);
@@ -71,13 +71,13 @@ class RoleSeeder extends Seeder
         $permission = Permission::create(['name' => 'Editar_estado_ventas'])->syncRoles(['Admin']);
         $permission = Permission::create(['name' => 'volver'])->syncRoles(['Admin', 'Empleado']);
         $permission = Permission::create(['name' => 'Exportar'])->syncRoles(['Admin']);
-        
+
         $permission = Permission::create(['name' => 'informes'])->assignRole('Admin');
         $permission = Permission::create(['name' => 'Informe_ventas'])->assignRole('Admin');
 
         $permission = Permission::create(['name' => 'permisos'])->assignRole('Admin');
         $permission = Permission::create(['name' => 'Editar_estado_permiso'])->assignRole('Admin');
 
-        
+
     }
 }

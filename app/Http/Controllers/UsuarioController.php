@@ -39,9 +39,8 @@ class UsuarioController extends Controller
     {
         $request->validate([
             'name' => 'required|min:3',
-            'username' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required',
+            'password' => 'required|min:8',
             'roles' => 'required'
         ]);
         $usuario = User::create($request->only('name', 'username', 'email')

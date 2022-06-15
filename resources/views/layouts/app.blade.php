@@ -31,20 +31,23 @@
 
 </head>
 <body >
-    
+
 
     <div>
         <nav id="nav" class="navbar navbar-expand-md navbar-dark">
             <div class="container">
+
                     <?php if(Request::is('password/reset')){ ?>
                         <a href="/login" style="text-decoration: none;">
                             <img id="img" src="\vendor\adminlte\dist\img\Moto_oilpo.png" alt="moto.png"><span id="oilpo">ILPO</span>
                         </a>
-                    <?php }else{ ?>
+                    <?php }else if(Request::is('login') or  Request::is('register') ){ ?>
                         <a href="login" style="text-decoration: none;">
                             <img id="img" src="vendor\adminlte\dist\img\Moto_oilpo.png" alt="moto.png"><span id="oilpo">ILPO</span>
                         </a>
-                    <?php } ?>
+                    <?php }else{ ?>
+
+                    <?php  } ?>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -130,9 +133,6 @@
 
         }
 
-
-
-
     </style>
     <?php if(Request::is('password/reset')){ ?>
         <div class="position-absolute bottom-0 start-0">
@@ -143,7 +143,7 @@
             <img src="vendor/adminlte/dist/img/OILMOTORS.png" id="OILMOTORS">
         </div>
     <?php } ?>
-    
+
 
 </body>
 

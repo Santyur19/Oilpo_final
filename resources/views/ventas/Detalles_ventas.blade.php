@@ -25,7 +25,7 @@
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <?php foreach ($totales as $total){ ?>
-                                <h5>Numero factura  <?php echo $total-> Factura ?></h5>
+                                <h5>Numero Comprobante  <?php echo $total-> Factura ?></h5>
                             <?php } ?>
                                 <br>
                             <span id="card_title">
@@ -38,7 +38,7 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>#Factura</th>
+                                        <th>#Comprobante</th>
                                         <th>Nombre</th>
                                         <th>Producto</th>
                                         <th>Servicio</th>
@@ -106,7 +106,7 @@
                                                         <br>
                                                         <?php  $fecha = date("Y-m-d");  echo $fecha; ?>
                                                         <br>
-                                                        <strong>Factura No. {{ $venta->Factura }}</strong>
+                                                        <strong>Comprobante No. {{ $venta->Factura }}</strong>
                                                         <br>
 
                                                     </div>

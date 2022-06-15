@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 @section('content_header')
 @stop
 
@@ -93,28 +94,29 @@
             </div>
         </div>
     </div>
+
   </div>
-  <div class="contenedor">
+
+    <div class="contenedor">
         <button class="botonF1">
         <span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
-            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-            <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
-        </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-headset" viewBox="0 0 16 16">
+                <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5z"/>
+            </svg>
         </span>
         </button>
         <button class="btn botonF2">
-        <span>+</span>
+        <span><a href="https://www.animefenix.com/ver/one-piece-762" target="_blank"></a></span>
         </button>
         <button class="btn botonF3">
-        <span>+</span>
+        <span></span>
         </button>
         <button class="btn botonF4">
-        <span>+</span>
+        <span></span>
         </button>
         <button class="btn botonF5">
         <span>
-        
+            Usuarios
         </span>
         </button>
     </div>
@@ -135,8 +137,8 @@
             width:90px;
             height:240px;
             position:absolute;
-            right:0px;
-            bottom:-670px;
+            right:0%;
+            bottom:-150%;
             }
             .botonF1{
             width:60px;
@@ -153,10 +155,10 @@
             color:#FFF;
             font-size:36px;
             box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-            transition:.3s;  
+            transition:.3s;
             }
             span{
-            transition:.5s;  
+            transition:.5s;
             }
             .botonF1:hover span{
             transform:rotate(360deg);
@@ -204,6 +206,7 @@
             }
 
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script>
         $('.botonF1').hover(function(){
@@ -239,7 +242,7 @@
 
         for (var i = 0; i < Array.length; i++){
             var permisos = Array[i].permiso;
-            
+
             switch (permisos){
 
                 case 1:
