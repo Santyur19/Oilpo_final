@@ -50,7 +50,7 @@
                             <table id="table" class="table table-striped table-hover display nowrap">
                                 <thead class="thead">
                                     <tr>
-                                        <th>#Factura</th>
+                                        <th>#</th>
                                         <th>Cliente</th>
                                         <th>Fecha de venta</th>
                                         <th>Total</th>

@@ -37,7 +37,7 @@ $fecha = date("Y-m-d");
             <br>
             <?php echo $fecha ?>
             <br>
-            <strong>Factura No. <?php foreach ($dato_D as $dato_Ds) { echo $dato_Ds->Factura; } ?></strong>
+            <strong>Comprobante No. <?php foreach ($dato_D as $dato_Ds) { echo $dato_Ds->Factura; } ?></strong>
             <br>
         </div>
     </div>

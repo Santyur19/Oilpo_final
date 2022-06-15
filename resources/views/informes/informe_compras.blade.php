@@ -44,7 +44,7 @@
         var cData = JSON.parse(`<?php echo $data;  ?>`)
         var div_line_chart = document.getElementById("line_chart");
         var myLineChart = new Chart(div_line_chart, {
-            type: 'bar',
+            type: 'line',
             data: {
                 labels:cData.label_año,
                 //labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul"],

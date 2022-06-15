@@ -59,17 +59,17 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="message-text" class="col-form-label">Documento <small style="color:red;">*</small></label>
-                                        <input type="number" name="Documento_proveedor" class="form-control" id="recipient-name" value="">
+                                        <input type="number" name="Documento_proveedor" class="form-control" id="recipient-name" value="{{ old('Documento_proveedor') }}">
                                         <small class="text-danger">{{$errors->first('Documento_proveedor')}}</small>
                                     </div>
                                     <div class="mb-3">
                                         <label for="message-text" class="col-form-label">Nombre <small style="color:red;">*</small></label>
-                                        <input type="text" name="Nombre_proveedor" class="form-control" id="recipient-name" value="">
+                                        <input type="text" name="Nombre_proveedor" class="form-control" id="recipient-name" value="{{ old('Nombre_proveedor') }}">
                                         <small class="text-danger">{{$errors->first('Nombre_proveedor')}}</small>
                                     </div>
                                     <div class="mb-3">
                                         <label for="message-text" class="col-form-label">Teléfono <small style="color:red;">*</small></label>
-                                        <input type="number" name="Telefono_proveedor" class="form-control" id="recipient-name" value="">
+                                        <input type="number" name="Telefono_proveedor" class="form-control" id="recipient-name" value="{{ old('Telefono_proveedor') }}">
                                         <small class="text-danger">{{$errors->first('Telefono_proveedor')}}</small>
                                     </div>
                                     <div class="mb-3">
@@ -84,7 +84,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="message-text" class="col-form-label">Dirección <small style="color:red;">*</small></label>
-                                        <input type="text" name="Direccion_proveedor" class="form-control" id="recipient-name" value="">
+                                        <input type="text" name="Direccion_proveedor" class="form-control" id="recipient-name" value="{{ old('Direccion_proveedor') }}">
                                         <small class="text-danger">{{$errors->first('Direccion_proveedor')}}</small>
                                     </div>
                                     <div class="modal-footer">

@@ -26,7 +26,7 @@
                         <h3>Usuarios</h3>
 
                         </span>
-                          
+
                             @can('Usuario_crear')
                             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Agregar
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-circle-dotted" viewBox="0 0 16 16">
@@ -55,28 +55,21 @@
                                             </div> -->
                                         <div class="mb-3">
                                             <label for="name" class="col-form-label">Nombre <small style="color:red;">*</small></label>
-                                            <input type="text" class="form-control" name="name" value="" autofocus>
+                                            <input type="text" class="form-control" name="name" value="{{ old('name') }}" autofocus>
                                             @if ($errors->has('name'))
                                                 <span class="error text-danger" for="input-name">{{ $errors->first('name') }}</span>
                                             @endif
                                         </div>
                                         <div class="mb-3">
-                                            <label for="username" class="col-form-label">Nombre de usuario <small style="color:red;">*</small></label>
-                                            <input type="text" class="form-control" name="username" value="">
-                                            @if ($errors->has('name'))
-                                                <span class="error text-danger" for="input-username">{{ $errors->first('name') }}</span>
-                                            @endif
-                                        </div>
-                                        <div class="mb-3">
                                             <label for="email" class="col-form-label">Correo <small style="color:red;">*</small></label>
-                                            <input type="email" class="form-control" name="email" value="">
+                                            <input type="email" class="form-control" name="email" value="{{ old('email') }}">
                                             @if ($errors->has('email'))
                                                 <span class="error text-danger" for="input-email">{{ $errors->first('email') }}</span>
                                             @endif
                                         </div>
                                         <div class="mb-3">
                                             <label for="password" class="col-form-label">Contraseña <small style="color:red;">*</small></label>
-                                            <input type="password" class="form-control" name="password">
+                                            <input type="password" class="form-control" name="password" value="{{ old('password')}}">
                                             @if ($errors->has('password'))
                                                 <span class="error text-danger" for="input-password">{{ $errors->first('password') }}</span>
                                             @endif
@@ -231,13 +224,6 @@
                                                     <input type="text" class="form-control" name="name" placeholder="Ingrese su nombre" value="{{old('name', $usuario->name)}}" autofocus required>
                                                     @if ($errors->has('name'))
                                                         <span class="error text-danger" for="input-name">{{ $errors->first('name') }}</span>
-                                                    @endif
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="username" class="col-form-label">Nombre de usuario <small style="color:red;">*</small></label>
-                                                    <input type="text" class="form-control" name="username" placeholder="Ingrese su nombre de usuario" value="{{old('name', $usuario->name)}}" required>
-                                                    @if ($errors->has('name'))
-                                                        <span class="error text-danger" for="input-username">{{ $errors->first('name') }}</span>
                                                     @endif
                                                 </div>
                                                 <div class="mb-3">

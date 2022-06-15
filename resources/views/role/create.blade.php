@@ -23,7 +23,7 @@
         <div class="card-header">
             <div class="mb-3">
                 <label for="recipient-name" class="col-form-control">Nombre <small style="color:red;">*</small></label>
-                <input type="text" name="name" class="form-control" id="recipient-name" value="">
+                <input type="text" name="name" class="form-control" id="recipient-name" value="{{ old('name') }}">
                 <span class="error text-danger" for="input-Nombre_Rol">{{ $errors->first('name') }}</span>
             </div>
         </div>
@@ -100,7 +100,7 @@
 <script>
         function inicio(){
 
-            <?php 
+            <?php
 
                 $role=auth()->user()->roles[0]->id;
                 $Permiso_consulta=DB::Select("SELECT permission_id as permiso FROM role_has_permissions WHERE role_id = $role");
