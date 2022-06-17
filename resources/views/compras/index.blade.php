@@ -46,7 +46,7 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>Proveedor</th>
-                                        <th>Numero de factura</th>
+                                        <th>Número de factura</th>
                                         <th>Fecha de compra</th>
                                         <th>Acciones</th>
                                     </tr>
