@@ -42,7 +42,7 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="">Numero de factura <small style="color:red;">*</small></label>
+                                <label for="">Número de factura <small style="color:red;">*</small></label>
                                 <input type="number" class="form-control" name="Numero_factura" id="" aria-describedby="helpId" placeholder="" value="{{ old('Numero_factura') }}">
                                 <small class="text-danger">{{$errors->first('Numero_factura')}}</small>
                             </div>
