@@ -250,7 +250,7 @@ return [
             'id' =>'menu'
 
         ],
-        
+
         [
             'text'        => 'Usuarios',
             'url'         => 'usuarios/',
@@ -281,7 +281,7 @@ return [
 
 
         // SUB MENU COMPRAS
-        
+
 
         [
             'text'    => ' Compras',
@@ -400,17 +400,13 @@ return [
             'id' =>'informes',
         ],
 
-
-
-
-
-
-        // ['header' => 'labels'],
-        // [
-        //     'text'       => 'important',
-        //     'icon_color' => 'red',
-        //     'url'        => '#',
-        // ],
+        ['header' => ''],
+        [
+            'text'       => 'Ayuda en línea',
+            'icon_color' => 'blue',
+            'target' => '_blank',
+            'url'        => 'https://www.youtube.com/watch?v=Md2D9plNci0&list=PLkIglUYRZcMzGGmLvTialT_V9k8PwpSsk',
+        ],
         // [
         //     'text'       => 'warning',
         //     'icon_color' => 'yellow',
