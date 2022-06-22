@@ -24,7 +24,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <h5>Numero factura  <?php echo $_POST['Numero_factura']; ?></h5>
+                            <h5>Número factura  <?php echo $_POST['Numero_factura']; ?></h5>
                             <br>
                             <span id="card_title">
                                 <h3>Detalles</h3>
@@ -60,7 +60,7 @@
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
         </div>
         <form action="{{ route('volver_compra') }}" method="get">
         @csrf
